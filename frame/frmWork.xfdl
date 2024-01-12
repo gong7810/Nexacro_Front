@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="frmWork" width="1280" height="720" titletext="New Form" onload="frmWork_onload" onactivate="frmWork_onactivate" onclose="frmWork_onclose">
+    <Layouts>
+      <Layout height="720" mobileorientation="landscape" width="1280">
+        <Div id="divWork" taborder="0" text="Div00" left="10" top="0" right="0" bottom="0"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[this.application = null;
+this.fvWinId = null;
+this.fvMenuNM = null;
+this.fvFormURL = null;
+
+this.frmWork_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.application = nexacro.getApplication();
+	
+	var objOwnerFrame = this.getOwnerFrame();
+
+	this.fvWinId   = objOwnerFrame.param.FORM_ID;
+	this.fvMenuNM = objOwnerFrame.param.MENU_NM;
+	this.fvFormURL = objOwnerFrame.param.FORM_URL;
+	
+	this.divWork.set_url(this.fvFormURL);
+	this.divWork.form.resetScroll();
+};
+
+this.frmWork_onactivate = function(obj:nexacro.Form,e:nexacro.ActivateEventInfo)
+{
+	this.application.MdiFrame.form.fn_ActiveTabPage(this.fvWinId);
+    this.divWork.form.resetScroll();
+	return;	
+};
+
+this.frmWork_onclose = function(obj:nexacro.Form,e:nexacro.CloseEventInfo)
+{
+	this.application.MdiFrame.form.fn_DeleteTabpage(this.fvWinId);
+};
+]]></Script>
+  </Form>
+</FDL>

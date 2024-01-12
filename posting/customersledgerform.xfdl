@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="customersLedgerForm" width="1080" height="570" titletext="New Form" onload="customersLedgerForm_onload">
+    <Layouts>
+      <Layout height="570" width="1080">
+        <Static id="Static00" taborder="0" text="거래처원장" left="75" top="41" width="251" height="75" onclick="Static00_onclick" textAlign="center" font="normal 18pt/normal &quot;Arial&quot;"/>
+        <Grid id="Grid00" taborder="1" left="1" top="148" width="1079" height="507" binddataset="ds_customerLedger" autofittype="col" autosizingtype="row" oncellclick="Grid00_oncellclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="50"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+                <Row size="24" band="summ"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="거래처코드"/>
+                <Cell col="1" text="거래처이름"/>
+                <Cell col="2" text="이월금"/>
+                <Cell col="3" text="차변"/>
+                <Cell col="4" text="대변"/>
+                <Cell col="5" text="잔액"/>
+                <Cell col="6" text="원장상세"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:CUSTOMER_CODE"/>
+                <Cell col="1" text="bind:CUSTOMER_NAME"/>
+                <Cell col="2" text="bind:CARRY_OVER"/>
+                <Cell col="3" text="bind:DEPOSIT"/>
+                <Cell col="4" text="bind:WITHDRAWAL"/>
+                <Cell col="5" text="bind:BALANCE"/>
+                <Cell col="6" displaytype="buttoncontrol" text="상세보기"/>
+              </Band>
+              <Band id="summary">
+                <Cell colspan="3" text="합계"/>
+                <Cell col="3" expr="dataset.getSum('parseInt(DEPOSIT)')" displaytype="currency"/>
+                <Cell col="4" expr="dataset.getSum('parseInt(WITHDRAWAL)')" displaytype="currency"/>
+                <Cell col="5" expr="dataset.getSum('parseInt(BALANCE)')" displaytype="currency"/>
+                <Cell col="6" expr="dataset.getSum('parseInt(BALANCE)') == 0 ? &quot;이상없음&quot; : &quot;이상있음&quot;"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Calendar id="calendar_start" taborder="2" left="627" top="96" width="175" height="40"/>
+        <Calendar id="calendar_end" taborder="3" left="817" top="96" width="175" height="40"/>
+        <Button id="Button00" taborder="4" text="조회" left="1000" top="96" width="68" height="40" background="#87c4f1" color="aliceblue" borderRadius="5px" textAlign="center" onclick="Button00_onclick"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_customerLedger">
+        <ColumnInfo>
+          <Column id="CARRY_OVER" type="INT" size="256"/>
+          <Column id="CUSTOMER_CODE" type="STRING" size="256"/>
+          <Column id="CUSTOMER_NAME" type="STRING" size="256"/>
+          <Column id="DEPOSIT" type="INT" size="256"/>
+          <Column id="WITHDRAWAL" type="INT" size="256"/>
+          <Column id="BALANCE" type="INT" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[include "scripts::commonDate.xjs";
+include "scripts::commonOpen.xjs";
+
+application = nexacro.getApplication();
+
+this.customersLedgerForm_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+      this.calendar_start.set_value( this.gfn_todayFirst().toString() );
+      this.calendar_end.set_value( this.gfn_today().toString() );
+      application.gds_customerLedger.clearData();
+
+};
+
+this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+      var startDate = this.calendar_start.value;
+      var endDate = this.calendar_end.value;
+      
+      var sYear = startDate.toString().substring(0,4);
+      var sMonth = startDate.toString().substring(4,6);
+      var sDay = startDate.toString().substring(6,8);
+      var sDate = sYear+"-"+sMonth+"-"+sDay;
+      
+      var eYear = endDate.toString().substring(0,4);
+      var eMonth = endDate.toString().substring(4,6);
+      var eDay = endDate.toString().substring(6,8);   
+      var eDate = eYear+"-"+eMonth+"-"+eDay;
+      
+      var id = "customerledger";
+      var url = "svcPosting::customerledger";
+      var reqData = "";
+      var resData = "ds_customerLedger=gds_customerLedger";
+      var args = "startDate='"+sDate+"' endDate='"+eDate+"'";
+      var callback = "callback";
+
+      this.transaction(id, url, reqData, resData, args, callback);
+      
+      
+      
+      
+
+};
+
+ //excel 오브젝트 시작
+this.Button01_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+   
+       this.exportObj = new ExcelExportObject("Export00", this);
+    
+    this.exportObj.set_exportfilename("customerLedgerForm");
+    this.exportObj.set_exporturl("http://demo.nexacro.com/developer_guide/XExportImport");
+    
+    this.exportObj.addExportItem(nexacro.ExportItemTypes.GRID, this.Grid00, "Sheet1!A1");
+    
+    this.addEventHandler("onsuccess", this.Export00_onsuccess, this);
+    this.addEventHandler("onerror", this.Export00_onerror, this);
+    
+    var intExportedItem = this.exportObj.exportData();
+    trace("Number of Exported Item: " + intExportedItem);
+}
+
+this.Grid00_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+   
+   
+   if(e.cell == 6){
+      this.gfnOpen("dialog_customerLedgerDetail", "popup::customerledgerdetailform.xfdl", "callback", null);
+      application.gv_customerCode = this.ds_customerLedger.getColumn(e.row,"CUSTOMER_CODE");
+      
+      
+   }
+};
+
+//엑셀 export 시작
+this.Export00_onsuccess = function(obj:ExcelExportObject, e:nexacro.ExcelExportEventInfo)
+{
+    trace("Export00_onsuccess");    
+}
+
+this.Export00_onerror = function(obj:ExcelExportObject, e:nexacro.ExcelExportEventInfo)
+{
+    trace("Export00_onerror");
+}
+//엑셀 export 끝
+
+
+this.callback = function(trid , ErrorCode, ErrorMsg){       
+       if(trid == "customerledger"){
+         if(ErrorCode<0){
+             alert("해당 기간에는 거래 내역이 없습니다");
+                application.gds_customerLedger.clearData();
+         }
+       }
+       
+}
+]]></Script>
+  </Form>
+</FDL>

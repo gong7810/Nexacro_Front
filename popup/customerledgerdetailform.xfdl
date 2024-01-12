@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="customerledgerdetailform" width="390" height="400" titletext="New Form" onload="customerledgerdetailform_onload">
+    <Layouts>
+      <Layout height="400" mobileorientation="landscape" width="390">
+        <Static id="Static00" taborder="0" text="거래처원장상세" left="112" top="23" width="167" height="57" textAlign="center" font="24px/normal &quot;휴먼엑스포&quot;"/>
+        <Grid id="Grid00" taborder="1" left="10" top="90" width="370" height="286" binddataset="gds_customerLedger_detail" autofittype="col" oncelldblclick="Grid00_oncelldblclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="거래날짜"/>
+                <Cell col="1" text="계정과목"/>
+                <Cell col="2" text="차변"/>
+                <Cell col="3" text="대변"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:REPORTING_DATE"/>
+                <Cell col="1" text="bind:ACCOUNT_NAME"/>
+                <Cell col="2" text="bind:LEFT_DEBTOR_PRICE"/>
+                <Cell col="3" text="bind:RIGHT_CREDITS_PRICE"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[
+application = nexacro.getApplication();
+this.customerledgerdetailform_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+   
+   var customerCode = application.gv_customerCode;
+   var id = "findCustomerLedgerDetailList";
+   var url = "svcPosting::findCustomerLedgerDetailList";
+   var resData = "";
+   var reqData = "gds_customerLedger_detail=gds_customerLedger_detail";
+   var args = "customerCode='"+customerCode+"'";
+   var callback = "callback";
+
+   this.transaction(id, url, resData, reqData, args, callback);
+};
+this.callback = function(trid , ErrorCode, ErrorMsg){
+      //alert(application.gds_customerLedger_detail.saveXML());
+}]]></Script>
+  </Form>
+</FDL>

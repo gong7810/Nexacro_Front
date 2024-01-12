@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="accountLedgerForm" width="1080" height="570" titletext="New Form" onload="accountLedgerForm_onload">
+    <Layouts>
+      <Layout height="570" width="1080">
+        <Calendar id="calendar_date" taborder="0" left="670" top="96" width="322" height="40" borderRadius="5px"/>
+        <Button id="Button00" taborder="1" text="조회" left="1000" top="96" width="68" height="40" background="#87c4f1" color="aliceblue" borderRadius="5px" textAlign="center" onclick="Button00_onclick"/>
+        <Static id="Static00" taborder="2" text="계정별 원장" left="75" top="41" width="251" height="75" onclick="Static00_onclick" textAlign="center" font="normal 18pt/normal &quot;Arial&quot;"/>
+        <Grid id="Grid00" taborder="3" left="46" top="146" width="300" height="190" binddataset="ds_account" oncellclick="Grid00_oncellclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="150"/>
+                <Column size="150"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="계정과목코드"/>
+                <Cell col="1" text="계정과목"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:ACCOUNT_INNER_CODE" textAlign="center"/>
+                <Cell col="1" text="bind:ACCOUNT_NAME" textAlign="center"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Grid id="Grid00_01" taborder="4" left="426" top="146" width="642" height="404" binddataset="ds_cashJournal">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="136"/>
+                <Column size="100"/>
+                <Column size="135"/>
+                <Column size="135"/>
+                <Column size="135"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="적요"/>
+                <Cell col="1" text="날짜"/>
+                <Cell col="2" text="입금"/>
+                <Cell col="3" text="출금"/>
+                <Cell col="4" text="잔액"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:EXPENSE_REPORT"/>
+                <Cell col="1" text="bind:REPORTING_DATE"/>
+                <Cell col="2" text="bind:DEPOSIT"/>
+                <Cell col="3" text="bind:WITHDRAWAL"/>
+                <Cell col="4" text="bind:BALANCE"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Grid id="Grid00_00" taborder="5" left="46" top="360" width="300" height="190" binddataset="ds_accountDetail" oncellclick="Grid00_00_oncellclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="150"/>
+                <Column size="150"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="계정과목코드"/>
+                <Cell col="1" text="계정과목"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:ACCOUNT_INNER_CODE" textAlign="center"/>
+                <Cell col="1" text="bind:ACCOUNT_NAME" textAlign="center"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_account">
+        <ColumnInfo>
+          <Column id="ACCOUNT_INNER_CODE" type="STRING" size="256"/>
+          <Column id="ACCOUNT_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_accountDetail">
+        <ColumnInfo>
+          <Column id="ACCOUNT_INNER_CODE" type="STRING" size="256"/>
+          <Column id="ACCOUNT_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_cashJournal">
+        <ColumnInfo>
+          <Column id="MONTH_REPORTING_DATE" type="STRING" size="256"/>
+          <Column id="REPORTING_DATE" type="STRING" size="256"/>
+          <Column id="EXPENSE_REPORT" type="STRING" size="256"/>
+          <Column id="CUSTOMER_CODE" type="STRING" size="256"/>
+          <Column id="CUSTOMER_NAME" type="STRING" size="256"/>
+          <Column id="DEPOSIT" type="INT" size="256"/>
+          <Column id="WITHDRAWAL" type="INT" size="256"/>
+          <Column id="BALANCE" type="INT" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[include "scripts::commonDate.xjs";
+
+application = nexacro.getApplication();
+
+var today;
+var code;
+
+this.accountLedgerForm_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+      this.calendar_date.set_value( this.gfn_today().toString() );
+      today = this.calendar_date.value;
+   //계정과목 가져옴
+   var id = "getParentAccountList";
+   var url = "svcOperate::findParentAccountList";
+   var reqData = "";
+   var resData = "ds_account=gds_account";
+   var args = "";
+   var callback = "callback";
+   
+   this.transaction(id, url, reqData, resData, args, callback);
+   
+};
+
+
+this.Grid00_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+
+   code = this.ds_account.getColumn(e.row, "ACCOUNT_INNER_CODE");
+   trace(code);
+   trace("          code :  "+code);
+   var id = "Detailaccountlist";
+   var url = "svcOperate::detailaccountlist";
+   var reqData = "";
+   var resData = "ds_accountDetail=gds_account_detail";
+   var args = "parentAccountInnerCode='"+code+"'";
+   var callback = "callback";
+   
+   this.transaction(id, url, reqData, resData, args, callback);
+};
+
+this.Grid00_00_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+   
+   code = this.ds_accountDetail.getColumn(e.row, "ACCOUNT_INNER_CODE");
+   this.ds_cashJournal.clearData();
+};
+
+this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+      var Date = this.calendar_date.value;
+      var account = code;
+      var accounttoday = today;
+      
+      var sYear = Date.toString().substring(0,4);
+      var sMonth = Date.toString().substring(4,6);
+      var sDay = Date.toString().substring(6,8);
+      var sDate =  sYear+"-"+sMonth+"-"+sDay;
+      
+      var sYear1 = accounttoday.toString().substring(0,4);
+      var sMonth1 = accounttoday.toString().substring(4,6);
+      var sDay1 = accounttoday.toString().substring(6,8);
+      var sDate1 =  sYear1+"-"+sMonth1+"-"+sDay1;
+      
+      trace("          계정코드 :"+ account);
+      trace("          날짜     :"+ sDate);
+      trace("          오늘날짜 :"+ accounttoday);
+      
+      var id = "cashjournal";
+      var url = "svcPosting::cashjournal";
+      var reqData = "";
+      var resData = "ds_cashJournal=ds_cashJournal";
+      var args = "startDate='"+sDate+"' account='"+account+"'endDate='"+sDate1+"'";
+      var callback = "callback";
+
+      this.transaction(id, url, reqData, resData, args, callback);
+};
+
+this.callback = function(trid , ErrorCode, ErrorMsg){
+if(trid == "getParentAccountList"){
+   if(ErrorCode<0){
+   alert(trid+"  트랜잭션실패 , 사유"+ErrorMsg)
+   }
+}
+else if(trid == "Detailaccountlist"){
+   if(ErrorCode<0){
+   alert(trid+"  트랜잭션실패 , 사유"+ErrorMsg)
+   }
+}
+else if(trid == "cashjournal"){
+   if(ErrorCode<0){
+   alert(trid+"  트랜잭션실패 , 사유"+ErrorMsg)
+   }
+}
+}]]></Script>
+  </Form>
+</FDL>

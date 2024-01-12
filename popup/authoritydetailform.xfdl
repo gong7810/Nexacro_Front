@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="authoriry_emp_detailform" width="1000" height="400" titletext="New Form" onclick="authoriry_emp_addform_onclick" onkeyup="authoriry_emp_detailform_onkeyup" onload="authoriry_emp_detailform_onload">
+    <Layouts>
+      <Layout height="400" width="1000">
+        <Button id="list_btn" taborder="1" text="목록" left="907" top="340" width="70" height="20" onclick="list_btn_onclick" onkeydown="list_btn_onkeydown"/>
+        <Button id="del_btn" taborder="0" text="삭제" left="805" top="340" width="70" height="20" onclick="del_btn_onclick"/>
+        <Edit id="edit_emp_code" taborder="2" left="20" top="95" width="240" height="30" readonly="true" textAlign="center"/>
+        <Static id="Static00" taborder="3" left="31" top="50" width="212" height="26" textAlign="center" text="직급코드"/>
+        <Static id="Static00_00" taborder="4" left="273" top="50" width="212" height="26" textAlign="center" text="사원명"/>
+        <Static id="Static00_01" taborder="5" left="515" top="50" width="212" height="26" textAlign="center" text="권한코드"/>
+        <Static id="Static00_02" taborder="6" left="757" top="50" width="212" height="26" textAlign="center" text="권한명"/>
+        <Edit id="edit_authority_code" taborder="7" left="498" top="95" width="240" height="30" readonly="true" textAlign="center"/>
+        <Edit id="edit_emp_name" taborder="8" left="259" top="95" width="240" height="30" readonly="true" textAlign="center"/>
+        <Edit id="edit_authority_name" taborder="9" left="737" top="95" width="240" height="30" readonly="true" textAlign="center"/>
+      </Layout>
+    </Layouts>
+    <Objects/>
+    <Script type="xscript5.1"><![CDATA[include "scripts::commonDate.xjs";
+application = nexacro.getApplication();
+var today;
+var row;
+var status;
+var code; 
+
+
+
+
+
+
+
+this.authoriry_emp_detailform_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{		var empId=this.parent.empId;
+		var empCode=this.parent.empCode;
+		var empName=this.parent.empName;
+		var authCode=this.parent.authCode;
+		var authName=this.parent.authName;
+
+
+		this.edit_emp_code.set_value(empCode);
+		this.edit_emp_name.set_value(empName);
+		this.edit_authority_code.set_value(authCode);
+		this.edit_authority_name.set_value(authName);
+		
+
+
+};
+
+
+//삭제 버튼을 누르면 발생할 이벤트 
+this.del_btn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{  	 trace('del_btn_clicked');
+	var empId=this.parent.empId;
+	trace('empId is : '+empId);
+   
+	 	 	 
+	trace('<<< tracnsaction for delete has been sent');
+	
+	
+	var id = "deleteEmpAuth";
+	var url = "svcOperate::removeAuthorityEmpDetail"; // 매핑된 url주소
+	var resData = "";  // update하거나 insert할때는 res데이터로 :U옵션을 주고 전송 
+	var reqData ="";   // 데이터 요청 
+	var args = "id="+empId;
+	var callback = "";
+
+	var bool=confirm('삭제하시겠습니까?');
+
+	if(bool){
+			this.transaction(id, url, resData, reqData, args, callback);
+
+			trace('--------------delete data has been sent--------------');
+			trace('');
+			trace('');
+			trace('');
+			alert('삭제되었습니다.');
+			
+			
+			this.close();
+
+	}else{
+	 return;
+	 }
+	 
+	 
+};
+
+
+
+
+
+this.authoriry_emp_detailform_onkeyup = function(obj:nexacro.Form,e:nexacro.KeyEventInfo)
+{
+	var code=e.keycode;
+	trace(code);
+	if(code==27){
+	this.close();
+	}
+};
+
+
+
+
+
+
+//목록 버튼을 누르면 해당 창을 종료
+this.list_btn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.close();
+};
+
+
+
+]]></Script>
+    <Bind>
+      <BindItem id="item0" compid="edit_authority_code" propid="value" datasetid="emp_auth_for_trasaction" columnid="AUTHORITY_CODE"/>
+    </Bind>
+  </Form>
+</FDL>

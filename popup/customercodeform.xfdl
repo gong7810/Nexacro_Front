@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="customerCodeForm" width="360" height="360" onload="customerCodeForm_onload">
+    <Layouts>
+      <Layout height="360" width="360">
+        <Static id="Static00" taborder="0" text="거래처" left="97" top="13" width="167" height="35" textAlign="center" font="20px/normal &quot;휴먼엑스포&quot;"/>
+        <Tab id="Tab00" taborder="1" tabindex="0" left="25" top="56" width="311" height="272" onchanged="Tab00_onchanged">
+          <Tabpages>
+            <Tabpage id="Tabpage1" text="일반거래처">
+              <Layouts>
+                <Layout>
+                  <Grid id="Grid00" taborder="0" left="12" top="12" width="288" height="223" binddataset="gds_customer" autofittype="col" oncelldblclick="Grid00_oncelldblclick">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="70"/>
+                          <Column size="70"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="24" band="head"/>
+                          <Row size="24"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell text="거래처코드"/>
+                          <Cell col="1" text="거래처명"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell text="bind:CUSTOMER_CODE"/>
+                          <Cell col="1" text="bind:CUSTOMER_NAME"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="Tabpage2" text="금융거래처">
+              <Layouts>
+                <Layout>
+                  <Grid id="Grid00" taborder="0" left="12" top="12" width="288" height="223" binddataset="gds_customer" autofittype="col">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="70"/>
+                          <Column size="70"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="24" band="head"/>
+                          <Row size="24"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell text="거래처코드"/>
+                          <Cell col="1" text="거래처명"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell text="bind:CUSTOMER_CODE"/>
+                          <Cell col="1" text="bind:CUSTOMER_NAME"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="Tabpage3" text="신용카드">
+              <Layouts>
+                <Layout>
+                  <Grid id="Grid00" taborder="0" left="12" top="12" width="288" height="223" binddataset="gds_customer" autofittype="col" oncelldblclick="Grid00_oncelldblclick">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="70"/>
+                          <Column size="70"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="24" band="head"/>
+                          <Row size="24"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell text="거래처코드"/>
+                          <Cell col="1" text="거래처명"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell text="bind:CUSTOMER_CODE"/>
+                          <Cell col="1" text="bind:CUSTOMER_NAME"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+          </Tabpages>
+        </Tab>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[
+application = nexacro.getApplication();
+this.customerCodeForm_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	var id = "getTotalCustomerList";
+	var url = "svcBase::findCustomerCodeList";
+	var reqData = "";
+	var resData = "gds_customer=gds_customer";
+	var args = "";
+	var callback = "callback";
+	
+	this.transaction(id, url, reqData, resData, args, callback);
+	
+	application.gds_customer.filter("CUSTOMER_TYPE=='일반'");
+};
+
+
+// 콜백 
+this.callback = function(trid, ErrorCode, ErrorMsg){
+	if(trid=="getTotalCustomerList"){
+		if(ErrorCode<0){
+			alert("조회실패 : "+ErrorMsg);
+		}
+	}
+}
+
+
+// tab change
+this.Tab00_onchanged = function(obj:nexacro.Tab,e:nexacro.TabIndexChangeEventInfo)
+{
+	switch(obj.tabindex) {
+	case 0 : application.gds_customer.filter("CUSTOMER_TYPE=='일반'");
+		break;
+	case 1 : application.gds_customer.filter("CUSTOMER_TYPE=='금융기관'");
+		break;
+	case 2 : application.gds_customer.filter("CUSTOMER_TYPE=='신용카드'");
+		break;
+	}
+};
+
+
+// 그리드 더블클릭 
+this.Grid00_oncelldblclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{	
+	var customerCode = application.gds_customer.getColumn(application.gds_customer.rowposition, "CUSTOMER_CODE");
+	var customerName = application.gds_customer.getColumn(application.gds_customer.rowposition, "CUSTOMER_NAME");
+	trace(customerCode)
+	trace(customerName)
+	
+	
+	application.gds_journal.setColumn(application.gds_journal.rowposition, "CUSTOMER_CODE", customerCode);
+	application.gds_journal.setColumn(application.gds_journal.rowposition, "CUSTOMER_NAME", customerName);
+	
+
+	this.close();
+};
+]]></Script>
+    <Objects/>
+  </Form>
+</FDL>

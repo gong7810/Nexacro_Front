@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="fm_left" width="190" height="700" titletext="New Form" onload="fm_left_onload">
+    <Layouts>
+      <Layout height="700" mobileorientation="landscape" width="190">
+        <Grid id="grdLeft" taborder="0" left="0" top="40" width="190" binddataset="gds_menu" autofittype="col" treeusecheckbox="false" cssclass="grd_LF_treeMenu" bottom="75" treeinitstatus="expand,all" oncellclick="divLeft_grdLeft_oncellclick" border="0px solid #c7c7c7,1px solid #c7c7c7">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="184"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="MENU"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:MENU_NAME" displaytype="treeitemcontrol" edittype="tree" treelevel="bind:MENU_ORDER"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="Static00" taborder="1" text="Main Title Menu" left="0" top="0" height="40" width="190" cssclass="sta_LF_title01"/>
+      </Layout>
+    </Layouts>
+    <Objects/>
+    <Script type="xscript5.1"><![CDATA[this.application = null;
+
+this.fm_left_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.application = nexacro.getApplication();
+};
+
+this.divLeft_grdLeft_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	trace("grdLeft_oncellclick");
+   var sID = application.gds_menu.getColumn(e.row, "MENU_CODE");
+   var url = application.gds_menu.getColumn(e.row, "URL");
+   var title = application.gds_menu.getColumn(e.row, "MENU_NAME");
+   var level = application.gds_menu.getColumn(e.row, "MENU_ORDER");
+   trace("sID  :"+sID);
+   trace("url  :"+url);
+   trace("title  :"+title);
+   trace("level  :"+level);
+	gfn_open(url, title, sID);
+
+//    for(var i=0; i<application.gds_loginAuthority.getRowCount(); i++){
+// 		if(application.gds_loginAuthority.getColumn(i, "MENU_CODE")==sID){
+// 		trace(application.gds_loginAuthority.getColumn(i, "IS_AUTHORITY"));
+// 			if(application.gds_loginAuthority.getColumn(i, "IS_AUTHORITY")=="1"){
+// 				gfn_open(url, title, sID);
+// 			}
+// 			else {
+// 				alert("권한이 없습니다.");
+// 				return;	
+// 			}
+// 		}
+//    }
+};
+]]></Script>
+  </Form>
+</FDL>

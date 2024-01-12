@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="totalaccountledgerform" width="1080" height="570" titletext="New Form" onload="earlycarryoverbycustomerform_onload">
+    <Layouts>
+      <Layout height="570" mobileorientation="landscape" width="1080">
+        <Static id="Static00" taborder="0" text="거래처별초기이월" left="75" top="41" width="251" height="75" onclick="Static00_onclick" textAlign="center" font="normal 18pt/normal &quot;Arial&quot;"/>
+        <Grid id="Grid00" taborder="1" left="46" top="146" width="300" height="190" binddataset="ds_account" oncellclick="Grid00_oncellclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="150"/>
+                <Column size="150"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="계정과목 코드"/>
+                <Cell col="1" text="계정과목"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:ACCOUNT_INNER_CODE" textAlign="center"/>
+                <Cell col="1" text="bind:ACCOUNT_NAME" textAlign="center"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Grid id="Grid00_00" taborder="2" left="46" top="360" width="300" height="190" binddataset="ds_accountDetail" oncellclick="Grid00_00_oncellclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="100"/>
+                <Column size="100"/>
+                <Column size="100"/>
+              </Columns>
+              <Rows>
+                <Row band="head" size="24"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="ACCOUNT_INNER_CODE"/>
+                <Cell col="1" text="ACCOUNT_NAME"/>
+                <Cell col="2" text="BALANCE"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:ACCOUNT_INNER_CODE"/>
+                <Cell col="1" text="bind:ACCOUNT_NAME"/>
+                <Cell col="2" text="bind:BALANCE"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="Button00" taborder="3" text="조회" left="1000" top="96" width="68" height="40" background="#87c4f1" color="aliceblue" borderRadius="5px" textAlign="center" onclick="Button00_onclick"/>
+        <Grid id="Grid00_01" taborder="4" left="426" top="146" width="642" height="404" binddataset="ds_carrayOver">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="214"/>
+                <Column size="214"/>
+                <Column size="214"/>
+              </Columns>
+              <Rows>
+                <Row band="head" size="24"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="CUSTOMER_CODE"/>
+                <Cell col="1" text="CUSTOMER_NAME"/>
+                <Cell col="2" text="CARRY_OVER"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:CUSTOMER_CODE"/>
+                <Cell col="1" text="bind:CUSTOMER_NAME"/>
+                <Cell col="2" text="bind:CARRY_OVER"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Edit id="Edit00" taborder="5" left="760" top="96" width="228" height="40" borderRadius="5px" displaynulltext="회계기수를 조회해주세요." textAlign="center" oneditclick="Edit00_oneditclick" enable="true" readonly="true" font="bold 14px/normal &quot;Arial&quot;,&quot;Malgun Gothic&quot;,&quot;Gulim&quot;" onchanged="Edit00_onchanged"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_account">
+        <ColumnInfo>
+          <Column id="ACCOUNT_INNER_CODE" type="STRING" size="256"/>
+          <Column id="ACCOUNT_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_accountDetail">
+        <ColumnInfo>
+          <Column id="ACCOUNT_INNER_CODE" type="STRING" size="256"/>
+          <Column id="ACCOUNT_NAME" type="STRING" size="256"/>
+          <Column id="BALANCE" type="INT" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_carrayOver">
+        <ColumnInfo>
+          <Column id="CUSTOMER_CODE" type="STRING" size="256"/>
+          <Column id="CUSTOMER_NAME" type="STRING" size="256"/>
+          <Column id="CARRY_OVER" type="INT" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[include "scripts::commonDate.xjs"
+include "scripts::commonOpen.xjs"
+application = nexacro.getApplication();
+
+var code;
+
+this.earlycarryoverbycustomerform_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo){
+	application.gds_period.clearData();
+	//계정과목 가져옴
+	var id = "getParentAccountList";
+	var url = "svcOperate::findParentAccountList";
+	var reqData = "";
+	var resData = "ds_account=gds_account";
+	var args = "";
+	var callback = "callback";
+	
+	this.transaction(id, url, reqData, resData, args, callback);
+};
+
+
+this.Grid00_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+
+	code = this.ds_account.getColumn(e.row, "ACCOUNT_INNER_CODE");
+	trace("          code :  "+code);
+	var id = "Detailaccountlist";
+	var url = "svcOperate::Detailaccountlist";
+	var reqData = "";
+	var resData = "ds_accountDetail=gds_account";
+	var args = "code='"+code+"'";
+	var callback = "callback";
+	
+	this.transaction(id, url, reqData, resData, args, callback);
+};
+
+
+this.Edit00_oneditclick = function(obj:nexacro.Edit,e:nexacro.ChangeEventInfo)
+{
+	this.gfnOpen("periodpopup", "popup::periodpopupform.xfdl", "callback", null);
+};
+
+this.callback = function(trid, ErrorCode, ErrorMsg){
+   
+   if(trid == "periodpopup"){
+	this.Edit00.set_value(application.gds_period.getColumn(0,"FISCAL_YEAR"));
+	//this.Edit00.set_enable("false");
+      if(ErrorCode<0){
+         alert("조회 실패 : "+ErrorMsg);
+      }
+   }
+}]]></Script>
+  </Form>
+</FDL>

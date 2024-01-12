@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="MainPage" width="1280" height="720" titletext="New Form" background="white" borderRadius="10px 0px 0px / 0px" border="0px none transparent,0px none,0px none">
+    <Layouts>
+      <Layout height="720" width="1280">
+        <Static id="Static01" taborder="1" text="76기 회계 프로젝트" left="400" top="180" width="365" height="70" font="25pt/normal &quot;휴먼둥근헤드라인&quot;" textAlign="center"/>
+        <Button id="slipForm" taborder="2" text="전표" left="197" top="304" width="149" height="46" font="bold 15pt/normal &quot;Arial&quot;,&quot;함초롬바탕&quot;" onclick="slipForm_onclick" borderRadius="10px" background="#EAEAEA" border="0px none transparent,0px none,0px none"/>
+        <Button id="journalForm" taborder="3" text="분개장" left="356" top="304" width="149" height="46" font="bold 15pt/normal &quot;Arial&quot;,&quot;함초롬바탕&quot;" onclick="journalForm_onclick" borderRadius="10px" background="#EAEAEA" border="0px none transparent,0px none,0px none"/>
+        <ImageViewer id="ImageViewer00" taborder="0" text="" left="180" top="130" width="295" height="143" image="url('https://image.homeplus.kr/td/49dbe728-51a7-4a77-8c73-4bd8b1532dcd')" stretch="fixaspectratio" borderRadius="10px" opacity="1" background="transparent" border="0px none transparent,0px none,0px none"/>
+        <Button id="incomestatementform" taborder="4" text="손익계산서" left="515" top="304" width="149" height="46" font="bold 15pt/normal &quot;Arial&quot;,&quot;함초롬바탕&quot;" onclick="incomestatementform_onclick" borderRadius="10px" background="#EAEAEA" border="0px none transparent,0px none,0px none"/>
+        <Button id="financialpositionform" taborder="5" text="재무상태표" left="674" top="304" width="149" height="46" font="bold 15pt/normal &quot;Arial&quot;,&quot;함초롬바탕&quot;" onclick="financialpositionform_onclick" borderRadius="10px" background="#EAEAEA" border="0px none transparent,0px none,0px none"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[
+this.slipForm_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	gfn_open("/posting/slipform", "일반 전표");
+};
+
+this.journalForm_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	gfn_open("/posting/journalform", "분개장");
+};
+
+this.incomestatementform_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	gfn_open("/settlement/incomestatementform", "손익계산서");
+};
+
+this.financialpositionform_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	gfn_open("/settlement/financialpositionform", "재무상태표");	
+};
+
+this.ImageViewer00_onclick = function(obj:nexacro.ImageViewer,e:nexacro.ClickEventInfo)
+{
+	
+};
+]]></Script>
+  </Form>
+</FDL>

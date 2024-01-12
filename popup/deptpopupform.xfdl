@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="deptpopupform" width="390" height="430" onload="deptpopupform_onload">
+    <Layouts>
+      <Layout height="430" width="390">
+        <Static id="Static00" taborder="0" text="부서코드" left="108" top="13" width="167" height="35" textAlign="center" font="20px/normal &quot;휴먼엑스포&quot;"/>
+        <Grid id="Grid00" taborder="1" left="42" top="60" width="298" height="316" binddataset="gds_department" autofittype="col" oncelldblclick="Grid00_oncelldblclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="120"/>
+                <Column size="120"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="부서코드"/>
+                <Cell col="1" text="부서명"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:DEPT_CODE"/>
+                <Cell col="1" text="bind:DEPT_NAME"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_code">
+        <ColumnInfo>
+          <Column id="DEPT_CODE" type="STRING" size="256"/>
+          <Column id="DEPT_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <InitValue/>
+    <Script type="xscript5.1"><![CDATA[
+application = nexacro.getApplication();
+this.deptpopupform_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+		var code = application.gds_department.getColumn(0,"WORKPLACE_CODE");
+		var id = "selectdeptCode";
+		var url = "svcOperate::selectdeptCode";
+		var resData = "";
+		var reqData = "gds_department=gds_department";
+		var args = "code='"+code+"'";
+		var callback = "callback";		
+		this.transaction(id, url, resData, reqData, args, callback);
+};
+
+this.Grid00_oncelldblclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	var deptCode = application.gds_department.getColumn(e.row,"DEPT_CODE");
+	var deptName = application.gds_department.getColumn(e.row,"DEPT_NAME");
+	
+	application.gds_department.setColumn(0,"DEPT_CODE",deptCode)
+	application.gds_department.setColumn(0,"DEPT_NAME",deptName)
+	
+	this.close();
+};
+]]></Script>
+  </Form>
+</FDL>

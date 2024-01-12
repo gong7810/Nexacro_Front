@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Script version="1.0" type="xscript5.1"><![CDATA[
+/********************************************************************************
+ 공통 스트립트관리
+ @Path		    scripts::commonScripts
+ @Description 	공통스크립트의 모음
+ 공통단 처리한 부분을 공부하고싶으면 loginForm과 ContractForm을 보면 됨.
+ ********************************************************************************/
+
+include "scripts::commonTransaction.xjs"
+// 트랜잭션 스크립트
+include "scripts::commonOpen.xjs"
+// 화면 관련 스크립트
+include "scripts::commonUtil.xjs"
+// 유틸 관련 스크립트
+include "scripts::commonDataset.xjs"
+// 데이터셋 관련 스크립트
+include "scripts::commonDate.xjs"
+// 날짜 관련 스크립트
+include "scripts::commonString.xjs"
+// String 관련 스크립트
+]]></Script>

@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XCSS version="1.0"><![CDATA[.Static.sta_mian_smIocn01
+{
+	background : url("imagerc::img_main_smIcon01.png") no-repeat left center;
+	color : #222222;
+	font : 14px "Arial","Malgun Gothic";
+	-nexa-text-align : left ;
+	-nexa-padding : 0px 0px 20px 90px;
+}
+
+.Static.sta_mian_smIocn02
+{
+	background : url("imagerc::img_main_smIcon02.png") no-repeat left center;
+	color : #222222;
+	font : 14px "Arial","Malgun Gothic";
+	-nexa-text-align : left ;
+	-nexa-padding : 0px 0px 20px 90px;
+}
+
+.Static.sta_mian_smIocn03
+{
+	background : url("imagerc::img_main_smIcon03.png") no-repeat left center;
+	color : #222222;
+	font : 14px "Arial","Malgun Gothic";
+	-nexa-text-align : left ;
+	-nexa-padding : 0px 0px 20px 90px;
+}
+
+.Static.sta_main_iconText
+{
+	font : bold 24px "Arial","Malgun Gothic";
+	-nexa-text-align : left ;
+}
+
+.Static.sta_main_box01
+{
+	background : #f7f7f7;
+	-nexa-border : 1px solid #c7c7c7;
+}
+
+.Static.sta_main_box02
+{
+	background : #eeeeee;
+	-nexa-border : 1px solid #c7c7c7;
+}
+
+.Static.sta_main_chartx01
+{
+	background : url("imagerc::img_main_chart01.png") no-repeat center center;
+}
+
+.Static.sta_main_boxTle01
+{
+	background : #f7f7f7;
+	color : #666666;
+	font : 20px "Arial";
+	-nexa-border : 1px solid #c7c7c7;
+	-nexa-padding : 0px 0px 0px 20px;
+}
+
+.Static.sta_main_more
+{
+	background : url("imagerc::img_main_more.png") no-repeat center center;
+	cursor : pointer;
+}
+
+.Static.sta_main_numbering
+{
+	background : #f7f7f7;
+	border-radius : 10px;
+	color : #666666;
+	font : 100px "Arial";
+	-nexa-border : 1px solid #c7c7c7;
+	-nexa-text-align : center;
+}
+
+.Static.sta_main_text11C
+{
+	color : #666666;
+	font : 11px "Arial";
+	-nexa-text-align : center;
+	-nexa-word-wrap : char;
+}
+
+.Static.sta_main_text12C
+{
+	color : #666666;
+	font : 12x "Arial";
+	-nexa-text-align : center;
+	-nexa-word-wrap : char;
+}
+
+.Static.sta_main_icon01
+{
+	background : url("imagerc::img_main_icon01.png") no-repeat center center;
+	color : #ffffff;
+	font : bold 28px "Arial";
+	-nexa-text-align : right;
+	-nexa-vertical-align : middle;
+	-nexa-padding : 20px 17px 0px 17px;
+}
+.Static.sta_main_icon02
+{
+	background : url("imagerc::img_main_icon02.png") no-repeat center center;
+	color : #ffffff;
+	font : bold 28px "Arial";
+	-nexa-text-align : right;
+	-nexa-vertical-align : middle;
+	-nexa-padding : 20px 17px 0px 17px;
+}
+.Static.sta_main_icon03
+{
+	background : url("imagerc::img_main_icon03.png") no-repeat center center;
+	color : #ffffff;
+	font : bold 28px "Arial";
+	-nexa-text-align : right;
+	-nexa-vertical-align : middle;
+	-nexa-padding : 20px 17px 0px 17px;
+}
+.Static.sta_main_icon04
+{
+	background : url("imagerc::img_main_icon04.png") no-repeat center center;
+	color : #ffffff;
+	font : bold 28px "Arial";
+	-nexa-text-align : right;
+	-nexa-vertical-align : middle;
+	-nexa-padding : 20px 17px 0px 17px;
+}
+.Static.sta_main_icon05
+{
+	background : url("imagerc::img_main_icon05.png") no-repeat center center;
+	color : #ffffff;
+	font : bold 28px "Arial";
+	-nexa-text-align : right;
+	-nexa-vertical-align : middle;
+	-nexa-padding : 20px 17px 0px 17px;
+}
+
+.Grid.grd_main_table01
+{
+	-nexa-border : 1px solid #c7c7c7;
+}
+
+.Grid.grd_main_table01 .head .row .cell
+{
+	background : #666666;
+	color : #ffffff;
+	-nexa-text-align : center;
+}
+.Grid.grd_main_table01 .body .row .cell,.Grid.grd_main_table01 .body .row .cell[status=mouseover],.Grid.grd_main_table01 .body .row .cell[userstatus=selected]
+{
+	background : #ffffff;
+	-nexa-background-odd : #f7f7f7;
+	-nexa-text-align : center;
+}]]></XCSS>

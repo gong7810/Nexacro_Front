@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TypeDefinition version="3.0">
+  <Modules>
+    <Module url="CompBase.json"/>
+    <Module url="ComComp.json"/>
+    <Module url="Grid.json"/>
+    <Module url="DeviceAPI.json"/>
+  </Modules>
+  <Components>
+    <Component type="JavaScript" id="Button" classname="nexacro.Button"/>
+    <Component type="JavaScript" id="Combo" classname="nexacro.Combo"/>
+    <Component type="JavaScript" id="Edit" classname="nexacro.Edit"/>
+    <Component type="JavaScript" id="MaskEdit" classname="nexacro.MaskEdit"/>
+    <Component type="JavaScript" id="TextArea" classname="nexacro.TextArea"/>
+    <Component type="JavaScript" id="Static" classname="nexacro.Static"/>
+    <Component type="JavaScript" id="Div" classname="nexacro.Div"/>
+    <Component type="JavaScript" id="PopupDiv" classname="nexacro.PopupDiv"/>
+    <Component type="JavaScript" id="Radio" classname="nexacro.Radio"/>
+    <Component type="JavaScript" id="CheckBox" classname="nexacro.CheckBox"/>
+    <Component type="JavaScript" id="ListBox" classname="nexacro.ListBox"/>
+    <Component type="JavaScript" id="Grid" classname="nexacro.Grid"/>
+    <Component type="JavaScript" id="Spin" classname="nexacro.Spin"/>
+    <Component type="JavaScript" id="Menu" classname="nexacro.Menu"/>
+    <Component type="JavaScript" id="PopupMenu" classname="nexacro.PopupMenu"/>
+    <Component type="JavaScript" id="Tab" classname="nexacro.Tab"/>
+    <Component type="JavaScript" id="GroupBox" classname="nexacro.GroupBox"/>
+    <Component type="JavaScript" id="Calendar" classname="nexacro.Calendar"/>
+    <Component type="JavaScript" id="ImageViewer" classname="nexacro.ImageViewer"/>
+    <Component type="JavaScript" id="ProgressBar" classname="nexacro.ProgressBar"/>
+    <Component type="JavaScript" id="Plugin" classname="nexacro.Plugin"/>
+    <Component type="JavaScript" id="Dataset" classname="nexacro.NormalDataset"/>
+    <Component type="JavaScript" id="FileDialog" classname="nexacro.FileDialog"/>
+    <Component type="JavaScript" id="VirtualFile" classname="nexacro.VirtualFile"/>
+  </Components>
+  <Services>
+    <Service prefixid="theme" type="resource" url="./_resource_/_theme_/" version="0" communicationversion="0" cachelevel="session" include_subdir="true"/>
+    <Service prefixid="initvalue" type="resource" url="./_resource_/_initvalue_/" version="0" communicationversion="0" cachelevel="session" include_subdir="false"/>
+    <Service prefixid="xcssrc" type="resource" url="./_resource_/_xcss_/" cachelevel="session" include_subdir="false"/>
+    <Service prefixid="imagerc" type="resource" url="./_resource_/_images_/" cachelevel="session" include_subdir="true"/>
+    <Service prefixid="font" type="resource" url="./_resource_/_font_/" version="0" communicationversion="0" cachelevel="session" include_subdir="false"/>
+    <Service prefixid="Base" type="form" cachelevel="session" url="./Base/" version="0" communicationversion="0" include_subdir="false"/>
+    <Service prefixid="frame" type="form" cachelevel="session" url="./frame/" version="0" communicationversion="0" include_subdir="false"/>
+    <Service prefixid="scripts" type="form" url="./scripts/" version="0" cachelevel="session" include_subdir="false" communicationversion="0"/>
+    <Service prefixid="svcBase" type="form" url="http://localhost:9162/base/" version="0" cachelevel="none" include_subdir="false" communicationversion="0"/>
+    <Service prefixid="posting" type="form" url="./posting/" version="0" cachelevel="session" include_subdir="false" communicationversion="0"/>
+    <Service prefixid="popup" type="form" url="./popup/" version="0" cachelevel="session" include_subdir="false" communicationversion="0"/>
+    <Service prefixid="svcOperate" type="form" url="http://localhost:9162/operate/" version="0" cachelevel="none" include_subdir="false" communicationversion="0"/>
+    <Service prefixid="svcPosting" type="form" url="http://localhost:9162/posting/" version="0" cachelevel="none" include_subdir="false" communicationversion="0"/>
+    <Service prefixid="operate" type="form" url="./operate/" version="0" cachelevel="session" include_subdir="false" communicationversion="0"/>
+    <Service prefixid="settlement" type="form" url="./settlement/" version="0" cachelevel="session" include_subdir="false" communicationversion="0"/>
+    <Service prefixid="svcSettlement" type="form" url="http://localhost:9162/settlement/" version="0" cachelevel="none" include_subdir="false" communicationversion="0"/>
+    <Service prefixid="svcBudget" type="form" url="http://localhost:9162/budget/" version="0" cachelevel="none" include_subdir="false" communicationversion="0"/>
+    <Service prefixid="budget" type="form" url="./budget/" version="0" cachelevel="session" include_subdir="false" communicationversion="0"/>
+    <Service prefixid="board" type="form" url="./board/" version="0" cachelevel="session" include_subdir="false" communicationversion="0"/>
+  </Services>
+  <Protocols/>
+  <Update/>
+</TypeDefinition>

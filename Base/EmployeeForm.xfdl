@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="employeeform2" width="1280" height="720" titletext="New Form" onload="employeeform2_onload">
+    <Layouts>
+      <Layout height="720" width="1280">
+        <Grid id="Grid00" taborder="0" left="60" top="160" width="320" height="311" binddataset="gds_emp" visible="true">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="사원코드"/>
+                <Cell col="1" text="사원이름"/>
+                <Cell col="2" text="직급"/>
+                <Cell col="3" text="부서이름"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:EMP_CODE"/>
+                <Cell col="1" text="bind:EMP_NAME"/>
+                <Cell col="2" text="bind:POSITION_NAME"/>
+                <Cell col="3" text="bind:DEPT_NAME"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="Button00" taborder="1" text="사원 조회" left="60" top="75" width="120" height="50" onclick="Button00_onclick"/>
+        <Button id="Button01" taborder="2" text="사원 추가" left="240" top="75" width="120" height="50" onclick="Button01_onclick"/>
+        <Button id="Button02" taborder="3" text="사원 수정" left="420" top="75" width="120" height="50" onclick="Button02_onclick"/>
+        <Button id="Button03" taborder="4" text="사원 삭제" left="610" top="75" width="120" height="50" onclick="Button03_onclick"/>
+      </Layout>
+    </Layouts>
+    <Objects/>
+    <Script type="xscript5.1"><![CDATA[include "scripts::commonOpen.xjs";
+application = nexacro.getApplication();
+this.employeeform2_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+   this.gds_emp.clearData();
+   
+};
+
+this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{      
+     this.transaction(
+      "findEmployeeList",
+      "svcOperate::findEmployeeList",
+      "",
+      "gds_emp=gds_emp",
+      "",
+      "callback"
+      );
+};
+
+
+this.Button01_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+   trace("추가를 해봅시다");
+   this.gfnOpen("popup", "popup::addemployeeform.xfdl", "add")
+   
+};
+
+
+
+
+this.callbackFunc = function( strID, vArgu ){
+   this.reload();
+ 
+}
+
+this.Button02_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+   trace("수정을 해봅시다");
+   this.gfnOpen("popup", "popup::addemployeeform.xfdl", "modifying")
+};
+this.Button04_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	
+};
+]]></Script>
+  </Form>
+</FDL>

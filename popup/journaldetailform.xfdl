@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="journalDetailForm" width="390" height="430" onload="journalDetailForm_onload">
+    <Layouts>
+      <Layout height="430" width="390">
+        <Static id="Static00" taborder="0" text="분개상세" left="112" top="23" width="167" height="57" textAlign="center" font="24px/normal &quot;휴먼엑스포&quot;"/>
+        <Grid id="Grid00" taborder="1" left="10" top="90" width="370" height="286" binddataset="gds_journalDetail" autofittype="col" oncelldblclick="Grid00_oncelldblclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="분개번호"/>
+                <Cell col="1" text="분개상세번호"/>
+                <Cell col="2" text="상세계정과목"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:JOURNAL_NO" textAlign="center"/>
+                <Cell col="1" text="bind:JOURNAL_DETAIL_NO" textAlign="center"/>
+                <Cell col="2" text="bind:ACCOUNT_CONTROL_NAME" textAlign="center"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Objects/>
+    <InitValue/>
+    <Script type="xscript5.1"><![CDATA[
+application = nexacro.getApplication();
+this.journalDetailForm_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	trace("   분개번호 : " + application.gv_journalNo);
+	var journalNo = application.gv_journalNo;
+
+
+	var id = "findJournalDetailList";
+	var url = "svcPosting::findJournalDetailList";
+	var resData = "gds_journalDetail=gds_journalDetail";
+	var reqData = "";
+	var args = "journalNo='"+journalNo+"'";
+	var callback = "callback";
+
+	this.transaction(id, url, reqData, resData, args, callback);
+	
+};
+this.callback = function(trid , ErrorCode, ErrorMsg){
+		//alert(application.gds_journalDetail.saveXML());
+}]]></Script>
+  </Form>
+</FDL>

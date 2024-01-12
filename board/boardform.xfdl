@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="boardform" width="1080" height="570" titletext="New Form" onload="boardform_onload">
+    <Layouts>
+      <Layout height="570" width="1080">
+        <Button id="btnFirst" taborder="0" left="282" top="525" width="35" onclick="Button_onclick" cssclass="btn_WF_firstBlue1" height="35" text="&lt;&lt;"/>
+        <Button id="btnPrev" taborder="1" left="317" top="525" width="35" onclick="Button_onclick" cssclass="btn_WF_preBlue1" height="35" text="&lt;"/>
+        <Button id="btn1" taborder="2" text="1" left="352" top="525" width="35" height="35" onclick="btn0_onclick"/>
+        <Button id="btn2" taborder="3" text="2" left="387" top="525" width="35" height="35" onclick="btn1_onclick"/>
+        <Button id="btn3" taborder="4" text="3" left="422" top="525" width="35" height="35" onclick="btn2_onclick"/>
+        <Button id="btn4" taborder="5" text="4" left="457" top="525" width="35" height="35" onclick="btn3_onclick"/>
+        <Button id="btn5" taborder="6" text="5" left="492" top="525" width="35" height="35" onclick="btn4_onclick"/>
+        <Button id="btn6" taborder="7" text="6" left="527" top="525" width="35" height="35" onclick="btn5_onclick"/>
+        <Button id="btn7" taborder="8" text="7" left="562" top="525" width="35" height="35" onclick="btn6_onclick"/>
+        <Button id="btn8" taborder="9" text="8" left="597" top="525" width="35" height="35" onclick="btn7_onclick"/>
+        <Button id="btn9" taborder="10" text="9" left="632" top="525" width="35" height="35" onclick="btn8_onclick"/>
+        <Button id="btn10" taborder="11" text="10" left="667" top="525" width="35" height="35" onclick="btn9_onclick"/>
+        <Button id="btnNext" taborder="12" left="702" top="525" width="35" onclick="Button_onclick" cssclass="btn_WF_nextBlue1" height="35" text="&gt;"/>
+        <Button id="btnLast" taborder="13" top="525" width="35" onclick="Button_onclick" cssclass="btn_WF_lastBlue1" height="35" left="737" text="&gt;&gt;"/>
+        <Grid id="Grid00" taborder="14" left="40" top="144" width="1000" height="364" binddataset="gds_bbs" oncellclick="Grid00_oncellclick" onheadclick="Grid00_onheadclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="BBS_ID"/>
+                <Cell col="1" text="BBS_TITLE"/>
+                <Cell col="2" text="BBS_CONTENTS"/>
+                <Cell col="3" text="BBS_DATE"/>
+                <Cell col="4" text="EMP_NAME"/>
+                <Cell col="5" text="CHECKED"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:BBS_ID"/>
+                <Cell col="1" text="bind:BBS_TITLE"/>
+                <Cell col="2" text="bind:BBS_CONTENTS"/>
+                <Cell col="3" text="bind:BBS_DATE"/>
+                <Cell col="4" text="bind:EMP_NAME"/>
+                <Cell col="5" text="bind:CHECKED" displaytype="checkboxcontrol"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="Static00" taborder="15" text="사내 게시판" left="263" top="21" width="554" height="96" textAlign="center" font="48px/normal &quot;Arial&quot;,&quot;Malgun Gothic&quot;,&quot;Gulim&quot;"/>
+        <Button id="bt_add" taborder="16" text="추가" left="910" top="113" width="60" height="28" onclick="bt_add_onclick"/>
+        <Button id="bt_delete" taborder="17" text="삭제" left="980" top="113" width="60" height="27" onclick="bt_delete_onclick"/>
+      </Layout>
+    </Layouts>
+    <Objects/>
+    <Script type="xscript5.1"><![CDATA[include "scripts::commonOpen.xjs";
+include "scripts::commonDate.xjs";
+application = nexacro.getApplication();
+var today;
+var page=0;
+this.boardform_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	today=this.gfn_today();
+
+	var id = "selectBoard";
+	var url = "svcOperate::selectBoard";
+	var resData = "";
+	var reqData = "gds_bbs=gds_bbs";
+	var args = "";
+	var callback = "callback";
+
+	this.transaction(id, url, resData, reqData, args, callback);
+	
+};
+//게시판 추가
+this.bt_add_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+
+// 	this.ds_bbs.addRow();
+// 	this.ds_bbs.setColumn(0,"BBS_ID","NEW");
+// 	this.ds_bbs.setColumn(0,"EMP_NAME",application.gv_empName);
+// 	this.ds_bbs.setColumn(0,"BBS_DATE",today);
+	this.gfnOpen("popup", "popup::boardmodafform.xfdl", "callbackFunc", {status:"add",today:today})
+	
+	
+};
+
+
+
+
+this.Grid00_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	var checked = this.gds_bbs.getColumn(e.row,"CHECKED")
+	if(e.col == 4){
+	if(checked == null || checked == 0){
+		this.gds_bbs.setColumn(e.row,"CHECKED",1);
+	}
+	
+	else{
+		this.gds_bbs.setColumn(e.row,"CHECKED",0);
+	}
+	
+	}
+};
+
+ this.Grid00_onheadclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+ {
+ 	var num = null;
+ 	var size = this.gds_bbs.getRowCount();
+ 	var headCheck = obj.getCellProperty('Head',4,'text');
+	this.alert("체크여부 :"+headCheck);
+	
+ 	if(e.col==4){
+		if(headCheck=='0'||headCheck==null){
+         num = '1';
+ 		
+		}else{
+         num = '0';
+      }
+ 	        for(var i=0; i<size; i++){
+        this.gds_bbs.setColumn(i,"CHECKED",num);
+       }
+
+		obj.setCellProperty('Head',4,'text',num);
+	}
+
+
+};
+
+
+
+//게시판 삭제
+
+this.bt_delete_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	 
+//     
+// 	    this.confirm("게시글을 삭제 하시겠습니까?");
+// 		 var size = application.gds_bbs.getRowCount();
+//    var row = null;
+//    for(var i=0; i<size; i++){
+//       row = application.gds_bbs.findRow("CHECKED","1");
+//       if(row!=-1){
+//          application.gds_bbs.deleteRow(row); 
+//       }
+//    }
+//    
+//    var id = "deleteBoard";
+//             var url = "svcOperate::removeBoard";
+//             var resData = "";
+//             var reqData = "gds_bbs=gds_bbs";
+//             var args = "";
+//             var callback = "callback";
+// 
+//             this.transaction(id, url, resData, reqData, args, callback);
+
+
+	var count = this.Grid00.getCellValue(this.Grid00.currentrow, 0); // 저장전 
+	var boardNo = this.Grid00.getCellValue(this.Grid00.currentrow, 1); // 저장된 
+	var boardDS = this.Grid00.getBindDataset();
+	var rowCount = boardDS.getRowCountNF();
+	var index;
+	
+	if(rowCount != 0){
+		for(var i=0; i<rowCount; i++){
+			if(boardDS.id == "gds_bbs"){
+				index = bindDS.findRow("JOURNAL_NO", journalNo);			
+			}	
+			boardDS.deleteRow(index);
+		}
+	}
+	
+
+	application.gds_bbs.deleteRow(application.gds_bbs.rowposition);
+
+
+};
+
+
+
+this.callbackFunc = function( strID, vArgu ){
+   this.reload();
+ 
+}
+
+this.callback = function(trid , ErrorCode, ErrorMsg){
+
+
+   if(trid == "deleteBoard"){
+      if(ErrorCode>=0){
+         alert("삭제완료!");
+      }
+   }
+};
+
+]]></Script>
+  </Form>
+</FDL>

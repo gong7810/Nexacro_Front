@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="accountdetailform" width="1000" height="400" titletext="New Form" onkeydown="accountdetailform_onkeydown" onload="accountdetailform_onload">
+    <Layouts>
+      <Layout height="400" width="1000">
+        <Button id="list_btn" taborder="3" text="목록" left="907" top="340" width="70" height="20" onclick="list_btn_onclick"/>
+        <Edit id="edit_inner_code" taborder="1" left="20" top="95" width="240" height="30" onchanged="Edit00_onchanged" readonly="true" textAlign="center"/>
+        <Static id="Static00" taborder="4" text="계정코드" left="31" top="50" width="212" height="26" textAlign="center"/>
+        <Static id="Static00_00" taborder="5" text="계정과목코드" left="273" top="50" width="212" height="26" textAlign="center"/>
+        <Static id="Static00_01" taborder="6" text="계정그룹코드" left="515" top="50" width="212" height="26" textAlign="center"/>
+        <Static id="Static00_02" taborder="7" text="계정과목" left="757" top="50" width="212" height="26" textAlign="center"/>
+        <Button id="del_btn" taborder="0" text="삭제" left="707" top="340" width="70" height="20" onclick="del_btn_onclick" onsetfocus="del_btn_onsetfocus" ontouchstart="del_btn_ontouchstart" onkeydown="del_btn_onkeydown"/>
+        <Button id="mod_btn" taborder="2" text="수정" left="807" top="340" width="70" height="20" onclick="mod_btn_onclick"/>
+        <Edit id="edit_account_code" taborder="8" left="259" top="95" width="240" height="30" readonly="true" textAlign="center"/>
+        <Edit id="edit_group_code" taborder="9" left="498" top="95" width="240" height="30" readonly="true" textAlign="center"/>
+        <Edit id="edit_subject" taborder="10" left="737" top="95" width="240" height="30" readonly="true" textAlign="center"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_account">
+        <ColumnInfo>
+          <Column id="ACCOUNT_INNER_CODE" type="STRING" size="256"/>
+          <Column id="PARENT_ACCOUNT_INNER_CODE" type="STRING" size="256"/>
+          <Column id="ACCOUNT_CHARACTER" type="STRING" size="256"/>
+          <Column id="ACCOUNT_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_accountDetailList">
+        <ColumnInfo>
+          <Column id="ACCOUNT_INNER_CODE" type="STRING" size="256"/>
+          <Column id="GROUP_CODE" type="STRING" size="256"/>
+          <Column id="ACCOUNT_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_account_for_transfer">
+        <ColumnInfo>
+          <Column id="PARENT_ACCOUNT_INNER_CODE" type="STRING" size="256"/>
+          <Column id="ACCOUNT_CHARACTER" type="STRING" size="256"/>
+          <Column id="ACCOUNT_NAME" type="STRING" size="256"/>
+          <Column id="GROUP_CODE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[include "scripts::commonDate.xjs";
+application = nexacro.getApplication();
+var today;
+
+
+
+var account_inner_code=this.parent.account_inner_code;
+var parent_account_inner_code=this.parent.parent_account_inner_code;
+var account_group_code=this.parent.account_group_code;
+var account_name=this.parent.account_name;
+
+
+this.accountdetailform_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+		trace("onload Event has been occured at : accountaddform");
+
+
+
+
+
+trace( '<<<<<account_inner_code :'+account_inner_code,
+	   ' // parent_account_inner_code : ' + parent_account_inner_code,
+	   ' // account_group_code : ' + account_group_code,
+	   ' // account_name : ' + account_name 
+	);
+		
+		
+ this.edit_inner_code.set_value(account_inner_code);
+ this.edit_account_code.set_value(parent_account_inner_code);
+ this.edit_group_code.set_value(account_group_code);
+ this.edit_subject.set_value(account_name);
+
+
+		
+
+};
+
+
+
+
+
+
+
+
+
+
+//목록으로 돌아가는 버튼 ---> 해당 창이 닫힘
+this.list_btn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+   this.close('list_btn');
+};
+
+
+//esc버튼을 누르면 해당 창이 닫힘
+this.accountdetailform_onkeydown = function(obj:nexacro.Form,e:nexacro.KeyEventInfo)
+{
+	const a=e.keycode;
+
+if(a==27){
+this.close("esc"); // esc를 눌러서 종료한것임을 알려주기 위한 인수
+	}
+};
+
+
+this.mod_btn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{   
+	trace('<<<<< onclick event has been occured at : mod_btn');
+
+    
+	this.close(account_inner_code+":"+
+			   parent_account_inner_code+":"+
+			   account_group_code+":"+
+			   account_name
+				);// 부모 폼으로 해당 폼에 있는 데이터를 넘겨주기 위함 문자열로 넘어갑니다. 
+	
+
+
+};
+
+
+
+
+
+this.del_btn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{	
+	var account_inner_code=this.parent.account_inner_code;
+	trace("account_inner_code from del_btn is : "+account_inner_code);
+
+
+
+
+	var account_inner_code=this.parent.account_inner_code;
+	trace("account_inner_code from del_btn is : "+account_inner_code);
+
+		var bool=confirm('삭제 하시겠습니까?');
+	
+	if(bool){
+	
+	var id = "deleteaccount";
+	var url = "svcOperate::removeAccountDetail";
+	var resData = "";  // update하거나 insert할때는 res데이터로 :U옵션을 주고 전송 
+	var reqData = ""; // 데이터 요청 
+	var args = "accountInnerCode="+account_inner_code;
+	var callback = "detailform_callbackFunc";
+	
+
+
+
+	this.transaction(id, url, resData, reqData, args, callback);
+	 trace('<<<transaction has been successfully sent!!!');
+	 alert('삭제되었습니다.');
+	 this.close('del_btn'); // del_btn에서 일어난 이벤트라는 것을 알려주기 위한 인수
+	}else{
+	return;
+	}
+	
+
+	trace('<<<<< onclick event has been occured at : del_btn ');
+	
+	
+};
+
+
+
+]]></Script>
+  </Form>
+</FDL>

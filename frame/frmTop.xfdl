@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="fm_top" width="1260" height="65">
+    <Layouts>
+      <Layout height="65" mobileorientation="landscape" width="1260">
+        <Static id="Static00" taborder="0" left="0" top="0" height="24" right="0"/>
+        <Static id="Static01" taborder="1" left="0" top="24" height="41" right="0" cssclass="sta_top_bg02"/>
+        <Static id="Static02" taborder="2" left="0" top="24" width="160" height="41" text="ACCOUNT" textAlign="center" font="bold 20px/normal &quot;Arial&quot;,&quot;Malgun Gothic&quot;,&quot;Gulim&quot;"/>
+        <Button id="Button00" taborder="3" left="310" top="24" width="140" height="40" cssclass="btn_top_menu" onclick="Button00_onclick" text="메뉴"/>
+        <Static id="user_info" taborder="4" text="Hello! Hong Gil Dong" left="10" top="0" width="210" height="24" cssclass="sta_top_textWht"/>
+        <Button id="Home" taborder="5" left="170" top="25" width="140" height="40" cssclass="btn_top_menu" onclick="Home_onclick" text="홈으로"/>
+        <PopupMenu id="PopupMenu00" left="320" top="69" width="140" height="101" innerdataset="gds_menu" captioncolumn="MENU_NAME" idcolumn="MENU_NAME" levelcolumn="MENU_ORDER" onmenuclick="PopupMenu00_onmenuclick"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_Popup">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+          <Column id="Column2" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column0">하위메뉴_1</Col>
+            <Col id="Column1">0</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">하위메뉴_2</Col>
+            <Col id="Column1">0</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">하위메뉴_2_1</Col>
+            <Col id="Column1">1</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">하위메뉴_2_2</Col>
+            <Col id="Column1">1</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">하위메뉴_2_3</Col>
+            <Col id="Column1">1</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">하위메뉴_3</Col>
+            <Col id="Column1">0</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">하위메뉴_4</Col>
+            <Col id="Column1">0</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[
+this.fm_top_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	// user 정보 출력  
+	var position = application.gds_open.getColumn(0, "CODE");  
+	var name = application.gds_open.getColumn(0, "NAME");
+	//this.user_info.set_text(name + " " + position + "님");
+	trace("@@@@"+position+"@@@@"+name);
+};
+
+this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.PopupMenu00.trackPopupByComponent(this.Button00,0,41);
+};
+
+this.Home_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	gfn_open("Base::MainPage.xfdl", "MainPage", "mainForm");
+};
+]]></Script>
+  </Form>
+</FDL>

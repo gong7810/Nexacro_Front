@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="write_board" width="700" height="400" titletext="New Form" onload="write_board_onload" onkeydown="write_board_onkeydown">
+    <Layouts>
+      <Layout height="400" width="700">
+        <TextArea id="e_contents" taborder="2" left="32" top="132" width="618" height="228" readonly="false" onkeyup="e_contents_onkeyup"/>
+        <Static id="Static00" taborder="1" text="제목" left="32" top="36" width="64" height="14" textAlign="center" font="bold 12px/normal &quot;Arial&quot;,&quot;Malgun Gothic&quot;,&quot;Gulim&quot;"/>
+        <Static id="Static00_00" taborder="5" text="작성자" left="32" top="90" width="64" height="14" textAlign="center" font="bold 12px/normal &quot;Arial&quot;,&quot;Malgun Gothic&quot;,&quot;Gulim&quot;" onclick="Static00_00_onclick"/>
+        <Button id="write_btn" taborder="3" text="저장" left="485" top="370" width="70" height="20" onclick="write_btn_onclick"/>
+        <Edit id="e_title" taborder="0" left="110" top="36" width="526" height="30" onmouseenter="e_title_onmouseenter"/>
+        <Button id="list_btn" taborder="4" text="목록" left="580" top="370" width="70" height="20" onclick="list_btn_onclick"/>
+        <Edit id="e_writer" taborder="6" left="110" top="82" width="526" height="30" readonly="true" text="hi"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_board">
+        <ColumnInfo>
+          <Column id="TITLE" type="STRING" size="256"/>
+          <Column id="WRITTEN_BY" type="STRING" size="256"/>
+          <Column id="CONTENTS" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[// include "scripts::commonDate.xjs";
+// application = nexacro.getApplication();
+// var today;
+// var row;
+// var status;
+// 
+application = nexacro.getApplication();
+
+
+
+
+//테스트 완료
+
+this.write_board_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{	
+
+	
+	trace('');
+	trace('');
+	trace('');
+	trace('-------------------onload event has been started------------------------');
+	trace("<<<<<<<<<<<<<<<< : this is for write");
+
+			//기존에 있는 데이터 셋을 삭제 
+			trace('cleared data cnt is :'+this.ds_board.clearData()); 
+			
+			//데이터셋에 row를 추가 
+			this.ds_board.addRow();
+			
+			//데이터 셋에 row가 추가되었는지 확인 
+			trace(this.ds_board.getRowCount());
+			
+			
+			//현재 로그인한 사용자의 정보가 있는 데이터 셋에서 사용자의 이름을 가지고 온다. 
+			var name = application.gds_emp.getColumn(0, "EMP_NAME");
+			
+			//이름을 잘 가지고 왔는지 확인 
+			trace('this is name : '+name);
+			
+			//사용자의 이름을 e_writer에 할당  
+			this.e_writer.set_value(name);
+		
+	
+	
+	trace('-----------------------------onload event has been finished-------------------------------');
+	trace('');
+	trace('');
+	trace('');
+			
+
+};
+
+
+
+
+//테스트 완료 
+
+this.list_btn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{	
+	this.close('list_btn');
+	
+};
+
+
+
+//테스트 완료
+
+this.write_btn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+			//제목과 내용의 text값을 변수에 할당 
+			var title=this.e_title.text;
+			var contents=this.e_contents.text;
+			trace("title : " +title,"contents : "+contents);
+	
+	trace("this is for write");
+ 	
+	//트랜잭션 정보를 변수에 할당 
+ 	var id = "writeBoard";
+ 	var url = "svcOperate::registerBoard";
+ 	var reqData = "";
+ 	var resData = "ds_board=ds_board";
+ 	var args = "";
+ 	var callback = "callback";
+ 	
+	
+	
+	// 제목이나 내용을 입력하지 않았다면 transaction이 실행되지 않음 
+	// ---> 공백이어도 마찬가지  
+	if(title.trim()==''){
+		alert('제목을 입력해 주세요');
+		return;
+	}else if(contents.trim()==''){
+		alert('내용을 입력해 주세요');
+		return;
+	
+	//제목과 내용을 다 입력했는지 확인 
+	}else if(title&&contents){
+		
+ 	this.transaction(id, url, resData, reqData, args, callback); 
+ 	this.close('write_btn');
+	
+	}
+	
+
+	
+};
+
+
+//테스트 완료 
+// esc 버튼을 클릭하면은 해당 화면을 종료
+this.write_board_onkeydown = function(obj:nexacro.Form,e:nexacro.KeyEventInfo)
+{
+const a=e.keycode;
+if(a==27){
+this.close('esc');
+	}
+};
+
+
+
+]]></Script>
+    <Bind>
+      <BindItem id="item0" compid="e_contents" propid="value" datasetid="ds_board" columnid="CONTENTS"/>
+      <BindItem id="item1" compid="e_title" propid="value" datasetid="ds_board" columnid="TITLE"/>
+      <BindItem id="item3" compid="e_contents" propid="readonly" datasetid="ds_write" columnid="CONTENTS"/>
+      <BindItem id="item4" compid="e_writer" propid="accessibilityaction" datasetid="Dataset00" columnid="user"/>
+      <BindItem id="item5" compid="e_writer" propid="accessibilitydesclevel" datasetid="ds_writer" columnid="writer"/>
+      <BindItem id="item2" compid="e_writer" propid="value" datasetid="ds_board" columnid="WRITTEN_BY"/>
+    </Bind>
+    <InitValue/>
+  </Form>
+</FDL>

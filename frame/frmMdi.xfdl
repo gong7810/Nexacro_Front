@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="fm_mdi" width="1070" height="30" titletext="New Form" onload="fm_mdi_onload" scrollbartype="none" scrolltype="none">
+    <Layouts>
+      <Layout height="30" mobileorientation="landscape" width="1070">
+        <Static id="Static00" taborder="0" left="0" top="0" height="30" right="0" cssclass="sta_mdi_bg01"/>
+        <Tab id="tabMdi" taborder="1" tabindex="0" left="30" top="0" height="100" right="100" cssclass="tab_mdi_menu" showextrabutton="true" onchanged="tabMdi_onchanged" onextrabuttonclick="tabMdi_onextrabuttonclick">
+          <Tabpages>
+            <Tabpage id="Tabpage2" text="Tabpage2"/>
+          </Tabpages>
+        </Tab>
+        <Button id="btn_MdiPrev" taborder="2" top="-1" width="30" height="31" right="58" cssclass="btn_mdi_prev"/>
+        <Button id="btn_MdiNext" taborder="3" top="-1" width="30" height="31" right="29" cssclass="btn_mdi_next"/>
+        <Button id="btnCloseAll" taborder="4" top="-1" width="30" height="31" right="0" cssclass="btn_mdi_close" onclick="btnCloseAll_onclick"/>
+        <Static id="Static01" taborder="5" left="0" top="0" width="30" height="30" cssclass="sta_mdi_home"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[this.application = null;
+
+this.fm_mdi_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.application = nexacro.getApplication();
+	this.tabMdi.removeTabpage(0);
+};
+
+this.tabMdi_onchanged = function(obj:nexacro.Tab,e:nexacro.TabIndexChangeEventInfo)
+{
+	var sWinId = obj.tabpages[e.postindex].name;
+	
+	this.application.WorkFrame[sWinId].form.setFocus();
+};
+
+this.tabMdi_onextrabuttonclick = function(obj:nexacro.Tab,e:nexacro.TabMouseEventInfo)
+{
+	var sWinId = obj.tabpages[e.index].name;	
+	obj.removeTabpage(e.index);
+	
+	this.application.WorkFrame[sWinId].form.close();
+
+	this.application.LeftFrame.form.fn_DelOpenMenu(sWinId);
+};
+
+// 탭 추가
+this.fn_AddTabPage = function(pvWinId, pvMenuNm)
+{
+	this.tabMdi.insertTabpage(pvWinId, -1, "", pvMenuNm);
+}
+
+this.fn_DeleteTabpage = function(pvWinId)
+{
+	var nCnt = this.tabMdi.getTabpageCount();	
+	for(var i=0; i<nCnt; i++)
+	{	
+		if(this.tabMdi.tabpages[i].name == pvWinId)
+		{
+			this.tabMdi.removeTabpage(i); 
+			this.application.LeftFrame.form.fn_DelOpenMenu(pvWinId);
+			return;
+		}
+	}
+}
+
+this.fn_ActiveTabPage = function(pvWinId)
+{
+	var nCnt = this.tabMdi.getTabpageCount();	
+	for(var i=0; i<nCnt; i++)
+	{	
+		if(this.tabMdi.tabpages[i].name == pvWinId)
+		{
+			this.tabMdi.set_tabindex(i);
+			return;
+		}
+	}
+}
+
+this.btnCloseAll_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var WorkFrame = this.application.WorkFrame.all;
+	for(var i=WorkFrame.length-1; i>=0; i--) 
+	{
+		WorkFrame[i].form.close();
+		this.tabMdi.removeTabpage(i);
+	}
+};
+]]></Script>
+  </Form>
+</FDL>

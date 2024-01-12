@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ADL version="2.0">
+  <Application id="App_Desktop" screenid="Desktop_screen" onload="Application_onload">
+    <Layout>
+      <MainFrame id="mainframe" showtitlebar="true" showstatusbar="false" width="1280" height="720" titletext="MDI (Frameset)">
+        <VFrameSet id="VFrameSet00" separatesize="65,*,30">
+          <Frames>
+            <ChildFrame id="TopFrame" formurl="frame::frmTop.xfdl" dragmovetype="none" showstatusbar="false" showtitlebar="false"/>
+            <HFrameSet id="HFrameSet00" separatesize="190,*">
+              <Frames>
+                <ChildFrame id="LeftFrame" formurl="frame::frmLeft.xfdl" dragmovetype="none" showtitlebar="false"/>
+                <ChildFrame id="WorkFrame" formurl=""/>
+              </Frames>
+            </HFrameSet>
+            <ChildFrame id="BottomFrame" formurl="frame::frmBottom.xfdl" showtitlebar="false" dragmovetype="none"/>
+          </Frames>
+        </VFrameSet>
+      </MainFrame>
+    </Layout>
+    <Style url="xcssrc::temp_main.xcss"/>
+  </Application>
+  <Script type="xscript5.1"><![CDATA[application = nexacro.getApplication();
+// divisionCode = '';
+
+this.Application_onload = function(obj:nexacro.Application,e:nexacro.LoadEventInfo)
+{
+	application.mainframe.set_visible(false);
+	nexacro.open("login", "Base::loginForm.xfdl", this.mainframe, null, "", 450, 150, 400, 500); // 모달을 띄운다. 
+};
+
+
+//목록 페이지 오픈 함수
+gfn_open = function(url, title, sID){
+	trace("@@@@gfn_open@@@@")
+	var workFrame = application.mainframe.VFrameSet00.HFrameSet00.WorkFrame;
+/*	
+	var positionCode = application.gds_emp.getColumn(0, "DEPT_CODE");	
+	var posNo = positionCode.substr(4);	//DPT-05 에서 05만 구함. 앞의 4글자 subString
+	
+	if(
+		url == "slip::slipApprovalForm.xfdl"
+			|| "statements::totalTrialbalanceForm.xfdl"
+			|| "statements::statementOfFPForm.xfdl"
+			|| "statements::incomeSForm.xfdl"
+	){
+		if(posNo<05){
+			alert("과장 이상만 접근 가능합니다.");
+		}else{
+			workFrame.set_titletext(title);
+			workFrame.set_formurl(url);
+		}
+	}else{  */
+	let pre = "";
+	let post = "";
+		workFrame.set_titletext(title);
+		if(url != null){
+		trace(url);
+			if(url.startsWith("/") || url.endsWith(".html")){
+				pre = url.split('/');
+				post = pre[2].split('.');
+				trace(" 0 "+pre[0]+" 1 "+pre[1]+" 2 "+pre[2]);
+				trace("pre : "+pre[1]+"		post : "+post[0]);
+				if(pre[1] == "hr") pre[1] = "emp";
+				
+				if(post[0].endsWith("form")) workFrame.set_formurl(pre[1]+"::"+post[0]+".xfdl");
+				else workFrame.set_formurl(pre[1]+"::"+post[0]+"form.xfdl");
+			} else {
+				workFrame.set_formurl(url);
+			}
+		}
+		else alert("준비중.");
+//	}
+};
+
+
+
+this.callback = function(strSvcID, nErrorCode, strErrorMag){
+	
+		this.trace(this.gds_loginAuthority.getColCount());
+};
+
+// gds_open에 데이터가 세팅되면, TopFrame에 user정보 출력 
+this.gds_open_onvaluechanged = function(obj:nexacro.NormalDataset,e:nexacro.DSColChangeEventInfo)
+{
+	var name = obj.getColumn(0, "NAME");
+	var position = obj.getColumn(0, "CODE");
+	this.mainframe.VFrameSet00.TopFrame.getForm().user_info.set_text(name + " " + position + "님");
+};
+
+
+/* 
+dialog = function ( sID, sURL ,objArguList, obj ){  // objArguList  {변수명: 변수값}
+   var objFrame = new ChildFrame();
+   var objParentFrame = application.mainframe;
+   objFrame.init( sID, 400, 150, 400, 150 );
+   objFrame.set_formurl(sURL);
+   var vRtn = objFrame.showModal( sID, objParentFrame, objArguList, obj, obj.fn_callback );
+}
+*/ 
+
+]]></Script>
+</ADL>

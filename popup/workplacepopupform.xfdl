@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="workplacepopupform" width="390" height="430" onload="workplacepopupform_onload">
+    <Layouts>
+      <Layout height="430" width="390">
+        <Static id="Static00" taborder="0" text="사업장코드" left="108" top="13" width="167" height="35" textAlign="center" font="20px/normal &quot;휴먼엑스포&quot;" onclick="Static00_onclick"/>
+        <Grid id="Grid00" taborder="1" left="42" top="60" width="298" height="316" binddataset="gds_department" autofittype="col" oncelldblclick="Grid00_oncelldblclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="147"/>
+                <Column size="147"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="사업장코드"/>
+                <Cell col="1" text="사업장명"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:WORKPLACE_CODE" textAlign="center"/>
+                <Cell col="1" text="bind:WORKPLACE_NAME" textAlign="center"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_code">
+        <ColumnInfo>
+          <Column id="WORKPLACE_CODE" type="STRING" size="256"/>
+          <Column id="WORKPLACE_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <InitValue/>
+    <Script type="xscript5.1"><![CDATA[application = nexacro.getApplication();
+
+this.workplacepopupform_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+		var id = "selectworkplaceCode";
+		var url = "svcOperate::selectworkplaceCode";
+		var resData = "";
+		var reqData = "gds_department=gds_department";
+		var args = "";
+		var callback = "callback";		
+		this.transaction(id, url, resData, reqData, args, callback);
+};
+
+this.Grid00_oncelldblclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	var workplaceCode = application.gds_department.getColumn(e.row,"WORKPLACE_CODE");
+	
+	var workplaceName = application.gds_department.getColumn(e.row,"WORKPLACE_NAME");
+	
+	application.gds_department.setColumn(0,"WORKPLACE_CODE",workplaceCode);
+	
+	application.gds_department.setColumn(0,"WORKPLACE_NAME", workplaceName);
+	
+	this.close();
+};
+]]></Script>
+  </Form>
+</FDL>

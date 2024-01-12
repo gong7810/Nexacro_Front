@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="customerdetailform" width="1280" height="200" titletext="New Form" visible="true" onload="customerdetailform_onload" onkeyup="customerdetailform_onkeyup">
+    <Layouts>
+      <Layout height="200" width="1280">
+        <Edit id="edit_customer_ceo" taborder="0" left="310" top="55" width="90" height="31" password="false" onchanged="edit_pw_onchanged" readonly="true" textAlign="center"/>
+        <Button id="del_btn" taborder="1" text="삭 제" left="74.06%" top="80.00%" width="6.09%" height="14.00%" onclick="del_btn_onclick"/>
+        <Button id="mod_btn" taborder="2" text="수 정" left="82.42%" top="80.00%" width="6.02%" height="14.00%" onclick="mod_btn_onclick"/>
+        <Button id="list_btn" taborder="3" text="목 록" left="90.78%" top="80.00%" width="6.02%" height="14.00%" onclick="list_btn_onclick"/>
+        <Edit id="edit_customer_business_conditions" taborder="4" left="410" top="55" width="180" height="31" password="false" readonly="true" textAlign="center"/>
+        <Edit id="edit_customer_name" taborder="5" left="120" top="55" width="180" height="31" password="false" readonly="true" textAlign="center"/>
+        <Edit id="edit_customer_business_itmes" taborder="6" left="600" top="55" width="180" height="31" password="false" readonly="true" textAlign="center"/>
+        <Edit id="edit_customer_code" taborder="7" left="20" top="55" width="90" height="31" password="false" readonly="true" textAlign="center"/>
+        <Edit id="edit_customer_basic_address" taborder="8" left="790" top="55" width="281" height="31" password="false" readonly="true" textAlign="center"/>
+        <Static id="Static00" taborder="9" text="거래처코드" left="20" top="14" width="90" height="31" textAlign="center"/>
+        <Static id="Static00_00" taborder="10" text="거래처명" left="120" top="14" width="180" height="31" textAlign="center"/>
+        <Static id="Static00_01" taborder="11" text="대표자" left="310" top="14" width="90" height="31" textAlign="center"/>
+        <Static id="Static00_02" taborder="12" text="주소" left="790" top="10" width="281" height="31" textAlign="center"/>
+        <Static id="Static00_03" taborder="13" text="업태" left="410" top="14" width="180" height="31" textAlign="center"/>
+        <Static id="Static00_04" taborder="14" text="종목" left="600" top="10" width="180" height="31" textAlign="center"/>
+        <Static id="Static00_05" taborder="15" text="전화번호" left="1081" top="14" width="180" height="31" textAlign="center"/>
+        <MaskEdit id="edit_customer_phone_number" taborder="16" left="1081" top="55" width="180" height="31" displaynulltext="휴대폰 번호를 입력해 주세요" type="string" format="###-####-####" textAlign="center" usesoftkeyboard="false" readonly="true"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_customer">
+        <ColumnInfo>
+          <Column id="CUSTOMER_CODE" type="STRING" size="256"/>
+          <Column id="WORKPLACE_CODE" type="STRING" size="256"/>
+          <Column id="CUSTOMER_NAME" type="STRING" size="256"/>
+          <Column id="CUSTOMER_TYPE" type="STRING" size="256"/>
+          <Column id="CUSTOMER_CEO" type="STRING" size="256"/>
+          <Column id="BUSINESS_LICENSE_NUMBER" type="STRING" size="256"/>
+          <Column id="CUSTOMER_BUSINESS_CONDITIONS" type="STRING" size="256"/>
+          <Column id="CUSTOMER_BUSINESS_ITEMS" type="STRING" size="256"/>
+          <Column id="CUSTOMER_ZIP_CODE" type="STRING" size="256"/>
+          <Column id="CUSTOMER_BASIC_ADDRESS" type="STRING" size="256"/>
+          <Column id="CUSTOMER_DETAIL_ADDRESS" type="STRING" size="256"/>
+          <Column id="CUSTOMER_TEL_NUMBER" type="STRING" size="256"/>
+          <Column id="CUSTOMER_FAX_NUMBER" type="STRING" size="256"/>
+          <Column id="CHECKED" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[application = nexacro.getApplication();
+
+
+//부모로부터 받은 값들을 변수에 할당한다. 
+var custCode=this.parent.custCode;
+var custName=this.parent.custName;
+var custCeo=this.parent.custCeo;
+var custBusinessConditions=this.parent.custBusinessConditions;
+var custBusinessItems=this.parent.custBusinessItems;
+var custAddr=this.parent.custAddr;
+var custPhone=this.parent.custPhone;
+
+
+this.customerdetailform_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+
+		// 수정 버튼을 눌렀을때 추가된 row를 삭제 
+		this.ds_customer.clearData();
+	
+		// 수정 버튼을 눌렀을때 변경된 사항들을 원래 상태로 원복
+		this.del_btn.set_visible(true);
+		this.mod_btn.set_text('수 정');
+		this.edit_customer_ceo.set_readonly(true);
+		this.edit_customer_basic_address.set_readonly(true);
+		this.edit_customer_phone_number.set_readonly(true);
+
+
+
+trace('this is from child : '+custCode+'//'+custName+'//'+custCeo+'//'+custBusinessConditions+'//'+custBusinessConditions+'//'+custBusinessItems+
+	   '//'+custAddr+'//'+custPhone);
+	   
+	   
+this.edit_customer_code.set_value(custCode);	   
+this.edit_customer_name.set_value(custName);
+this.edit_customer_ceo.set_value(custCeo);
+this.edit_customer_business_conditions.set_value(custBusinessConditions);
+this.edit_customer_business_itmes.set_value(custBusinessItems);
+this.edit_customer_basic_address.set_value(custAddr);
+this.edit_customer_phone_number.set_value(custPhone);
+	
+};
+
+
+
+
+
+
+
+
+this.del_btn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{			
+		var customerCode=this.edit_customer_code.text;
+		trace('empCode for delete data is : '+customerCode);
+		
+		var bool=confirm('삭제하시겠습니까?');	
+		
+		if(bool){
+			var id = "removeCustomer";
+			var url = "svcOperate::removeCustomer";
+			var resData = "";  // update하거나 insert할때는 res데이터로 :U옵션을 주고 전송 
+			var reqData = ""; // 데이터 요청 
+			var args = "customerCode="+customerCode;
+			var callback = "";
+			this.transaction(id, url, resData, reqData, args, callback);
+			
+			alert('삭제되었습니다.');
+			this.close('del_btn');
+				}else{
+				
+				return;
+
+				}
+
+
+
+
+};
+
+
+//수정 버튼을 클릭하면 발생시킬 이벤트 
+this.mod_btn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{		var modBtn=this.mod_btn.text;	
+			
+	
+		
+		//기존의 컴포넌트의 값을 가지고 온다. 
+	
+	
+		if(modBtn=='수 정'){
+		
+		this.ds_customer.addRow();
+		trace(this.ds_customer.getRowCount());
+		
+		this.del_btn.set_visible(false);
+		this.mod_btn.set_text('저 장');
+		this.edit_customer_ceo.set_readonly(false);
+		this.edit_customer_basic_address.set_readonly(false);
+		this.edit_customer_phone_number.set_readonly(false);
+		}else if(modBtn=='저 장'){
+		
+		var bool=confirm('저장하시겠습니까?');
+		trace(this.edit_customer_phone_number.text.length);
+				trace('<<<< value is : '+this.edit_customer_ceo.value);
+			if(this.edit_customer_ceo.text.trim()==''){
+			
+				alert('대표자를 입력해 주세요.');
+				return;
+			}else if(this.edit_customer_basic_address.text.trim()==''){
+				alert('주소를 입력해 주세요.');
+				return;
+			}else if(this.edit_customer_phone_number.text=='___-____-____'){
+			
+				alert('휴대폰 번호를 입력해주세요.');
+				
+			}
+			
+			
+		
+			this.for_update_transaction();
+	
+	
+		}
+							
+	// 수정 버튼을 누르면 삭제 버튼을 안보이게 하고 
+	 // 수정 버튼의 글자를 저장으로 변경.
+	 // 대표자,주소, 전화번호의 속성을 readonly=false로 변경
+	 // 해당 데이터가 원래의 데이터와 같거나 빈칸이 아닐시 
+	 // 데이터를 전송하는 로직 구현 
+	 
+	 // detail on_load 이벤트에 바뀐 사항들을 다시 원복하는 
+	 // 코드 추가 
+	 
+	 // 컴포넌트의 데이터를 dataset에 할당 
+	 // transaction으로 dataset을 보냄
+	 
+
+};
+
+
+this.for_update_transaction=function(){
+			trace('');
+			trace('');
+			trace('');	
+			trace('------------im in for_update_transaction-----------------');
+			
+			// 컴포넌트의 값을 dataset에 할당
+			this.ds_customer.setColumn(0,'CUSTOMER_CODE',this.edit_customer_code.text);
+			this.ds_customer.setColumn(0,'CUSTOMER_NAME',this.edit_customer_name.text);
+			this.ds_customer.setColumn(0,'CUSTOMER_CEO',this.edit_customer_ceo.text);
+			this.ds_customer.setColumn(0,'CUSTOMER_BUSINESS_CONDITIONS',this.edit_customer_business_conditions.text);
+			this.ds_customer.setColumn(0,'CUSTOMER_BUSINESS_ITEMS',this.edit_customer_business_itmes.text);
+			this.ds_customer.setColumn(0,'CUSTOMER_BASIC_ADDRESS',this.edit_customer_basic_address.text);
+			this.ds_customer.setColumn(0,'CUSTOMER_TEL_NUMBER',this.edit_customer_phone_number.text);
+			
+			
+			trace('');
+			trace('');
+			trace('-----------data has inserted???-----------------------------');
+			trace(this.ds_customer.getColumn(0,'CUSTOMER_CODE'));			
+			trace(this.ds_customer.getColumn(0,'CUSTOMER_NAME'));
+			trace(this.ds_customer.getColumn(0,'CUSTOMER_CEO'));
+			trace(this.ds_customer.getColumn(0,'CUSTOMER_BUSINESS_CONDITIONS'));
+			trace(this.ds_customer.getColumn(0,'CUSTOMER_BUSINESS_ITEMS'));
+			trace(this.ds_customer.getColumn(0,'CUSTOMER_BASIC_ADDRESS'));
+			trace(this.ds_customer.getColumn(0,'CUSTOMER_TEL_NUMBER'));
+			trace('');
+			trace('');
+			trace('');
+
+			
+			// 트랜잭션으로 전송 
+			var id = "updateCustomer";
+			var url = "svcOperate::updateCustomer";
+			var resData = "ds_customer=ds_customer";  // update하거나 insert할때는 res데이터로 :U옵션을 주고 전송 
+			var reqData = ""; // 데이터 요청 
+			var args = "";
+			var callback = "save_btn_callbackFunc";
+			this.transaction(id, url, resData, reqData, args, callback);
+
+			alert('성공적으로 수정되었습니다.');
+			
+			trace('');
+			trace('');
+			trace('-----------transaction has been successfully sent----------------');
+			trace('');
+			trace('');
+			trace('');
+			this.close('save_btn');
+			
+
+}
+
+
+
+
+
+
+
+
+this.list_btn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.close('list_btn');
+};
+
+
+
+// esc 키를 누르면은 해당 폼을 닫는다. 
+this.customerdetailform_onkeyup = function(obj:nexacro.Form,e:nexacro.KeyEventInfo)
+{
+	
+	var code=e.keycode
+	if(code==27){
+	
+	this.close('esc');
+	
+	}
+	
+	
+	
+};
+]]></Script>
+  </Form>
+</FDL>

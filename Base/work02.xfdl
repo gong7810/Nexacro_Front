@@ -1,0 +1,352 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="work01" width="1090" height="650" titletext="New Form">
+    <Layouts>
+      <Layout height="650" mobileorientation="landscape" width="1090">
+        <Static id="Static00" taborder="0" text="가장 큰 타이틀 입니다." left="0" top="0" height="34" cssclass="sta_WF_title01" right="10"/>
+        <Tab id="Tab00" taborder="1" tabindex="0" left="0" top="44" right="10" height="308">
+          <Tabpages>
+            <Tabpage id="Tabpage1" text="Tabpage1">
+              <Layouts>
+                <Layout>
+                  <Grid id="Grid00" taborder="0" left="10" height="228" right="10" binddataset="Dataset00" top="13">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="40"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="30" band="head"/>
+                          <Row size="30"/>
+                          <Row size="30" band="summ"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell text="Column0"/>
+                          <Cell col="1" text="Column1"/>
+                          <Cell col="2" text="Column2"/>
+                          <Cell col="3" text="Column3"/>
+                          <Cell col="4" text="Column4"/>
+                          <Cell col="5" text="Column5"/>
+                          <Cell col="6" text="Column6"/>
+                          <Cell col="7" text="Column7"/>
+                          <Cell col="8" text="Column8"/>
+                          <Cell col="9" text="Column9"/>
+                          <Cell col="10" text="Column10"/>
+                          <Cell col="11" text="Column11"/>
+                          <Cell col="12" text="Column12"/>
+                          <Cell col="13" text="Column13"/>
+                          <Cell col="14" text="Column14"/>
+                          <Cell col="15" text="Column15"/>
+                          <Cell col="16" text="Column16"/>
+                          <Cell col="17" text="Column17"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell text="bind:Column0" displaytype="checkboxcontrol" edittype="checkbox"/>
+                          <Cell col="1" text="bind:Column1" displaytype="editcontrol" edittype="text"/>
+                          <Cell col="2" text="bind:Column2" displaytype="combocontrol" edittype="combo" combodataset="Dataset01" combodatacol="Column0" combocodecol="Column0"/>
+                          <Cell col="3" text="bind:Column3" displaytype="calendarcontrol" edittype="date"/>
+                          <Cell col="4" text="bind:Column4" displaytype="maskeditcontrol" edittype="text"/>
+                          <Cell col="5" text="bind:Column5" progressbarblocksize="50" cssclass="cellCenter"/>
+                          <Cell col="6" text="bind:Column6" displaytype="buttoncontrol" edittype="button"/>
+                          <Cell col="7" text="bind:Column7"/>
+                          <Cell col="8" text="bind:Column8"/>
+                          <Cell col="9" text="bind:Column9"/>
+                          <Cell col="10" text="bind:Column10"/>
+                          <Cell col="11" text="bind:Column11"/>
+                          <Cell col="12" text="bind:Column12"/>
+                          <Cell col="13" text="bind:Column13"/>
+                          <Cell col="14" text="bind:Column14"/>
+                          <Cell col="15" text="bind:Column15"/>
+                          <Cell col="16" text="bind:Column16"/>
+                          <Cell col="17" text="bind:Column17"/>
+                        </Band>
+                        <Band id="summary">
+                          <Cell/>
+                          <Cell col="1"/>
+                          <Cell col="2"/>
+                          <Cell col="3"/>
+                          <Cell col="4"/>
+                          <Cell col="5"/>
+                          <Cell col="6"/>
+                          <Cell col="7"/>
+                          <Cell col="8"/>
+                          <Cell col="9"/>
+                          <Cell col="10"/>
+                          <Cell col="11"/>
+                          <Cell col="12"/>
+                          <Cell col="13"/>
+                          <Cell col="14"/>
+                          <Cell col="15"/>
+                          <Cell col="16"/>
+                          <Cell col="17"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                  <Static id="Static00" taborder="1" left="10" height="30" right="10" cssclass="sta_WF_pagingBox" top="240"/>
+                  <Button id="Button00" taborder="2" top="240" width="30" height="30" cssclass="btn_WF_pagingLast" right="10"/>
+                  <Button id="Button01" taborder="3" top="240" width="30" height="30" cssclass="btn_WF_pagingNext" right="39"/>
+                  <Button id="Button02" taborder="4" left="10" top="240" width="30" height="30" cssclass="btn_WF_pagingFirst"/>
+                  <Button id="Button03" taborder="5" left="39" top="240" width="30" height="30" cssclass="btn_WF_pagingPrev"/>
+                  <Static id="Static01" taborder="6" text="1" left="328" top="240" width="40" height="30" cssclass="sta_WF_pagingNum" enable="false"/>
+                  <Static id="Static02" taborder="7" text="2" left="367" top="240" width="40" height="30" cssclass="sta_WF_pagingNum"/>
+                  <Static id="Static03" taborder="8" text="3" left="406" top="240" width="40" height="30" cssclass="sta_WF_pagingNum"/>
+                  <Static id="Static04" taborder="9" text="4" left="445" top="240" width="40" height="30" cssclass="sta_WF_pagingNum"/>
+                  <Static id="Static05" taborder="10" text="5" left="484" top="240" width="40" height="30" cssclass="sta_WF_pagingNum"/>
+                  <Static id="Static06" taborder="11" text="6" left="523" top="240" width="40" height="30" cssclass="sta_WF_pagingNum"/>
+                  <Static id="Static07" taborder="12" text="7" left="562" top="240" width="40" height="30" cssclass="sta_WF_pagingNum"/>
+                  <Static id="Static08" taborder="13" text="8" left="601" top="240" width="40" height="30" cssclass="sta_WF_pagingNum"/>
+                  <Static id="Static09" taborder="14" text="9" left="640" top="240" width="40" height="30" cssclass="sta_WF_pagingNum"/>
+                  <Static id="Static10" taborder="15" text="10" left="679" top="240" width="40" height="30" cssclass="sta_WF_pagingNum"/>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="Tabpage2" text="Tabpage2"/>
+            <Tabpage id="Tabpage3" text="Tabpage3">
+              <Layouts>
+                <Layout/>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="Tabpage4" text="Tabpage4">
+              <Layouts>
+                <Layout/>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="Tabpage5" text="Tabpage5">
+              <Layouts>
+                <Layout/>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="Tabpage6" text="Tabpage6">
+              <Layouts>
+                <Layout/>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="Tabpage7" text="Tabpage7">
+              <Layouts>
+                <Layout/>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="Tabpage8" text="Tabpage8">
+              <Layouts>
+                <Layout/>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="Tabpage9" text="Tabpage9">
+              <Layouts>
+                <Layout/>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="Tabpage10" text="Tabpage10">
+              <Layouts>
+                <Layout/>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="Tabpage11" text="Tabpage11">
+              <Layouts>
+                <Layout/>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="Tabpage12" text="Tabpage12">
+              <Layouts>
+                <Layout/>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="Tabpage13" text="Tabpage13">
+              <Layouts>
+                <Layout/>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="Tabpage14" text="Tabpage14">
+              <Layouts>
+                <Layout/>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="Tabpage15" text="Tabpage15">
+              <Layouts>
+                <Layout/>
+              </Layouts>
+            </Tabpage>
+          </Tabpages>
+        </Tab>
+        <Static id="Static20" taborder="2" text="· Home &gt; Middle title &gt; navi" top="0" width="263" height="34" right="10" cssclass="sta_WF_navi"/>
+        <Static id="Static01" taborder="3" text="Label" left="0" top="396" width="110" height="32" cssclass="sta_cm_box01R"/>
+        <Static id="Static08" taborder="4" left="109" top="396" width="271" height="32" cssclass="sta_cm_box02L"/>
+        <Static id="Static02" taborder="5" text="중간 타이틀 입니다." left="0" top="362" height="34" cssclass="sta_WF_title02" right="10"/>
+        <Static id="Static03" taborder="6" text="Label" left="379" top="396" width="110" height="32" cssclass="sta_cm_box01R"/>
+        <Static id="Static04" taborder="7" left="488" top="396" width="321" height="32" cssclass="sta_cm_box02L"/>
+        <Static id="Static05" taborder="8" text="Label" left="808" top="396" width="90" height="32" cssclass="sta_cm_box01R"/>
+        <Static id="Static06" taborder="9" left="897" top="396" height="32" cssclass="sta_cm_box02L" right="10"/>
+        <Static id="Static07" taborder="10" text="Label" left="0" top="427" width="110" height="32" cssclass="sta_cm_box01R"/>
+        <Static id="Static09" taborder="11" left="109" top="427" width="271" height="32" cssclass="sta_cm_box02L"/>
+        <Static id="Static10" taborder="12" text="Label" left="379" top="427" width="110" height="32" cssclass="sta_cm_box01R"/>
+        <Static id="Static11" taborder="13" left="488" top="427" height="32" cssclass="sta_cm_box02L" right="10"/>
+        <Static id="Static14" taborder="14" text="Label" left="0" top="458" width="110" height="32" cssclass="sta_cm_box01R"/>
+        <Static id="Static15" taborder="15" left="109" top="458" width="271" height="32" cssclass="sta_cm_box02L"/>
+        <Static id="Static16" taborder="16" text="Label" left="379" top="458" width="110" height="32" cssclass="sta_cm_box01R"/>
+        <Static id="Static17" taborder="17" left="488" top="458" width="321" height="32" cssclass="sta_cm_box02L"/>
+        <Static id="Static18" taborder="18" text="Label" left="808" top="458" width="90" height="32" cssclass="sta_cm_box01R"/>
+        <Static id="Static19" taborder="19" left="897" top="458" height="32" cssclass="sta_cm_box02L" right="10"/>
+        <Static id="Static21" taborder="20" text="Label" left="0" top="489" width="110" height="32" cssclass="sta_cm_box01R"/>
+        <Static id="Static22" taborder="21" left="109" top="489" width="271" height="32" cssclass="sta_cm_box02L"/>
+        <Static id="Static23" taborder="22" text="Label" left="379" top="489" width="110" height="32" cssclass="sta_cm_box01R"/>
+        <Static id="Static24" taborder="23" left="488" top="489" width="321" height="32" cssclass="sta_cm_box02L"/>
+        <Static id="Static25" taborder="24" text="Label" left="808" top="489" width="90" height="32" cssclass="sta_cm_box01R"/>
+        <Static id="Static26" taborder="25" left="897" top="489" height="32" cssclass="sta_cm_box02L" right="10"/>
+        <Static id="Static27" taborder="26" text="Label" left="0" top="520" width="110" height="32" cssclass="sta_cm_box01R"/>
+        <Static id="Static28" taborder="27" left="109" top="520" width="271" height="32" cssclass="sta_cm_box02L"/>
+        <Static id="Static29" taborder="28" text="Label" left="379" top="520" width="110" height="32" cssclass="sta_cm_box01R"/>
+        <Static id="Static30" taborder="29" left="488" top="520" width="321" height="32" cssclass="sta_cm_box02L"/>
+        <Static id="Static31" taborder="30" text="Label" left="808" top="520" width="90" height="32" cssclass="sta_cm_box01R"/>
+        <Static id="Static32" taborder="31" left="897" top="520" height="32" cssclass="sta_cm_box02L" right="10"/>
+        <Edit id="Edit00" taborder="32" left="119" top="400" width="70" height="24"/>
+        <Button id="Button00" taborder="33" left="189" top="400" width="24" height="24" cssclass="btn_WF_search02"/>
+        <Edit id="Edit01" taborder="34" left="223" top="400" width="140" height="24"/>
+        <Spin id="Spin00" taborder="35" left="119" top="431" width="140" height="24"/>
+        <Calendar id="Calendar00" taborder="36" left="498" top="400" width="140" height="24"/>
+        <Calendar id="Calendar01" taborder="37" left="655" top="400" width="140" height="24"/>
+        <Static id="Static33" taborder="38" text="~" left="641" top="400" width="9" height="24"/>
+        <Edit id="Edit02" taborder="39" left="907" top="400" width="100" height="24"/>
+        <CheckBox id="CheckBox00" taborder="40" text="확인" left="1011" top="400" width="50" height="24"/>
+        <Edit id="Edit03" taborder="41" left="498" top="431" width="80" height="24"/>
+        <Edit id="Edit04" taborder="42" left="583" top="431" width="80" height="24"/>
+        <Button id="Button01" taborder="43" left="663" top="431" width="24" height="24" cssclass="btn_WF_search02"/>
+        <Edit id="Edit05" taborder="44" left="704" top="431" width="303" height="24"/>
+        <Edit id="Edit06" taborder="45" left="119" top="462" width="140" height="24"/>
+        <Button id="Button02" taborder="46" text="공통확인" left="264" top="462" width="70" height="24" cssclass="btn_cm_basic01"/>
+        <Radio id="Radio00" taborder="47" left="119" top="493" width="140" height="24" innerdataset="@Dataset01" codecolumn="Column0" datacolumn="Column0" direction="vertical"/>
+        <Edit id="Edit07" taborder="48" left="119" top="524" width="140" height="24"/>
+        <Combo id="Combo00" taborder="49" text="Combo00" left="498" top="462" width="200" height="24"/>
+        <Combo id="Combo01" taborder="50" text="Combo00" left="498" top="493" width="100" height="24"/>
+        <Edit id="Edit08" taborder="51" left="603" top="493" width="180" height="24"/>
+        <Radio id="Radio01" taborder="52" left="498" top="524" width="200" height="24" innerdataset="@Dataset01" codecolumn="Column1" datacolumn="Column1" direction="vertical"/>
+        <CheckBox id="CheckBox01" taborder="53" text="CheckBox01" left="907" top="462" width="100" height="24"/>
+        <Edit id="Edit09" taborder="54" left="907" top="493" width="100" height="24" readonly="true"/>
+        <MaskEdit id="MaskEdit00" taborder="55" left="907" top="524" width="100" height="24"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="Dataset00">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+          <Column id="Column2" type="STRING" size="256"/>
+          <Column id="Column3" type="STRING" size="256"/>
+          <Column id="Column4" type="STRING" size="256"/>
+          <Column id="Column5" type="STRING" size="256"/>
+          <Column id="Column6" type="STRING" size="256"/>
+          <Column id="Column7" type="STRING" size="256"/>
+          <Column id="Column8" type="STRING" size="256"/>
+          <Column id="Column9" type="STRING" size="256"/>
+          <Column id="Column10" type="STRING" size="256"/>
+          <Column id="Column11" type="STRING" size="256"/>
+          <Column id="Column12" type="STRING" size="256"/>
+          <Column id="Column13" type="STRING" size="256"/>
+          <Column id="Column14" type="STRING" size="256"/>
+          <Column id="Column15" type="STRING" size="256"/>
+          <Column id="Column16" type="STRING" size="256"/>
+          <Column id="Column17" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column5">홍길동</Col>
+            <Col id="Column6">버튼</Col>
+          </Row>
+          <Row>
+            <Col id="Column5">홍길동</Col>
+            <Col id="Column6">버튼</Col>
+          </Row>
+          <Row>
+            <Col id="Column5">홍길동</Col>
+            <Col id="Column6">버튼</Col>
+          </Row>
+          <Row>
+            <Col id="Column5">홍길동</Col>
+            <Col id="Column6">버튼</Col>
+          </Row>
+          <Row>
+            <Col id="Column5">홍길동</Col>
+            <Col id="Column6">버튼</Col>
+          </Row>
+          <Row>
+            <Col id="Column5">홍길동</Col>
+            <Col id="Column6">버튼</Col>
+          </Row>
+          <Row>
+            <Col id="Column5">홍길동</Col>
+            <Col id="Column6">버튼</Col>
+          </Row>
+          <Row>
+            <Col id="Column5">홍길동</Col>
+            <Col id="Column6">버튼</Col>
+          </Row>
+          <Row>
+            <Col id="Column5">홍길동</Col>
+            <Col id="Column6">버튼</Col>
+          </Row>
+          <Row>
+            <Col id="Column5">홍길동</Col>
+            <Col id="Column6">버튼</Col>
+          </Row>
+          <Row>
+            <Col id="Column5">홍길동</Col>
+            <Col id="Column6">버튼</Col>
+          </Row>
+          <Row>
+            <Col id="Column5">홍길동</Col>
+            <Col id="Column6">버튼</Col>
+          </Row>
+          <Row>
+            <Col id="Column5">홍길동</Col>
+            <Col id="Column6">버튼</Col>
+          </Row>
+          <Row>
+            <Col id="Column5">홍길동</Col>
+            <Col id="Column6">버튼</Col>
+          </Row>
+          <Row>
+            <Col id="Column5">홍길동</Col>
+            <Col id="Column6">버튼</Col>
+          </Row>
+          <Row>
+            <Col id="Column5">홍길동</Col>
+            <Col id="Column6">버튼</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="Dataset01">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column0">여성</Col>
+            <Col id="Column1">사무직</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">남성</Col>
+            <Col id="Column1">기술직</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

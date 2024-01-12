@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="detailtrialbalanceForm" width="1080" height="570" titletext="New Form" onload="detailtrialbalanceForm_onload">
+    <Layouts>
+      <Layout height="570" width="1080">
+        <Grid id="Grid00" taborder="1" left="0" top="120" width="1080" height="510" binddataset="ds_detailtrialbalance">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="155"/>
+                <Column size="155"/>
+                <Column size="155"/>
+                <Column size="140"/>
+                <Column size="155"/>
+                <Column size="155"/>
+                <Column size="155"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell colspan="3" text="차변" background="#87c4f1" color="#ededed"/>
+                <Cell col="3"/>
+                <Cell col="4" colspan="3" text="대변" background="#87c4f1" color="#f4f4f4"/>
+                <Cell row="1" text="계"/>
+                <Cell row="1" col="1" text="대체"/>
+                <Cell row="1" col="2" text="현금"/>
+                <Cell row="1" col="3"/>
+                <Cell row="1" col="4" text="현금"/>
+                <Cell row="1" col="5" text="대체"/>
+                <Cell row="1" col="6" text="계"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:DEBITS_SUM" textAlign="center"/>
+                <Cell col="1" text="bind:EXCEPT_CASH_DEBITS" textAlign="center"/>
+                <Cell col="2" text="bind:CASH_DEBITS" textAlign="center"/>
+                <Cell col="3" text="bind:ACCOUNT_NAME"/>
+                <Cell col="4" text="bind:CASH_CREDITS" textAlign="center"/>
+                <Cell col="5" text="bind:EXCEPT_CASH_CREDITS" textAlign="center"/>
+                <Cell col="6" text="bind:CREDITS_SUM" textAlign="center"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="Static00" taborder="0" text="일(월) 계표" left="75" top="31" width="251" height="75" onclick="Static00_onclick" textAlign="center" font="normal 18pt/normal &quot;Arial&quot;"/>
+        <Calendar id="calendar_start" taborder="2" left="627" top="66" width="175" height="40"/>
+        <Calendar id="calendar_end" taborder="3" left="817" top="66" width="175" height="40"/>
+        <Button id="Button00" taborder="4" text="조회" left="1000" top="66" width="68" height="40" background="#87c4f1" color="aliceblue" borderRadius="5px" textAlign="center" onclick="Button00_onclick"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_detailtrialbalance">
+        <ColumnInfo>
+          <Column id="LEV" type="INT" size="256"/>
+          <Column id="ACCOUNT_INNER_CODE" type="STRING" size="256"/>
+          <Column id="DEBITS_SUM" type="INT" size="256"/>
+          <Column id="EXCEPT_CASH_DEBITS" type="INT" size="256"/>
+          <Column id="CASH_DEBITS" type="INT" size="256"/>
+          <Column id="ACCOUNT_NAME" type="STRING" size="256"/>
+          <Column id="CREDITS_SUM_BALANCE" type="INT" size="256"/>
+          <Column id="DEBITS_SUM_BALANCE" type="INT" size="256"/>
+          <Column id="CASH_CREDITS" type="INT" size="256"/>
+          <Column id="EXCEPT_CASH_CREDITS" type="INT" size="256"/>
+          <Column id="CREDITS_SUM" type="INT" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[include "scripts::commonDate.xjs"
+application = nexacro.getApplication();
+
+this.detailtrialbalanceForm_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	
+		this.calendar_start.set_value( this.gfn_todayFirst().toString() );
+		this.calendar_end.set_value( this.gfn_today().toString() );
+};
+
+this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+		var startDate = this.calendar_start.value;
+		var endDate = this.calendar_end.value;
+		
+		var sYear = startDate.toString().substring(0,4);
+		var sMonth = startDate.toString().substring(4,6);
+		var sDay = startDate.toString().substring(6,8);
+		var sDate = sYear+"-"+sMonth+"-"+sDay;
+		
+		var eYear = endDate.toString().substring(0,4);
+		var eMonth = endDate.toString().substring(4,6);
+		var eDay = endDate.toString().substring(6,8);	
+		var eDate = eYear+"-"+eMonth+"-"+eDay;
+		
+		var id = "detailtrialbalance";
+		var url = "svcSettlement::detailtrialbalance";
+		var resData = "";
+		var reqData = "ds_detailtrialbalance=ds_detailtrialbalance";
+		var args = "startDate='"+sDate+"' endDate='"+eDate+"'";
+		var callback = "callback";
+
+		this.transaction(id, url, resData, reqData, args, callback);
+		
+};
+]]></Script>
+  </Form>
+</FDL>

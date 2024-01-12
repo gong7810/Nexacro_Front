@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="periodpopupform" width="390" height="430" onload="periodpopupform_onload">
+    <Layouts>
+      <Layout height="430" width="390">
+        <Static id="Static00" taborder="0" text="회계연도" left="97" top="13" width="167" height="35" textAlign="center" font="20px/normal &quot;휴먼엑스포&quot;"/>
+        <Grid id="Grid00" taborder="1" left="42" top="60" width="298" height="316" binddataset="gds_period" autofittype="col" oncelldblclick="Grid00_oncelldblclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="69"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="회계연도"/>
+                <Cell col="1" text="회계시작일"/>
+                <Cell col="2" text="회계종료일"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:FISCAL_YEAR"/>
+                <Cell col="1" text="bind:PERIOD_START_DATE"/>
+                <Cell col="2" text="bind:PERIOD_END_DATE"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Objects/>
+    <InitValue/>
+    <Script type="xscript5.1"><![CDATA[
+application = nexacro.getApplication();
+var parent; // childFrame의 ID 
+
+this.periodpopupform_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+
+   trace("회계기수 onload함수 시작");
+   
+   application.gds_period.clearData();
+
+   //application.ds_period.clear();
+   
+   //회계기수 가져옴
+   var id = "getPeriodList";
+   var url = "svcOperate::accountperiodlist";
+   var reqData = "";
+   var resData = "gds_period=gds_period";
+   var args = "";
+   var callback = "callback";
+   
+   this.transaction(id, url, reqData, resData, args, callback);
+};
+
+// 콜백  
+this.callback = function(trid, ErrorCode, ErrorMsg){
+   
+   if(trid == "getPeriodList"){
+      if(ErrorCode<0){
+         alert("조회 실패 : "+ErrorMsg);
+      }
+   }
+}
+
+// 그리드 더블클릭 이벤트 
+this.Grid00_oncelldblclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+   var AccountYear = application.gds_period.getColumn(e.row, "FISCAL_YEAR");
+   var periodNo = application.gds_period.getColumn(e.row, "ACCOUNT_PERIOD_NO");
+
+   application.gds_period.setColumn(0,"FISCAL_YEAR", AccountYear);
+   application.gds_period.setColumn(0,"ACCOUNT_PERIOD_NO", periodNo);
+
+   this.close();
+   
+};]]></Script>
+  </Form>
+</FDL>

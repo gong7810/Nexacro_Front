@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="incomestatementform" width="1080" height="570" titletext="New Form" onload="incomestatementform_onload">
+    <Layouts>
+      <Layout height="570" width="1080">
+        <Grid id="Grid00" taborder="0" left="0" top="120" width="1080" height="510" binddataset="ds_incomestatement">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="216"/>
+                <Column size="216"/>
+                <Column size="216"/>
+                <Column size="216"/>
+                <Column size="216"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell/>
+                <Cell col="1" colspan="2" text="당기"/>
+                <Cell col="3" colspan="2" text="전기"/>
+                <Cell row="1" text="과목"/>
+                <Cell row="1" col="1" text="금액"/>
+                <Cell row="1" col="2" text="잔액"/>
+                <Cell row="1" col="3" text="금액"/>
+                <Cell row="1" col="4" text="잔액"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:ACCOUNT_NAME" textAlign="center"/>
+                <Cell col="1" text="bind:INCOME" textAlign="center" displaytype="number"/>
+                <Cell col="2" text="bind:INCOME_SUMMARY" textAlign="center" displaytype="number"/>
+                <Cell col="3" text="bind:EARLY_INCOME" textAlign="center" displaytype="number"/>
+                <Cell col="4" text="bind:EARLY_INCOME_SUMMARY" textAlign="center" displaytype="number"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="Button00" taborder="1" text="조회" left="1000" top="76" width="68" height="40" background="#87c4f1" color="aliceblue" borderRadius="5px" textAlign="center" onclick="Button00_onclick"/>
+        <Static id="Static00" taborder="2" text="전기분손익계산서" left="75" top="31" width="251" height="75" onclick="Static00_onclick" textAlign="center" font="normal 18pt/normal &quot;Arial&quot;"/>
+        <Edit id="Edit00" taborder="3" left="760" top="76" width="228" height="40" borderRadius="5px" displaynulltext="회계기수를 조회해주세요." textAlign="center" oneditclick="Edit00_oneditclick" enable="true" readonly="true" font="bold 14px/normal &quot;Arial&quot;,&quot;Malgun Gothic&quot;,&quot;Gulim&quot;" onchanged="Edit00_onchanged"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_incomestatement">
+        <ColumnInfo>
+          <Column id="ACCOUNT_INNER_CODE" type="STRING" size="256"/>
+          <Column id="ACCOUNT_NAME" type="STRING" size="256"/>
+          <Column id="PARENT_ACCOUNT_CODE" type="STRING" size="256"/>
+          <Column id="INCOME" type="STRING" size="256"/>
+          <Column id="INCOME_SUMMARY" type="STRING" size="256"/>
+          <Column id="EARLY_INCOME" type="STRING" size="256"/>
+          <Column id="EARLY_INCOME_SUMMARY" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[include "scripts::commonDate.xjs"
+include "scripts::commonOpen.xjs"
+application = nexacro.getApplication();
+
+this.incomestatementform_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	
+	application.gds_period.clearData()
+	
+};
+
+this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var period=application.gds_period.getColumn(0,"ACCOUNT_PERIOD_NO");
+	alert("  선택한 기수 :"+period);
+	var callresult = "SEARCH";
+	
+		var id = "selectincomestatement";
+		var url = "svcSettlement::incomestatement";
+		var resData = "";
+		var reqData = "ds_incomestatement=ds_incomestatement";
+		var args = "period='"+period+"' callresult='"+callresult+"'";
+		var callback = "callback";		
+		this.transaction(id, url, resData, reqData, args, callback);
+	
+};
+
+this.Edit00_oneditclick = function(obj:nexacro.Edit,e:nexacro.EditClickEventInfo)
+{
+	this.gfnOpen("periodpopup", "popup::periodpopupform.xfdl", "callback", null);
+};
+
+this.callback = function(trid, ErrorCode, ErrorMsg){
+   
+   if(trid == "periodpopup"){
+	this.Edit00.set_value(application.gds_period.getColumn(0,"FISCAL_YEAR"));
+	//this.Edit00.set_enable("false");
+      if(ErrorCode<0){
+         alert("조회 실패 : "+ErrorMsg);
+      }
+   }
+}
+
+this.Edit00_onchanged = function(obj:nexacro.Edit,e:nexacro.ChangeEventInfo)
+{
+	
+};
+]]></Script>
+  </Form>
+</FDL>

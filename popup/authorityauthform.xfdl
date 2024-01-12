@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="authorityauthform" width="300" height="400" titletext="New Form" onsetfocus="write_board_onsetfocus" onkeydown="authorityauthform_onkeydown" ondeactivate="authorityauthform_ondeactivate" oninit="authorityauthform_oninit" onkeyup="authorityauthform_onkeyup">
+    <Layouts>
+      <Layout height="400" width="300">
+        <Edit id="edit_id" left="24" top="103" width="252" height="57" textAlign="center" onsetfocus="edit_id_onsetfocus" border="0px none" background="transparent" readonly="true"/>
+        <Static id="static_auth" taborder="1" left="24" top="93" width="252" height="14" textAlign="center" border="0px none"/>
+        <Button id="Button00" taborder="2" text="확인" left="66" top="340" width="168" height="40" onclick="Button00_onclick"/>
+      </Layout>
+    </Layouts>
+    <Objects/>
+    <Script type="xscript5.1"><![CDATA[application = nexacro.getApplication();
+
+
+
+
+
+
+
+this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+		
+this.close();
+		
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ this.authorityauthform_onkeydown = function(obj:nexacro.Form,e:nexacro.KeyEventInfo)
+ {
+		
+ 
+	var code=e.keycode;
+
+	if(code===27){
+ 		this.close();
+ 	}
+ };
+
+
+
+
+//이거로는 파라미터를 보낼수가 없음 
+// this.authorityauthform_onclose = function(obj:nexacro.Form,e:nexacro.CloseEventInfo)
+// {
+// 	var a='1';
+// 	var b='2';
+//  
+//    this.close(a);
+// 	trace('Data has been sent from : authorityauthform ' +a+","+b);
+// 	
+// };
+
+this.authorityauthform_oninit = function(obj:nexacro.Form,e:nexacro.EventInfo)
+{
+		
+var	name = application.gds_emp.getColumn(0, "POSITION_NAME"); //현재 로그인되어 있는 id를 가져옴
+	trace('<<<<< name : '+name);
+	this.edit_id.set_value('현재 권한은 '+name+' 입니다.');
+	
+};
+
+this.authorityauthform_onkeyup = function(obj:nexacro.Form,e:nexacro.KeyEventInfo)
+{
+	var code=e.keycode;
+	
+	if(code==13||code==32){
+	 this.Button00.click();
+	}
+};
+]]></Script>
+    <InitValue/>
+  </Form>
+</FDL>

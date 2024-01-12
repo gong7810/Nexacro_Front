@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="financialpositionform" width="1080" height="570" titletext="New Form" onload="financialpositionform_onload">
+    <Layouts>
+      <Layout height="570" width="1080">
+        <Static id="Static00" taborder="0" text="전기분재무상태표" left="75" top="31" width="251" height="75" onclick="Static00_onclick" textAlign="center" font="normal 18pt/normal &quot;Arial&quot;"/>
+        <Button id="Button00" taborder="1" text="조회" left="1000" top="76" width="68" height="40" background="#87c4f1" color="aliceblue" borderRadius="5px" textAlign="center" onclick="Button00_onclick"/>
+        <Grid id="Grid00" taborder="2" left="0" top="120" width="1080" height="510" binddataset="ds_financialposition">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="270"/>
+                <Column size="270"/>
+                <Column size="270"/>
+                <Column size="270"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell colspan="2"/>
+                <Cell col="2" colspan="2" text="당기"/>
+                <Cell row="1" text="분류"/>
+                <Cell row="1" col="1" text="계정과목"/>
+                <Cell row="1" col="2" text="세부금액"/>
+                <Cell row="1" col="3" text="합계금액"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:CATEGORY" textAlign="center"/>
+                <Cell col="1" text="bind:ACCOUNT_NAME" textAlign="center"/>
+                <Cell col="2" text="bind:BALANCE_DETAIL"/>
+                <Cell col="3" text="bind:BALANCE_SUMMARY" textAlign="center"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Edit id="Edit00" taborder="3" left="760" top="76" width="228" height="40" borderRadius="5px" displaynulltext="회계기수를 조회해주세요." textAlign="center" oneditclick="Edit00_oneditclick" enable="true" readonly="true" font="bold 14px/normal &quot;Arial&quot;,&quot;Malgun Gothic&quot;,&quot;Gulim&quot;" onchanged="Edit00_onchanged"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_financialposition">
+        <ColumnInfo>
+          <Column id="LEV" type="STRING" size="256"/>
+          <Column id="CATEGORY" type="STRING" size="256"/>
+          <Column id="ACCOUNT_NAME" type="STRING" size="256"/>
+          <Column id="ACCOUNT_CODE" type="STRING" size="256"/>
+          <Column id="BALANCE_DETAIL" type="STRING" size="256"/>
+          <Column id="BALANCE_SUMMARY" type="STRING" size="256"/>
+          <Column id="PRE_BALANCE_DETAIL" type="STRING" size="256"/>
+          <Column id="PRE_BALANCE_SUMMARY" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[include "scripts::commonDate.xjs"
+application = nexacro.getApplication();
+
+this.financialpositionform_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	application.gds_period.clearData()
+		
+};
+
+this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var period=application.gds_period.getColumn(0,"ACCOUNT_PERIOD_NO")-1;
+	//alert("  선택한 기수 :"+period);
+	var callresult = "SEARCH";
+	
+		var id = "selectfinancialposition";
+		var url = "svcSettlement::financialposition";
+		var resData = "";
+		var reqData = "ds_financialposition=ds_financialposition";
+		var args = "period='"+period+"' callresult='"+callresult+"'";
+		var callback = "callback";		
+		this.transaction(id, url, resData, reqData, args, callback);
+};
+this.Edit00_oneditclick = function(obj:nexacro.Edit,e:nexacro.EditClickEventInfo)
+{
+	this.gfnOpen("periodpopup", "popup::periodpopupform.xfdl", "callback", null);
+};
+
+this.callback = function(trid, ErrorCode, ErrorMsg){
+   
+   if(trid == "periodpopup"){
+	this.Edit00.set_value(application.gds_period.getColumn(0,"FISCAL_YEAR"));
+	//this.Edit00.set_enable("false");
+      if(ErrorCode<0){
+         alert("조회 실패 : "+ErrorMsg);
+      }
+   }
+   }
+
+
+this.Edit00_onchanged = function(obj:nexacro.Edit,e:nexacro.ChangeEventInfo)
+{
+	
+};
+]]></Script>
+  </Form>
+</FDL>
