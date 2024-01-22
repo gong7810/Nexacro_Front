@@ -121,7 +121,7 @@
           </Formats>
         </Grid>
         <Calendar id="calendar_start" taborder="3" left="20" top="14" width="131" height="30"/>
-        <Calendar id="calendar_end" taborder="4" left="187" top="14" width="131" height="30"/>
+        <Calendar id="calendar_end" taborder="4" left="187" top="14" width="131" height="30" onchanged="calendar_end_onchanged"/>
         <Button id="bt_addSlip" taborder="5" text="전표추가" left="67.50%" top="2.63%" height="4.74%" width="5.28%" onclick="bt_appSlip_onclick"/>
         <Button id="bt_delSlip" taborder="6" text="전표삭제" left="80.00%" top="2.63%" height="4.74%" width="5.28%" onclick="bt_delSlip_onclick"/>
         <Button id="bt_approvalSlip" taborder="7" text="승인요청" left="92.13%" top="2.63%" height="4.74%" width="5.28%" onclick="bt_approvalSlip_onclick"/>
@@ -985,6 +985,11 @@ this.callback = function(trid , ErrorCode, ErrorMsg){
          this.reload();
       }
 }
-}]]></Script>
+}
+this.calendar_end_onchanged = function(obj:nexacro.Calendar,e:nexacro.ChangeEventInfo)
+{
+	
+};
+]]></Script>
   </Form>
 </FDL>

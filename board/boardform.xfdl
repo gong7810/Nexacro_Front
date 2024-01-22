@@ -67,7 +67,8 @@ this.boardform_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
 	today=this.gfn_today();
 
 	var id = "selectBoard";
-	var url = "svcOperate::selectBoard";
+	var url = "svcBoard::findBoardList";
+	//var url = "svcOperate::selectBoard";
 	var resData = "";
 	var reqData = "gds_bbs=gds_bbs";
 	var args = "";

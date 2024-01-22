@@ -88,14 +88,15 @@ this.boardform_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
 
 	
 	var id = "selectBoard";
-	var url = "svcOperate::findBoardList";
-	var resData = "";  // update하거나 insert할때는 res데이터로 :U옵션을 주고 전송 
-	var reqData = "ds_board=ds_board"; // 데이터 요청 
+	//var url = "svcOperate::findBoardList";
+	var url = "svcOpr::findBoardList";
+	var reqData = ""; // update하거나 insert할때는 res데이터로 :U옵션을 주고 전송 
+	var resData = "ds_board=ds_board";  // 데이터 요청 
 	var args = "";
 	var callback = "callback";
 
 
-	this.transaction(id, url, resData, reqData, args, callback);
+	this.transaction(id, url, reqData, resData, args, callback);
 	
 	trace("<<<<<<<<<<<<<<< on_load event successfully finished");
 	

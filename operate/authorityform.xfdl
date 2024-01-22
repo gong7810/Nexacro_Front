@@ -81,7 +81,7 @@ this.authorityform_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
 				var	name = application.gds_emp.getColumn(0, "EMP_CODE"); 
 				
 			
-			if(name!='emp1'){
+			if(name!='emp7'){
 				this.emp_list_grid.set_visible(false);
 				this.static_emp_list.set_visible(false);
 				this.refresh_btn.set_visible(false);
@@ -142,7 +142,7 @@ this.callbackFunc=function(obj,val){
 	//alert('<<< code is :'+code)
 	
 	
-	if(code=='emp1'){
+	if(code=='emp7'){
 		
 	//로그인한 사용자가 admin이면 모든 사원의 권한 데이터를 가져옴		
 		

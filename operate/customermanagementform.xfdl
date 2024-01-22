@@ -21,7 +21,7 @@
                 <Row size="24"/>
               </Rows>
               <Band id="head">
-                <Cell text="거래처코드"/>
+                <Cell col="0" text="거래처코드"/>
                 <Cell col="1" text="거래처명"/>
                 <Cell col="2" text="대표자"/>
                 <Cell col="3" text="업태"/>
@@ -30,7 +30,7 @@
                 <Cell col="6" text="전화번호"/>
               </Band>
               <Band id="body">
-                <Cell text="bind:CUSTOMER_CODE"/>
+                <Cell col="0" text="bind:CUSTOMER_CODE" edittype="none"/>
                 <Cell col="1" text="bind:CUSTOMER_NAME" edittype="none"/>
                 <Cell col="2" text="bind:CUSTOMER_CEO" edittype="none"/>
                 <Cell col="3" text="bind:CUSTOMER_BUSINESS_CONDITIONS" edittype="none"/>
@@ -142,10 +142,7 @@ trace('<<<<<<<<<< cnt is : '+cnt);
 this.register_btn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {		
 
-	
-	
-	
-	
+
 	
 	var registerBtn=this.register_btn.text;
 	// 새로 등록되는 거래처 코드를 생성하기 위해 현재 등록되어 있는 거래처의 개수를 
@@ -193,6 +190,7 @@ this.register_btn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo
 	// ---> 하나의 그리드로 정보를 보여주고 추가하는 
 	// 기능을 하게 만들었으므로, 속성을 변경해준다.
  	this.ds_customer.setColumn(nRow,"CUSTOMER_CODE","PTN-"+ (rCount + 1) +"");
+	this.customer_grid.setCellProperty("Body", 0, "edittype", "text");
 	this.customer_grid.setCellProperty("Body", 1, "edittype", "text");
 	this.customer_grid.setCellProperty("Body", 2, "edittype", "text");
 	this.customer_grid.setCellProperty("Body", 3, "edittype", "text");
@@ -408,12 +406,6 @@ this.reload();
 
 
 }
-
-
-
-
-
-
 
 
 this.reload_btn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)

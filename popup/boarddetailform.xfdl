@@ -4,15 +4,15 @@
     <Layouts>
       <Layout height="400" width="700">
         <TextArea id="e_contents" taborder="0" left="32" top="132" width="618" height="228" readonly="true" onchanged="e_contents_onchanged"/>
-        <Static id="Static00" taborder="4" text="제목" left="32" top="36" width="64" height="14" textAlign="center" font="bold 12px/normal &quot;Arial&quot;,&quot;Malgun Gothic&quot;,&quot;Gulim&quot;"/>
-        <Static id="Static00_00" taborder="5" text="작성자" left="32" top="90" width="64" height="14" textAlign="center" font="bold 12px/normal &quot;Arial&quot;,&quot;Malgun Gothic&quot;,&quot;Gulim&quot;" onclick="Static00_00_onclick"/>
+        <Static id="Static00" taborder="4" text="제목" left="30.00" top="45" width="64" height="14" textAlign="center" font="bold 12px/normal &quot;Arial&quot;,&quot;Malgun Gothic&quot;,&quot;Gulim&quot;"/>
+        <Static id="Static00_00" taborder="5" text="작성자" left="32.00" top="89" width="64" height="14" textAlign="center" font="bold 12px/normal &quot;Arial&quot;,&quot;Malgun Gothic&quot;,&quot;Gulim&quot;" onclick="Static00_00_onclick"/>
         <Button id="modify_btn" taborder="1" text="수정" left="405" top="370" width="70" height="20" onclick="modify_btn_onclick" onsetfocus="modify_btn_onsetfocus"/>
         <Edit id="e_name" taborder="6" left="110" top="36" width="231" height="34" readonly="true"/>
         <Button id="list_btn_detail" taborder="2" text="목록" left="490" top="370" width="70" height="20" onclick="list_btn_detail_onclick"/>
         <Button id="delete_btn" taborder="3" text="삭제" left="580" top="370" width="70" height="20" onclick="delete_btn_onclick"/>
         <Edit id="e_writer" taborder="7" left="110" top="80" width="231" height="34" readonly="true"/>
-        <Edit id="e_write_date" taborder="8" left="419" top="86" width="231" height="34" readonly="true"/>
-        <Static id="Static00_00_00" taborder="9" text="작성일" left="348" top="86" width="64" height="14" textAlign="center" font="bold 12px/normal &quot;Arial&quot;,&quot;Malgun Gothic&quot;,&quot;Gulim&quot;" onclick="Static00_00_00_onclick"/>
+        <Edit id="e_write_date" taborder="8" left="419.00" top="80" width="231" height="34" readonly="true"/>
+        <Static id="Static00_00_00" taborder="9" text="작성일" left="348.00" top="88" width="64" height="14" textAlign="center" font="bold 12px/normal &quot;Arial&quot;,&quot;Malgun Gothic&quot;,&quot;Gulim&quot;" onclick="Static00_00_00_onclick"/>
       </Layout>
     </Layouts>
     <Objects>
@@ -38,29 +38,24 @@ var bno=this.parent.bno; // 부모객체에서 넘겨준 게시물 정보를 받
 
 this.boarddetailform_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
 {
-	 trace('<<<<onload event has been occured at : boarddetailform');
-			this.e_name.set_readonly(true);
-			this.e_contents.set_readonly(true);
-	
-			trace("<<<<<<<<<<<<<< this is bno for parameter  :"+this.parent.bno); //객체의 키로 값을 받는다. 
-	
-	
-				
-			var id = "findBoardDetail";
-			var url = "svcOperate::findBoardDetail";
-			var resData = "";
-			var reqData = "ds_board=ds_board";
-			var args = "bno="+bno;
-			var callback = "callback";
-			
-			this.transaction(id, url, resData, reqData, args, callback);
+	trace('<<<<onload event has been occured at : boarddetailform');
+	this.e_name.set_readonly(true);
+	this.e_contents.set_readonly(true);
+
+	trace("<<<<<<<<<<<<<< this is bno for parameter  :"+this.parent.bno); //객체의 키로 값을 받는다. 
+
+
+		
+	var id = "findBoardDetail";
+	var url = "svcOpr::findBoardDetail";
+	var reqData= "";
+	var resData  = "ds_board=ds_board";
+	var args = "bno="+bno;
+	var callback = "callback";
+
+	this.transaction(id, url, reqData, resData, args, callback);
 			
 };
-
-
-
-
-
 
 
 
@@ -70,8 +65,8 @@ this.delete_btn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 	trace("this is for delete : "+bool);
 	
 	if(bool){
-			var id = "removeBoard";
-			var url = "svcOperate::removeBoard";
+			var id = "deleteBoard";
+			var url = "svcOpr::deleteBoard";
 			var resData = "";
 			var reqData = "";
 			var args = "bno="+bno; // 삭제할 게시물의 id를 파라미터로 백단으로 넘겨준다. 		
@@ -135,8 +130,8 @@ this.modify_btn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 				var title=	this.e_name.text;
 				var contents = this.e_contents.text;
 			
-				var id = "modifyBoard";
-				var url = "svcOperate::modifyBoard";
+				var id = "updateBoard";
+				var url = "svcOpr::updateBoard";
 				var resData = "ds_board=ds_board:U"; // 업데이트할 데이터만 전송 
 				var reqData = "";
 				var args = "";

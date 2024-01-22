@@ -62,9 +62,6 @@
           <Row>
             <Col id="authority_code">AU11</Col>
           </Row>
-          <Row>
-            <Col id="authority_code">AU12</Col>
-          </Row>
         </Rows>
       </Dataset>
       <Dataset id="auth_name">
@@ -73,10 +70,7 @@
         </ColumnInfo>
         <Rows>
           <Row>
-            <Col id="auth_name">전표입력</Col>
-          </Row>
-          <Row>
-            <Col id="auth_name">기본설정</Col>
+            <Col id="auth_name">거래관리</Col>
           </Row>
           <Row>
             <Col id="auth_name">장부관리</Col>
@@ -85,28 +79,28 @@
             <Col id="auth_name">결산 및 재무제표</Col>
           </Row>
           <Row>
-            <Col id="auth_name">전기분재무제표</Col>
-          </Row>
-          <Row>
             <Col id="auth_name">예산관리</Col>
-          </Row>
-          <Row>
-            <Col id="auth_name">권한관리</Col>
           </Row>
           <Row>
             <Col id="auth_name">고정자산관리</Col>
           </Row>
           <Row>
-            <Col id="auth_name">게시판</Col>
-          </Row>
-          <Row>
-            <Col id="auth_name">업무용차량관리</Col>
+            <Col id="auth_name">자금관리</Col>
           </Row>
           <Row>
             <Col id="auth_name">어음명세서관리</Col>
           </Row>
           <Row>
-            <Col id="auth_name">자금관리</Col>
+            <Col id="auth_name">업무용차량관리</Col>
+          </Row>
+          <Row>
+            <Col id="auth_name">인사관리</Col>
+          </Row>
+          <Row>
+            <Col id="auth_name">시스템관리</Col>
+          </Row>
+          <Row>
+            <Col id="auth_name">게시판</Col>
           </Row>
         </Rows>
       </Dataset>
@@ -276,55 +270,50 @@ this.edit_authority_name_onitemchanged = function(obj:nexacro.Combo,e:nexacro.It
 			trace('<<<<<< text : '+text);
 			
 			//선택된 아이템에 해당하는 권한 코드를 edit_emp_code에 할당 
-			if(text=='전표입력'){
+			if(text=='거래관리'){
 			
 				this.emp_auth_for_trasaction.setColumn(0,2,'AU01');
 			
-			}else if(text=='기본설정'){
+			}else if(text=='장부관리'){
 			
 				this.emp_auth_for_trasaction.setColumn(0,2,'AU02');
 			
-			}else if(text=='장부관리'){
+			}else if(text=='결산 및 재무제표'){
 			
 				this.emp_auth_for_trasaction.setColumn(0,2,'AU03');
 				trace('THIS IS RIGHT');
 	
-			}else if(text=='결산 및 재무제표'){
+			}else if(text=='예산관리'){
 				
 				this.emp_auth_for_trasaction.setColumn(0,2,'AU04');
-		
-			
-			}else if(text=='전기분재무제표'){
-			
-				this.emp_auth_for_trasaction.setColumn(0,2,'AU05');
-			
-			}else if(text=='예산관리'){
-			
-				this.emp_auth_for_trasaction.setColumn(0,2,'AU06');
-			
-			}else if(text=='권한관리'){
-			
-				this.emp_auth_for_trasaction.setColumn(0,2,'AU07');
 			
 			}else if(text=='고정자산관리'){
 			
-				this.emp_auth_for_trasaction.setColumn(0,2,'AU08');
-			
-			}else if(text=='게시판'){
-			
-				this.emp_auth_for_trasaction.setColumn(0,2,'AU09');
-			
-			}else if(text=='업무용차량관리'){
-			
-				this.emp_auth_for_trasaction.setColumn(0,2,'AU10');
-			
-			}else if(text=='어음명세서관리'){
-			
-				this.emp_auth_for_trasaction.setColumn(0,2,'AU11');
+				this.emp_auth_for_trasaction.setColumn(0,2,'AU05');
 			
 			}else if(text=='자금관리'){
 			
-				this.emp_auth_for_trasaction.setColumn(0,2,'AU12');
+				this.emp_auth_for_trasaction.setColumn(0,2,'AU06');
+			
+			}else if(text=='어음명세서관리'){
+			
+				this.emp_auth_for_trasaction.setColumn(0,2,'AU07');
+			
+			}else if(text=='업무용차량관리'){
+			
+				this.emp_auth_for_trasaction.setColumn(0,2,'AU08');
+			
+			}else if(text=='인사관리'){
+			
+				this.emp_auth_for_trasaction.setColumn(0,2,'AU09');
+			
+			}else if(text=='시스템관리'){
+			
+				this.emp_auth_for_trasaction.setColumn(0,2,'AU10');
+			
+			}else if(text=='게시판'){
+			
+				this.emp_auth_for_trasaction.setColumn(0,2,'AU11');
 			
 			}
 				
