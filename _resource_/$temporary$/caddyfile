@@ -1,0 +1,8 @@
+﻿{
+admin off
+}
+:4098
+{
+root "C:/Users/JUNGHEON/Documents/TOBESOFT/Nexacro N/outputs/Account77"
+file_server
+}
