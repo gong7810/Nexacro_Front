@@ -343,11 +343,13 @@
       <ColumnInfo>
         <Column id="JOURNAL_NO" type="STRING" size="256"/>
         <Column id="JOURNAL_DETAIL_NO" type="STRING" size="256"/>
-        <Column id="DESCRIPTION" type="STRING" size="256"/>
+        <Column id="JOURNAL_DESCRIPTION" type="STRING" size="256"/>
         <Column id="ACCOUNT_CONTROL_NAME" type="STRING" size="256"/>
         <Column id="ACCOUNT_CONTROL_TYPE" type="STRING" size="256"/>
         <Column id="ACCOUNT_CONTROL_DESCRIPTION" type="STRING" size="256"/>
         <Column id="ACCOUNT_CONTROL_CODE" type="STRING" size="256"/>
+        <Column id="ACCOUNT_NAME" type="STRING" size="256"/>
+        <Column id="ACCOUNT_INNER_CODE" type="STRING" size="256"/>
       </ColumnInfo>
     </Dataset>
     <Dataset id="gds_account_control_temp">

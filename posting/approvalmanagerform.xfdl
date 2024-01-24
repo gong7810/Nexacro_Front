@@ -122,7 +122,7 @@
         <Button id="bt_appSlip" taborder="5" text="전표승인" left="86.30%" top="2.81%" height="4.74%" width="5.28%" onclick="bt_appSlip_onclick"/>
         <Button id="bt_cancleApp" taborder="6" text="전표반려" left="92.69%" top="2.81%" height="4.74%" width="5.28%" onclick="bt_cancleApp_onclick"/>
         <Button id="bt_searchSlip" taborder="7" text="조회" left="39.26%" top="3.51%" height="4.39%" width="7.22%" onclick="bt_searchSlip_onclick"/>
-        <Static id="Static00" taborder="8" text="-" left="153" top="16" width="27" height="24" textAlign="center" font="bold 20px/normal &quot;Gulim&quot;"/>
+        <Static id="Static00" taborder="8" text="-" left="14.17%" top="2.81%" width="2.5%" height="4.21%" textAlign="center" font="bold 20px/normal &quot;Gulim&quot;"/>
         <Combo id="combo_status" taborder="9" text="전체검색" left="29.63%" top="3.86%" width="8.98%" height="4.04%" innerdataset="ds_slipStatus" datacolumn="STATUS" codecolumn="STATUS" index="0" value="전체검색" onitemchanged="combo_status_onitemchanged"/>
       </Layout>
     </Layouts>
@@ -186,7 +186,6 @@ this.bt_searchSlip_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInf
 	for(index=0 ; index<rowcount ; index++){
 		application.gds_slip.setColumn(index,"SLIP_DESCRIPTION",0); // 선택해제 세팅   
 	}
-	
 };
 
 
@@ -211,8 +210,7 @@ this.grid_slip_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventI
 };
 
 //분개상세조회
-this.grid_journal_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
-{
+this.grid_journal_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo){
 	var selJournalNo = application.gds_journal.getColumn(application.gds_journal.rowposition, "JOURNAL_NO");
 	
 	var id = "findJournalDetailInfo";
@@ -229,8 +227,6 @@ this.grid_journal_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEve
 
 
 var executionType; // 실행유형
-
-
 
 //전표승인
 this.bt_appSlip_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo){
