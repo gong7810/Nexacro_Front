@@ -60,12 +60,12 @@ this.currentAssetRegisterform_onload = function(obj:nexacro.Form,e:nexacro.LoadE
 {
 	var id = "findAssetList";
 	var url = "svcOpr::findAssetList";
-	var resData ="";
-	var reqData ="ds_assetList=ds_asset";
+	var reqData = "";
+	var resData = "ds_assetList=ds_asset";
 	var args = "";
 	var callback = "onload_callbackFunc";
 	
-	this.transaction(id, url, resData, reqData, args, callback);   
+	this.transaction(id, url, reqData, resData, args, callback);   
 	
 	
 	application.ds_assetList.filter('');
@@ -104,12 +104,12 @@ this.assetSearch_onitemchanged = function(obj:nexacro.Combo, e:nexacro.ItemChang
 // 고정자산상세 조회
 this.currentAsset_information_oncelldblclick = function (obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
 {
-	var assetCode = this.currentAsset_information.getCellText(this.currentAsset_information.currentrow, 2); // 게시물 id를 열리는 폼에 넘김
+	var assetCode = this.currentAsset_information.getCellText(this.currentAsset_information.currentrow, 2); // 고정자산코드를 열리는 폼에 넘김
 	trace(assetCode);
 	
 	//띄울 poppdiv의 정보를 작성하고 
 	var sID="currentAssetdetailform";
-	var sURL="popup::currentAssetdetailform.xfdl";		
+	var sURL="popup::currentAssetdetailform.xfdl";
 	var param={assetCode : assetCode}; // 생성되는 폼에 파라미터를 넘겨준다. 
 	var callbackFunc="currentAssetdetailform_callbackFunc";  
 	// 해당 프레임을 생성												 //            --파라미터 순서-- 
@@ -120,8 +120,6 @@ this.currentAsset_information_oncelldblclick = function (obj:nexacro.Grid,e:nexa
 	// 해당 프레임 화면에 출력												 // 참고 : 해당 프레임의 크기는 변경할수는 없는거 같다. 
 	oChildFrame.set_openalign("center middle");  // ---> 띄워지는 위치를 지정 
 	oChildFrame.showModal(sID, this.getOwnerFrame(), param, this, callbackFunc);
-	
-	
 	
 	trace("this is for read");
 };
@@ -282,6 +280,7 @@ this.currentAssetdetailform_callbackFunc = function(obj:nexacro.Grid,e:nexacro.G
           <Column id="ASSET_NAME" type="STRING" size="256"/>
           <Column id="PROGRESS" type="STRING" size="256"/>
           <Column id="FINALIZE_STATUS" type="STRING" size="256"/>
+          <Column id="Column0" type="STRING" size="256"/>
         </ColumnInfo>
       </Dataset>
     </Objects>

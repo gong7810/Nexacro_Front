@@ -434,6 +434,22 @@
         <Column id="CUSTOMER_NAME" type="STRING" size="256" sumtext="거래처이름"/>
       </ColumnInfo>
     </Dataset>
+    <Dataset id="gds_plan">
+      <ColumnInfo>
+        <Column id="PLAN_NO" type="STRING" size="256"/>
+        <Column id="PLAN_DATE" type="STRING" size="256"/>
+        <Column id="FUND_CODE" type="STRING" size="256"/>
+        <Column id="FUND_NAME" type="STRING" size="256"/>
+        <Column id="CUSTOMER_CODE" type="STRING" size="256"/>
+        <Column id="CUSTOMER_NAME" type="STRING" size="256"/>
+        <Column id="EXPENSE_REPORT" type="STRING" size="256"/>
+        <Column id="PRICE" type="STRING" size="256"/>
+        <Column id="BALANCE_DIVISION" type="STRING" size="256"/>
+      </ColumnInfo>
+      <Rows>
+        <Row/>
+      </Rows>
+    </Dataset>
   </Datasets>
   <Variables>
     <Variable id="gv_accountControlName"/>
@@ -443,6 +459,9 @@
     <Variable id="gv_currentPeriod"/>
     <Variable id="gv_journalNo"/>
     <Variable id="gv_customerCode"/>
+    <Variable id="gv_accountCode"/>
+    <Variable id="gv_accountName"/>
+    <Variable id="gv_customerName"/>
   </Variables>
   <DataObjects/>
 </AppVariables>

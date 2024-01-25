@@ -17,8 +17,8 @@ application = nexacro.getApplication();
 this.btn_login_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
 	trace("@@@@btn_login_onclick@@@@");
-	//var empCode = this.ed_id.value;
-	var empCode = "emp7";
+	var empCode = this.ed_id.value;
+	//var empCode = "emp7";
 	var userPw = this.ed_pw.value;
 	var today = this.gfn_today(); // 2021-01-01
 	

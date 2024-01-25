@@ -62,7 +62,35 @@
                 </Layout>
               </Layouts>
             </Tabpage>
-            <Tabpage id="Tabpage3" text="신용카드">
+            <Tabpage id="Tabpage3" text="보험사">
+              <Layouts>
+                <Layout>
+                  <Grid id="Grid00" taborder="0" left="12" top="12" width="288" height="223" binddataset="gds_customer" autofittype="col" oncelldblclick="Grid00_oncelldblclick">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="70"/>
+                          <Column size="70"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="24" band="head"/>
+                          <Row size="24"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell text="거래처코드"/>
+                          <Cell col="1" text="거래처명"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell text="bind:CUSTOMER_CODE"/>
+                          <Cell col="1" text="bind:CUSTOMER_NAME"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="Tabpage4" text="직원복지">
               <Layouts>
                 <Layout>
                   <Grid id="Grid00" taborder="0" left="12" top="12" width="288" height="223" binddataset="gds_customer" autofittype="col" oncelldblclick="Grid00_oncelldblclick">
@@ -127,9 +155,11 @@ this.Tab00_onchanged = function(obj:nexacro.Tab,e:nexacro.TabIndexChangeEventInf
 	switch(obj.tabindex) {
 	case 0 : application.gds_customer.filter("CUSTOMER_TYPE=='일반'");
 		break;
-	case 1 : application.gds_customer.filter("CUSTOMER_TYPE=='금융기관'");
+	case 1 : application.gds_customer.filter("CUSTOMER_TYPE=='금융'");
 		break;
-	case 2 : application.gds_customer.filter("CUSTOMER_TYPE=='신용카드'");
+	case 2 : application.gds_customer.filter("CUSTOMER_TYPE=='보험'");
+		break;
+	case 3 : application.gds_customer.filter("CUSTOMER_TYPE=='복지'");
 		break;
 	}
 };
@@ -142,7 +172,8 @@ this.Grid00_oncelldblclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventI
 	var customerName = application.gds_customer.getColumn(application.gds_customer.rowposition, "CUSTOMER_NAME");
 	trace(customerCode)
 	trace(customerName)
-	
+	application.gv_customerCode = customerCode;
+	application.gv_customerName = customerName;
 	
 	application.gds_journal.setColumn(application.gds_journal.rowposition, "CUSTOMER_CODE", customerCode);
 	application.gds_journal.setColumn(application.gds_journal.rowposition, "CUSTOMER_NAME", customerName);
@@ -150,6 +181,7 @@ this.Grid00_oncelldblclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventI
 
 	this.close();
 };
+
 ]]></Script>
     <Objects/>
   </Form>

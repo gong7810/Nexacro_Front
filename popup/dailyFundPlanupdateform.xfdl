@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="dailyFundPlanupdateform" width="500" height="360" titletext="New Form" onload="dailyFundPlanupdateform_onload" onkeydown="dailyFundPlanupdateform_onkeydown">
+    <Layouts>
+      <Layout height="360" width="500">
+        <Static id="Static00" taborder="0" text="자금계획 수정" left="115.00" top="10" width="251" height="75" textAlign="center" font="normal 18pt/normal &quot;Arial&quot;"/>
+        <Static id="accountname" taborder="6" text="계획번호" left="4.60%" top="27.50%" width="12.00%" height="8.06%" textAlign="center" borderRadius="5px" color="white" background="#87c4f1"/>
+        <Edit id="planNo" taborder="1" left="96.00" top="99" width="28.00%" height="8.06%" readonly="true" textAlign="center"/>
+        <Static id="assetcode" taborder="7" text="계획일자" left="4.60%" top="40.56%" width="12.00%" height="8.06%" textAlign="center" background="#87c4f1" borderRadius="5px" color="white"/>
+        <Calendar id="planDate" taborder="16" left="96.00" top="147" width="28.00%" height="8.06%" dateformat="yyyy-MM-dd" readonly="true"/>
+        <Static id="accountcode" taborder="8" text="자금코드" left="4.60%" top="54.17%" width="12.00%" height="8.06%" textAlign="center" background="#87c4f1" borderRadius="5px" color="white"/>
+        <Edit id="fundCode" taborder="2" left="95.00" top="196" width="28.20%" height="8.06%" textAlign="center" readonly="false" oneditclick="fundCode_oneditclick"/>
+        <Static id="assetname" taborder="9" text="자금과목" left="4.60%" top="67.78%" width="12.00%" height="8.06%" textAlign="center" background="#87c4f1" borderRadius="5px" color="white"/>
+        <Edit id="fundName" taborder="10" left="19.00%" top="67.78%" width="28.00%" height="8.06%" textAlign="center" onchanged="edit_basic_address_onchanged" text="" readonly="true"/>
+        <Static id="previouscost" taborder="11" text="거래처코드" left="52.20%" top="27.50%" width="12.00%" height="8.06%" textAlign="center" background="#87c4f1" borderRadius="5px" color="white"/>
+        <Edit id="customerCode" taborder="3" left="336.00" top="99" width="28.20%" height="8.06%" textAlign="center" readonly="false" oneditclick="customerCode_oneditclick"/>
+        <Static id="previousbalance" taborder="12" text="거래처명" left="52.20%" top="40.56%" width="12.00%" height="8.06%" textAlign="center" background="#87c4f1" borderRadius="5px" color="white"/>
+        <Edit id="customerName" taborder="18" left="336.00" top="146" width="28.20%" height="8.06%" textAlign="center" readonly="true"/>
+        <Static id="usefullife" taborder="13" text="적요" left="52.20%" top="54.17%" width="12.00%" height="8.06%" textAlign="center" background="#87c4f1" borderRadius="5px" color="white"/>
+        <Edit id="expenseReport" taborder="4" left="336.00" top="195" width="28.20%" height="8.06%" textAlign="center" readonly="false"/>
+        <Static id="amortizationfinalyear" taborder="14" text="금액" left="52.20%" top="67.78%" width="12.00%" height="8.06%" textAlign="center" background="#87c4f1" borderRadius="5px" color="white"/>
+        <MaskEdit id="price" taborder="19" left="336" top="244" width="28.00%" height="8.06%" format="#,#.###"/>
+        <Static id="assetname00" taborder="15" text="구분" left="4.60%" top="81.39%" width="12.00%" height="8.06%" textAlign="center" background="#87c4f1" borderRadius="5px" color="white"/>
+        <Combo id="balanceDivision" taborder="17" text="입 / 출을 선택해주세요" left="95.00" top="293" width="28.00%" height="8.06%" value="" index="-1" innerdataset="ds_balance" datacolumn="BALANCE_DIVISION" readonly="true"/>
+        <Button id="updatePlanbtn" taborder="5" text="저장" left="409.00" top="330" width="68" height="19" onclick="updatePlanbtn_onclick"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_plan">
+        <ColumnInfo>
+          <Column id="PLAN_NO" type="STRING" size="256"/>
+          <Column id="PLAN_DATE" type="STRING" size="256"/>
+          <Column id="FUND_CODE" type="STRING" size="256"/>
+          <Column id="FUND_NAME" type="STRING" size="256"/>
+          <Column id="CUSTOMER_CODE" type="STRING" size="256"/>
+          <Column id="CUSTOMER_NAME" type="STRING" size="256"/>
+          <Column id="EXPENSE_REPORT" type="STRING" size="256"/>
+          <Column id="PRICE" type="STRING" size="256"/>
+          <Column id="BALANCE_DIVISION" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_balance">
+        <ColumnInfo>
+          <Column id="BALANCE_DIVISION" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="BALANCE_DIVISION">수입</Col>
+          </Row>
+          <Row>
+            <Col id="BALANCE_DIVISION">지출</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/*************************************************************/
+/* 프 로 그 램 : C:\Users\owner\Desktop\77th_2nd_Nexa ACC\Nexacro_Front\popup\dailyFundPlanupdateform.xfdl
+/* 작 성 일 자 : 2024/01/24
+/* 작 성 자 명 : S.U
+/* 설       명 : 자금계획 수정 폼
+/*************************************************************/
+
+nexa = nexacro.getApplication();
+
+// 선택 자금계획 세팅
+this.dailyFundPlanupdateform_onload = function (obj:nexacro.Form, e:nexacro.LoadEventInfo)
+{	
+	this.planNo.set_value(nexa.gds_plan.getColumn(0, "PLAN_NO"));
+	this.planDate.set_value(nexa.gds_plan.getColumn(0, "PLAN_DATE"));
+	this.fundCode.set_value(nexa.gds_plan.getColumn(0, "FUND_CODE"));
+	this.fundName.set_value(nexa.gds_plan.getColumn(0, "FUND_NAME"));
+	this.customerCode.set_value(nexa.gds_plan.getColumn(0, "CUSTOMER_CODE"));
+	this.customerName.set_value(nexa.gds_plan.getColumn(0, "CUSTOMER_NAME"));
+	this.expenseReport.set_value(nexa.gds_plan.getColumn(0, "EXPENSE_REPORT"));
+	this.price.value = nexa.gds_plan.getColumn(0, "PRICE").replace(/,/gi, '');
+	this.balanceDivision.set_value(nexa.gds_plan.getColumn(0, "BALANCE_DIVISION"));
+	
+};
+
+// 자금코드 수정
+this.fundCode_oneditclick = function(obj:nexacro.Edit,e:nexacro.ChangeEventInfo)
+{
+	var sID="accInnerCodeForm";
+	var sURL="popup::accInnercodeform.xfdl";
+	var param="";
+	var callbackFunc="accInnercodeform_callbackFunc";  
+	// 해당 프레임을 생성												 //            --파라미터 순서-- 
+	var oChildFrame = new ChildFrame(sID, 0, 0, 0, 0, null, null, sURL);  // 프레임명, 부모프레임의 왼쪽과의 거리,
+	// 부모프레임의 상단과의 거리, 해당 프레임의 넓이,
+	// 해당 프레임의 높이, 부로 프레임의 오른쪽과의 거리,
+	// 부모 프레임과의 하단과의 거리, 참조할 프레임의 주소
+	// 해당 프레임 화면에 출력												 // 참고 : 해당 프레임의 크기는 변경할수는 없는거 같다. 
+	oChildFrame.set_openalign("center middle");  // ---> 띄워지는 위치를 지정 
+	oChildFrame.showModal(sID, this.getOwnerFrame(), param, this, callbackFunc);
+};
+
+// 선택 계정과목 세팅
+this.accInnercodeform_callbackFunc = function ()
+{
+	this.fundCode.set_value(nexa.gv_accountCode);
+	this.fundName.set_value(nexa.gv_accountName);
+};
+
+// 거래처 팝업창 호출
+this.customerCode_oneditclick = function(obj:nexacro.Edit,e:nexacro.ChangeEventInfo)
+{	 
+	var sID="customercodeform";
+	var sURL="popup::customercodeform.xfdl";
+	var param="";
+	var callbackFunc="customercodeform_callbackFunc";  
+	// 해당 프레임을 생성												 //            --파라미터 순서-- 
+	var oChildFrame = new ChildFrame(sID, 0, 0, 0, 0, null, null, sURL);  // 프레임명, 부모프레임의 왼쪽과의 거리,
+	// 부모프레임의 상단과의 거리, 해당 프레임의 넓이,
+	// 해당 프레임의 높이, 부로 프레임의 오른쪽과의 거리,
+	// 부모 프레임과의 하단과의 거리, 참조할 프레임의 주소
+	// 해당 프레임 화면에 출력												 // 참고 : 해당 프레임의 크기는 변경할수는 없는거 같다. 
+	oChildFrame.set_openalign("center middle");  // ---> 띄워지는 위치를 지정 
+	oChildFrame.showModal(sID, this.getOwnerFrame(), param, this, callbackFunc);
+};
+
+// 선택 거래처 세팅
+this.customercodeform_callbackFunc = function() 
+{
+	this.customerCode.set_value(nexa.gv_customerCode);
+	this.customerName.set_value(nexa.gv_customerName);
+}
+
+// 자금계획 수정
+this.updatePlanbtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	trace(this.ds_plan.getColumn(0, "FUND_CODE"));
+	if (this.ds_plan.getColumn(0, "FUND_CODE") == null)
+		alert("자금코드를 선택해주세요");
+	else if (this.ds_plan.getColumn(0, "CUSTOMER_CODE") == null)
+		alert("거래처코드를 선택해주세요");
+	else if (this.ds_plan.getColumn(0, "EXPENSE_REPORT") == null)
+		alert("적요를 입력해주세요");
+	else if (this.ds_plan.getColumn(0, "PRICE") == null)
+		alert("금액을 입력해주세요");
+	else {	
+		var bool = confirm("저장하시겠습니까?")
+		if (bool) {		
+			var id = "updatePlan";
+			var url = "svcOpr::updatePlan";
+			var reqData = "ds_plan=ds_plan";
+			var resData = "";
+			var args = "";
+			var callback = "updatePlan_callback";
+			
+			this.transaction(id, url, reqData, resData, args, callback);
+			alert("저장되었습니다.");
+			this.close();
+		}
+		
+	}
+};
+
+// esc로 창 닫기
+this.dailyFundPlanupdateform_onkeydown = function(obj:nexacro.Form,e:nexacro.KeyEventInfo)
+{
+	const a=e.keycode;
+	if(a==27){
+		this.close('esc');
+	}
+};
+
+
+
+]]></Script>
+    <Bind>
+      <BindItem id="item0" compid="planNo" propid="value" datasetid="ds_plan" columnid="PLAN_NO"/>
+      <BindItem id="item1" compid="planDate" propid="value" datasetid="ds_plan" columnid="PLAN_DATE"/>
+      <BindItem id="item2" compid="fundCode" propid="value" datasetid="ds_plan" columnid="FUND_CODE"/>
+      <BindItem id="item3" compid="fundName" propid="value" datasetid="ds_plan" columnid="FUND_NAME"/>
+      <BindItem id="item4" compid="customerCode" propid="value" datasetid="ds_plan" columnid="CUSTOMER_CODE"/>
+      <BindItem id="item5" compid="customerName" propid="value" datasetid="ds_plan" columnid="CUSTOMER_NAME"/>
+      <BindItem id="item6" compid="expenseReport" propid="value" datasetid="ds_plan" columnid="EXPENSE_REPORT"/>
+      <BindItem id="item7" compid="price" propid="value" datasetid="ds_plan" columnid="PRICE"/>
+      <BindItem id="item8" compid="balanceDivision" propid="value" datasetid="ds_plan" columnid="BALANCE_DIVISION"/>
+    </Bind>
+  </Form>
+</FDL>

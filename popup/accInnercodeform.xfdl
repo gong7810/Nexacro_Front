@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <FDL version="2.1">
-  <Form id="accInnerCodeForm" width="390" height="430" onload="accInnerCodeForm_onload">
+  <Form id="accInnerCodeForm" width="390" height="380" onload="accInnerCodeForm_onload">
     <Layouts>
-      <Layout height="430" width="390">
-        <Edit id="searchAccText" taborder="1" left="42" top="55" width="178" height="30" onkeyup="searchAccText_onkeyup" onchanged="searchAccText_onchanged"/>
-        <Static id="Static00" taborder="1" text="계정과목" left="97" top="13" width="167" height="35" textAlign="center" font="20px/normal &quot;휴먼엑스포&quot;"/>
-        <Button id="bt_searchAcc" taborder="2" text="검색" left="250" top="54" width="80" height="31" onclick="bt_searchAcc_onclick"/>
-        <Grid id="Grid00" taborder="3" left="42" top="150" width="298" height="226" binddataset="gds_account" autofittype="col" oncelldblclick="Grid00_oncelldblclick">
+      <Layout height="380" width="390">
+        <Edit id="searchAccText" taborder="1" left="42" top="69" width="198" height="30" onkeyup="searchAccText_onkeyup" onchanged="searchAccText_onchanged"/>
+        <Static id="Static00" taborder="0" text="계정과목" left="97" top="13" width="167" height="35" textAlign="center" font="20px/normal &quot;휴먼엑스포&quot;"/>
+        <Button id="bt_searchAcc" taborder="2" text="검색" left="260" top="68" width="80" height="31" onclick="bt_searchAcc_onclick"/>
+        <Grid id="Grid00" taborder="3" left="42" top="127" width="298" height="226" binddataset="gds_account" autofittype="col" oncelldblclick="Grid00_oncelldblclick">
           <Formats>
             <Format id="default">
               <Columns>
@@ -28,7 +28,6 @@
             </Format>
           </Formats>
         </Grid>
-        <Combo id="Combo00" taborder="4" text="Combo00" left="42" top="100" width="298" height="30" onitemchanged="Combo00_onitemchanged" codecolumn="ACCOUNT_INNER_CODE" datacolumn="ACCOUNT_NAME" innerdataset="ds_account" tooltiptype="default,mouseleave" type="dropdown" displayrowcount="10" index="0" readonly="false"/>
       </Layout>
     </Layouts>
     <Objects>
@@ -38,13 +37,7 @@
         </ColumnInfo>
       </Dataset>
     </Objects>
-    <Bind>
-      <BindItem id="item0" compid="Combo00" propid="text" datasetid="ds_account" columnid="ACCOUNT_NAME"/>
-      <BindItem id="item1" compid="Combo00" propid="value" datasetid="ds_account" columnid="ACCOUNT_NAME"/>
-    </Bind>
-    <InitValue>
-      <Combo id="Combo00" innerdataset="gds_account"/>
-    </InitValue>
+    <InitValue/>
     <Script type="xscript5.1"><![CDATA[
 application = nexacro.getApplication();
 
@@ -52,72 +45,73 @@ var parent; // childFrame의 ID
 
 this.accInnerCodeForm_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
 {
-	application.gds_account.clear();
-	this.searchAccText.setFocus(true);
-	parent = obj.parent.name;
-	trace(parent);
-	
-	//계정과목 가져옴
-	var id = "getParentAccountList";
-	var url = "svcOperate::findParentAccountList";
-	var reqData = "";
-	var resData = "ds_account=gds_account";
-	var args = "";
-	var callback = "callback";
-	
-	this.transaction(id, url, reqData, resData, args, callback);
+   application.gds_account.clear();
+   this.searchAccText.setFocus(true);
+   parent = this.parent.name;
+   trace("<<<<<<<<<<<", parent);
+   
+   //계정과목 가져옴
+   var id = "getParentAccountList";
+   var url = "svcOperate::findParentAccountList";
+   var reqData = "";
+   var resData = "ds_account=gds_account";
+   var args = "";
+   var callback = "callback";
+   
+   this.transaction(id, url, reqData, resData, args, callback);
 
+   this.search();
 };
 
 
 // 검색 버튼 
 this.bt_searchAcc_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
-	this.search();
+   this.search();
 };
 
 
 // 검색 function 
 this.search = function(){
 
-	var id = "getAccountList";
-	var url = "svcOperate::findAccountListByName";
-	var resData = "";
-	var reqData = "gds_account=gds_account";
-	var args = "";
-	if(this.searchAccText.value != null){
-		args = "accountName='"+this.searchAccText.value+"'";
-		application.gds_account.filter("");
-	}else{
-		args = "accountName=''";		
-		application.gds_account.filter("ACCOUNT_NAME!='사용자설정계정과목'");
-	}
-	var callback = "callback";  
-	trace("args : "+args);
-	
-	this.transaction(id, url, resData, reqData, args, callback);
-	
-	
+   var id = "getAccountList";
+   var url = "svcOperate::findAccountListByName";
+   var resData = "";
+   var reqData = "gds_account=gds_account";
+   var args = "";
+   if(this.searchAccText.value != null){
+      args = "accountName='"+this.searchAccText.value+"'";
+      application.gds_account.filter("");
+   }else{
+      args = "accountName=''";      
+      application.gds_account.filter("ACCOUNT_NAME!='사용자설정계정과목'");
+   }
+   var callback = "callback";  
+   trace("args : "+args);
+   
+   this.transaction(id, url, resData, reqData, args, callback);
+   
+   
 }
 
 
 // 콜백  
 this.callback = function(trid, ErrorCode, ErrorMsg){
-	
-	if(trid == "getAccountList"){
-		if(ErrorCode<0){
-			alert("조회 실패 : "+ErrorMsg);
-		}
-	}
+   
+   if(trid == "getAccountList"){
+      if(ErrorCode<0){
+         alert("조회 실패 : "+ErrorMsg);
+      }
+   }
 }
 
 
 //enter키
 this.searchAccText_onkeyup = function(obj:nexacro.Edit,e:nexacro.KeyEventInfo)
 {
-	if(e.keycode == 13){
-		this.search();
-	}
+   if(e.keycode == 13){
+      this.search();
+   }
 };
 
 
@@ -125,41 +119,23 @@ this.searchAccText_onkeyup = function(obj:nexacro.Edit,e:nexacro.KeyEventInfo)
 // 그리드 더블클릭 이벤트 
 this.Grid00_oncelldblclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
 {
-	var accountCode = application.gds_account.getColumn(application.gds_account.rowposition, "ACCOUNT_INNER_CODE");
-	var accountName = application.gds_account.getColumn(application.gds_account.rowposition, "ACCOUNT_NAME");
-	
-	if(parent == "dialog_account"){
-		application.gds_account_code.setColumn(0,"ACCOUNT_INNER_CODE",accountCode);
-		application.gds_account_code.setColumn(0,"ACCOUNT_NAME",accountName);
-		
-	}else if(parent =="dialog_account_journal"){ // 계정 모달 
-		var n = application.gds_journal.rowposition;
-		application.gds_journal.setColumn(n,"ACCOUNT_INNER_CODE",accountCode);
-		application.gds_journal.setColumn(n,"ACCOUNT_NAME",accountName);
-	}
-	this.close();
+   var accountCode = application.gds_account.getColumn(application.gds_account.rowposition, "ACCOUNT_INNER_CODE");
+   var accountName = application.gds_account.getColumn(application.gds_account.rowposition, "ACCOUNT_NAME");
+   
+   if(parent == "dialog_account"){
+      application.gds_account_code.setColumn(0,"ACCOUNT_INNER_CODE",accountCode);
+      application.gds_account_code.setColumn(0,"ACCOUNT_NAME",accountName);
+   }else if(parent =="dialog_account_journal"){ // 계정 모달 
+      var n = application.gds_journal.rowposition;
+      application.gds_journal.setColumn(n,"ACCOUNT_INNER_CODE",accountCode);
+      application.gds_journal.setColumn(n,"ACCOUNT_NAME",accountName);
+   }else if (parent == "accInnerCodeForm") {
+	  application.gv_accountCode = accountCode;
+	  application.gv_accountName = accountName;
+   }
+   this.close();
 };
 
-
-
-this.Combo00_onitemchanged = function(obj:nexacro.Combo,e:nexacro.ItemChangeEventInfo)
-{
-
-	var code = this.Combo00.value;
-	var id = "Detailaccountlist";
-	var url = "svcOperate::Detailaccountlist";
-	var reqData = "";
-	var resData = "gds_account=gds_account";
-	var args = "code='"+code+"'";
-	var callback = "callback";
-	
-	this.transaction(id, url, reqData, resData, args, callback);
-};
-
-this.searchAccText_onchanged = function(obj:nexacro.Edit,e:nexacro.ChangeEventInfo)
-{
-	
-};
 ]]></Script>
   </Form>
 </FDL>
