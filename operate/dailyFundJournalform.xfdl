@@ -1,0 +1,504 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="dailyFundJournalform" width="1280" height="720" titletext="New Form">
+    <Layouts>
+      <Layout height="720" width="1280">
+        <Static id="Static00" taborder="0" text="일일자금/분개현황" left="405.00" top="10" width="251" height="75" textAlign="center" font="normal 18pt/normal &quot;Arial&quot;"/>
+        <Tab id="dailyFund" taborder="1" tabindex="0" left="63" top="76" width="967" height="464">
+          <Tabpages>
+            <Tabpage id="dailyTradeStatus" text="일일거래증감현황">
+              <Layouts>
+                <Layout>
+                  <Calendar id="Calendar" taborder="0" left="26" top="19" width="169" height="36" dateformat="yyyy-MM-dd"/>
+                  <Button id="fetchbtn" taborder="1" text="조회" left="226.00" top="19" height="36" width="79" onclick="fetchbtn_onclick"/>
+                  <Grid id="dailyTradeStatusGrid" taborder="2" left="26" top="74" width="913" height="341" binddataset="ds_dailyTrade" readonly="false" nodatatext="조회된 일일거래가 없습니다">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="183"/>
+                          <Column size="183"/>
+                          <Column size="183"/>
+                          <Column size="183"/>
+                          <Column size="183"/>
+                        </Columns>
+                        <Rows>
+                          <Row band="head" size="24"/>
+                          <Row size="24"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell text="구분"/>
+                          <Cell col="1" text="전일잔액"/>
+                          <Cell col="2" text="당일증가"/>
+                          <Cell col="3" text="당일감소"/>
+                          <Cell col="4" text="당일잔액"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell text="bind:ACCOUNT_NAME" textAlign="center"/>
+                          <Cell col="1" text="bind:PREVIOUS_BALANCE" textAlign="right"/>
+                          <Cell col="2" text="bind:DAY_INCREASE" textAlign="right"/>
+                          <Cell col="3" text="bind:DAY_DECREASE" textAlign="right"/>
+                          <Cell col="4" text="bind:DAY_BALANCE" textAlign="right"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="inoutExpectedPrice" text="입출금예정액">
+              <Layouts>
+                <Layout>
+                  <Calendar id="Calendar" taborder="0" left="26.00" top="19" width="169" height="36" dateformat="yyyy-MM-dd"/>
+                  <Button id="fetchInoutbtn" taborder="1" text="조회" left="226.00" top="19" height="36" width="79" onclick="fetchInoutbtn_onclick"/>
+                  <Grid id="outExpectedPriceGrid" taborder="2" left="13" top="85" width="465" height="328" binddataset="ds_outExpected" nodatatext="출금예정이 없습니다">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="155"/>
+                          <Column size="155"/>
+                          <Column size="155"/>
+                        </Columns>
+                        <Rows>
+                          <Row band="head" size="24"/>
+                          <Row size="24"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell text="자금항목"/>
+                          <Cell col="1" text="적요"/>
+                          <Cell col="2" text="금액"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell text="bind:ACCOUNT_NAME"/>
+                          <Cell col="1" text="bind:EXPENSE_REPORT"/>
+                          <Cell col="2" text="bind:PRICE"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                  <Grid id="inExpectedPriceGrid" taborder="3" left="491.00" top="85" width="465" height="328" binddataset="ds_inExpected" nodatatext="입금예정이 없습니다">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="155"/>
+                          <Column size="155"/>
+                          <Column size="155"/>
+                        </Columns>
+                        <Rows>
+                          <Row band="head" size="24"/>
+                          <Row size="24"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell text="자금항목"/>
+                          <Cell col="1" text="적요"/>
+                          <Cell col="2" text="금액"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell text="bind:ACCOUNT_NAME"/>
+                          <Cell col="1" text="bind:EXPENSE_REPORT"/>
+                          <Cell col="2" text="bind:PRICE"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                  <Static id="Static00" taborder="4" left="692.00" top="60" width="70" height="20" text="입금예정" font="normal 13pt/normal &quot;Gulim&quot;"/>
+                  <Static id="Static00_00" taborder="5" left="214.00" top="60" width="70" height="20" text="출금예정" font="normal 13pt/normal &quot;Gulim&quot;"/>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="financeStatus" text="예적금현황">
+              <Layouts>
+                <Layout>
+                  <Calendar id="date" taborder="0" left="32.00" top="17" width="131" height="36" dateformat="yyyy-MM-dd"/>
+                  <Static id="Static00_00" taborder="1" text="-" left="167.00" top="20" width="27" height="24" textAlign="center" font="bold 20px/normal &quot;Gulim&quot;"/>
+                  <Button id="fetchfinanceBtn" taborder="2" text="조회" left="358.00" top="17" height="36" width="79" onclick="fetchfinanceBtn_onclick"/>
+                  <Grid id="financeStatusGrid" taborder="3" left="34" top="83" width="900" height="329" binddataset="ds_finance" nodatatext="조회된 예적금현황이 없습니다">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="113"/>
+                          <Column size="113"/>
+                          <Column size="113"/>
+                          <Column size="113"/>
+                          <Column size="113"/>
+                          <Column size="113"/>
+                          <Column size="113"/>
+                          <Column size="113"/>
+                        </Columns>
+                        <Rows>
+                          <Row band="head" size="24"/>
+                          <Row size="24"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell text="CODE"/>
+                          <Cell col="1" text="개설점"/>
+                          <Cell col="2" text="계좌번호"/>
+                          <Cell col="3" text="전일잔액"/>
+                          <Cell col="4" text="증가"/>
+                          <Cell col="5" text="감소"/>
+                          <Cell col="6" text="당일잔액"/>
+                          <Cell col="7" text="한도잔액"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell text="bind:CUSTOMER_CODE"/>
+                          <Cell col="1" text="bind:CUSTOMER_NAME" textAlign="center"/>
+                          <Cell col="2" text="bind:ACCOUNT_NO"/>
+                          <Cell col="3" text="bind:PREVIOUS_BALANCE" textAlign="right"/>
+                          <Cell col="4" text="bind:INCREASE" textAlign="right"/>
+                          <Cell col="5" text="bind:DECREASE" textAlign="right"/>
+                          <Cell col="6" text="bind:DAY_BALANCE" textAlign="right"/>
+                          <Cell col="7" text="bind:LIMIT_BALANCE" textAlign="right"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                  <Combo id="selectAccount" taborder="4" text="구분" left="196" top="17" width="131" height="36" value="" index="-1" innerdataset="ds_account" datacolumn="ACCOUNT_NAME"/>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="fundStatus" text="자금현황">
+              <Layouts>
+                <Layout>
+                  <Tab id="fundStatusTab" taborder="0" tabindex="0" left="7.00" top="-1" width="951" height="426">
+                    <Tabpages>
+                      <Tabpage id="generalFundStatus" text="총괄거래현황">
+                        <Layouts>
+                          <Layout>
+                            <Calendar id="startDate" taborder="0" left="32.00" top="17" width="131" height="36" dateformat="yyyy-MM-dd"/>
+                            <Static id="Static00_00" taborder="1" text="-" left="167.00" top="20" width="27" height="24" textAlign="center" font="bold 20px/normal &quot;Gulim&quot;"/>
+                            <Calendar id="endDate" taborder="2" left="199.00" top="17" width="131" height="36" dateformat="yyyy-MM-dd"/>
+                            <Button id="fetchGeneralTradeBtn" taborder="3" text="조회" left="358.00" top="17" height="36" width="79" onclick="fetchGeneralTradeBtn_onclick"/>
+                            <Grid id="generalFundStatusGrid" taborder="4" left="34" top="73" width="884" height="301" binddataset="ds_general" nodatatext="조회된 거래현황이 없습니다">
+                              <Formats>
+                                <Format id="default">
+                                  <Columns>
+                                    <Column size="148"/>
+                                    <Column size="148"/>
+                                    <Column size="148"/>
+                                    <Column size="148"/>
+                                    <Column size="148"/>
+                                    <Column size="148"/>
+                                  </Columns>
+                                  <Rows>
+                                    <Row band="head" size="24"/>
+                                    <Row size="24"/>
+                                  </Rows>
+                                  <Band id="head">
+                                    <Cell text="NO"/>
+                                    <Cell col="1" text="구분"/>
+                                    <Cell col="2" text="거래처"/>
+                                    <Cell col="3" text="전일잔액"/>
+                                    <Cell col="4" text="당일증감내역"/>
+                                    <Cell col="5" text="당일잔액"/>
+                                  </Band>
+                                  <Band id="body">
+                                    <Cell text="bind:INDEX_NO" textAlign="center"/>
+                                    <Cell col="1" text="bind:ACCOUNT_NAME"/>
+                                    <Cell col="2" text="bind:CUSTOMER_NAME"/>
+                                    <Cell col="3" text="bind:PREVIOUS_BALANCE" textAlign="right"/>
+                                    <Cell col="4" text="bind:DAY_INOUT" textAlign="right"/>
+                                    <Cell col="5" text="bind:DAY_BALANCE" textAlign="right"/>
+                                  </Band>
+                                </Format>
+                              </Formats>
+                            </Grid>
+                          </Layout>
+                        </Layouts>
+                      </Tabpage>
+                      <Tabpage id="noteStatus" text="어음현황">
+                        <Layouts>
+                          <Layout>
+                            <Calendar id="Calendar" taborder="0" left="26.00" top="19" width="169" height="36" dateformat="yyyy-MM-dd"/>
+                            <Button id="fetchNotebtn" taborder="1" text="조회" left="226.00" top="19" height="36" width="79" onclick="fetchNotebtn_onclick"/>
+                            <Grid id="payNoteStatusGrid" taborder="2" left="26" top="81" width="442" height="296" binddataset="ds_paynote">
+                              <Formats>
+                                <Format id="default">
+                                  <Columns>
+                                    <Column size="89"/>
+                                    <Column size="89"/>
+                                    <Column size="89"/>
+                                    <Column size="89"/>
+                                    <Column size="89"/>
+                                  </Columns>
+                                  <Rows>
+                                    <Row band="head" size="24"/>
+                                    <Row size="24"/>
+                                  </Rows>
+                                  <Band id="head">
+                                    <Cell text="거래처"/>
+                                    <Cell col="1" text="전일잔액"/>
+                                    <Cell col="2" text="당일증가"/>
+                                    <Cell col="3" text="당일감소"/>
+                                    <Cell col="4" text="당일잔액"/>
+                                  </Band>
+                                  <Band id="body">
+                                    <Cell text="bind:CUSTOMER_NAME" textAlign="center"/>
+                                    <Cell col="1" text="bind:PREVIOUS_BALANCE" textAlign="right"/>
+                                    <Cell col="2" text="bind:DAY_INCREASE" textAlign="right"/>
+                                    <Cell col="3" text="bind:DAY_DECREASE" textAlign="right"/>
+                                    <Cell col="4" text="bind:DAY_BALANCE" textAlign="right"/>
+                                  </Band>
+                                </Format>
+                              </Formats>
+                            </Grid>
+                            <Grid id="receiveNoteStatusGrid" taborder="3" left="484.00" top="81" width="442" height="296" binddataset="ds_receivenote">
+                              <Formats>
+                                <Format id="default">
+                                  <Columns>
+                                    <Column size="89"/>
+                                    <Column size="89"/>
+                                    <Column size="89"/>
+                                    <Column size="89"/>
+                                    <Column size="89"/>
+                                  </Columns>
+                                  <Rows>
+                                    <Row band="head" size="24"/>
+                                    <Row size="24"/>
+                                  </Rows>
+                                  <Band id="head">
+                                    <Cell text="거래처"/>
+                                    <Cell col="1" text="전일잔액"/>
+                                    <Cell col="2" text="당일증가"/>
+                                    <Cell col="3" text="당일감소"/>
+                                    <Cell col="4" text="당일잔액"/>
+                                  </Band>
+                                  <Band id="body">
+                                    <Cell text="bind:CUSTOMER_NAME" textAlign="center"/>
+                                    <Cell col="1" text="bind:PREVIOUS_BALANCE" textAlign="right"/>
+                                    <Cell col="2" text="bind:DAY_INCREASE" textAlign="right"/>
+                                    <Cell col="3" text="bind:DAY_DECREASE" textAlign="right"/>
+                                    <Cell col="4" text="bind:DAY_BALANCE" textAlign="right"/>
+                                  </Band>
+                                </Format>
+                              </Formats>
+                            </Grid>
+                            <Static id="Static00_00" taborder="4" left="185.00" top="60" width="105" height="20" text="지급어음현황" font="normal 13pt/normal &quot;Gulim&quot;"/>
+                            <Static id="Static00" taborder="5" left="663.00" top="60" width="105" height="20" text="받을어음현황" font="normal 13pt/normal &quot;Gulim&quot;"/>
+                          </Layout>
+                        </Layouts>
+                      </Tabpage>
+                    </Tabpages>
+                  </Tab>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+          </Tabpages>
+        </Tab>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[/*************************************************************/
+/* 프 로 그 램 : C:\Users\owner\Desktop\77th_2nd_Nexa ACC\Nexacro_Front\operate\dailyFundJournalform.xfdl
+/* 작 성 일 자 : 2024/01/25
+/* 작 성 자 명 : S.U
+/* 설       명 : 일일자금/분개현황 폼
+/*************************************************************/
+
+// 일일거래증감현황 조회
+this.fetchbtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var date = this.dailyFund.dailyTradeStatus.form.Calendar.text;
+	
+	if (date.replace(/-/gi, '').trim() == '') {
+		alert("조회일자를 선택해주세요");
+	} else {
+		var id = "findDailyTradeStatus";
+		var url = "svcOpr::findDailyTradeStatus";
+		var reqData = "";
+		var resData = "ds_dailyTrade=ds_dailyTrade";
+		var args = "date="+date;
+		var callback = "dailyTradeStatus_callback";	
+		
+		this.transaction(id, url, reqData, resData, args, callback);
+	}
+};
+
+// 입출금예정액 조회
+this.fetchInoutbtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var date = this.dailyFund.inoutExpectedPrice.form.Calendar.text;
+	
+	if (date.replace(/-/gi, '').trim() == '') {
+		alert("조회일자를 선택해주세요");
+	} else {
+		var id = "findInoutExpectedPrice";
+		var url = "svcOpr::findInoutExpectedPrice";
+		var reqData = "";
+		var resData = "ds_outExpected=ds_outExpected ds_inExpected=ds_inExpected";
+		var args = "date="+date;
+		var callback = "inoutExpectedPrice_callback";	
+		
+		this.transaction(id, url, reqData, resData, args, callback);
+	}
+};
+
+// 예적금현황 조회
+this.fetchfinanceBtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var date = this.dailyFund.financeStatus.form.date.text;
+	var accountName = this.dailyFund.financeStatus.form.selectAccount.text;
+	
+	if (date.replace(/-/gi, '').trim() == '') {
+		alert("조회일자를 선택해주세요");
+	} else if (accountName == '') {
+		alert("구분을 선택해주세요");
+	} else {
+		var id = "findFinanceStatus";
+		var url = "svcOpr::findFinanceStatus";
+		var reqData = "";
+		var resData = "ds_finance=ds_finance";
+		var args = "date='"+date+"' accountName='"+accountName+"'";
+		var callback = "financeStatus_callback";	
+		
+		this.transaction(id, url, reqData, resData, args, callback);
+	}
+};
+
+// 총괄거래현황 조회
+this.fetchGeneralTradeBtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var startDate = this.dailyFund.fundStatus.form.fundStatusTab.generalFundStatus.form.startDate.text;
+	var endDate = this.dailyFund.fundStatus.form.fundStatusTab.generalFundStatus.form.endDate.text;
+	
+	if (startDate.replace(/-/gi, '').trim() == '' || endDate.replace(/-/gi, '').trim() == '') {
+		alert("조회일자를 선택해주세요");
+	} else {
+		var id = "findGeneralFundStatus";
+		var url = "svcOpr::findGeneralFundStatus";
+		var reqData = "";
+		var resData = "ds_general=ds_general";
+		var args = "startDate='"+startDate+"' endDate='"+endDate+"'";
+		var callback = "findGeneralFundStatus_callback";	
+		
+		this.transaction(id, url, reqData, resData, args, callback);
+	}
+};
+
+// 어음현황 조회
+this.fetchNotebtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var date = this.dailyFund.fundStatus.form.fundStatusTab.noteStatus.form.Calendar.text;
+	trace(date);
+	
+	if (date.replace(/-/gi, '').trim() == '') {
+		alert("조회일자를 선택해주세요");
+	} else {
+		var id = "findNoteStatus";
+		var url = "svcOpr::findNoteStatus";
+		var reqData = "";
+		var resData = "ds_paynote=ds_paynote ds_receivenote=ds_receivenote";
+		var args = "date="+date;
+		var callback = "findNoteStatus_callback";	
+		
+		this.transaction(id, url, reqData, resData, args, callback);
+	}
+};
+]]></Script>
+    <Objects>
+      <Dataset id="ds_dailyTrade">
+        <ColumnInfo>
+          <Column id="ACCOUNT_NAME" type="STRING" size="256"/>
+          <Column id="PREVIOUS_BALANCE" type="STRING" size="256"/>
+          <Column id="DAY_INCREASE" type="STRING" size="256"/>
+          <Column id="DAY_DECREASE" type="STRING" size="256"/>
+          <Column id="DAY_BALANCE" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_outExpected">
+        <ColumnInfo>
+          <Column id="ACCOUNT_NAME" type="STRING" size="256"/>
+          <Column id="EXPENSE_REPORT" type="STRING" size="256"/>
+          <Column id="PRICE" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_inExpected">
+        <ColumnInfo>
+          <Column id="ACCOUNT_NAME" type="STRING" size="256"/>
+          <Column id="EXPENSE_REPORT" type="STRING" size="256"/>
+          <Column id="PRICE" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_finance">
+        <ColumnInfo>
+          <Column id="CUSTOMER_CODE" type="STRING" size="256"/>
+          <Column id="CUSTOMER_NAME" type="STRING" size="256"/>
+          <Column id="ACCOUNT_NO" type="STRING" size="256"/>
+          <Column id="PREVIOUS_BALANCE" type="STRING" size="256"/>
+          <Column id="INCREASE" type="STRING" size="256"/>
+          <Column id="DECREASE" type="STRING" size="256"/>
+          <Column id="DAY_BALANCE" type="STRING" size="256"/>
+          <Column id="LIMIT_BALANCE" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_account">
+        <ColumnInfo>
+          <Column id="ACCOUNT_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="ACCOUNT_NAME">당좌예금</Col>
+          </Row>
+          <Row>
+            <Col id="ACCOUNT_NAME">보통예금</Col>
+          </Row>
+          <Row>
+            <Col id="ACCOUNT_NAME">제예금</Col>
+          </Row>
+          <Row>
+            <Col id="ACCOUNT_NAME">정기예금</Col>
+          </Row>
+          <Row>
+            <Col id="ACCOUNT_NAME">정기적금</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_general">
+        <ColumnInfo>
+          <Column id="INDEX_NO" type="STRING" size="256"/>
+          <Column id="ACCOUNT_NAME" type="STRING" size="256"/>
+          <Column id="CUSTOMER_NAME" type="STRING" size="256"/>
+          <Column id="PREVIOUS_BALANCE" type="STRING" size="256"/>
+          <Column id="DAY_INOUT" type="STRING" size="256"/>
+          <Column id="DAY_BALANCE" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_paynote">
+        <ColumnInfo>
+          <Column id="CUSTOMER_NAME" type="STRING" size="256"/>
+          <Column id="PREVIOUS_BALANCE" type="STRING" size="256"/>
+          <Column id="DAY_INCREASE" type="STRING" size="256"/>
+          <Column id="DAY_DECREASE" type="STRING" size="256"/>
+          <Column id="DAY_BALANCE" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_receivenote">
+        <ColumnInfo>
+          <Column id="CUSTOMER_NAME" type="STRING" size="256"/>
+          <Column id="PREVIOUS_BALANCE" type="STRING" size="256"/>
+          <Column id="DAY_INCREASE" type="STRING" size="256"/>
+          <Column id="DAY_DECREASE" type="STRING" size="256"/>
+          <Column id="DAY_BALANCE" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

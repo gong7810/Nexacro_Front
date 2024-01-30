@@ -63,20 +63,21 @@
 /* 설       명 : 자금계획 수정 폼
 /*************************************************************/
 
-nexa = nexacro.getApplication();
+application = nexacro.getApplication();
 
 // 선택 자금계획 세팅
 this.dailyFundPlanupdateform_onload = function (obj:nexacro.Form, e:nexacro.LoadEventInfo)
 {	
-	this.planNo.set_value(nexa.gds_plan.getColumn(0, "PLAN_NO"));
-	this.planDate.set_value(nexa.gds_plan.getColumn(0, "PLAN_DATE"));
-	this.fundCode.set_value(nexa.gds_plan.getColumn(0, "FUND_CODE"));
-	this.fundName.set_value(nexa.gds_plan.getColumn(0, "FUND_NAME"));
-	this.customerCode.set_value(nexa.gds_plan.getColumn(0, "CUSTOMER_CODE"));
-	this.customerName.set_value(nexa.gds_plan.getColumn(0, "CUSTOMER_NAME"));
-	this.expenseReport.set_value(nexa.gds_plan.getColumn(0, "EXPENSE_REPORT"));
-	this.price.value = nexa.gds_plan.getColumn(0, "PRICE").replace(/,/gi, '');
-	this.balanceDivision.set_value(nexa.gds_plan.getColumn(0, "BALANCE_DIVISION"));
+	trace(application.gds_plan.getColumn(0, "PLAN_NO"));
+	this.planNo.set_value(application.gds_plan.getColumn(0, "PLAN_NO"));
+	this.planDate.set_value(application.gds_plan.getColumn(0, "PLAN_DATE"));
+	this.fundCode.set_value(application.gds_plan.getColumn(0, "FUND_CODE"));
+	this.fundName.set_value(application.gds_plan.getColumn(0, "FUND_NAME"));
+	this.customerCode.set_value(application.gds_plan.getColumn(0, "CUSTOMER_CODE"));
+	this.customerName.set_value(application.gds_plan.getColumn(0, "CUSTOMER_NAME"));
+	this.expenseReport.set_value(application.gds_plan.getColumn(0, "EXPENSE_REPORT"));
+	this.price.set_value(application.gds_plan.getColumn(0, "PRICE").replace(/,/gi, ''));
+	this.balanceDivision.set_value(application.gds_plan.getColumn(0, "BALANCE_DIVISION"));
 	
 };
 

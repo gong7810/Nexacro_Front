@@ -450,6 +450,18 @@
         <Row/>
       </Rows>
     </Dataset>
+    <Dataset id="gds_vehicleCode">
+      <ColumnInfo>
+        <Column id="VEHICLE_CODE" type="STRING" size="256"/>
+        <Column id="VEHICLE_NUMBER" type="STRING" size="256"/>
+        <Column id="VEHICLE_TYPE" type="STRING" size="256"/>
+        <Column id="DEPT_CODE" type="STRING" size="256"/>
+        <Column id="DEPT_NAME" type="STRING" size="256"/>
+        <Column id="EMP_CODE" type="STRING" size="256"/>
+        <Column id="EMP_NAME" type="STRING" size="256"/>
+        <Column id="AVAILABILITY" type="STRING" size="256"/>
+      </ColumnInfo>
+    </Dataset>
   </Datasets>
   <Variables>
     <Variable id="gv_accountControlName"/>
@@ -462,6 +474,8 @@
     <Variable id="gv_accountCode"/>
     <Variable id="gv_accountName"/>
     <Variable id="gv_customerName"/>
+    <Variable id="gv_assetCode"/>
+    <Variable id="gv_assetName"/>
   </Variables>
   <DataObjects/>
 </AppVariables>

@@ -289,7 +289,7 @@ var SLIPNO;
 // 전표 그리드 클릭 이벤트
 this.grid_slip_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
 {
-   trace("wetewtewt");
+  trace("wetewtewt");
    SLIPNO = application.gds_slip.getColumn(e.row, "SLIP_NO");
    STATUS = application.gds_slip.getColumn(e.row, "SLIP_STATUS");
    

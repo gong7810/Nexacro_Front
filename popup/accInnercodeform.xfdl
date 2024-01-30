@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <FDL version="2.1">
-  <Form id="accInnerCodeForm" width="390" height="380" onload="accInnerCodeForm_onload">
+  <Form id="accInnerCodeForm" width="390" height="380" onload="accInnerCodeForm_onload" onkeydown="accInnerCodeForm_onkeydown">
     <Layouts>
       <Layout height="380" width="390">
         <Edit id="searchAccText" taborder="1" left="42" top="69" width="198" height="30" onkeyup="searchAccText_onkeyup" onchanged="searchAccText_onchanged"/>
@@ -136,6 +136,14 @@ this.Grid00_oncelldblclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventI
    this.close();
 };
 
+// esc로 창 닫기
+this.accInnerCodeForm_onkeydown = function(obj:nexacro.Form,e:nexacro.KeyEventInfo)
+{
+	const a=e.keycode;
+	if(a==27){
+		this.close('esc');
+	}
+};
 ]]></Script>
   </Form>
 </FDL>

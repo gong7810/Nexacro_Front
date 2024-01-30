@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="vehicleLogbookRegistform" width="700" height="440" titletext="New Form" onload="vehicleLogbookRegistform_onload" onkeydown="vehicleLogbookRegistform_onkeydown">
+    <Layouts>
+      <Layout height="440" width="700">
+        <Static id="vehiclecode" taborder="0" text="차량코드" left="46" top="38" width="73" height="33" textAlign="center" borderRadius="5px" color="white" background="#87c4f1"/>
+        <Combo id="vehicleCodeCombo" taborder="1" left="139.00" top="38" width="82" height="33" value="" index="-1" innerdataset="gds_vehicleCode" datacolumn="VEHICLE_CODE" onitemchanged="vehicleCodeCombo_onitemchanged"/>
+        <Grid id="Grid00" taborder="9" left="46.00" top="92" width="602" height="51" binddataset="ds_vehicle" readonly="true">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="100"/>
+                <Column size="100"/>
+                <Column size="100"/>
+                <Column size="100"/>
+                <Column size="100"/>
+                <Column size="100"/>
+              </Columns>
+              <Rows>
+                <Row band="head" size="24"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell col="0" text="차량번호"/>
+                <Cell col="1" text="차종"/>
+                <Cell col="2" text="부서코드"/>
+                <Cell col="3" text="부서명"/>
+                <Cell col="4" text="사원코드"/>
+                <Cell col="5" text="사원명"/>
+              </Band>
+              <Band id="body">
+                <Cell col="0" text="bind:VEHICLE_NUMBER" textAlign="center"/>
+                <Cell col="1" text="bind:VEHICLE_TYPE" textAlign="center"/>
+                <Cell col="2" text="bind:DEPT_CODE" textAlign="center"/>
+                <Cell col="3" text="bind:DEPT_NAME" textAlign="center"/>
+                <Cell col="4" text="bind:EMP_CODE" textAlign="center"/>
+                <Cell col="5" text="bind:EMP_NAME" textAlign="center"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="usedate" taborder="10" text="사용일자" left="45" top="174" width="73" height="33" textAlign="center" borderRadius="5px" color="white" background="#87c4f1"/>
+        <Calendar id="useDate" taborder="2" left="176.00" top="174" width="130" height="33" dateformat="yyyy-MM-dd"/>
+        <Static id="usedate00" taborder="11" text="사용시작시간" left="387.00" top="174" width="87" height="33" textAlign="center" borderRadius="5px" color="white" background="#87c4f1"/>
+        <Calendar id="startTime" taborder="3" left="518.00" top="174" width="130" height="33" onchanged="useDate00_onchanged" type="normal" dateformat="HH:mm" editformat="HH:mm" datepickerchangetype="auto" headformat="HH:mm" popuptype="none"/>
+        <Button id="saveData" taborder="8" text="저장" left="577.00" top="388" width="71" height="30" onclick="saveData_onclick"/>
+        <Static id="usedate01" taborder="12" text="주행 전 계기판의 거리(km)" left="45" top="227" width="165" height="33" textAlign="center" borderRadius="5px" color="white" background="#87c4f1"/>
+        <Static id="usedate01_00" taborder="13" text="주행 후 계기판의 거리(km)" left="388.00" top="227" width="164" height="33" textAlign="center" borderRadius="5px" color="white" background="#87c4f1"/>
+        <MaskEdit id="before" taborder="4" left="240.00" top="227" width="66" height="33" format="#,#.###"/>
+        <MaskEdit id="after" taborder="5" left="582.00" top="227" width="66" height="33" format="#,#.###" onchanged="after_onchanged"/>
+        <Static id="usedate01_01" taborder="14" text="주행거리(km)" left="45" top="280" width="95" height="33" textAlign="center" borderRadius="5px" color="white" background="#87c4f1"/>
+        <MaskEdit id="distance" taborder="15" left="224.00" top="280" width="82" height="33" format="#,#.###" readonly="true"/>
+        <Static id="usedate01_01_00" taborder="16" text="업무용 주행거리(km)" left="386.00" top="280" width="122" height="33" textAlign="center" borderRadius="5px" color="white" background="#87c4f1"/>
+        <MaskEdit id="busiDistance" taborder="6" left="566.00" top="280" width="82" height="33" format="#,0.###" onchanged="busiDistance_onchanged"/>
+        <Static id="usedate01_01_01" taborder="17" text="비업무용 주행거리(km)" left="45" top="334" width="136" height="33" textAlign="center" borderRadius="5px" color="white" background="#87c4f1"/>
+        <MaskEdit id="perDistance" taborder="18" left="224.00" top="334" width="82" height="33" format="#,0.###" onchanged="perDistance_onchanged" readonly="true"/>
+        <Static id="usedate02" taborder="19" text="비고" left="386.00" top="334" width="43" height="33" textAlign="center" borderRadius="5px" color="white" background="#87c4f1"/>
+        <Edit id="notes" taborder="7" left="457.00" top="334" width="191" height="33"/>
+        <Edit id="vehicleCode" taborder="20" left="250.00" top="38" width="94" height="33" visible="false"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_vehicle">
+        <ColumnInfo>
+          <Column id="VEHICLE_CODE" type="STRING" size="256"/>
+          <Column id="VEHICLE_NUMBER" type="STRING" size="256"/>
+          <Column id="VEHICLE_TYPE" type="STRING" size="256"/>
+          <Column id="DEPT_CODE" type="STRING" size="256"/>
+          <Column id="DEPT_NAME" type="STRING" size="256"/>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+          <Column id="AVAILABILITY" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="AVAILABILITY">사용</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_vehicleLogbook">
+        <ColumnInfo>
+          <Column id="VEHICLE_CODE" type="STRING" size="256"/>
+          <Column id="USE_DATE" type="STRING" size="256"/>
+          <Column id="START_TIME" type="STRING" size="256"/>
+          <Column id="DEPT_CODE" type="STRING" size="256"/>
+          <Column id="DEPT_NAME" type="STRING" size="256"/>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+          <Column id="BEFORE_ODOMETER" type="STRING" size="256"/>
+          <Column id="AFTER_ODOMETER" type="STRING" size="256"/>
+          <Column id="DISTANCE" type="STRING" size="256"/>
+          <Column id="BUSINESS_DISTANCE" type="STRING" size="256"/>
+          <Column id="PERSONAL_DISTANCE" type="STRING" size="256"/>
+          <Column id="NOTES" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/*************************************************************/
+/* 프 로 그 램 : C:\Users\owner\Desktop\77th_2nd_Nexa ACC\Nexacro_Front\popup\vehicleLogbookRegistform.xfdl
+/* 작 성 일 자 : 2024/01/27
+/* 작 성 자 명 : S.U
+/* 설       명 : 업무용차량 운행기록 추가 폼
+/*************************************************************/
+var count = this.parent.count;
+application = nexacro.getApplication();
+
+this.vehicleLogbookRegistform_onload = function (obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	var condition = "사용";
+	application.gds_vehicleCode.filter("AVAILABILITY=='" + condition + "'");
+};
+
+// 차량코드 선택
+this.vehicleCodeCombo_onitemchanged = function(obj:nexacro.Combo,e:nexacro.ItemChangeEventInfo)
+{
+	this.vehicleCode.value = this.vehicleCodeCombo.value;
+	var selectCode = this.vehicleCodeCombo.index
+	this.ds_vehicle.setColumn(0, "VEHICLE_CODE", application.gds_vehicleCode.getColumn(selectCode, 0));
+	this.ds_vehicle.setColumn(0, "VEHICLE_NUMBER", application.gds_vehicleCode.getColumn(selectCode, 1));
+	this.ds_vehicle.setColumn(0, "VEHICLE_TYPE", application.gds_vehicleCode.getColumn(selectCode, 2));
+	this.ds_vehicle.setColumn(0, "DEPT_CODE", application.gds_vehicleCode.getColumn(selectCode, 3));
+	this.ds_vehicle.setColumn(0, "DEPT_NAME", application.gds_vehicleCode.getColumn(selectCode, 4));
+	this.ds_vehicle.setColumn(0, "EMP_CODE", application.gds_vehicleCode.getColumn(selectCode, 5));
+	this.ds_vehicle.setColumn(0, "EMP_NAME", application.gds_vehicleCode.getColumn(selectCode, 6));
+};
+
+// 주행거리 세팅
+this.after_onchanged = function(obj:nexacro.MaskEdit,e:nexacro.ChangeEventInfo)
+{
+	if (this.before.value != null && this.after.value != null) {
+		if (this.after.value <= this.before.value) {
+			alert("주행 후 계기판의 거리가 주행 전과 같거나 더 적을 수 없습니다")
+			this.after.value = '';
+		} else
+			this.distance.value = this.after.value - this.before.value;
+	}
+};
+
+// 업무용 사용비율 세팅
+this.busiDistance_onchanged = function(obj:nexacro.MaskEdit,e:nexacro.ChangeEventInfo)
+{
+	if (this.distance.value - this.busiDistance.value < 0) {
+		alert("주행거리보다 더 주행할 수 없습니다");
+		this.busiDistance.value = '';
+	} else 
+		this.perDistance.value = this.distance.value - this.busiDistance.value;
+};
+
+// 저장
+this.saveData_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.ds_vehicleLogbook.setColumn(0, "USE_DATE", this.useDate.text);
+	this.ds_vehicleLogbook.setColumn(0, "START_TIME", this.startTime.text);
+	this.ds_vehicleLogbook.setColumn(0, "DEPT_CODE", this.ds_vehicle.getColumn(0, "DEPT_CODE"));
+	this.ds_vehicleLogbook.setColumn(0, "DEPT_NAME", this.ds_vehicle.getColumn(0, "DEPT_NAME"));
+	this.ds_vehicleLogbook.setColumn(0, "EMP_CODE", this.ds_vehicle.getColumn(0, "EMP_CODE"));
+	this.ds_vehicleLogbook.setColumn(0, "EMP_NAME", this.ds_vehicle.getColumn(0, "EMP_NAME"));
+	trace(this.ds_vehicleLogbook.getColumn(0, "USE_DATE"));
+	trace(this.ds_vehicleLogbook.getColumn(0, "START_TIME"));
+	
+	if (this.ds_vehicleLogbook.getColumn(0, "VEHICLE_CODE") == null)
+		alert("운행한 차량코드를 선택해주세요");
+	else if (this.ds_vehicleLogbook.getColumn(0, "USE_DATE") == null)
+		alert("사용일자를 입력해주세요");
+	else if (this.ds_vehicleLogbook.getColumn(0, "START_TIME") == null)
+		alert("시작시간을 입력해주세요");
+	else if (this.ds_vehicleLogbook.getColumn(0, "BEFORE_ODOMETER") == null)
+		alert("주행 전 계기판의 거리를 입력해주세요");
+	else if (this.ds_vehicleLogbook.getColumn(0, "AFTER_ODOMETER") == null)
+		alert("주행 후 계기판의 거리를 입력해주세요");
+	else if (this.ds_vehicleLogbook.getColumn(0, "BUSINESS_DISTANCE") == null)
+		alert("업무용 주행거리를 입력해주세요");
+	else {
+		var bool = confirm("저장하시겠습니까?")
+		
+		if (bool) {
+			var id = "insertVehicleLogbook";
+			var url = "svcOpr::insertVehicleLogbook";
+			var reqData = "ds_vehicleLogbook=ds_vehicleLogbook";
+			var resData = "";
+			var args = "";
+			var callback = "onload_callbackFunc";
+			
+			this.transaction(id, url, reqData, resData, args, callback); 
+			alert("저장되었습니다");
+			
+			this.close();
+		}
+	}
+};
+
+
+
+
+
+// esc로 창 닫기
+this.vehicleLogbookRegistform_onkeydown = function(obj:nexacro.Form,e:nexacro.KeyEventInfo)
+{
+	const a=e.keycode;
+	if(a==27){
+		this.close('esc');
+	}
+};]]></Script>
+    <Bind>
+      <BindItem id="item0" compid="vehicleCode" propid="value" datasetid="ds_vehicleLogbook" columnid="VEHICLE_CODE"/>
+      <BindItem id="item1" compid="useDate" propid="value" datasetid="ds_vehicleLogbook" columnid="USE_DATE"/>
+      <BindItem id="item2" compid="startTime" propid="value" datasetid="ds_vehicleLogbook" columnid="START_TIME"/>
+      <BindItem id="item3" compid="before" propid="value" datasetid="ds_vehicleLogbook" columnid="BEFORE_ODOMETER"/>
+      <BindItem id="item4" compid="after" propid="value" datasetid="ds_vehicleLogbook" columnid="AFTER_ODOMETER"/>
+      <BindItem id="item5" compid="distance" propid="value" datasetid="ds_vehicleLogbook" columnid="DISTANCE"/>
+      <BindItem id="item6" compid="busiDistance" propid="value" datasetid="ds_vehicleLogbook" columnid="BUSINESS_DISTANCE"/>
+      <BindItem id="item7" compid="perDistance" propid="value" datasetid="ds_vehicleLogbook" columnid="PERSONAL_DISTANCE"/>
+      <BindItem id="item8" compid="notes" propid="value" datasetid="ds_vehicleLogbook" columnid="NOTES"/>
+    </Bind>
+  </Form>
+</FDL>

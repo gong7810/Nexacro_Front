@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <FDL version="2.1">
-  <Form id="customerCodeForm" width="360" height="360" onload="customerCodeForm_onload">
+  <Form id="customerCodeForm" width="360" height="360" onload="customerCodeForm_onload" onkeydown="customerCodeForm_onkeydown">
     <Layouts>
       <Layout height="360" width="360">
         <Static id="Static00" taborder="0" text="거래처" left="97" top="13" width="167" height="35" textAlign="center" font="20px/normal &quot;휴먼엑스포&quot;"/>
-        <Tab id="Tab00" taborder="1" tabindex="0" left="25" top="56" width="311" height="272" onchanged="Tab00_onchanged">
+        <Tab id="Tab00" taborder="1" tabindex="0" left="25" top="56" width="311" height="272" onchanged="Tab00_onchanged" enable="true" enableevent="true" usecontrolkey="true">
           <Tabpages>
             <Tabpage id="Tabpage1" text="일반거래처">
               <Layouts>
@@ -37,7 +37,7 @@
             <Tabpage id="Tabpage2" text="금융거래처">
               <Layouts>
                 <Layout>
-                  <Grid id="Grid00" taborder="0" left="12" top="12" width="288" height="223" binddataset="gds_customer" autofittype="col">
+                  <Grid id="Grid00" taborder="0" left="12" top="12" width="288" height="223" binddataset="gds_customer" autofittype="col" oncelldblclick="Grid00_oncelldblclick">
                     <Formats>
                       <Format id="default">
                         <Columns>
@@ -124,6 +124,8 @@
     </Layouts>
     <Script type="xscript5.1"><![CDATA[
 application = nexacro.getApplication();
+var checkPoint = this.parent.vehicle;
+
 this.customerCodeForm_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
 {
 	var id = "getTotalCustomerList";
@@ -136,6 +138,12 @@ this.customerCodeForm_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo
 	this.transaction(id, url, reqData, resData, args, callback);
 	
 	application.gds_customer.filter("CUSTOMER_TYPE=='일반'");
+	
+	trace('>>>>>', checkPoint);
+	if (checkPoint == "vehicle") {
+		this.Tab00.tabindex = 2;
+		this.Tab00.enableevent = false;
+	}
 };
 
 
@@ -178,8 +186,16 @@ this.Grid00_oncelldblclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventI
 	application.gds_journal.setColumn(application.gds_journal.rowposition, "CUSTOMER_CODE", customerCode);
 	application.gds_journal.setColumn(application.gds_journal.rowposition, "CUSTOMER_NAME", customerName);
 	
-
 	this.close();
+};
+
+// esc로 창 닫기
+this.customerCodeForm_onkeydown = function(obj:nexacro.Form,e:nexacro.KeyEventInfo)
+{
+	const a=e.keycode;
+	if(a==27){
+		this.close('esc');
+	}
 };
 
 ]]></Script>
