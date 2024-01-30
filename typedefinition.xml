@@ -42,18 +42,17 @@
     <Service prefixid="font" type="resource" url="./_resource_/_font_/" version="0" communicationversion="0" cachelevel="session" include_subdir="false"/>
     <Service prefixid="Base" type="form" cachelevel="session" url="./Base/" version="0" communicationversion="0" include_subdir="false"/>
     <Service prefixid="frame" type="form" cachelevel="session" url="./frame/" version="0" communicationversion="0" include_subdir="false"/>
-    <Service prefixid="scripts" type="form" url="./scripts/" version="0" cachelevel="session" include_subdir="false" communicationversion="0"/>
     <Service prefixid="popup" type="form" url="./popup/" version="0" cachelevel="session" include_subdir="false" communicationversion="0"/>
-    <Service prefixid="svcBase" type="form" url="http://localhost:8484/acc/base/" version="0" cachelevel="none" include_subdir="false" communicationversion="0"/>
-    <Service prefixid="svcPosting" type="form" url="http://localhost:8484/acc/posting/" version="0" cachelevel="none" include_subdir="false" communicationversion="0"/>
+    <Service prefixid="scripts" type="js" url="./scripts/" version="0" cachelevel="session" include_subdir="false" communicationversion="0"/>
+    <Service prefixid="svcBase" type="JSP" url="http://localhost:8484/acc/base/" version="0" cachelevel="none" include_subdir="false" communicationversion="0"/>
+    <Service prefixid="svcPosting" type="JSP" url="http://localhost:8484/acc/posting/" version="0" cachelevel="none" include_subdir="false" communicationversion="0"/>
     <Service prefixid="svcStatement" type="JSP" url="http://localhost:8484/acc/statement/" version="0" cachelevel="none" include_subdir="false" communicationversion="0"/>
-    <Service prefixid="svcBudget" type="form" url="http://localhost:8484/acc/budget/" version="0" cachelevel="none" include_subdir="false" communicationversion="0"/>
-    <Service prefixid="svcOperate" type="form" url="http://localhost:8484/acc/operate/" version="0" cachelevel="none" include_subdir="false" communicationversion="0"/>
+    <Service prefixid="svcBudget" type="JSP" url="http://localhost:8484/acc/budget/" version="0" cachelevel="none" include_subdir="false" communicationversion="0"/>
+    <Service prefixid="svcOperate" type="JSP" url="http://localhost:8484/acc/operate/" version="0" cachelevel="none" include_subdir="false" communicationversion="0"/>
     <Service prefixid="posting" type="form" url="./posting/" version="0" cachelevel="session" include_subdir="false" communicationversion="0"/>
     <Service prefixid="statement" type="form" url="./statement/" version="0" cachelevel="session" include_subdir="false" communicationversion="0"/>
     <Service prefixid="budget" type="form" url="./budget/" version="0" cachelevel="session" include_subdir="false" communicationversion="0"/>
     <Service prefixid="operate" type="form" url="./operate/" version="0" cachelevel="session" include_subdir="false" communicationversion="0"/>
-    <Service prefixid="board" type="form" url="./board/" version="0" cachelevel="session" include_subdir="false" communicationversion="0"/>
   </Services>
   <Protocols/>
   <Update/>

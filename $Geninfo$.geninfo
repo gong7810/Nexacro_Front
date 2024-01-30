@@ -9,6 +9,36 @@
       <Script rule_version="1.02"/>
       <GeneratorInfo rule_version="1.3"/>
     </Rule>
-    <Info project="C:\Users\owner\Desktop\77th_2nd_Nexa ACC\Nexacro_Front\" generated="C:\Users\owner\Documents\TOBESOFT\Nexacro N\outputs\Account77\"><File url="environment.xml" checksum="20231123161502" errormsg=""/><File url="typedefinition.xml" checksum="20240130111744" errormsg=""/><File url="appvariables.xml" checksum="20240130105822" errormsg=""/><File url="_resource_\_theme_\blue\theme.xcss" checksum="20231123161512" errormsg=""/><File url="_resource_\_xcss_\temp_main.xcss" checksum="20231123161523" errormsg=""/><File url="C:\Program Files (x86)\TOBESOFT\Nexacro N\SDK\24.0.0\nexacrolib\framework\Framework.json" checksum="20231106185616" errormsg=""/><File url="C:\Program Files (x86)\TOBESOFT\Nexacro N\SDK\24.0.0\nexacrolib\resources\Resource.json" checksum="20231106185616" errormsg=""/><File url="C:\Program Files (x86)\TOBESOFT\Nexacro N\SDK\24.0.0\nexacrolib\component\CompBase.json" checksum="20231106185612" errormsg=""/><File url="C:\Program Files (x86)\TOBESOFT\Nexacro N\SDK\24.0.0\nexacrolib\component\ComComp.json" checksum="20231106185612" errormsg=""/><File url="C:\Program Files (x86)\TOBESOFT\Nexacro N\SDK\24.0.0\nexacrolib\component\Grid.json" checksum="20231106185614" errormsg=""/><File url="C:\Program Files (x86)\TOBESOFT\Nexacro N\SDK\24.0.0\nexacrolib\component\DeviceAPI.json" checksum="20231106185612" errormsg=""/><File url="App_Desktop.xadl" checksum="20231123161501" errormsg=""/><File url="popup\currentAssetRegistform.xfdl" checksum="20240130110255" errormsg=""/><File url="operate\currentAssetRegisterform.xfdl" checksum="20240130110300" errormsg=""/><File url="popup\currentAssetselectform.xfdl" checksum="20240130110311" errormsg=""/><File url="popup\currentAssetdetailform.xfdl" checksum="20240130110318" errormsg=""/><File url="operate\currentAssetManagementform.xfdl" checksum="20240130110351" errormsg=""/><File url="operate\depreciationScheduleform.xfdl" checksum="20240130110403" errormsg=""/><File url="operate\dailyFundPlanform.xfdl" checksum="20240130110511" errormsg=""/><File url="popup\dailyFundPlanupdateform.xfdl" checksum="20240130110502" errormsg=""/><File url="operate\fundPlanCalendarform.xfdl" checksum="20240130110528" errormsg=""/><File url="operate\dailyFundJournalform.xfdl" checksum="20240130110555" errormsg=""/><File url="operate\vehicleRegisterform.xfdl" checksum="20240130110622" errormsg=""/><File url="popup\vehicleRegistform.xfdl" checksum="20240130110652" errormsg=""/><File url="popup\vehicledetailform.xfdl" checksum="20240130110716" errormsg=""/><File url="operate\vehicleLogBookform.xfdl" checksum="20240130110741" errormsg=""/><File url="popup\vehicleLogbookRegistform.xfdl" checksum="20240130110757" errormsg=""/><File url="posting\detailtrialbalanceForm.xfdl" checksum="20240130112214" errormsg=""/></Info>
+    <Info project="C:\Users\owner\Desktop\77th_2nd_Nexa ACC\Nexacro_Front\" generated="C:\Users\owner\Documents\TOBESOFT\Nexacro N\outputs\Account77\">
+      <File url="environment.xml" checksum="20231123161502" errormsg=""/>
+      <File url="typedefinition.xml" checksum="20240130113954" errormsg=""/>
+      <File url="appvariables.xml" checksum="20240130105822" errormsg=""/>
+      <File url="_resource_\_theme_\blue\theme.xcss" checksum="20231123161512" errormsg=""/>
+      <File url="_resource_\_xcss_\temp_main.xcss" checksum="20231123161523" errormsg=""/>
+      <File url="C:\Program Files (x86)\TOBESOFT\Nexacro N\SDK\24.0.0\nexacrolib\framework\Framework.json" checksum="20231106185616" errormsg=""/>
+      <File url="C:\Program Files (x86)\TOBESOFT\Nexacro N\SDK\24.0.0\nexacrolib\resources\Resource.json" checksum="20231106185616" errormsg=""/>
+      <File url="C:\Program Files (x86)\TOBESOFT\Nexacro N\SDK\24.0.0\nexacrolib\component\CompBase.json" checksum="20231106185612" errormsg=""/>
+      <File url="C:\Program Files (x86)\TOBESOFT\Nexacro N\SDK\24.0.0\nexacrolib\component\ComComp.json" checksum="20231106185612" errormsg=""/>
+      <File url="C:\Program Files (x86)\TOBESOFT\Nexacro N\SDK\24.0.0\nexacrolib\component\Grid.json" checksum="20231106185614" errormsg=""/>
+      <File url="C:\Program Files (x86)\TOBESOFT\Nexacro N\SDK\24.0.0\nexacrolib\component\DeviceAPI.json" checksum="20231106185612" errormsg=""/>
+      <File url="App_Desktop.xadl" checksum="20231123161501" errormsg=""/>
+      <File url="popup\currentAssetRegistform.xfdl" checksum="20240130110255" errormsg=""/>
+      <File url="operate\currentAssetRegisterform.xfdl" checksum="20240130110300" errormsg=""/>
+      <File url="popup\currentAssetselectform.xfdl" checksum="20240130110311" errormsg=""/>
+      <File url="popup\currentAssetdetailform.xfdl" checksum="20240130110318" errormsg=""/>
+      <File url="operate\currentAssetManagementform.xfdl" checksum="20240130110351" errormsg=""/>
+      <File url="operate\depreciationScheduleform.xfdl" checksum="20240130110403" errormsg=""/>
+      <File url="operate\dailyFundPlanform.xfdl" checksum="20240130110511" errormsg=""/>
+      <File url="popup\dailyFundPlanupdateform.xfdl" checksum="20240130110502" errormsg=""/>
+      <File url="operate\fundPlanCalendarform.xfdl" checksum="20240130110528" errormsg=""/>
+      <File url="operate\dailyFundJournalform.xfdl" checksum="20240130110555" errormsg=""/>
+      <File url="operate\vehicleRegisterform.xfdl" checksum="20240130110622" errormsg=""/>
+      <File url="popup\vehicleRegistform.xfdl" checksum="20240130110652" errormsg=""/>
+      <File url="popup\vehicledetailform.xfdl" checksum="20240130110716" errormsg=""/>
+      <File url="operate\vehicleLogBookform.xfdl" checksum="20240130110741" errormsg=""/>
+      <File url="popup\vehicleLogbookRegistform.xfdl" checksum="20240130110757" errormsg=""/>
+      <File url="posting\detailtrialbalanceForm.xfdl" checksum="20240130112214" errormsg=""/>
+      <File url="Base\MainPage.xfdl" checksum="20240130113554" errormsg=""/>
+    </Info>
   </GenInfo>
 </root>
