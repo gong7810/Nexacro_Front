@@ -245,7 +245,7 @@ this.bt_appSlip_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo){
 			var reportingEmpCode = application.gds_slip.getColumn(index,"REPORTING_EMP_CODE");
 			
 			application.gds_slip.setColumn(index, "APPROVAL_DATE",today);
-			application.gds_slip.setColumn(index, "APPROVAL_EMP_CODE",reportingEmpCode);	
+			application.gds_slip.setColumn(index, "APPROVAL_EMP_CODE",application.gv_empCode);	
 			application.gds_slip.setColumn(index, "SLIP_STATUS","승인완료");
 			application.gds_slip.setColumn(index, "SLIP_DESCRIPTION", null);
 			count++;
@@ -274,8 +274,8 @@ this.bt_cancleApp_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo
 		check = nexacro.getApplication().gds_slip.getColumn(index, "SLIP_DESCRIPTION");
 		if(check==1){	
 			
-			application.gds_slip.setColumn(index, "APPROVAL_DATE","");
-			application.gds_slip.setColumn(index, "APPROVAL_EMP_CODE","");
+			application.gds_slip.setColumn(index, "APPROVAL_DATE",' ');
+			application.gds_slip.setColumn(index, "APPROVAL_EMP_CODE",' ');
 			application.gds_slip.setColumn(index, "SLIP_STATUS","작성중(반려)");	
 			application.gds_slip.setColumn(index, "SLIP_DESCRIPTION", null);	
 			
