@@ -179,8 +179,8 @@
         };
         
         // User Script
-        this.addIncludeScript("budgetstatusform.xfdl","scripts::commonOpen.xjs");
-        this.registerScript("budgetstatusform.xfdl", function() {
+        this.addIncludeScript("budgetStatusform.xfdl","scripts::commonOpen.xjs");
+        this.registerScript("budgetStatusform.xfdl", function() {
         this.executeIncludeScript("scripts::commonOpen.xjs"); /*include "scripts::commonOpen.xjs"*/;
         application = nexacro.getApplication();
 
@@ -197,7 +197,6 @@
         // 		var callback = "callback";
         // 		this.transaction(id, url, resData, reqData, args, callback);
          			this.ds_budget1.addRow();
-
         };
         		this.callback = function(trid , ErrorCode, ErrorMsg){
 
@@ -375,7 +374,7 @@
             this.CheckBox00_00.addEventHandler("onchanged",this.CheckBox00_00_onchanged,this);
             this.CheckBox00_00.addEventHandler("onclick",this.CheckBox00_00_onclick,this);
         };
-        this.loadIncludeScript("budgetstatusform.xfdl");
+        this.loadIncludeScript("budgetStatusform.xfdl");
         this.loadPreloadList();
         
         // Remove Reference

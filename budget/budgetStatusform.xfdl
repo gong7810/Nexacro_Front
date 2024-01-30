@@ -83,7 +83,6 @@ this.budgetapplform_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
 // 		var callback = "callback";		
 // 		this.transaction(id, url, resData, reqData, args, callback);
  			this.ds_budget1.addRow();
-
 };
 		this.callback = function(trid , ErrorCode, ErrorMsg){
 		
