@@ -1,0 +1,414 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="dailyFundPlanform" width="1280" height="720" titletext="New Form">
+    <Layouts>
+      <Layout height="720" width="1280">
+        <Static id="Static00" taborder="0" text="일자별자금계획관리" left="365.00" top="10" width="251" height="75" textAlign="center" font="normal 18pt/normal &quot;Arial&quot;"/>
+        <Tab id="planTab" taborder="1" tabindex="0" left="112.00" top="68" width="819" height="452">
+          <Tabpages>
+            <Tabpage id="addPlan" text="자금계획입력">
+              <Layouts>
+                <Layout>
+                  <Static id="static1" taborder="0" text="계획일자" left="3.06%" top="11.14%" width="9.67%" height="8.06%" textAlign="center" background="#87c4f1" borderRadius="5px" color="white"/>
+                  <Calendar id="planDate" taborder="1" left="16.28%" top="11.14%" width="30.60%" height="8.06%" innerdataset="ds_asset" datecolumn="PROGRESS" onchanged="edit_birth_date_onchanged" dateformat="yyyy-MM-dd "/>
+                  <Static id="static2" taborder="2" text="자금코드" left="3.06%" top="26.78%" width="9.67%" height="8.06%" textAlign="center" background="#87c4f1" borderRadius="5px" color="white"/>
+                  <Edit id="fundCode" taborder="3" left="134.00" top="114" width="30.60%" height="8.06%" readonly="false" textAlign="center" oneditclick="fundCode_oneditclick" onchanged="planTab_addPlan_fundCode_onchanged"/>
+                  <Static id="static3" taborder="4" text="자금과목" left="3.06%" top="44.08%" width="9.67%" height="8.06%" textAlign="center" background="#87c4f1" borderRadius="5px" color="white"/>
+                  <Edit id="fundName" taborder="5" left="134.00" top="187" width="30.60%" height="8.06%" readonly="true" textAlign="center"/>
+                  <Static id="static4" taborder="6" text="구분" left="3.06%" top="60.43%" width="9.67%" height="8.06%" textAlign="center" background="#87c4f1" borderRadius="5px" color="white"/>
+                  <Combo id="balanceDivision" taborder="7" text="입 / 출을 선택해주세요" left="134.00" top="257" width="30.60%" height="8.06%" value="" index="-1" innerdataset="ds_balance" datacolumn="BALANCE_DIVISION"/>
+                  <Static id="static5" taborder="8" text="거래처코드" left="52.02%" top="11.14%" width="9.67%" height="8.06%" textAlign="center" borderRadius="5px" color="white" background="#87c4f1"/>
+                  <Edit id="customerCode" taborder="9" left="537.00" top="48" width="30.60%" height="8.06%" readonly="false" textAlign="center" oneditclick="customerCode_oneditclick"/>
+                  <Static id="static6" taborder="10" text="거래처명" left="51.90%" top="27.25%" width="9.67%" height="8.06%" textAlign="center" borderRadius="5px" color="white" background="#87c4f1"/>
+                  <Edit id="customerName" taborder="11" left="537.00" top="115" width="30.60%" height="8.06%" readonly="true" textAlign="center"/>
+                  <Static id="static7" taborder="12" text="적요" left="51.90%" top="44.08%" width="9.67%" height="8.06%" textAlign="center" borderRadius="5px" color="white" background="#87c4f1"/>
+                  <Edit id="expenseReport" taborder="13" left="538.00" top="187" width="30.60%" height="8.06%" readonly="false" textAlign="center"/>
+                  <Static id="static8" taborder="14" text="금액" left="51.90%" top="60.43%" width="9.67%" height="8.06%" textAlign="center" borderRadius="5px" color="white" background="#87c4f1"/>
+                  <MaskEdit id="price" taborder="15" left="537.00" top="256" width="30.60%" height="8.06%" format="#,#.###"/>
+                  <Button id="saveDatabtn" taborder="16" text="저장" left="717.00" top="323" width="72" height="40" onclick="saveDatabtn_onclick"/>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="findPlan" text="자금계획상세">
+              <Layouts>
+                <Layout>
+                  <Calendar id="startDate" taborder="2" left="32.00" top="17" width="131" height="30" dateformat="yyyy-MM-dd"/>
+                  <Calendar id="endDate" taborder="0" left="199.00" top="17" width="131" height="30" dateformat="yyyy-MM-dd"/>
+                  <Static id="Static00_00" taborder="3" text="-" left="167.00" top="20" width="27" height="24" textAlign="center" font="bold 20px/normal &quot;Gulim&quot;"/>
+                  <Button id="findPlanbtn" taborder="1" text="조회" left="358.00" top="17" height="30" width="79" onclick="findPlanbtn_onclick"/>
+                  <Grid id="inExpectedPlan" taborder="4" left="32.00" top="78" width="763" height="155" binddataset="ds_inplanList" oncellclick="inExpectedPlan_oncellclick" nodatatext="조회된 수입예정계획이 없습니다.">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="135"/>
+                          <Column size="75"/>
+                          <Column size="65"/>
+                          <Column size="95"/>
+                          <Column size="75"/>
+                          <Column size="95"/>
+                          <Column size="135"/>
+                          <Column size="98"/>
+                        </Columns>
+                        <Rows>
+                          <Row band="head" size="24"/>
+                          <Row size="24"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell text="계획번호"/>
+                          <Cell col="1" text="계획일자"/>
+                          <Cell col="2" text="자금코드"/>
+                          <Cell col="3" text="자금과목"/>
+                          <Cell col="4" text="거래처코드"/>
+                          <Cell col="5" text="거래처명"/>
+                          <Cell col="6" text="적요"/>
+                          <Cell col="7" text="금액"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell text="bind:PLAN_NO"/>
+                          <Cell col="1" text="bind:PLAN_DATE"/>
+                          <Cell col="2" text="bind:FUND_CODE"/>
+                          <Cell col="3" text="bind:FUND_NAME"/>
+                          <Cell col="4" text="bind:CUSTOMER_CODE"/>
+                          <Cell col="5" text="bind:CUSTOMER_NAME"/>
+                          <Cell col="6" text="bind:EXPENSE_REPORT"/>
+                          <Cell col="7" text="bind:PRICE"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                  <Static id="Static00" taborder="5" left="31.00" top="55" width="120" height="20" text="수입예정" font="normal 13pt/normal &quot;Gulim&quot;"/>
+                  <Static id="Static00_01" taborder="6" left="30.00" top="237" width="120" height="20" text="지출예정" font="normal 13pt/normal &quot;Gulim&quot;"/>
+                  <Grid id="outExpectedPlan" taborder="7" left="31.00" top="260" width="763" height="155" binddataset="ds_outplanList" oncellclick="outExpectedPlan_oncellclick" nodatatext="조회된 지출예정계획이 없습니다.">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="135"/>
+                          <Column size="75"/>
+                          <Column size="65"/>
+                          <Column size="95"/>
+                          <Column size="75"/>
+                          <Column size="95"/>
+                          <Column size="135"/>
+                          <Column size="98"/>
+                        </Columns>
+                        <Rows>
+                          <Row band="head" size="24"/>
+                          <Row size="24"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell text="계획번호"/>
+                          <Cell col="1" text="계획일자"/>
+                          <Cell col="2" text="자금코드"/>
+                          <Cell col="3" text="자금과목"/>
+                          <Cell col="4" text="거래처코드"/>
+                          <Cell col="5" text="거래처명"/>
+                          <Cell col="6" text="적요"/>
+                          <Cell col="7" text="금액"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell text="bind:PLAN_NO"/>
+                          <Cell col="1" text="bind:PLAN_DATE"/>
+                          <Cell col="2" text="bind:FUND_CODE"/>
+                          <Cell col="3" text="bind:FUND_NAME"/>
+                          <Cell col="4" text="bind:CUSTOMER_CODE"/>
+                          <Cell col="5" text="bind:CUSTOMER_NAME"/>
+                          <Cell col="6" text="bind:EXPENSE_REPORT"/>
+                          <Cell col="7" text="bind:PRICE"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                  <Button id="updatePlanbtn" taborder="8" text="수정" left="627.00" top="17" height="30" width="79" onclick="updatePlanbtn_onclick"/>
+                  <Button id="deletePlan" taborder="9" text="삭제" left="716.00" top="17" height="30" width="79" onclick="deletePlan_onclick"/>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+          </Tabpages>
+        </Tab>
+      </Layout>
+    </Layouts>
+    <Bind>
+      <BindItem id="item0" compid="planTab.addPlan.form.planDate" propid="value" datasetid="ds_plan" columnid="PLAN_DATE"/>
+      <BindItem id="item1" compid="planTab.addPlan.form.fundCode" propid="value" datasetid="ds_plan" columnid="FUND_CODE"/>
+      <BindItem id="item2" compid="planTab.addPlan.form.fundName" propid="value" datasetid="ds_plan" columnid="FUND_NAME"/>
+      <BindItem id="item3" compid="planTab.addPlan.form.balanceDivision" propid="value" datasetid="ds_plan" columnid="BALANCE_DIVISION"/>
+      <BindItem id="item4" compid="planTab.addPlan.form.customerCode" propid="value" datasetid="ds_plan" columnid="CUSTOMER_CODE"/>
+      <BindItem id="item5" compid="planTab.addPlan.form.customerName" propid="value" datasetid="ds_plan" columnid="CUSTOMER_NAME"/>
+      <BindItem id="item6" compid="planTab.addPlan.form.expenseReport" propid="value" datasetid="ds_plan" columnid="EXPENSE_REPORT"/>
+      <BindItem id="item7" compid="planTab.addPlan.form.price" propid="value" datasetid="ds_plan" columnid="PRICE"/>
+      <BindItem id="item8" compid="planTab.addPlan.form.static1" propid="value" datasetid="ds_plan" columnid="PRICE"/>
+    </Bind>
+    <Objects>
+      <Dataset id="ds_plan">
+        <ColumnInfo>
+          <Column id="PLAN_DATE" type="STRING" size="256"/>
+          <Column id="FUND_CODE" type="STRING" size="256"/>
+          <Column id="FUND_NAME" type="STRING" size="256"/>
+          <Column id="BALANCE_DIVISION" type="STRING" size="256"/>
+          <Column id="CUSTOMER_CODE" type="STRING" size="256"/>
+          <Column id="CUSTOMER_NAME" type="STRING" size="256"/>
+          <Column id="EXPENSE_REPORT" type="STRING" size="256"/>
+          <Column id="PRICE" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_balance">
+        <ColumnInfo>
+          <Column id="BALANCE_DIVISION" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="BALANCE_DIVISION">수입</Col>
+          </Row>
+          <Row>
+            <Col id="BALANCE_DIVISION">지출</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_inplanList">
+        <ColumnInfo>
+          <Column id="PLAN_NO" type="STRING" size="256"/>
+          <Column id="PLAN_DATE" type="STRING" size="256"/>
+          <Column id="FUND_CODE" type="STRING" size="256"/>
+          <Column id="FUND_NAME" type="STRING" size="256"/>
+          <Column id="CUSTOMER_CODE" type="STRING" size="256"/>
+          <Column id="CUSTOMER_NAME" type="STRING" size="256"/>
+          <Column id="EXPENSE_REPORT" type="STRING" size="256"/>
+          <Column id="PRICE" type="STRING" size="256"/>
+          <Column id="BALANCE_DIVISION" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_outplanList">
+        <ColumnInfo>
+          <Column id="PLAN_NO" type="STRING" size="256"/>
+          <Column id="PLAN_DATE" type="STRING" size="256"/>
+          <Column id="FUND_CODE" type="STRING" size="256"/>
+          <Column id="FUND_NAME" type="STRING" size="256"/>
+          <Column id="CUSTOMER_CODE" type="STRING" size="256"/>
+          <Column id="CUSTOMER_NAME" type="STRING" size="256"/>
+          <Column id="EXPENSE_REPORT" type="STRING" size="256"/>
+          <Column id="PRICE" type="STRING" size="256"/>
+          <Column id="BALANCE_DIVISION" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/*************************************************************/
+/* 프 로 그 램 : C:\Users\owner\Desktop\77th_2nd_Nexa ACC\Nexacro_Front\operate\dailyFundPlanform.xfdl
+/* 작 성 일 자 : 2024/01/23
+/* 작 성 자 명 : S.U
+/* 설       명 : 일자별자금계획관리 폼
+/*************************************************************/
+
+include "scripts::commonOpen.xjs"
+var planNo = '';
+application = nexacro.getApplication();
+
+// 계정과목 팝업창 호출
+this.fundCode_oneditclick = function(obj:nexacro.Edit,e:nexacro.ChangeEventInfo)
+{	
+	//this.gfnOpen("dialog_account_journal", "popup::accInnercodeform.xfdl", null, this, null);  // sID, sURL, param, callbackFunc
+	
+	var sID="accInnerCodeForm";
+	var sURL="popup::accInnercodeform.xfdl";
+	var param="";
+	var callbackFunc="accInnercodeform_callbackFunc";  
+	// 해당 프레임을 생성												 //            --파라미터 순서-- 
+	var oChildFrame = new ChildFrame(sID, 0, 0, 0, 0, null, null, sURL);  // 프레임명, 부모프레임의 왼쪽과의 거리,
+	// 부모프레임의 상단과의 거리, 해당 프레임의 넓이,
+	// 해당 프레임의 높이, 부로 프레임의 오른쪽과의 거리,
+	// 부모 프레임과의 하단과의 거리, 참조할 프레임의 주소
+	// 해당 프레임 화면에 출력												 // 참고 : 해당 프레임의 크기는 변경할수는 없는거 같다. 
+	oChildFrame.set_openalign("center middle");  // ---> 띄워지는 위치를 지정 
+	oChildFrame.showModal(sID, this.getOwnerFrame(), param, this, callbackFunc);
+};
+
+// 선택 계정과목 세팅
+this.accInnercodeform_callbackFunc = function ()
+{
+	this.planTab.addPlan.form.fundCode.set_value(application.gv_accountCode);
+	this.planTab.addPlan.form.fundName.set_value(application.gv_accountName);
+};
+
+// 거래처 팝업창 호출
+this.customerCode_oneditclick = function(obj:nexacro.Edit,e:nexacro.ChangeEventInfo)
+{	 
+	var sID="customercodeform";
+	var sURL="popup::customercodeform.xfdl";
+	var param="";
+	var callbackFunc="customercodeform_callbackFunc";  
+	// 해당 프레임을 생성												 //            --파라미터 순서-- 
+	var oChildFrame = new ChildFrame(sID, 0, 0, 0, 0, null, null, sURL);  // 프레임명, 부모프레임의 왼쪽과의 거리,
+	// 부모프레임의 상단과의 거리, 해당 프레임의 넓이,
+	// 해당 프레임의 높이, 부로 프레임의 오른쪽과의 거리,
+	// 부모 프레임과의 하단과의 거리, 참조할 프레임의 주소
+	// 해당 프레임 화면에 출력												 // 참고 : 해당 프레임의 크기는 변경할수는 없는거 같다. 
+	oChildFrame.set_openalign("center middle");  // ---> 띄워지는 위치를 지정 
+	oChildFrame.showModal(sID, this.getOwnerFrame(), param, this, callbackFunc);
+};
+
+// 선택 거래처 세팅
+this.customercodeform_callbackFunc = function() 
+{
+	this.planTab.addPlan.form.customerCode.set_value(application.gv_customerCode);
+	this.planTab.addPlan.form.customerName.set_value(application.gv_customerName);
+}
+
+// 데이터 
+this.reset = function ()
+{
+	this.planTab.addPlan.form.planDate.value = "";
+	this.planTab.addPlan.form.fundCode.value = "";
+	this.planTab.addPlan.form.fundName.value = "";
+	this.planTab.addPlan.form.balanceDivision.value = "";
+	this.planTab.addPlan.form.customerCode.value = "";
+	this.planTab.addPlan.form.customerName.value = "";
+	this.planTab.addPlan.form.expenseReport.value = "";
+	this.planTab.addPlan.form.price.value = "";
+};
+
+// 자금계획 추가
+this.saveDatabtn_onclick = function (obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	trace(this.planTab.addPlan.form.planDate.text); // 탭컴포넌트 - 탭번호 - 폼 - 하위컴포넌트로 접근 경로 명시
+	var bool = confirm("저장하시겠습니까?");
+	if (bool) {
+		if (this.planTab.addPlan.form.planDate.value == '')
+		alert("계획일자를 선택해주세요");
+		else if(this.planTab.addPlan.form.balanceDivision.value == '')
+		alert("구분을 선택해주세요");
+		else if(this.planTab.addPlan.form.expenseReport.value == '')
+		alert("적요를 입력해주세요");
+		else if(this.planTab.addPlan.form.price.value == '')
+		alert("금액을 입력해주세요");
+		else {
+			var id = "insertPlan";
+			var url = "svcOpr::insertPlan";
+			var reqData = "ds_plan=ds_plan";
+			var resData = "";
+			var args = "";
+			var callback = "callback";	
+			
+			this.transaction(id, url, reqData, resData, args, callback);
+			alert("저장되었습니다.");
+			this.reset();
+			/*this.reload();*/
+		}
+	}
+};
+
+// 자금계획 조회
+this.findPlanbtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	trace(this.planTab.findPlan.form.startDate.text);
+	trace(this.planTab.findPlan.form.endDate.text);
+	var startDate = this.planTab.findPlan.form.startDate.text;
+	var endDate = this.planTab.findPlan.form.endDate.text;
+	
+	if (this.planTab.findPlan.form.startDate.value == null || this.planTab.findPlan.form.endDate.value == null)
+	alert("조회일자를 선택해주세요");
+	else {
+		var id = "findPlan";
+		var url = "svcOpr::findPlan";
+		var reqData = "";
+		var resData = "ds_inplanList=ds_plan ds_outplanList=ds_plan";
+		var args = "startDate='"+startDate+"' endDate='"+endDate+"'";
+		var callback = "findPlan_callback";	
+		
+		this.transaction(id, url, reqData, resData, args, callback);
+	}
+};
+
+this.findPlan_callback = function ()
+{
+	var increase = "수입";
+	var decrease = "지출";
+	this.ds_inplanList.filter("BALANCE_DIVISION=='"+increase+"'");
+	this.ds_outplanList.filter("BALANCE_DIVISION=='"+decrease+"'");
+};
+
+// 자금계획 수정
+this.inExpectedPlan_oncellclick = function (obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	
+	planNo = this.planTab.findPlan.form.inExpectedPlan.getCellText(this.planTab.findPlan.form.inExpectedPlan.currentrow, 0);
+	trace(planNo);
+	application.gds_plan.setColumn(0, "PLAN_NO", this.planTab.findPlan.form.inExpectedPlan.getCellText(this.planTab.findPlan.form.inExpectedPlan.currentrow, 0));
+	application.gds_plan.setColumn(0, "PLAN_DATE", this.planTab.findPlan.form.inExpectedPlan.getCellText(this.planTab.findPlan.form.inExpectedPlan.currentrow, 1));
+	application.gds_plan.setColumn(0, "FUND_CODE", this.planTab.findPlan.form.inExpectedPlan.getCellText(this.planTab.findPlan.form.inExpectedPlan.currentrow, 2));
+	application.gds_plan.setColumn(0, "FUND_NAME", this.planTab.findPlan.form.inExpectedPlan.getCellText(this.planTab.findPlan.form.inExpectedPlan.currentrow, 3));
+	application.gds_plan.setColumn(0, "CUSTOMER_CODE", this.planTab.findPlan.form.inExpectedPlan.getCellText(this.planTab.findPlan.form.inExpectedPlan.currentrow, 4));
+	application.gds_plan.setColumn(0, "CUSTOMER_NAME", this.planTab.findPlan.form.inExpectedPlan.getCellText(this.planTab.findPlan.form.inExpectedPlan.currentrow, 5));
+	application.gds_plan.setColumn(0, "EXPENSE_REPORT", this.planTab.findPlan.form.inExpectedPlan.getCellText(this.planTab.findPlan.form.inExpectedPlan.currentrow, 6));
+	application.gds_plan.setColumn(0, "PRICE", this.planTab.findPlan.form.inExpectedPlan.getCellText(this.planTab.findPlan.form.inExpectedPlan.currentrow, 7));
+	application.gds_plan.setColumn(0, "BALANCE_DIVISION", "수입");
+	
+	trace(application.gds_plan.getColumn(0, "PLAN_NO"));
+};
+
+this.outExpectedPlan_oncellclick = function (obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	planNo = this.planTab.findPlan.form.outExpectedPlan.getCellText(this.planTab.findPlan.form.outExpectedPlan.currentrow, 0);
+	
+	application.gds_plan.setColumn(0, "PLAN_NO", this.planTab.findPlan.form.outExpectedPlan.getCellText(this.planTab.findPlan.form.outExpectedPlan.currentrow, 0));
+	application.gds_plan.setColumn(0, "PLAN_DATE", this.planTab.findPlan.form.outExpectedPlan.getCellText(this.planTab.findPlan.form.outExpectedPlan.currentrow, 1));
+	application.gds_plan.setColumn(0, "FUND_CODE", this.planTab.findPlan.form.outExpectedPlan.getCellText(this.planTab.findPlan.form.outExpectedPlan.currentrow, 2));
+	application.gds_plan.setColumn(0, "FUND_NAME", this.planTab.findPlan.form.outExpectedPlan.getCellText(this.planTab.findPlan.form.outExpectedPlan.currentrow, 3));
+	application.gds_plan.setColumn(0, "CUSTOMER_CODE", this.planTab.findPlan.form.outExpectedPlan.getCellText(this.planTab.findPlan.form.outExpectedPlan.currentrow, 4));
+	application.gds_plan.setColumn(0, "CUSTOMER_NAME", this.planTab.findPlan.form.outExpectedPlan.getCellText(this.planTab.findPlan.form.outExpectedPlan.currentrow, 5));
+	application.gds_plan.setColumn(0, "EXPENSE_REPORT", this.planTab.findPlan.form.outExpectedPlan.getCellText(this.planTab.findPlan.form.outExpectedPlan.currentrow, 6));
+	application.gds_plan.setColumn(0, "PRICE", this.planTab.findPlan.form.outExpectedPlan.getCellText(this.planTab.findPlan.form.outExpectedPlan.currentrow, 7));
+	application.gds_plan.setColumn(0, "BALANCE_DIVISION", "지출");
+};
+
+this.updatePlanbtn_onclick = function ()
+{
+	//띄울 poppdiv의 정보를 작성하고 
+	var sID="dailyFundPlanupdateform";
+	var sURL="popup::dailyFundPlanupdateform.xfdl";
+	var param={}; // 생성되는 폼에 파라미터를 넘겨준다. 
+	var callbackFunc="dailyFundPlanupdateform_callbackFunc";  
+	// 해당 프레임을 생성												 //            --파라미터 순서-- 
+	var oChildFrame = new ChildFrame(sID, 0, 0, 0, 0, null, null, sURL);  // 프레임명, 부모프레임의 왼쪽과의 거리,
+	// 부모프레임의 상단과의 거리, 해당 프레임의 넓이,
+	// 해당 프레임의 높이, 부로 프레임의 오른쪽과의 거리,
+	// 부모 프레임과의 하단과의 거리, 참조할 프레임의 주소
+	// 해당 프레임 화면에 출력												 // 참고 : 해당 프레임의 크기는 변경할수는 없는거 같다. 
+	oChildFrame.set_openalign("center middle");  // ---> 띄워지는 위치를 지정 
+	oChildFrame.showModal(sID, this.getOwnerFrame(), param, this, callbackFunc);
+};
+
+this.dailyFundPlanupdateform_callbackFunc = function ()
+{
+	this.findPlanbtn_onclick();
+};
+
+// 자금계획 삭제
+this.deletePlan_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	trace(planNo);
+	var bool = confirm("계획번호 : " + planNo + "\n삭제하시겠습니까?");
+	
+	if (bool) {
+		var id = "deletePlan";
+		var url = "svcOpr::deletePlan";
+		var reqData = "";
+		var resData = "";
+		var args = "planNo="+planNo;
+		var callback = "deletePlan_callback";	
+		
+		this.transaction(id, url, reqData, resData, args, callback);
+		alert("삭제되었습니다");
+		this.findPlanbtn_onclick();
+	}
+};
+]]></Script>
+  </Form>
+</FDL>

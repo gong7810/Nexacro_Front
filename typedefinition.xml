@@ -31,6 +31,8 @@
     <Component type="JavaScript" id="Dataset" classname="nexacro.NormalDataset"/>
     <Component type="JavaScript" id="FileDialog" classname="nexacro.FileDialog"/>
     <Component type="JavaScript" id="VirtualFile" classname="nexacro.VirtualFile"/>
+    <Component type="JavaScript" id="Panel" classname="nexacro.Panel"/>
+    <Component type="JavaScript" id="MultiCombo" classname="nexacro.MultiCombo"/>
   </Components>
   <Services>
     <Service prefixid="theme" type="resource" url="./_resource_/_theme_/" version="0" communicationversion="0" cachelevel="session" include_subdir="true"/>
@@ -48,7 +50,7 @@
     <Service prefixid="svcPosting" type="form" url="http://localhost:8484/acc/posting/" version="0" cachelevel="none" include_subdir="false" communicationversion="0"/>
     <Service prefixid="operate" type="form" url="./operate/" version="0" cachelevel="session" include_subdir="false" communicationversion="0"/>
     <Service prefixid="settlement" type="form" url="./settlement/" version="0" cachelevel="session" include_subdir="false" communicationversion="0"/>
-    <Service prefixid="svcSettlement" type="form" url="http://localhost:8484/settlement/" version="0" cachelevel="none" include_subdir="false" communicationversion="0"/>
+    <Service prefixid="svcSettlement" type="JSP" url="http://localhost:8484/acc/statement/" version="0" cachelevel="none" include_subdir="false" communicationversion="0"/>
     <Service prefixid="svcBudget" type="form" url="http://localhost:8484/budget/" version="0" cachelevel="none" include_subdir="false" communicationversion="0"/>
     <Service prefixid="budget" type="form" url="./budget/" version="0" cachelevel="session" include_subdir="false" communicationversion="0"/>
     <Service prefixid="board" type="form" url="./board/" version="0" cachelevel="session" include_subdir="false" communicationversion="0"/>

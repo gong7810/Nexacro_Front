@@ -70,9 +70,6 @@ this.currentAssetdetailform_onload = function(obj:nexacro.Form,e:nexacro.LoadEve
 	var callback = "onload_callbackFunc";
 	
 	this.transaction(id, url, reqData, resData, args, callback);   
-	
-	trace('333333333333', this.progress.text);
-	
 }
 
 // 수정
