@@ -31,14 +31,14 @@
                 <Cell col="7" text="사용여부"/>
               </Band>
               <Band id="body">
-                <Cell text="bind:VEHICLE_CODE"/>
-                <Cell col="1" text="bind:VEHICLE_NUMBER"/>
-                <Cell col="2" text="bind:VEHICLE_TYPE"/>
-                <Cell col="3" text="bind:DEPT_CODE"/>
-                <Cell col="4" text="bind:DEPT_NAME"/>
-                <Cell col="5" text="bind:EMP_CODE" edittype="text"/>
-                <Cell col="6" text="bind:EMP_NAME" edittype="text"/>
-                <Cell col="7" text="bind:AVAILABILITY" edittype="combo" combodataset="ds_available" combodatacol="AVAILABLE"/>
+                <Cell text="bind:VEHICLE_CODE" textAlign="center"/>
+                <Cell col="1" text="bind:VEHICLE_NUMBER" textAlign="center"/>
+                <Cell col="2" text="bind:VEHICLE_TYPE" textAlign="center"/>
+                <Cell col="3" text="bind:DEPT_CODE" textAlign="center"/>
+                <Cell col="4" text="bind:DEPT_NAME" textAlign="center"/>
+                <Cell col="5" text="bind:EMP_CODE" edittype="text" textAlign="center"/>
+                <Cell col="6" text="bind:EMP_NAME" edittype="text" textAlign="center"/>
+                <Cell col="7" text="bind:AVAILABILITY" edittype="combo" combodataset="ds_available" combodatacol="AVAILABLE" textAlign="center"/>
               </Band>
             </Format>
           </Formats>
@@ -322,7 +322,7 @@ this.updateBtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 // 목록
 this.returnBtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
-	this.close();
+	this.close('list_btn');
 };
 
 // 삭제

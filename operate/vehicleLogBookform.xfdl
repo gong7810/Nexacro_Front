@@ -153,7 +153,7 @@ this.vehicleLogBookform_onload = function (obj:nexacro.Form,e:nexacro.LoadEventI
 	var reqData = "";
 	var resData = "ds_vehicle=ds_vehicle";
 	var args = "";
-	var callback = "onload_callbackFunc";
+	var callback = "callbackFunc";
 	
 	this.transaction(id, url, reqData, resData, args, callback); 
 };
@@ -168,7 +168,7 @@ this.vehicleGrid_oncellclick = function (obj:nexacro.Grid,e:nexacro.GridClickEve
 	var reqData = "";
 	var resData = "ds_vehicleLogbook=ds_vehicleLogbook";
 	var args = "vehicleCode="+vehicleCode;
-	var callback = "onload_callbackFunc";
+	var callback = "callbackFunc";
 	
 	this.transaction(id, url, reqData, resData, args, callback); 
 	
@@ -212,7 +212,7 @@ this.insertBtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 	var sID="vehicleLogbookRegistform";
 	var sURL="popup::vehicleLogbookRegistform.xfdl";
 	var param={count:count}; // 생성되는 폼에 파라미터를 넘겨준다. 
-	var callbackFunc="vehicleLogbookRegistform_callbackFunc";  
+	var callbackFunc="onload_callbackFunc";  
 	// 해당 프레임을 생성												 //            --파라미터 순서-- 
 	var oChildFrame = new ChildFrame(sID, 0, 0, 0, 0, null, null, sURL);  // 프레임명, 부모 프레임의 왼쪽과의 거리,
 	// 부모 프레임의 상단과의 거리, 해당 프레임의 넓이,
@@ -222,13 +222,6 @@ this.insertBtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 	oChildFrame.set_openalign("center middle");  // ---> 띄워지는 위치를 지정 
 	oChildFrame.showModal(sID, this.getOwnerFrame(), param, this, callbackFunc);
 };
-
-this.vehicleLogbookRegistform_callbackFunc = function ()
-{
-	this.reload();
-};
-
-
 
 // 삭제
 this.deleteBtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
@@ -256,6 +249,19 @@ this.deleteBtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 		}
 	}
 };
+
+this.onload_callbackFunc = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	trace("<<<<<<< callback function has been called");
+	
+	if(e=='esc'){
+		trace('<<<<<<<<<<<<<<<< this is esc_btn >>>>>>>>>>>>>>>>>>>');
+	}else {
+		this.reload();
+		trace(">>>>>>> vehicleLogBookform has been reloaded!!");
+		
+	}
+}
 ]]></Script>
   </Form>
 </FDL>

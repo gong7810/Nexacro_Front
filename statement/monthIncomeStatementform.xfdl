@@ -94,7 +94,7 @@ this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo){
 		//trace(eYear, eMonth, eDay, eDate);
 		
 		var id = "monthIncomeStatement";
-		var url = "svcSettlement::monthIncomeStatement";
+		var url = "svcStatement::monthIncomeStatement";
 		var resData = "";
 		var reqData = "ds_tmpmonthIncomeStatement=ds_tmpmonthIncomeStatement";
 		var args = "selectedDate='"+selectedDate+"'";

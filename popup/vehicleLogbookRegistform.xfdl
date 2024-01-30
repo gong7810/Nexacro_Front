@@ -131,8 +131,11 @@ this.vehicleCodeCombo_onitemchanged = function(obj:nexacro.Combo,e:nexacro.ItemC
 this.after_onchanged = function(obj:nexacro.MaskEdit,e:nexacro.ChangeEventInfo)
 {
 	if (this.before.value != null && this.after.value != null) {
-		if (this.after.value <= this.before.value) {
-			alert("주행 후 계기판의 거리가 주행 전과 같거나 더 적을 수 없습니다")
+		if (nexacro.toNumber(this.after.value) <= nexacro.toNumber(this.before.value)) {
+			
+			trace(typeof(this.after.value)); // type을 number로 하고 value를 뽑아도 string이다
+			
+			alert("주행 후 계기판의 거리가 주행 전과 같거나 더 적을 수 없습니다");
 			this.after.value = '';
 		} else
 			this.distance.value = this.after.value - this.before.value;
@@ -182,7 +185,7 @@ this.saveData_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 			var reqData = "ds_vehicleLogbook=ds_vehicleLogbook";
 			var resData = "";
 			var args = "";
-			var callback = "onload_callbackFunc";
+			var callback = "callbackFunc";
 			
 			this.transaction(id, url, reqData, resData, args, callback); 
 			alert("저장되었습니다");

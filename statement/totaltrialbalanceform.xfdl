@@ -70,7 +70,7 @@ this.totaltrialbalanceForm_onload = function(obj:nexacro.Form,e:nexacro.LoadEven
  	var callresult = "SEARCH";
  	
  		var id = "totaltrialbalance";
- 		var url = "svcSettlement::totaltrialbalance";
+ 		var url = "svcStatement::totaltrialbalance";
 		var reqData = "";
  		var resData = "ds_totaltrialbalance=ds_totaltrialbalance1"; // 좌 넥사 ,  우 부트
 // 		var reqData = "ds_totaltrialbalance=ds_totaltrialbalance"; //  빠가 새끼들이 반대로 쳐 적어놨네 

@@ -57,7 +57,7 @@ this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo) //
 		//var period=application.gds_period.getColumn(0,"ACCOUNT_PERIOD_NO");
 		var callresult = "SEARCH";
 		var id = "financialposition"; // 계정 과목
-		var url = "svcSettlement::financialposition";
+		var url = "svcStatement::financialposition";
 		var resData = "";
 		var reqData = "ds_financialposition=ds_financialposition";
 		var args = "period='"+period+"' callresult='"+callresult+"'";
@@ -75,7 +75,7 @@ this.Button01_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 			if(this.confirm("결산하시겠습니까?","결산")){
 
 		var id = "selecttotaltrialbalance";
-		var url = "svcSettlement::selecttotaltrialbalance"; //selecttotaltrialbalance
+		var url = "svcStatement::selecttotaltrialbalance"; //selecttotaltrialbalance
 		var reqData = "ds_totaltrialbalance=ds_totaltrialbalance";
 		var resData = "";
 		var args = "accountPeriodNo='"+accountPeriodNo+"' callresult='"+callresult+"'";

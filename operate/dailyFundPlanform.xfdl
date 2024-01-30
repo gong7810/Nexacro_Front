@@ -214,8 +214,6 @@ application = nexacro.getApplication();
 // 계정과목 팝업창 호출
 this.fundCode_oneditclick = function(obj:nexacro.Edit,e:nexacro.ChangeEventInfo)
 {	
-	//this.gfnOpen("dialog_account_journal", "popup::accInnercodeform.xfdl", null, this, null);  // sID, sURL, param, callbackFunc
-	
 	var sID="accInnerCodeForm";
 	var sURL="popup::accInnercodeform.xfdl";
 	var param="";
@@ -299,7 +297,6 @@ this.saveDatabtn_onclick = function (obj:nexacro.Button,e:nexacro.ClickEventInfo
 			this.transaction(id, url, reqData, resData, args, callback);
 			alert("저장되었습니다.");
 			this.reset();
-			/*this.reload();*/
 		}
 	}
 };
@@ -337,9 +334,8 @@ this.findPlan_callback = function ()
 // 자금계획 수정
 this.inExpectedPlan_oncellclick = function (obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
 {
-	
 	planNo = this.planTab.findPlan.form.inExpectedPlan.getCellText(this.planTab.findPlan.form.inExpectedPlan.currentrow, 0);
-	trace(planNo);
+	
 	application.gds_plan.setColumn(0, "PLAN_NO", this.planTab.findPlan.form.inExpectedPlan.getCellText(this.planTab.findPlan.form.inExpectedPlan.currentrow, 0));
 	application.gds_plan.setColumn(0, "PLAN_DATE", this.planTab.findPlan.form.inExpectedPlan.getCellText(this.planTab.findPlan.form.inExpectedPlan.currentrow, 1));
 	application.gds_plan.setColumn(0, "FUND_CODE", this.planTab.findPlan.form.inExpectedPlan.getCellText(this.planTab.findPlan.form.inExpectedPlan.currentrow, 2));
@@ -385,10 +381,20 @@ this.updatePlanbtn_onclick = function ()
 	oChildFrame.showModal(sID, this.getOwnerFrame(), param, this, callbackFunc);
 };
 
-this.dailyFundPlanupdateform_callbackFunc = function ()
+
+// dailyFundPlanupdateform의 콜백함수를 받는 함수 입니다. 
+this.dailyFundPlanupdateform_callbackFunc = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
 {
-	this.findPlanbtn_onclick();
-};
+	trace("<<<<<<< callback function has been called");
+	
+	if(e=='esc'){
+		trace('<<<<<<<<<<<<<<<< this is esc >>>>>>>>>>>>>>>>>>>');
+	}else if(e=='updatePlanbtn'){
+		this.reload();
+		trace(">>>>>>> dailyFundPlanupdateform has been reloaded!!");
+		
+	}
+}
 
 // 자금계획 삭제
 this.deletePlan_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
@@ -409,6 +415,7 @@ this.deletePlan_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 		this.findPlanbtn_onclick();
 	}
 };
+
 ]]></Script>
   </Form>
 </FDL>

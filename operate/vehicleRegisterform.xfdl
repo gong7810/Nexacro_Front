@@ -116,7 +116,7 @@ this.insertBtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 	var sID="vehicleRegistform";
 	var sURL="popup::vehicleRegistform.xfdl";
 	var param={}; // 생성되는 폼에 파라미터를 넘겨준다. 
-	var callbackFunc="vehicleRegistform_callbackFunc";  
+	var callbackFunc="vehicledetailform_callbackFunc";  
 	// 해당 프레임을 생성												 //            --파라미터 순서-- 
 	var oChildFrame = new ChildFrame(sID, 0, 0, 0, 0, null, null, sURL);  // 프레임명, 부모 프레임의 왼쪽과의 거리,
 	// 부모 프레임의 상단과의 거리, 해당 프레임의 넓이,
@@ -127,10 +127,18 @@ this.insertBtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 	oChildFrame.showModal(sID, this.getOwnerFrame(), param, this, callbackFunc);
 };
 
-this.vehicleRegistform_callbackFunc = function ()
+this.vehicledetailform_callbackFunc = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
 {
-	this.reload();
-};
+	trace("<<<<<<< callback function has been called");
+	
+	if(e=='esc' || e=='list_btn'){
+		trace('<<<<<<<<<<<<<<<< this is esc or list_btn >>>>>>>>>>>>>>>>>>>');
+	}else {
+		this.reload();
+		trace(">>>>>>> vehicleRegistform has been reloaded!!");
+		
+	}
+}
 ]]></Script>
   </Form>
 </FDL>

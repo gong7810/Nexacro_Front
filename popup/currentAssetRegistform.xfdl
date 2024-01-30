@@ -178,13 +178,12 @@ this.saveData_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 	nowBalance = this.nowBalance.text;
 		
 	//트랜잭션 정보를 변수에 할당 
-	// 고정자산
- 	var asset_id = "insertAsset";
- 	var asset_url = "svcOpr::insertAsset";
- 	var asset_reqData = "ds_asset=ds_asset";
- 	var asset_resData = "";
-	var asset_args = "";
- 	var asset_callback = "aasetRegister_callback";	
+ 	var id = "insertAsset";
+ 	var url = "svcOperate::insertAsset";
+ 	var reqData = "ds_asset=ds_asset ds_assetDetail=ds_assetDetail";
+ 	var resData = "";
+	var args = "";
+ 	var callback = "aasetRegister_callback";	
 	
 	// 전부 입력하지 않았다면 transaction이 실행되지 않음 
 	// ---> 공백이어도 마찬가지  
@@ -217,25 +216,12 @@ this.saveData_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 	} else{
 		const bool = confirm("등록 하시겠습니까?");
 		if (bool) {		
- 			this.transaction(asset_id, asset_url, asset_reqData, asset_resData, asset_args, asset_callback); 
+ 			this.transaction(id, url, reqData, resData, args, callback); 
 			alert("등록되었습니다.");
 			this.close('saveData');
 		}
 	}
 }
-
-this.aasetRegister_callback = function ()
-{
-	// 고정자산상세
-	var assetDetail_id = "insertAssetDetail";
- 	var assetDetail_url = "svcOperate::insertAssetDetail";
- 	var assetDetail_reqData = "ds_assetDetail=ds_assetDetail";
- 	var assetDetail_resData = "";
-	var assetDetail_args = "";
- 	var assetDetail_callback = "callback";	
-
-	this.transaction(assetDetail_id, assetDetail_url, assetDetail_reqData, assetDetail_resData, assetDetail_args, assetDetail_callback);
-};
 
 
 // esc로 창 닫기

@@ -67,7 +67,6 @@ this.currentAssetRegisterform_onload = function(obj:nexacro.Form,e:nexacro.LoadE
 	
 	this.transaction(id, url, reqData, resData, args, callback);   
 	
-	
 	application.ds_assetList.filter('');
 }
 
@@ -87,18 +86,7 @@ this.assetSearch_onitemchanged = function(obj:nexacro.Combo, e:nexacro.ItemChang
 	}else{
 		this.ds_assetList.filter("ACCOUNT_NAME=='"+accountName+"'");
 	}
-	
-	//trace("e : "+e.posttext);
-	/*trace('<<<<<< objDs : '+objDs);*/
-	
-	// 	var coltext=this.emp_auth_for_trasaction.getColumn(0,2);
-	// 	
-	// 	trace('<<<<<<<<<<<<<<<<<<<<<< coltext : '+coltext);
-	// 	
-	// 	
-	// 	this.emp_auth_for_trasaction.setColumn(0,3,e.posttext); //현재 선택된 아이템을  dataset에 할당 
-	// 	var ddd=this.emp_auth_for_trasaction.getColumn(0,3);
-	// 	trace('<<<<<<< ddd id : '+ddd);
+
 };
 
 // 고정자산상세 조회

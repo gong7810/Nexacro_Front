@@ -72,7 +72,7 @@ this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo){
 		//trace(eYear, eMonth, eDay, eDate);
 		
 		var id = "costStatement";
-		var url = "svcSettlement::costStatement";
+		var url = "svcStatement::costStatement";
 		var resData = "";
 		var reqData = "ds_tmpCostStatement=ds_tmpCostStatement";
 		var args = "selectedDate='"+selectedDate+"'";

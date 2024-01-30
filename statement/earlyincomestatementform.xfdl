@@ -74,7 +74,7 @@ this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 	var callresult = "SEARCH";
 	
 		var id = "selectincomestatement";
-		var url = "svcSettlement::incomestatement";
+		var url = "svcStatement::incomestatement";
 		var resData = "";
 		var reqData = "ds_incomestatement=ds_incomestatement";
 		var args = "period='"+period+"' callresult='"+callresult+"'";

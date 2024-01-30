@@ -73,152 +73,106 @@ var today;
 var page=0;
 
 
-
-
 //Grid edit에 id 칼럼의 headsize를 0으로 설정해 놓았습니다. 
 //CRUD시에만 필요해서 그렇게 해놓은 것이므로 필요시 size를 
 //키워서 사용하시면 되겠습니다. ---> Grid에 데이터가 표시되지 않습니다. 
 
 this.boardform_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
 {
-		trace("onload Event has been occured at : boardform");
+	trace("onload Event has been occured at : boardform");
 	today=this.gfn_today();
-
-    
-
 	
-	var id = "selectBoard";
+	var id = "findBoardList";
 	var url = "svcOperate::findBoardList";
-	var resData = "";  // update하거나 insert할때는 res데이터로 :U옵션을 주고 전송 
-	var reqData = "ds_board=ds_board"; // 데이터 요청 
+	var reqData = "";  // update하거나 insert할때는 res데이터로 :U옵션을 주고 전송 
+	var resData = "ds_board=ds_board"; // 데이터 요청 
 	var args = "";
 	var callback = "callback";
-
-
-	this.transaction(id, url, resData, reqData, args, callback);
+	
+	this.transaction(id, url, reqData, resData, args, callback);
 	
 	trace("<<<<<<<<<<<<<<< on_load event successfully finished");
-	
-	
-
-
-
 };
 
 
 this.callback=function(){
-
-
-trace('>>>>>>>>>>>>>>> data for board has been successfully arrived!!!');
-
+	trace('>>>>>>>>>>>>>>> data for board has been successfully arrived!!!');
 }
-
-
-
-
-
-
 
 this.write_btn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
-
 	trace("btn has been pushed for : write_board");
 	
-			//띄울 poppdiv의 정보를 작성하고 
-			var sID="baordwriteform";
-			var sURL="popup::boardwriteform.xfdl";		
-			var param={}; // 열리는 폼에 파라미터를 넘겨준다. 
-			var callbackFunc="callbackFunc";  
-			// 해당 프레임을 생성												 //            --파라미터 순서-- 
+	//띄울 poppdiv의 정보를 작성하고 
+	var sID="baordwriteform";
+	var sURL="popup::boardwriteform.xfdl";		
+	var param={}; // 열리는 폼에 파라미터를 넘겨준다. 
+	var callbackFunc="callbackFunc";  
+	// 해당 프레임을 생성												 //            --파라미터 순서-- 
 	var oChildFrame = new ChildFrame(sID,300, 150, 100, 500, null, null, sURL);  // 프레임명, 부모프레임의 왼쪽과의 거리,
-							                                                     // 부모프레임의 상단과의 거리, 해당 프레임의 넓이,
-																				 // 해당 프레임의 높이, 부로 프레임의 오른쪽과의 거리,
-																				 // 부모 프레임과의 하단과의 거리, 참조할 프레임의 주소 ㄴ
+	// 부모프레임의 상단과의 거리, 해당 프레임의 넓이,
+	// 해당 프레임의 높이, 부로 프레임의 오른쪽과의 거리,
+	// 부모 프레임과의 하단과의 거리, 참조할 프레임의 주소 ㄴ
 	// 해당 프레임의 띄어지는 위치및 해당 프레임을 화면에 출력												 // 참고 : 해당 프레임의 크기는 변경할수는 없는거 같다. 
-		oChildFrame.set_openalign("center middle"); 
-		oChildFrame.showModal(sID, this.getOwnerFrame(), param, this, callbackFunc);
-		
-		
-		
-		trace("this is for write");
+	oChildFrame.set_openalign("center middle"); 
+	oChildFrame.showModal(sID, this.getOwnerFrame(), param, this, callbackFunc);
+	
+	trace("this is for write");
 };
-
-
-
-
-
 
 //셀을 클릭하면은, 클릭한 게시판의 세부내용을 다른 화면에 출력
 
 this.Grid00_oncelldblclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
 {		var bno=this.Grid00.getCellText(this.Grid00.currentrow,1); // 게시물 id를 열리는 폼에 넘김
-		trace("<<< e.row : "+e.row);
-		trace(bno);
-		
-																				   
-																				   
-								//띄울 poppdiv의 정보를 작성하고 
-			var sID="baorddetail";
-			var sURL="popup::boarddetailform.xfdl";		
-			var param={bno:bno,c:3}; // 생성되는 폼에 파라미터를 넘겨준다. 
-			var callbackFunc="callbackFunc";  
-			// 해당 프레임을 생성												 //            --파라미터 순서-- 
+	trace("<<< e.row : "+e.row);
+	trace(bno);
+	
+	//띄울 poppdiv의 정보를 작성하고 
+	var sID="baorddetail";
+	var sURL="popup::boarddetailform.xfdl";		
+	var param={bno:bno,c:3}; // 생성되는 폼에 파라미터를 넘겨준다. 
+	var callbackFunc="callbackFunc";  
+	// 해당 프레임을 생성												 //            --파라미터 순서-- 
 	var oChildFrame = new ChildFrame(sID,0, 0, 0, 0, null, null, sURL);  // 프레임명, 부모프레임의 왼쪽과의 거리,
-							                                                     // 부모프레임의 상단과의 거리, 해당 프레임의 넓이,
-																				 // 해당 프레임의 높이, 부로 프레임의 오른쪽과의 거리,
-																				 // 부모 프레임과의 하단과의 거리, 참조할 프레임의 주소 ㄴ
+	// 부모프레임의 상단과의 거리, 해당 프레임의 넓이,
+	// 해당 프레임의 높이, 부로 프레임의 오른쪽과의 거리,
+	// 부모 프레임과의 하단과의 거리, 참조할 프레임의 주소 ㄴ
 	// 해당 프레임 화면에 출력												 // 참고 : 해당 프레임의 크기는 변경할수는 없는거 같다. 
-		oChildFrame.set_openalign("center middle");  // ---> 띄워지는 위치를 지정 
-		oChildFrame.showModal(sID, this.getOwnerFrame(), param, this, callbackFunc);
-															   
-																				   
-																				   
-		trace("this is for read");
-	  
-
+	oChildFrame.set_openalign("center middle");  // ---> 띄워지는 위치를 지정 
+	oChildFrame.showModal(sID, this.getOwnerFrame(), param, this, callbackFunc);
+	
+	trace("this is for read");
 
 };
 
 
 // boarddetailform과 boardwriteform의 콜백함수를 받는 함수 입니다. 
 // 단 해당 폼의 onload시의 콜백함수를 받으면 무한 로딩에 걸림
-this.callbackFunc=function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo){
-			
-			
-				
-				trace('');
-				trace('');	
-				trace('');	
-				trace("<<<<<<< callback function has been called");
-			
-				if(e=='esc'||e=='list_btn'){
-				
-				
-					trace('<<<<<<<<<<<<<<<< this is esc or list_btn >>>>>>>>>>>>>>>>>>>');
-					
-				
-				}else if(e=='del_btn'||e=='mod_btn'||e=='write_btn'){
-				
-				
-						this.reload();
-						trace(">>>>>>> boardform has been reloaded!!");
-				
-				}
-				trace('');
-				trace('');	
-				trace('');	
-				
-
-
-
-}
-
-
-
-
-
-
-]]></Script>
+this.callbackFunc=function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{	
+	trace('');
+	trace('');	
+	trace('');	
+	trace("<<<<<<< callback function has been called");
+	
+	if(e=='esc'||e=='list_btn'){
+		
+		
+		trace('<<<<<<<<<<<<<<<< this is esc or list_btn >>>>>>>>>>>>>>>>>>>');
+		
+		
+	}else if(e=='del_btn'||e=='mod_btn'||e=='write_btn'){
+		
+		
+		this.reload();
+		trace(">>>>>>> boardform has been reloaded!!");
+		
+	}
+	trace('');
+	trace('');	
+	trace('');	
+	
+}]]></Script>
     <InitValue/>
     <Bind>
       <BindItem id="item0" compid="Grid00" propid="binddataset" datasetid="gds_bbs" columnid=""/>

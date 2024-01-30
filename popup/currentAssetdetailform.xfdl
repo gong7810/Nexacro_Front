@@ -48,6 +48,7 @@
         <Button id="modify_btn" taborder="42" text="수정" left="597.00" top="550" width="70" height="20" onclick="modify_btn_onclick" onsetfocus="modify_btn_onsetfocus"/>
         <Button id="list_btn_detail" taborder="43" text="목록" left="682.00" top="550" width="70" height="20" onclick="list_btn_detail_onclick"/>
         <Button id="delete_btn" taborder="44" text="삭제" left="772.00" top="550" width="70" height="20" onclick="delete_btn_onclick"/>
+        <Edit id="assetDetailCode" taborder="45" left="920" top="80" width="207" height="40" visible="false"/>
       </Layout>
     </Layouts>
     <Script type="xscript5.1"><![CDATA[/*************************************************************/
@@ -65,11 +66,13 @@ this.currentAssetdetailform_onload = function(obj:nexacro.Form,e:nexacro.LoadEve
 	var id = "findAssetDetail";
 	var url = "svcOperate::findAssetDetail";
 	var reqData ="";
-	var resData ="ds_asset=ds_asset";
+	var resData ="ds_asset=ds_asset ds_assetDetail=ds_assetDetail";
 	var args = "assetCode="+assetCode;
 	var callback = "onload_callbackFunc";
 	
 	this.transaction(id, url, reqData, resData, args, callback);   
+	
+	this.assetDetailCode.value = assetCode;
 }
 
 // 수정
@@ -88,8 +91,8 @@ this.modify_btn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 		const bool = confirm("저장하시겠습니까?");
 		
 		var id = "updateAsset";
-		var url = "svcOpr::updateAsset";
-		var reqData  = "ds_asset=ds_asset"; // 업데이트할 데이터만 전송 
+		var url = "svcOperate::updateAsset";
+		var reqData  = "ds_asset=ds_asset ds_assetDetail=ds_assetDetail"; // 업데이트할 데이터만 전송 
 		var resData = "";
 		var args = "";
 		var callback = "callbackFunc";
@@ -165,7 +168,7 @@ this.delete_btn_onclick = function ()
 	
 	if(bool){
 		var id = "deleteAsset";
-		var url = "svcOpr::deleteAsset";
+		var url = "svcOperate::deleteAsset";
 		var reqData = "";
 		var resData = "";
 		var args = "assetCode="+this.assetCode.value; // 삭제할 게시물의 id를 파라미터로 백단으로 넘겨준다. 		
@@ -249,6 +252,21 @@ this.currentAssetdetailform_onkeydown = function(obj:nexacro.Form,e:nexacro.KeyE
           <Column id="ASSET_NAME" type="STRING" size="256"/>
           <Column id="PROGRESS" type="STRING" size="256"/>
           <Column id="FINALIZE_STATUS" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="ACCOUNT_NAME"/>
+            <Col id="ASSET_CODE"/>
+            <Col id="ACCOUNT_CODE"/>
+            <Col id="ASSET_NAME"/>
+            <Col id="PROGRESS"/>
+            <Col id="FINALIZE_STATUS"/>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_assetDetail">
+        <ColumnInfo>
+          <Column id="ASSET_CODE" type="STRING" size="256"/>
           <Column id="ACQUISITION_COST" type="STRING" size="256"/>
           <Column id="AMORTIZATION_WAY" type="STRING" size="256"/>
           <Column id="DEPARTMENT" type="STRING" size="256"/>
@@ -266,14 +284,7 @@ this.currentAssetdetailform_onkeydown = function(obj:nexacro.Form,e:nexacro.KeyE
           <Column id="BOOK_VALUE_END" type="STRING" size="256"/>
         </ColumnInfo>
         <Rows>
-          <Row>
-            <Col id="ACCOUNT_NAME"/>
-            <Col id="ASSET_CODE"/>
-            <Col id="ACCOUNT_CODE"/>
-            <Col id="ASSET_NAME"/>
-            <Col id="PROGRESS"/>
-            <Col id="FINALIZE_STATUS"/>
-          </Row>
+          <Row/>
         </Rows>
       </Dataset>
     </Objects>
@@ -284,21 +295,22 @@ this.currentAssetdetailform_onkeydown = function(obj:nexacro.Form,e:nexacro.KeyE
       <BindItem id="item3" compid="assetName" propid="value" datasetid="ds_asset" columnid="ASSET_NAME"/>
       <BindItem id="item4" compid="progress" propid="value" datasetid="ds_asset" columnid="PROGRESS"/>
       <BindItem id="item5" compid="finalizeStatus" propid="value" datasetid="ds_asset" columnid="FINALIZE_STATUS"/>
-      <BindItem id="item6" compid="acquisitionCost" propid="value" datasetid="ds_asset" columnid="ACQUISITION_COST"/>
-      <BindItem id="item7" compid="amortizationWay" propid="value" datasetid="ds_asset" columnid="AMORTIZATION_WAY"/>
-      <BindItem id="item8" compid="department" propid="value" datasetid="ds_asset" columnid="DEPARTMENT"/>
-      <BindItem id="item9" compid="previousCost" propid="value" datasetid="ds_asset" columnid="DEPRECIATION"/>
-      <BindItem id="item10" compid="previousBalance" propid="value" datasetid="ds_asset" columnid="BOOK_VALUE"/>
-      <BindItem id="item11" compid="usefulLife" propid="value" datasetid="ds_asset" columnid="USEFUL_LIFE"/>
-      <BindItem id="item12" compid="amortizationFinalYear" propid="value" datasetid="ds_asset" columnid="AMORTIZATION_FINAL_YEAR"/>
-      <BindItem id="item13" compid="acquisitionQuantity" propid="value" datasetid="ds_asset" columnid="ACQUISITION_QUANTITY"/>
-      <BindItem id="item14" compid="changeQuantity" propid="value" datasetid="ds_asset" columnid="CHANGE_QUANTITY"/>
-      <BindItem id="item15" compid="remainQuantity" propid="value" datasetid="ds_asset" columnid="REMAIN_QUANTITY"/>
-      <BindItem id="item16" compid="amortizationRate" propid="value" datasetid="ds_asset" columnid="AMORTIZATION_RATE"/>
-      <BindItem id="item17" compid="month" propid="value" datasetid="ds_asset" columnid="MONTH"/>
-      <BindItem id="item18" compid="normalAmortization" propid="value" datasetid="ds_asset" columnid="NORMAL_AMORTIZATION"/>
-      <BindItem id="item19" compid="nowCost" propid="value" datasetid="ds_asset" columnid="ACCUMULATED_AMORTIZATION"/>
-      <BindItem id="item20" compid="nowBalance" propid="value" datasetid="ds_asset" columnid="BOOK_VALUE_END"/>
+      <BindItem id="item6" compid="assetDetailCode" propid="value" datasetid="ds_assetDetail" columnid="ASSET_CODE"/>
+      <BindItem id="item7" compid="acquisitionCost" propid="value" datasetid="ds_assetDetail" columnid="ACQUISITION_COST"/>
+      <BindItem id="item8" compid="amortizationWay" propid="value" datasetid="ds_assetDetail" columnid="AMORTIZATION_WAY"/>
+      <BindItem id="item9" compid="department" propid="value" datasetid="ds_assetDetail" columnid="DEPARTMENT"/>
+      <BindItem id="item10" compid="previousCost" propid="value" datasetid="ds_assetDetail" columnid="DEPRECIATION"/>
+      <BindItem id="item11" compid="previousBalance" propid="value" datasetid="ds_assetDetail" columnid="BOOK_VALUE"/>
+      <BindItem id="item12" compid="usefulLife" propid="value" datasetid="ds_assetDetail" columnid="USEFUL_LIFE"/>
+      <BindItem id="item13" compid="amortizationFinalYear" propid="value" datasetid="ds_assetDetail" columnid="AMORTIZATION_FINAL_YEAR"/>
+      <BindItem id="item14" compid="acquisitionQuantity" propid="value" datasetid="ds_assetDetail" columnid="ACQUISITION_QUANTITY"/>
+      <BindItem id="item15" compid="changeQuantity" propid="value" datasetid="ds_assetDetail" columnid="CHANGE_QUANTITY"/>
+      <BindItem id="item16" compid="remainQuantity" propid="value" datasetid="ds_assetDetail" columnid="REMAIN_QUANTITY"/>
+      <BindItem id="item17" compid="amortizationRate" propid="value" datasetid="ds_assetDetail" columnid="AMORTIZATION_RATE"/>
+      <BindItem id="item18" compid="month" propid="value" datasetid="ds_assetDetail" columnid="MONTH"/>
+      <BindItem id="item19" compid="normalAmortization" propid="value" datasetid="ds_assetDetail" columnid="NORMAL_AMORTIZATION"/>
+      <BindItem id="item20" compid="nowCost" propid="value" datasetid="ds_assetDetail" columnid="ACCUMULATED_AMORTIZATION"/>
+      <BindItem id="item21" compid="nowBalance" propid="value" datasetid="ds_assetDetail" columnid="BOOK_VALUE_END"/>
     </Bind>
   </Form>
 </FDL>
