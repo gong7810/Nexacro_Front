@@ -93,7 +93,7 @@ this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 		var eDate = eYear+"-"+eMonth+"-"+eDay;
 		
 		var id = "detailtrialbalance";
-		var url = "svcSettlement::detailtrialbalance";
+		var url = "svcStatement::detailtrialbalance";
 		var resData = "";
 		var reqData = "ds_detailtrialbalance=ds_detailtrialbalance";
 		var args = "startDate='"+sDate+"' endDate='"+eDate+"'";

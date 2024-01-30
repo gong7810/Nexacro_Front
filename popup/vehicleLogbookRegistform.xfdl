@@ -178,7 +178,7 @@ this.saveData_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 		
 		if (bool) {
 			var id = "insertVehicleLogbook";
-			var url = "svcOpr::insertVehicleLogbook";
+			var url = "svcOperate::insertVehicleLogbook";
 			var reqData = "ds_vehicleLogbook=ds_vehicleLogbook";
 			var resData = "";
 			var args = "";
@@ -191,10 +191,6 @@ this.saveData_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 		}
 	}
 };
-
-
-
-
 
 // esc로 창 닫기
 this.vehicleLogbookRegistform_onkeydown = function(obj:nexacro.Form,e:nexacro.KeyEventInfo)

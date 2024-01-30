@@ -59,7 +59,7 @@ var accountCode = '';
 this.currentAssetRegisterform_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
 {
 	var id = "findAssetList";
-	var url = "svcOpr::findAssetList";
+	var url = "svcOperate::findAssetList";
 	var reqData = "";
 	var resData = "ds_assetList=ds_asset";
 	var args = "";

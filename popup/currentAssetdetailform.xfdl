@@ -63,7 +63,7 @@ var assetCode = this.parent.assetCode;		// 선택 자산코드
 this.currentAssetdetailform_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
 {
 	var id = "findAssetDetail";
-	var url = "svcOpr::findAssetDetail";
+	var url = "svcOperate::findAssetDetail";
 	var reqData ="";
 	var resData ="ds_asset=ds_asset";
 	var args = "assetCode="+assetCode;

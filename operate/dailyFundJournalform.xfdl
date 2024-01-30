@@ -301,7 +301,7 @@ this.fetchbtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 		alert("조회일자를 선택해주세요");
 	} else {
 		var id = "findDailyTradeStatus";
-		var url = "svcOpr::findDailyTradeStatus";
+		var url = "svcOperate::findDailyTradeStatus";
 		var reqData = "";
 		var resData = "ds_dailyTrade=ds_dailyTrade";
 		var args = "date="+date;
@@ -320,7 +320,7 @@ this.fetchInoutbtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInf
 		alert("조회일자를 선택해주세요");
 	} else {
 		var id = "findInoutExpectedPrice";
-		var url = "svcOpr::findInoutExpectedPrice";
+		var url = "svcOperate::findInoutExpectedPrice";
 		var reqData = "";
 		var resData = "ds_outExpected=ds_outExpected ds_inExpected=ds_inExpected";
 		var args = "date="+date;
@@ -342,7 +342,7 @@ this.fetchfinanceBtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventI
 		alert("구분을 선택해주세요");
 	} else {
 		var id = "findFinanceStatus";
-		var url = "svcOpr::findFinanceStatus";
+		var url = "svcOperate::findFinanceStatus";
 		var reqData = "";
 		var resData = "ds_finance=ds_finance";
 		var args = "date='"+date+"' accountName='"+accountName+"'";
@@ -362,7 +362,7 @@ this.fetchGeneralTradeBtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickE
 		alert("조회일자를 선택해주세요");
 	} else {
 		var id = "findGeneralFundStatus";
-		var url = "svcOpr::findGeneralFundStatus";
+		var url = "svcOperate::findGeneralFundStatus";
 		var reqData = "";
 		var resData = "ds_general=ds_general";
 		var args = "startDate='"+startDate+"' endDate='"+endDate+"'";
@@ -382,7 +382,7 @@ this.fetchNotebtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo
 		alert("조회일자를 선택해주세요");
 	} else {
 		var id = "findNoteStatus";
-		var url = "svcOpr::findNoteStatus";
+		var url = "svcOperate::findNoteStatus";
 		var reqData = "";
 		var resData = "ds_paynote=ds_paynote ds_receivenote=ds_receivenote";
 		var args = "date="+date;

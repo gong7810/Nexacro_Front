@@ -83,7 +83,7 @@ this.Calendar_onchanged = function(obj:nexacro.Calendar,e:nexacro.ChangeEventInf
 	selectDate = this.Calendar.text;
 	
 	var id = "findPlan";
-	var url = "svcOpr::findPlan";
+	var url = "svcOperate::findPlan";
 	var reqData = "";
 	var resData = "ds_inplanList=ds_plan ds_outplanList=ds_plan";
 	var args = "startDate='"+selectDate+"' endDate='"+selectDate+"'";

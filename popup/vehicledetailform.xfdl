@@ -94,7 +94,7 @@ application = nexacro.getApplication();
 this.vehicledetailform_onload = function (obj:nexacro.Form,e:nexacro.LoadEventInfo)
 {
 	var id = "findVehicle";
-	var url = "svcOpr::findVehicle";
+	var url = "svcOperate::findVehicle";
 	var reqData ="";
 	var resData ="ds_vehicle=ds_vehicle";
 	var args = "vehicleCode="+vehicleCode;
@@ -107,7 +107,7 @@ this.vehicledetailform_onload = function (obj:nexacro.Form,e:nexacro.LoadEventIn
 this.findVehicle_callbackFunc = function ()
 {
 	var id = "findVehicleDetail";
-	var url = "svcOpr::findVehicleDetail";
+	var url = "svcOperate::findVehicleDetail";
 	var reqData ="";
 	var resData ="ds_vehicleDetail=ds_vehicleDetail";
 	var args = "vehicleCode="+vehicleCode;
@@ -304,7 +304,7 @@ this.updateBtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 			
 			if (bool) {
 				var id = "updateVehicle";
-				var url = "svcOpr::updateVehicle";
+				var url = "svcOperate::updateVehicle";
 				var reqData = "ds_vehicle=ds_vehicle ds_vehicleDetail=ds_vehicleDetail";
 				var resData = "";
 				var args = "";
@@ -334,7 +334,7 @@ this.deleteBtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 	
 	if (bool) {
 		var id = "deleteVehicle";
-		var url = "svcOpr::deleteVehicle";
+		var url = "svcOperate::deleteVehicle";
 		var reqData = "";
 		var resData = "";
 		var args = "vehicleCode="+vehicleCode;

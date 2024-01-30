@@ -96,7 +96,7 @@
 this.depreciationScheduleform_onload = function ()
 {
 	var id = "findDepreciationList";
-	var url = "svcOpr::findDepreciationList";
+	var url = "svcOperate::findDepreciationList";
 	var reqData ="";
 	var resData ="ds_assetList=ds_asset";
 	var args = "";
@@ -112,7 +112,7 @@ this.currentAsset_information_oncellclick = function (obj:nexacro.Grid,e:nexacro
 	trace(accountCode);
 	
 	var id = "selectDepreciationList";
-	var url = "svcOpr::selectDepreciationList";
+	var url = "svcOperate::selectDepreciationList";
 	var reqData ="";
 	var resData ="ds_assetDetailList=ds_asset";
 	var args = "accountCode="+accountCode;

@@ -74,7 +74,7 @@
 this.vehicleRegisterform_onload = function (obj:nexacro.Form,e:nexacro.LoadEventInfo)
 {
 	var id = "findVehicleList";
-	var url = "svcOpr::findVehicleList";
+	var url = "svcOperate::findVehicleList";
 	var reqData = "";
 	var resData = "ds_vehicle=ds_vehicle";
 	var args = "";

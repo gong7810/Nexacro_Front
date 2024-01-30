@@ -82,7 +82,7 @@
 this.currentAssetManagementform_onload = function (obj:nexacro.Form,e:nexacro.LoadEventInfo)
 {
 	var id = "findCurrentAssetLedgerList";
-	var url = "svcOpr::findCurrentAssetLedgerList";
+	var url = "svcOperate::findCurrentAssetLedgerList";
 	var resData ="";
 	var reqData ="ds_assetList=ds_asset";
 	var args = "";

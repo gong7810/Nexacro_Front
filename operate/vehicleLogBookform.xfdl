@@ -149,7 +149,7 @@ var rowNum = '';
 this.vehicleLogBookform_onload = function (obj:nexacro.Form,e:nexacro.LoadEventInfo)
 {
 	var id = "findVehicleList";
-	var url = "svcOpr::findVehicleList";
+	var url = "svcOperate::findVehicleList";
 	var reqData = "";
 	var resData = "ds_vehicle=ds_vehicle";
 	var args = "";
@@ -164,7 +164,7 @@ this.vehicleGrid_oncellclick = function (obj:nexacro.Grid,e:nexacro.GridClickEve
 	vehicleCode = this.vehicleGrid.getCellText(e.row, 0);
 	
 	var id = "findVehicleLogbookList";
-	var url = "svcOpr::findVehicleLogbookList";
+	var url = "svcOperate::findVehicleLogbookList";
 	var reqData = "";
 	var resData = "ds_vehicleLogbook=ds_vehicleLogbook";
 	var args = "vehicleCode="+vehicleCode;
@@ -240,7 +240,7 @@ this.deleteBtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 		
 		if (bool) {
 			var id = "deleteVehicleLogbook";
-			var url = "svcOpr::deleteVehicleLogbook";
+			var url = "svcOperate::deleteVehicleLogbook";
 			var reqData = "";
 			var resData = "";
 			var args = "vehicleCode='"+vehicleCode+"'"+" selectDate='"+selectDate+"'"+" selectTime='"+selectTime+"'";

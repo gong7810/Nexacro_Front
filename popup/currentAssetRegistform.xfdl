@@ -228,7 +228,7 @@ this.aasetRegister_callback = function ()
 {
 	// 고정자산상세
 	var assetDetail_id = "insertAssetDetail";
- 	var assetDetail_url = "svcOpr::insertAssetDetail";
+ 	var assetDetail_url = "svcOperate::insertAssetDetail";
  	var assetDetail_reqData = "ds_assetDetail=ds_assetDetail";
  	var assetDetail_resData = "";
 	var assetDetail_args = "";

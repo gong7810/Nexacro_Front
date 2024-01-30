@@ -145,7 +145,7 @@ this.updatePlanbtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInf
 		var bool = confirm("저장하시겠습니까?")
 		if (bool) {		
 			var id = "updatePlan";
-			var url = "svcOpr::updatePlan";
+			var url = "svcOperate::updatePlan";
 			var reqData = "ds_plan=ds_plan";
 			var resData = "";
 			var args = "";

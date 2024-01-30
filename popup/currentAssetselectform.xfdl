@@ -51,7 +51,7 @@ application = nexacro.getApplication();
 this.currentAssetselectform_onload = function (obj:nexacro.Form,e:nexacro.LoadEventInfo)
 {
 	var id = "findCarAsset";
-	var url = "svcOpr::findCarAsset";
+	var url = "svcOperate::findCarAsset";
 	var reqData = "";
 	var resData = "ds_asset=ds_asset";
 	var args = "";

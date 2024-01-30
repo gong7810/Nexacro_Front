@@ -382,7 +382,7 @@ this.deleteBtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 			alert("취득일자를 입력해주세요");
 		} else {
 			var id = "insertVehicle";
-			var url = "svcOpr::insertVehicle";
+			var url = "svcOperate::insertVehicle";
 			var reqData = "ds_vehicle=ds_vehicle ds_vehicleDetail=ds_vehicleDetail";
 			var resData = "";
 			var args = "";

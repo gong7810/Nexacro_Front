@@ -290,7 +290,7 @@ this.saveDatabtn_onclick = function (obj:nexacro.Button,e:nexacro.ClickEventInfo
 		alert("금액을 입력해주세요");
 		else {
 			var id = "insertPlan";
-			var url = "svcOpr::insertPlan";
+			var url = "svcOperate::insertPlan";
 			var reqData = "ds_plan=ds_plan";
 			var resData = "";
 			var args = "";
@@ -316,7 +316,7 @@ this.findPlanbtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 	alert("조회일자를 선택해주세요");
 	else {
 		var id = "findPlan";
-		var url = "svcOpr::findPlan";
+		var url = "svcOperate::findPlan";
 		var reqData = "";
 		var resData = "ds_inplanList=ds_plan ds_outplanList=ds_plan";
 		var args = "startDate='"+startDate+"' endDate='"+endDate+"'";
@@ -398,7 +398,7 @@ this.deletePlan_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 	
 	if (bool) {
 		var id = "deletePlan";
-		var url = "svcOpr::deletePlan";
+		var url = "svcOperate::deletePlan";
 		var reqData = "";
 		var resData = "";
 		var args = "planNo="+planNo;
