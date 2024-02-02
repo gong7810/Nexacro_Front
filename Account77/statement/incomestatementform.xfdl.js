@@ -115,11 +115,12 @@
         };
 
         this.callback = function(trid, ErrorCode, ErrorMsg){
-        	if(trid == "periodpopup"){
-        		this.Edit00.set_value(application.gds_period.getColumn(0,"FISCAL_YEAR"));
-        	} else if(trid=="incomestatement"){
+        	 if(trid == "periodpopup"){
+        	this.Edit00.set_value(application.gds_period.getColumn(0,"FISCAL_YEAR"));
+        	}
+        	else if(trid=="incomestatement"){
         		if(ErrorCode<0){
-        			alert("회계년도를 입력해 주세요 : "+ErrorMsg);
+        			alert("회계년도를 입력해 주세요 : "+ErrorMsg)
         			this.gfnOpen("periodpopup", "popup::periodpopupform.xfdl", "callback", null);
         		}
 
