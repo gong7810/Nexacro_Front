@@ -6,7 +6,7 @@
         <ImageViewer id="ImageViewer00" taborder="2" left="0" top="0" width="390" height="490" image="url('..\..\..\..\..\..\Downloads\0628치과\thumb_d_1174C8BDD2F59CCB55AEA36F4B30F24B.jpg')" stretch="fit" borderRadius="10px" onclick="ImageViewer00_onclick"/>
         <Button id="btn_login" taborder="0" text="로그인" left="121" top="323" width="148" height="37" onclick="btn_login_onclick"/>
         <Static id="Static00" taborder="1" text="Account" left="83" top="15" width="224" height="99" color="black" font="28px/normal &quot;Arial&quot;,&quot;Malgun Gothic&quot;,&quot;Gulim&quot;" textAlign="center"/>
-        <Edit id="ed_id" taborder="3" left="77" top="180" width="236" height="43" displaynulltext="아이디를 입력해주세요" textAlign="center" value="emp1" text="emp1"/>
+        <Edit id="ed_id" taborder="3" left="77" top="180" width="236" height="43" displaynulltext="아이디를 입력해주세요" textAlign="center" value="emp7" text="emp7"/>
         <Edit id="ed_pw" taborder="4" left="77" top="240" width="236" height="43" displaynulltext="패스워드 입력해주세요" textAlign="center" value="11111111" text="11111111" visible="true" password="true"/>
       </Layout>
     </Layouts>
@@ -17,7 +17,7 @@ application = nexacro.getApplication();
 this.btn_login_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
 	trace("@@@@btn_login_onclick@@@@");
-	var empCode = this.ed_id.value;
+	var empCode = 'emp7';
 	var userPw = this.ed_pw.value;
 	var today = this.gfn_today(); // 2021-01-01
 	

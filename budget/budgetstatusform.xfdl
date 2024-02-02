@@ -21,15 +21,15 @@
             <Format id="default">
               <Columns>
                 <Column size="67"/>
-                <Column size="101"/>
-                <Column size="80"/>
-                <Column size="80"/>
-                <Column size="80"/>
-                <Column size="63"/>
-                <Column size="80"/>
-                <Column size="80"/>
-                <Column size="80"/>
-                <Column size="63"/>
+                <Column size="99"/>
+                <Column size="78"/>
+                <Column size="78"/>
+                <Column size="78"/>
+                <Column size="78"/>
+                <Column size="78"/>
+                <Column size="78"/>
+                <Column size="78"/>
+                <Column size="78"/>
               </Columns>
               <Rows>
                 <Row size="24" band="head"/>
@@ -65,6 +65,8 @@
             </Format>
           </Formats>
         </Grid>
+        <Static id="Static01_01_00_00" taborder="14" text="" left="724.00" top="16" width="33" height="26" background="#0a0a0a" borderRadius="4px"/>
+        <Edit id="ed_accountCode" taborder="15" left="737.00" top="27" width="120" height="34" borderRadius="5px" displaynulltext="계정과목 선택" oneditclick="ed_accountCode_oneditclick" textAlign="center" enable="true" font="normal 10pt/normal &quot;함초롬돋움&quot;" onchanged="ed_accountCode_onchanged"/>
       </Layout>
     </Layouts>
     <Script type="xscript5.1"><![CDATA[include "scripts::commonOpen.xjs";
@@ -74,74 +76,73 @@ application = nexacro.getApplication();
 // var budgetCode;
 // var budgetingCode = "2";
 this.budgetapplform_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
-{		
-// 		var id = "budgetcode";
-// 		var url = "svcBudget::budgetcode";
-// 		var resData = "";
-// 		var reqData = "ds_budgetCode=ds_budgetCode";
-// 		var args = "";
-// 		var callback = "callback";		
-// 		this.transaction(id, url, resData, reqData, args, callback);
- 			this.ds_budget1.addRow();
+{      
+//       var id = "budgetcode";
+//       var url = "svcBudget::budgetcode";
+//       var resData = "";
+//       var reqData = "ds_budgetCode=ds_budgetCode";
+//       var args = "";
+//       var callback = "callback";      
+//       this.transaction(id, url, resData, reqData, args, callback);
+          this.ds_budget1.addRow();
 
 };
-		this.callback = function(trid , ErrorCode, ErrorMsg){
-		
-		strXml = this.ds_budget.saveXML();
-		}
+      this.callback = function(trid , ErrorCode, ErrorMsg){
+      
+      strXml = this.ds_budget.saveXML();
+      }
 
 //예산 신청 등록
 this.Button01_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
-		var deptCode = gb_deptCode;
-		var workplaceCode = gb_workplaceCode;
-		var accountPeriodNo = application.gds_period.getColumn(0,"ACCOUNT_PERIOD_NO");
-		var accountInnerCode = application.gds_account_detail.getColumn(e.row,"ACCOUNT_INNER_CODE");	
-		var budgetingCode="1";	
-	trace(deptCode);
-	trace(workplaceCode);
-	trace(accountPeriodNo);
-	trace(accountInnerCode);
-	
-	if(workplaceCode=="null"){
-		alert("작업장 코드를 선택해주세요")		
+      var deptCode = gb_deptCode;
+      var workplaceCode = gb_workplaceCode;
+      var accountPeriodNo = application.gds_period.getColumn(0,"ACCOUNT_PERIOD_NO");
+      var accountInnerCode = application.gds_account_detail.getColumn(e.row,"ACCOUNT_INNER_CODE");   
+      var budgetingCode="1";   
+   trace(deptCode);
+   trace(workplaceCode);
+   trace(accountPeriodNo);
+   trace(accountInnerCode);
+   
+   if(workplaceCode=="null"){
+      alert("작업장 코드를 선택해주세요")      
 
-	}
-	if(deptCode=="null"){
-		alert("부서 코드를 선택해주세요")		
-	}
-	else{		
-	
-// 		this.ds_budget1.setColumn(0,"WORKPLACE_CODE",workplace)
-// 		this.ds_budget1.setColumn(0,"DEPT_CODE",deptCode)
-// 		this.ds_budget1.setColumn(0,"BUDGETING_CODE",code)
-// 		
-	 	var id = "batchBudget";
- 		var url = "svcBudget::batch";
- 		var resData = "ds_budget1=ds_budget1";
- 		var reqData = "";
-		var args = "deptCode='"+deptCode+"' workplaceCode='"+workplaceCode+"' accountPeriodNo='"+accountPeriodNo+"' budgetingCode='"+budgetingCode+"' accountInnerCode='"+accountInnerCode+"'";
- 		var callback = "callback";		
- 		this.transaction(id, url, resData, reqData, args, callback);
-		this.reload();
-		}	
+   }
+   if(deptCode=="null"){
+      alert("부서 코드를 선택해주세요")      
+   }
+   else{      
+   
+//       this.ds_budget1.setColumn(0,"WORKPLACE_CODE",workplace)
+//       this.ds_budget1.setColumn(0,"DEPT_CODE",deptCode)
+//       this.ds_budget1.setColumn(0,"BUDGETING_CODE",code)
+//       
+       var id = "batchBudget";
+       var url = "svcBudget::batch";
+       var resData = "ds_budget1=ds_budget1";
+       var reqData = "";
+      var args = "deptCode='"+deptCode+"' workplaceCode='"+workplaceCode+"' accountPeriodNo='"+accountPeriodNo+"' budgetingCode='"+budgetingCode+"' accountInnerCode='"+accountInnerCode+"'";
+       var callback = "callback";      
+       this.transaction(id, url, resData, reqData, args, callback);
+      this.reload();
+      }   
 
 };
 
 
 this.Grid00_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
 {
-var parentAccountInnerCode = application.gds_account.getColumn(e.row,"ACCOUNT_INNER_CODE");	
-			trace("dfdf" + parentAccountInnerCode);
- 		var id = "detailaccountlist";
- 		var url = "svcOperate::detailaccountlist";
- 		var resData = "";
- 		var reqData = "gds_account_detail=gds_account_detail";
-		var args = "parentAccountInnerCode='"+parentAccountInnerCode+"'";
- 		var callback = "callback";		
- 		this.transaction(id, url, resData, reqData, args, callback);
+var parentAccountInnerCode = application.gds_account.getColumn(e.row,"ACCOUNT_INNER_CODE");   
+         trace("dfdf" + parentAccountInnerCode);
+       var id = "detailaccountlist";
+       var url = "svcOperate::detailaccountlist";
+       var resData = "";
+       var reqData = "gds_account_detail=gds_account_detail";
+      var args = "parentAccountInnerCode='"+parentAccountInnerCode+"'";
+       var callback = "callback";      
+       this.transaction(id, url, resData, reqData, args, callback);
 };
-
 
 this.ed_workplace_oneditclick = function(obj:nexacro.Edit,e:nexacro.EditClickEventInfo)
 {
@@ -158,6 +159,12 @@ this.ed_period_oneditclick = function(obj:nexacro.Edit,e:nexacro.EditClickEventI
 {
 	this.gfnOpen("periodpopup", "popup::periodpopupform.xfdl", "callback", null)
 };
+
+this.ed_accountCode_oneditclick = function(obj:nexacro.Edit,e:nexacro.EditClickEventInfo)
+{
+	this.gfnOpen("accountCodePopup", "popup::accInnercodeform.xfdl", "callback", null)
+};
+
 
 this.callback = function(trid, ErrorCode, ErrorMsg){
 
@@ -176,6 +183,19 @@ if(trid == "periodpopup"){
 	
 }
 
+if(trid == "accountCodePopup"){
+	var r = application.gds_account.rowposition;
+	this.ed_accountCode.set_value(application.gds_account.getColumn(r, "ACCOUNT_NAME"));
+	gb_accountInnerCode = application.gds_account.getColumn(r, "ACCOUNT_INNER_CODE");
+}
+
+};
+
+////////////////////////////
+
+this.ed_accountCode_onchanged = function(obj:nexacro.Edit,e:nexacro.ChangeEventInfo)
+{
+	
 };
 
 this.ed_workplace_onchanged = function(obj:nexacro.Edit,e:nexacro.ChangeEventInfo)
@@ -194,54 +214,60 @@ this.ed_period_onchanged = function(obj:nexacro.Edit,e:nexacro.ChangeEventInfo)
 };
 this.searchButton_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
-	var id = "budgetlist";
- 		var url = "svcOperate::findParentAccountList";
- 		var resData = "";
- 		var reqData = "gds_account=gds_account";
-		var args = "";
- 		var callback = "callback";		
- 		this.transaction(id, url, resData, reqData, args, callback);
+   var id = "budgetlist";
+       var url = "svcOperate::findParentAccountList";
+       var resData = "";
+       var reqData = "gds_account=gds_account";
+      var args = "";
+       var callback = "callback";      
+       this.transaction(id, url, resData, reqData, args, callback);
 };
 
 
 this.CheckBox00_00_onchanged= function(obj:nexacro.CheckBox,e:nexacro.ClickEventInfo)
 {
-	var checked2 = this.CheckBox00_00.isChecked();
-	trace(checked2);
-	if(checked2){			
-		var deptCode = gb_deptCode;
+   var checked2 = this.CheckBox00_00.isChecked();
+   trace(checked2);
+   if(checked2){         
+    	var deptCode = gb_deptCode;
 		var workplaceCode = gb_workplaceCode;
+		var accountInnerCode = gb_accountInnerCode;
 		var accountPeriodNo = application.gds_period.getColumn(0,"ACCOUNT_PERIOD_NO");	
-		var budgetingCode="2";	
-			
-		var id = "budgetStatus";
-		var url = "svcBudget::budgetStatus";
-		var resData = "";
-		var reqData = "ds_budgetStatus=ds_budgetStatus";
-		var args = "deptCode='"+deptCode+"' workplaceCode='"+workplaceCode+"' accountPeriodNo='"+accountPeriodNo+"' ";
-		var callback = "callback";		
-		this.transaction(id, url, resData, reqData, args, callback);			
+         
+      var id = "budgetStatus";
+      var url = "svcBudget::budgetStatus";
+      var resData = "";
+      var reqData = "ds_budgetStatus=ds_budgetStatus";
+      var args = "deptCode='"+deptCode+"' workplaceCode='"+workplaceCode+"' accountInnerCode='"+accountInnerCode+"' accountPeriodNo='"+accountPeriodNo+"' ";
+      var callback = "callback";      
+      this.transaction(id, url, resData, reqData, args, callback);         
 
-		}
-		else{
-			trace("Dfdfdf");
-			this.ds_budgetListForRecon.clearData();
-			this.Static05.set_text("");
-		}
+      }
+      else{
+         trace("Dfdfdf");
+         this.ds_budgetListForRecon.clearData();
+         this.Static05.set_text("");
+      }
+   
+      trace(deptCode);
+      trace(workplaceCode);
+      trace(accountPeriodNo);
+      trace(accountInnerCode);
+      
+      trace("dd" + application.gds_account_detail.rowposition);
+};
+
+
+this.Static02_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
+{
 	
-		trace(deptCode);
-		trace(workplaceCode);
-		trace(accountPeriodNo);
-		trace(accountInnerCode);
-		
-		trace("dd" + application.gds_account_detail.rowposition);
 };]]></Script>
     <Objects>
       <Dataset id="ds_budget">
         <ColumnInfo>
           <Column id="DEPT_CODE" type="STRING" size="256"/>
           <Column id="WORKPLACE_CODE" type="STRING" size="256"/>
-          <Column id="BUDGET_CODE" type="STRING" size="256"/>
+          <Column id="ACCOUNT_INNER_CODE" type="STRING" size="256"/>
           <Column id="ACCOUNT_PERIOD_NO" type="STRING" size="256"/>
           <Column id="BUDGETING_CODE" type="STRING" size="256"/>
           <Column id="M1BUDGET" type="INT" size="256"/>
@@ -262,7 +288,7 @@ this.CheckBox00_00_onchanged= function(obj:nexacro.CheckBox,e:nexacro.ClickEvent
         <ColumnInfo>
           <Column id="DEPT_CODE" type="STRING" size="256"/>
           <Column id="WORKPLACE_CODE" type="STRING" size="256"/>
-          <Column id="BUDGET_CODE" type="STRING" size="256"/>
+          <Column id="AACOUNT_INNER_CODE" type="STRING" size="256"/>
           <Column id="ACCOUNT_PERIOD_NO" type="STRING" size="256"/>
           <Column id="BUDGETING_CODE" type="STRING" size="256"/>
           <Column id="M1BUDGET" type="INT" size="256"/>

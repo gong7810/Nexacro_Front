@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="monthCostStatementform" width="1300" height="720" titletext="New Form" onload="monthCostStatementform_onload">
+    <Layouts>
+      <Layout height="720" width="1300">
+        <Button id="Button00" taborder="0" text="조회" left="1200.00" top="98" width="68" height="40" background="#5170ad" color="aliceblue" borderRadius="5px" textAlign="center" onclick="Button00_onclick"/>
+        <Calendar id="calendar_date" taborder="1" left="1007.00" top="98" width="175" height="40" onchanged="calendar_date_onchanged"/>
+        <Static id="Static01_02" taborder="2" text="" left="19.00" top="19" width="230" height="60" background="#5170ad" borderRadius="0px" font="normal 10pt/normal &quot;함초롬돋움&quot;"/>
+        <Static id="Static00_00" taborder="3" text="기간별 원가명세서" left="34.00" top="29" width="200" height="45" textAlign="center" font="normal 700 18pt/normal &quot;함초롬돋움&quot;" border="3px none #000000" background="transparent" borderRadius="0px" color="#fcfbfd" onclick="Static00_00_onclick"/>
+        <Calendar id="calendar_date00" taborder="4" left="803.00" top="98" width="175" height="40" onchanged="calendar_date00_onchanged"/>
+        <Grid id="Grid00" taborder="5" left="20" top="148" width="1260" height="507" binddataset="ds_monthCost">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="90"/>
+                <Column size="90"/>
+                <Column size="90"/>
+                <Column size="90"/>
+                <Column size="90"/>
+                <Column size="90"/>
+                <Column size="90"/>
+                <Column size="90"/>
+                <Column size="90"/>
+                <Column size="90"/>
+                <Column size="90"/>
+                <Column size="90"/>
+                <Column size="90"/>
+                <Column size="90"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="과목"/>
+                <Cell col="1" text="합계"/>
+                <Cell col="2" text="1월"/>
+                <Cell col="3" text="2월"/>
+                <Cell col="4" text="3월"/>
+                <Cell col="5" text="4월"/>
+                <Cell col="6" text="5월"/>
+                <Cell col="7" text="6월"/>
+                <Cell col="8" text="7월"/>
+                <Cell col="9" text="8월"/>
+                <Cell col="10" text="9월"/>
+                <Cell col="11" text="10월"/>
+                <Cell col="12" text="11월"/>
+                <Cell col="13" text="12월"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:ACCOUNT_NAME"/>
+                <Cell col="1" text="bind:COST_SUMMARY"/>
+                <Cell col="2" text="bind:JANUARY"/>
+                <Cell col="3" text="bind:FEBRUARY"/>
+                <Cell col="4" text="bind:MARCH"/>
+                <Cell col="5" text="bind:APRIL"/>
+                <Cell col="6" text="bind:MAY"/>
+                <Cell col="7" text="bind:JUNE"/>
+                <Cell col="8" text="bind:JULY"/>
+                <Cell col="9" text="bind:AUGUST"/>
+                <Cell col="10" text="bind:SEPTEMBER"/>
+                <Cell col="11" text="bind:OCTOBER"/>
+                <Cell col="12" text="bind:NOVEMBER"/>
+                <Cell col="13" text="bind:DECEMBER"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_monthCost">
+        <ColumnInfo>
+          <Column id="ACCOUNT_NAME" type="STRING" size="256"/>
+          <Column id="COST_SUMMARY" type="STRING" size="256"/>
+          <Column id="JANUARY" type="STRING" size="256"/>
+          <Column id="FEBRUARY" type="STRING" size="256"/>
+          <Column id="MARCH" type="STRING" size="256"/>
+          <Column id="APRIL" type="STRING" size="256"/>
+          <Column id="MAY" type="STRING" size="256"/>
+          <Column id="JUNE" type="STRING" size="256"/>
+          <Column id="JULY" type="STRING" size="256"/>
+          <Column id="AUGUST" type="STRING" size="256"/>
+          <Column id="SEPTEMBER" type="STRING" size="256"/>
+          <Column id="OCTOBER" type="STRING" size="256"/>
+          <Column id="NOVEMBER" type="STRING" size="256"/>
+          <Column id="DECEMBER" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[include "scripts::commonDate.xjs";
+include "scripts::commonOpen.xjs";
+application = nexacro.getApplication();
+
+
+this.monthCostStatement_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo){
+		trace("tracer기간별원가명세서");
+		this.calendar_date.set_value( this.gfn_todayFirst().toString() );
+};
+
+//조회 버튼 클릭
+this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo){
+		var date = this.calendar_date.value;
+			
+		var year = date.toString().substring(0,4);
+		var month = date.toString().substring(4,6);
+		var day = date.toString().substring(6,8);
+		var selectedDate = year+"-"+month+"-"+day;
+		
+// 		var eYear = endDate.toString().substring(0,4);
+// 		var eMonth = endDate.toString().substring(4,6);
+// 		var eDay = endDate.toString().substring(6,8);	
+// 		var eDate = eYear+"-"+eMonth+"-"+eDay;
+		
+		trace(year, month, day, selectedDate);
+		//trace(eYear, eMonth, eDay, eDate);
+		
+		var id = "monthCostStatement";
+		var url = "svcStatement::monthCost";
+		var resData = "";
+		var reqData = "ds_monthCost=ds_monthCost";
+		var args = "selectedDate='"+selectedDate+"'";
+		var callback = "callback";
+		this.transaction(id, url, resData, reqData, args, callback);
+};
+
+
+
+
+
+
+
+
+
+
+this.calendar_date_onchanged = function(obj:nexacro.Calendar,e:nexacro.ChangeEventInfo)
+{
+	
+};
+
+this.calendar_date00_onchanged = function(obj:nexacro.Calendar,e:nexacro.ChangeEventInfo)
+{
+	
+};
+]]></Script>
+  </Form>
+</FDL>

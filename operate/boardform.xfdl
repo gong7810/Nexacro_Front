@@ -88,7 +88,7 @@ this.boardform_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
 
 	
 	var id = "selectBoard";
-	var url = "svcOperate::findBoardList";
+	var url = "svcBoard::findBoardList";
 	var resData = "";  // update하거나 insert할때는 res데이터로 :U옵션을 주고 전송 
 	var reqData = "ds_board=ds_board"; // 데이터 요청 
 	var args = "";

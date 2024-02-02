@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="cashFlowform" width="1280" height="720" titletext="New Form" onload="cashFlowform_onload">
+    <Layouts>
+      <Layout height="720" mobileorientation="landscape" width="1280">
+        <Button id="Button00" taborder="0" text="조회" left="1050.00" top="96" width="68" height="40" background="#5170ad" color="aliceblue" borderRadius="5px" textAlign="center" onclick="Button00_onclick" defaultbutton="false"/>
+        <Calendar id="calendar_date" taborder="1" left="867.00" top="96" width="175" height="40"/>
+        <Static id="Static01_02" taborder="2" text="" left="39.00" top="19" width="191" height="60" background="#5170ad" borderRadius="0px" font="normal 10pt/normal &quot;함초롬돋움&quot;"/>
+        <Static id="Static00_00" taborder="3" text="현금흐름표" left="54.00" top="29" width="164" height="45" textAlign="center" font="normal 700 18pt/normal &quot;함초롬돋움&quot;" border="3px none #000000" background="transparent" borderRadius="0px" color="#fcfbfd"/>
+        <Grid id="Grid00" taborder="4" left="40.00" top="148" width="1080" height="507" binddataset="ds_tmpCashFlowStatement">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="154"/>
+                <Column size="154"/>
+                <Column size="154"/>
+                <Column size="154"/>
+                <Column size="154"/>
+                <Column size="154"/>
+                <Column size="154"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="과목"/>
+                <Cell col="1" text="당기"/>
+                <Cell col="2" text="세부금액"/>
+                <Cell col="3" text="합계금액"/>
+                <Cell col="4" text="전기"/>
+                <Cell col="5" text="세부금액"/>
+                <Cell col="6" text="합계금액"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:ACCOUNT_NAME"/>
+                <Cell col="1"/>
+                <Cell col="2" text="bind:CASHFLOW"/>
+                <Cell col="3" text="bind:CASHFLOW_SUMMARY"/>
+                <Cell col="4"/>
+                <Cell col="5" text="bind:EARLY_CASHFLOW"/>
+                <Cell col="6" text="bind:EARLY_CASHFLOW_SUMMARY" displaytype="number"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_tmpCashFlowStatement">
+        <ColumnInfo>
+          <Column id="ACCOUNT_INNER_CODE" type="INT" size="256"/>
+          <Column id="ACCOUNT_NAME" type="STRING" size="256"/>
+          <Column id="PARENT_ACCOUNT_CODE" type="INT" size="256"/>
+          <Column id="CASHFLOW" type="INT" size="256"/>
+          <Column id="CASHFLOW_SUMMARY" type="INT" size="256"/>
+          <Column id="EARLY_CASHFLOW" type="INT" size="256"/>
+          <Column id="EARLY_CASHFLOW_SUMMARY" type="INT" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[include "scripts::commonDate.xjs";
+include "scripts::commonOpen.xjs";
+application = nexacro.getApplication();
+
+
+this.cashFlow_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo){
+		trace("trace현금흐름표");
+		this.calendar_date.set_value( this.gfn_todayFirst().toString() );
+};
+
+//조회 버튼 클릭
+this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo){
+		var date = this.calendar_date.value;
+			
+		var year = date.toString().substring(0,4);
+		var month = date.toString().substring(4,6);
+		var day = date.toString().substring(6,8);
+		var selectedDate = year+"-"+month+"-"+day;
+		
+// 		var eYear = endDate.toString().substring(0,4);
+// 		var eMonth = endDate.toString().substring(4,6);
+// 		var eDay = endDate.toString().substring(6,8);	
+// 		var eDate = eYear+"-"+eMonth+"-"+eDay;
+		
+		trace(year, month, day, selectedDate);
+		//trace(eYear, eMonth, eDay, eDate);
+		
+		var id = "cashFlow";
+		var url = "svcStatement::cashFlow";
+		var reqData= "";
+		var resData  = "ds_tmpCashFlowStatement=ds_tmpCashFlowStatement";
+		var args = "selectedDate='"+selectedDate+"'";
+		var callback = "callback";
+		
+		this.transaction(id, url, reqData, resData, args, callback);
+};
+
+this.callback = function ()
+{
+	trace(this.ds_tmpCashFlowStatement.getColumn(0, 1));
+};
+
+
+
+
+
+
+
+
+
+]]></Script>
+  </Form>
+</FDL>

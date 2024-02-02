@@ -16,15 +16,15 @@
         <Static id="Static02_00_00_00" taborder="10" text="신청&#13;&#10;&#13;&#10;편성&#13;&#10;&#13;&#10;조정&#13;&#10;&#13;&#10;대비&#13;&#10;&#13;&#10;실적&#13;&#10;&#13;&#10;초과" left="105" top="212" width="70" height="250" onclick="Static02_onclick" font="normal 12pt/normal &quot;함초롬돋움&quot;" background="oldlace" color="sienna" textAlign="center" borderRadius="5px" positionstep="0"/>
         <Static id="Static02_00_00_01_00" taborder="11" text="    대비" left="105" top="341" width="134" height="34" onclick="Static02_onclick" font="normal 12pt/normal &quot;함초롬돋움&quot;" background="palegoldenrod" color="sienna" textAlign="left" borderRadius="5px" positionstep="0"/>
         <CheckBox id="CheckBox00_00" taborder="12" text="조회" left="184" top="331" width="65" height="56" canchange="CheckBox00_00_canchange" onchanged="CheckBox00_00_onchanged" positionstep="0" onclick="CheckBox00_00_onclick"/>
-        <Grid id="Grid00" taborder="13" left="376" top="126" width="494" height="404" binddataset="ds_budgetComparison">
+        <Grid id="Grid00" taborder="13" left="416.00" top="126" width="490" height="404" binddataset="ds_budgetComparison">
           <Formats>
             <Format id="default">
               <Columns>
-                <Column size="63"/>
-                <Column size="102"/>
-                <Column size="102"/>
-                <Column size="102"/>
-                <Column size="102"/>
+                <Column size="98"/>
+                <Column size="98"/>
+                <Column size="98"/>
+                <Column size="98"/>
+                <Column size="98"/>
               </Columns>
               <Rows>
                 <Row size="24" band="head"/>
@@ -109,6 +109,8 @@ this.Button01_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 		var args = "deptCode='"+deptCode+"' workplaceCode='"+workplaceCode+"' accountPeriodNo='"+accountPeriodNo+"' budgetingCode='"+budgetingCode+"' accountInnerCode='"+accountInnerCode+"'";
  		var callback = "callback";		
  		this.transaction(id, url, resData, reqData, args, callback);
+		
+		alert("승인 완료되었습니다");
 		this.reload();
 		}	
 
@@ -208,6 +210,11 @@ this.searchButton_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo
  		this.transaction(id, url, resData, reqData, args, callback);
 };
 
+this.Grid00_00_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+   
+};
+
 
 this.CheckBox00_00_onchanged= function(obj:nexacro.CheckBox,e:nexacro.ClickEventInfo)
 {
@@ -234,9 +241,15 @@ this.CheckBox00_00_onchanged= function(obj:nexacro.CheckBox,e:nexacro.ClickEvent
 			this.ds_budgetListForRecon.clearData();
 			this.Static05.set_text("");
 		}
-	
-
+		
+		     trace(deptCode);
+      trace(workplaceCode);
+      trace(accountPeriodNo);
+      trace(accountInnerCode);
+      
+      trace("dd" + application.gds_account_detail.rowposition);
 };
+
 
 
 this.Static02_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)

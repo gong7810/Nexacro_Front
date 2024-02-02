@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <GenInfo version="1.1">
+    <Rule>
+      <ENV rule_version="1.05"/>
+      <ADL rule_version="1.14"/>
+      <FDL rule_version="1.04"/>
+      <XCSS rule_version="1.04"/>
+      <Script rule_version="1.02"/>
+      <GeneratorInfo rule_version="1.3"/>
+    </Rule>
+    <Info project="C:\Users\duqrl\OneDrive\바탕 화면\77st_2nd_Naxcro\Nexacro_Front\" generated="C:\Users\duqrl\OneDrive\문서\TOBESOFT\Nexacro N\outputs\Account77\">
+      <File url="environment.xml" checksum="20240116164444" errormsg=""/>
+      <File url="typedefinition.xml" checksum="20240122142119" errormsg=""/>
+      <File url="appvariables.xml" checksum="20240116164444" errormsg=""/>
+      <File url="_resource_\_theme_\blue\theme.xcss" checksum="20240116164444" errormsg=""/>
+      <File url="_resource_\_xcss_\temp_main.xcss" checksum="20240116164444" errormsg=""/>
+      <File url="C:\Program Files (x86)\TOBESOFT\Nexacro N\SDK\24.0.0\nexacrolib\framework\Framework.json" checksum="20231215111948" errormsg=""/>
+      <File url="C:\Program Files (x86)\TOBESOFT\Nexacro N\SDK\24.0.0\nexacrolib\resources\Resource.json" checksum="20231215111948" errormsg=""/>
+      <File url="C:\Program Files (x86)\TOBESOFT\Nexacro N\SDK\24.0.0\nexacrolib\component\CompBase.json" checksum="20231215111944" errormsg=""/>
+      <File url="C:\Program Files (x86)\TOBESOFT\Nexacro N\SDK\24.0.0\nexacrolib\component\ComComp.json" checksum="20231215111944" errormsg=""/>
+      <File url="C:\Program Files (x86)\TOBESOFT\Nexacro N\SDK\24.0.0\nexacrolib\component\Grid.json" checksum="20231215111946" errormsg=""/>
+      <File url="C:\Program Files (x86)\TOBESOFT\Nexacro N\SDK\24.0.0\nexacrolib\component\DeviceAPI.json" checksum="20231215111946" errormsg=""/>
+      <File url="App_Desktop.xadl" checksum="20240116164444" errormsg=""/>
+    </Info>
+  </GenInfo>
+</root>
