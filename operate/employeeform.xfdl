@@ -202,11 +202,6 @@ this.employeeform_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
 	  
 };
 
-
-
-
-
-
 this.onload_callbackFunc=function(){
 
   if(this.edit_emp_code.value==undefined){

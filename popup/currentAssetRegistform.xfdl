@@ -1,0 +1,370 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="currentAssetRegistform" width="890" height="600" titletext="고정자산 등록 FORM" onload="currentAssetRegistform_onload" onkeydown="currentAssetRegistform_onkeydown">
+    <Layouts>
+      <Layout height="600" horizontalgap="0" mobileorientation="landscape" spacing="0px" tabletemplate="1* / 1*" verticalgap="0" width="890">
+        <Static id="accountname" taborder="0" text="자산유형" left="2.81%" top="4.83%" width="8.54%" height="5.17%" textAlign="center" borderRadius="5px" color="white" background="#87c4f1"/>
+        <Edit id="accountName" taborder="42" left="136.00" top="29" width="28.09%" height="5.17%" readonly="true" textAlign="center"/>
+        <Static id="assetcode" taborder="22" text="자산코드" left="2.81%" top="12.83%" width="8.54%" height="5.17%" textAlign="center" background="#87c4f1" borderRadius="5px" color="white"/>
+        <Edit id="assetCode" taborder="12" left="15.17%" top="12.83%" width="28.09%" height="5.17%" textAlign="center" readonly="true"/>
+        <Static id="accountcode" taborder="23" text="계정코드" left="2.81%" top="21.33%" width="8.54%" height="5.17%" textAlign="center" background="#87c4f1" borderRadius="5px" color="white"/>
+        <Edit id="accountCode" taborder="13" left="135.00" top="129" width="251" height="31" textAlign="center" readonly="true"/>
+        <Static id="assetname" taborder="24" text="자산명" left="2.81%" top="30.00%" width="8.54%" height="5.17%" textAlign="center" background="#87c4f1" borderRadius="5px" color="white"/>
+        <Edit id="assetName" taborder="1" left="15.17%" top="30.00%" width="28.09%" height="5.17%" textAlign="center" onchanged="edit_basic_address_onchanged" text=""/>
+        <Static id="progress_date" taborder="25" text="취득일" left="2.81%" top="38.83%" width="8.54%" height="5.17%" textAlign="center" background="#87c4f1" borderRadius="5px" color="white"/>
+        <Calendar id="progress" taborder="2" left="15.17%" top="38.83%" width="28.09%" height="5.17%" displayinvalidtext="날짜를 선택해 주세요" innerdataset="ds_asset" datecolumn="PROGRESS" onchanged="edit_birth_date_onchanged" dateformat="yyyy-MM-dd "/>
+        <Static id="finalizestatus" taborder="26" text="처리여부" left="2.81%" top="46.83%" width="8.54%" height="5.17%" textAlign="center" background="#87c4f1" borderRadius="5px" color="white"/>
+        <Combo id="finalizeStatus" taborder="3" text="" left="136.00" top="281" width="251" height="31" innerdataset="ds_status" datacolumn="FINALIZE_STATUS" displaynulltext="처리여부를 선택해 주세요" oncloseup="edit_position_name_oncloseup" value="" index="-1" tooltiptext="처리여부를 선택해 주세요"/>
+        <Static id="acquisitioncost" taborder="33" text="취득원가" left="2.81%" top="55.33%" width="8.54%" height="5.17%" textAlign="center" background="#87c4f1" borderRadius="5px" color="white"/>
+        <MaskEdit id="acquisitionCost" taborder="4" left="15.17%" top="55.33%" width="28.09%" height="5.17%" type="number" textAlign="center" trimtype="left" onchanged="mask_edit_social_security_number_onchanged" rtl="" maskchar=" " format="#,#.###"/>
+        <Static id="amortizationway" taborder="32" text="상각방법" left="2.81%" top="63.33%" width="8.54%" height="5.17%" textAlign="center" background="#87c4f1" borderRadius="5px" color="white"/>
+        <Combo id="amortizationWay" taborder="5" left="135.00" top="380" width="251" height="31" displaynulltext="상각방법을 선택해 주세요" oncloseup="edit_gender_oncloseup" innerdataset="ds_amortizationWay" datacolumn="AMORTIZATION_WAY" value="" index="-1" text="" tooltiptext="상각방법을 선택해 주세요"/>
+        <Static id="departmentList" taborder="30" text="관리부서" left="2.81%" top="71.17%" width="8.54%" height="5.17%" textAlign="center" background="#87c4f1" borderRadius="5px" color="white"/>
+        <Combo id="department" taborder="6" left="136.00" top="429" width="250" height="31" innerdataset="ds_departmentList" datacolumn="DEPARTMENT" displaynulltext="관리부서를 선택해주세요" oncloseup="edit_level_of_education_oncloseup" value="" index="-1" text="" tooltiptext="관리부서를 선택해주세요"/>
+        <Static id="previouscost" taborder="27" text="전기말상각누계액" left="50.11%" top="4.83%" width="13.15%" height="5.17%" textAlign="center" background="#87c4f1" borderRadius="5px" color="white"/>
+        <MaskEdit id="previousCost" taborder="7" left="67.42%" top="4.83%" width="28.09%" height="5.17%" type="number" textAlign="center" trimtype="left" onchanged="previousCost_onchanged" rtl="" maskchar=" " format="#,0.###"/>
+        <Static id="previousbalance" taborder="28" text="전기말장부가액" left="50.00%" top="13.00%" width="13.15%" height="5.17%" textAlign="center" background="#87c4f1" borderRadius="5px" color="white"/>
+        <MaskEdit id="previousBalance" taborder="14" left="67.42%" top="13.33%" width="27.87%" height="5.17%" type="number" textAlign="center" maskchar="-" trimtype="left" format="#,#.###" readonly="true"/>
+        <Static id="usefullife" taborder="29" text="내용연수" left="50.11%" top="21.83%" width="13.15%" height="5.17%" textAlign="center" background="#87c4f1" borderRadius="5px" color="white"/>
+        <MaskEdit id="usefulLife" taborder="8" left="67.53%" top="21.83%" width="27.87%" height="5.17%" type="number" textAlign="center" maskchar="-" trimtype="left" onchanged="usefulLife_onchanged"/>
+        <Static id="amortizationfinalyear" taborder="35" text="상각완료년도" left="50.11%" top="30.17%" width="13.15%" height="5.17%" textAlign="center" background="#87c4f1" borderRadius="5px" color="white"/>
+        <Edit id="amortizationFinalYear" taborder="15" left="67.42%" top="30.17%" width="27.87%" height="5.17%" textAlign="center" readonly="true"/>
+        <Static id="Static00_02_00_00" taborder="31" text="취득수량" left="50.22%" top="39.00%" width="13.15%" height="5.17%" textAlign="center" background="#87c4f1" borderRadius="5px" color="white"/>
+        <Edit id="acquisitionQuantity" taborder="9" left="67.42%" top="39.00%" width="27.87%" height="5.17%" textAlign="center" onchanged="acquisitionQuantity_onchanged"/>
+        <Static id="Static00_02_00_00_00" taborder="34" text="증감수량" left="50.22%" top="47.17%" width="13.15%" height="5.17%" textAlign="center" background="#87c4f1" borderRadius="5px" color="white"/>
+        <Edit id="changeQuantity" taborder="16" left="67.42%" top="47.17%" width="27.98%" height="5.17%" textAlign="center" onchanged="edit_basic_address_onchanged" readonly="true"/>
+        <Static id="Static00_02_00_00_00_00" taborder="36" text="잔존수량" left="50.22%" top="55.17%" width="13.15%" height="5.17%" textAlign="center" background="#87c4f1" borderRadius="5px" color="white"/>
+        <Edit id="remainQuantity" taborder="17" left="67.30%" top="55.17%" width="27.98%" height="5.17%" textAlign="center" onchanged="edit_basic_address_onchanged" readonly="true"/>
+        <Static id="Static00_02_00_00_00_01" taborder="37" text="상각률" left="50.22%" top="63.50%" width="13.15%" height="5.17%" textAlign="center" background="#87c4f1" borderRadius="5px" color="white"/>
+        <Edit id="amortizationRate" taborder="18" left="67.30%" top="63.50%" width="27.98%" height="5.17%" textAlign="center" onchanged="edit_basic_address_onchanged" readonly="true"/>
+        <Static id="Static00_02_00_00_00_00_00" taborder="38" text="월수" left="50.22%" top="71.50%" width="13.15%" height="5.17%" textAlign="center" background="#87c4f1" borderRadius="5px" color="white"/>
+        <Edit id="month" taborder="19" left="67.30%" top="71.50%" width="27.98%" height="5.17%" textAlign="center" readonly="true" text=""/>
+        <Static id="Static00_02_00_00_00_01_00" taborder="39" text="일반상각비" left="2.81%" top="81.83%" width="13.15%" height="5.17%" textAlign="center" background="#87c4f1" borderRadius="5px" color="white"/>
+        <MaskEdit id="normalAmortization" taborder="10" left="17.42%" top="81.83%" width="12.81%" height="5.17%" type="number" textAlign="center" trimtype="left" rtl="" maskchar=" " format="#,#.###" readonly="true"/>
+        <Static id="Static00_02_00_00_00_01_00_00" taborder="40" text="당기말상각누계액" left="35.17%" top="81.83%" width="13.15%" height="5.17%" textAlign="center" background="#87c4f1" borderRadius="5px" color="white"/>
+        <MaskEdit id="nowCost" taborder="20" left="49.89%" top="81.83%" width="12.81%" height="5.17%" type="number" textAlign="center" trimtype="left" rtl="" maskchar=" " format="#,#.###" readonly="true"/>
+        <Static id="Static00_02_00_00_00_01_00_01" taborder="41" text="당기말장부가액" left="67.87%" top="81.67%" width="13.15%" height="5.17%" textAlign="center" background="#87c4f1" borderRadius="5px" color="white"/>
+        <MaskEdit id="nowBalance" taborder="21" left="82.58%" top="81.67%" width="12.81%" height="5.17%" type="number" textAlign="center" trimtype="left" rtl="" maskchar=" " format="#,#.###" readonly="true"/>
+        <Button id="saveData" taborder="11" text="등록" left="764.00" top="542" width="86" height="39" onclick="saveData_onclick"/>
+        <Edit id="assetDetailCode" taborder="43" left="102.81%" top="15.33%" width="28.09%" height="5.17%" textAlign="center" readonly="true" visible="false"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[/*************************************************************/
+/* 프 로 그 램 : C:\Users\owner\Desktop\77th_2nd_Nexa ACC\Nexacro_Front\popup\currentAssetRegistform.xfdl
+/* 작 성 일 자 : 2024/01/18
+/* 작 성 자 명 : S.U
+/* 설       명 : 고정자산 상세정보입력 폼
+/*************************************************************/
+include "scripts::commonDate.xjs"
+
+application = nexacro.getApplication();
+var accountName = this.parent.accountName;
+var accountCode = this.parent.accountCode;
+var assetCode = this.parent.assetCode;
+var assetName = '';					// 자산명
+var progress = '';					// 취득일
+var finalizeStatus = '';			// 처리여부
+var acquisitionCost = '';			// 취득원가
+var amortizationWay = '';			// 상각방법
+var department = '';				// 관리부서
+var previousCost = '';				// 전기말상각누계액
+var previousBalance = '';			// 전기말장부가액
+var usefulLife = '';				// 내용연수
+var amortizationFinalYear = '';		// 상각완료년도
+var acquisitionQuantity = '';		// 취득수량
+var changeQuantity = '';			// 증감수량
+var remainQuantity = '';			// 잔존수량
+var amortizationRate = '';			// 상각률
+var month = 12;						// 월수
+var normalAmortization = '';		// 일반상각비
+var nowCost = '';					// 당기말상각누계액
+var nowBalance = '';				// 당기말장부가액
+
+// 자산유형, 자산코드, 계정코드 세팅
+this.currentAssetRegistform_onload = function(obj:nexacro.Form, e:nexacro.LoadEventInfo)
+{
+	trace('<<<<<<<<<<open the registform');
+	trace(accountName);
+	trace(assetCode);
+	trace(accountCode);
+	this.accountName.set_value(accountName);
+	this.assetCode.set_value(assetCode);
+	this.assetDetailCode.set_value(assetCode);
+	this.accountCode.set_value(accountCode);
+	
+};
+
+// 전기말장부가액 세팅
+this.previousCost_onchanged = function ()
+{
+	// 전기말장부가액 = 취득원가 - 전기말상각누계액
+ 	acquisitionCost = nexacro.toNumber(this.acquisitionCost.text.replace(/,/gi, ''));
+ 	previousCost = nexacro.toNumber(this.previousCost.text.replace(/,/gi, ''));
+	this.previousBalance.set_value(acquisitionCost - previousCost);
+	previousBalance = acquisitionCost - previousCost;
+	
+
+};
+
+// 상각완료년도 세팅
+this.usefulLife_onchanged = function ()
+{
+	// 상각완료년도 = 현재년도 + 내용연수
+	var year = (new Date().getFullYear() + nexacro.toNumber(this.usefulLife.text)).toString();
+	this.amortizationFinalYear.set_value(year+'년');
+	amortizationFinalYear = this.amortizationFinalYear.text;
+	usefulLife = nexacro.toNumber(this.usefulLife.text);
+	// 상각률 = 1 / 내용연수
+	var rate = 1 / nexacro.toNumber(this.usefulLife.text);
+	this.amortizationRate.set_value(rate);
+	amortizationRate = rate;
+	// 월수 = 12 고정
+	this.month.set_value(12);
+	// 일반상각비 = 취득원가 * 상각률
+	this.normalAmortization.set_value(acquisitionCost * amortizationRate);
+	normalAmortization = acquisitionCost * amortizationRate;
+	// 당기말상각누계액 = 전기말상각누계액 + 일반상각비
+	this.nowCost.set_value(previousCost + normalAmortization);
+	nowCost = previousCost + normalAmortization;
+	// 당기말장부가액 = 취득원가 - 당기말상각누계액
+	trace('>>>>>>>>>>', acquisitionCost);
+	trace('>>>>>>>>>>', nowCost);
+	trace('>>>>>>>>>>', acquisitionCost-nowCost);
+	nowBalance = acquisitionCost - nowCost;
+	trace('>>>>>>>>>>', nowBalance);
+	this.nowBalance.set_value(nowBalance);
+};
+
+// 증감, 잔존수량 세팅
+this.acquisitionQuantity_onchanged = function ()
+{
+	// 취득수량 = 잔존수량
+	this.changeQuantity.set_value(0);
+	this.remainQuantity.set_value(this.acquisitionQuantity.text);
+	changeQuantity = 0;
+	remainQuantity = this.acquisitionQuantity.text.replace(/,/gi, '');
+	
+	trace('>>>>>>>>>>>', this.ds_assetDetail.getColumn(0, 0));
+	trace('>>>>>>>>>>>', this.ds_assetDetail.getColumn(0, 1));
+	trace('>>>>>>>>>>>', this.ds_assetDetail.getColumn(0, 2));
+	trace('>>>>>>>>>>>', this.ds_assetDetail.getColumn(0, 15));
+};
+
+// 고정자산 등록
+this.saveData_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	trace('<<<<<<< this is save currentAsset >>>>>>>');
+	// 데이터 세팅
+// 	accountName = this.parent.accountName;
+// 	accountCode = this.parent.accountCode;
+// 	assetCode = this.parent.assetCode;
+	assetName = this.assetName.text;
+	progress = this.progress.value;
+	trace('<<<<<'+accountName);
+	finalizeStatus = this.finalizeStatus.text;
+	acquisitionCost = this.acquisitionCost.text;
+	amortizationWay = this.amortizationWay.text;
+	department = this.department.text;
+	previousCost = this.previousCost.text;
+	previousBalance = this.previousBalance.text;
+	usefulLife = this.usefulLife.text;
+	amortizationFinalYear = this.amortizationFinalYear.text;
+	acquisitionQuantity = this.acquisitionQuantity.text;
+	changeQuantity = this.changeQuantity.text;
+	remainQuantity = this.remainQuantity.text;
+	amortizationRate = this.amortizationRate.text;
+	normalAmortization = this.normalAmortization.text;
+	nowCost = this.nowCost.text;
+	nowBalance = this.nowBalance.text;
+		
+	//트랜잭션 정보를 변수에 할당 
+ 	var id = "insertAsset";
+ 	var url = "svcOperate::insertAsset";
+ 	var reqData = "ds_asset=ds_asset ds_assetDetail=ds_assetDetail";
+ 	var resData = "";
+	var args = "";
+ 	var callback = "aasetRegister_callback";	
+	
+	// 전부 입력하지 않았다면 transaction이 실행되지 않음 
+	// ---> 공백이어도 마찬가지  
+	if(assetName.trim() == ''){
+		alert('자산명을 입력해 주세요.');
+		return;
+// 	} else if(progress == null){
+// 		alert('취득일을 선택해 주세요.');
+// 		return;
+// 	} else if(finalizeStatus.trim()==''){
+// 		alert('처리여부를 선택해 주세요.');
+// 		return;
+// 	} else if(acquisitionCost.trim()==''){
+// 		alert('취득원가를 입력해 주세요.');
+// 		return;
+// 	} else if(amortizationWay.trim()==''){
+// 		alert('상각방법을 선택해 주세요.');
+// 		return;
+// 	} else if(department.trim()==''){
+// 		alert('관리부서를 선택해 주세요.');
+// 		return;
+// 	} else if(usefulLife.trim()==''){
+// 		alert('내용연수를 입력해 주세요.');
+// 		return;
+// 	} else if(acquisitionQuantity.trim()==''){
+// 		alert('취득수량을 입력해 주세요.');
+// 		return;
+		
+		// 상세정보를 다 입력했는지 확인
+	} else{
+		const bool = confirm("등록 하시겠습니까?");
+		if (bool) {		
+ 			this.transaction(id, url, reqData, resData, args, callback); 
+			alert("등록되었습니다.");
+			this.close('saveData');
+		}
+	}
+}
+
+
+// esc로 창 닫기
+this.currentAssetRegistform_onkeydown = function(obj:nexacro.Form,e:nexacro.KeyEventInfo)
+{
+	const a=e.keycode;
+	if(a==27){
+		this.close('esc');
+	}
+};]]></Script>
+    <Objects>
+      <Dataset id="ds_status">
+        <ColumnInfo>
+          <Column id="FINALIZE_STATUS" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="FINALIZE_STATUS">진행</Col>
+          </Row>
+          <Row>
+            <Col id="FINALIZE_STATUS">정지</Col>
+          </Row>
+          <Row>
+            <Col id="FINALIZE_STATUS">말소</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_amortizationWay">
+        <ColumnInfo>
+          <Column id="AMORTIZATION_WAY" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="AMORTIZATION_WAY">정액법</Col>
+          </Row>
+          <Row>
+            <Col id="AMORTIZATION_WAY">정률법</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_departmentList">
+        <ColumnInfo>
+          <Column id="DEPARTMENT" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="DEPARTMENT">재경부</Col>
+          </Row>
+          <Row>
+            <Col id="DEPARTMENT">영업부</Col>
+          </Row>
+          <Row>
+            <Col id="DEPARTMENT">생산부</Col>
+          </Row>
+          <Row>
+            <Col id="DEPARTMENT">구매자재부</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_asset">
+        <ColumnInfo>
+          <Column id="ACCOUNT_NAME" type="STRING" size="256"/>
+          <Column id="ASSET_CODE" type="STRING" size="256"/>
+          <Column id="ACCOUNT_CODE" type="STRING" size="256"/>
+          <Column id="ASSET_NAME" type="STRING" size="256"/>
+          <Column id="PROGRESS" type="STRING" size="256"/>
+          <Column id="FINALIZE_STATUS" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="ACCOUNT_NAME"/>
+            <Col id="ASSET_CODE"/>
+            <Col id="ACCOUNT_CODE"/>
+            <Col id="ASSET_NAME"/>
+            <Col id="PROGRESS"/>
+            <Col id="FINALIZE_STATUS"/>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_assetDetail">
+        <ColumnInfo>
+          <Column id="ASSET_CODE" type="STRING" size="256"/>
+          <Column id="ACQUISITION_COST" type="STRING" size="256"/>
+          <Column id="AMORTIZATION_WAY" type="STRING" size="256"/>
+          <Column id="DEPARTMENT" type="STRING" size="256"/>
+          <Column id="DEPRECIATION" type="STRING" size="256"/>
+          <Column id="BOOK_VALUE" type="STRING" size="256"/>
+          <Column id="USEFUL_LIFE" type="STRING" size="256"/>
+          <Column id="AMORTIZATION_FINAL_YEAR" type="STRING" size="256"/>
+          <Column id="ACQUISITION_QUANTITY" type="STRING" size="256"/>
+          <Column id="CHANGE_QUANTITY" type="STRING" size="256"/>
+          <Column id="REMAIN_QUANTITY" type="STRING" size="256"/>
+          <Column id="AMORTIZATION_RATE" type="STRING" size="256"/>
+          <Column id="MONTH" type="STRING" size="256"/>
+          <Column id="NORMAL_AMORTIZATION" type="STRING" size="256"/>
+          <Column id="ACCUMULATED_AMORTIZATION" type="STRING" size="256"/>
+          <Column id="BOOK_VALUE_END" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="ACQUISITION_COST"/>
+            <Col id="ASSET_CODE"/>
+            <Col id="AMORTIZATION_WAY"/>
+            <Col id="DEPARTMENT"/>
+            <Col id="DEPRECIATION"/>
+            <Col id="BOOK_VALUE"/>
+            <Col id="USEFUL_LIFE"/>
+            <Col id="AMORTIZATION_FINAL_YEAR"/>
+            <Col id="ACQUISITION_QUANTITY"/>
+            <Col id="CHANGE_QUANTITY"/>
+            <Col id="REMAIN_QUANTITY"/>
+            <Col id="AMORTIZATION_RATE"/>
+            <Col id="MONTH"/>
+            <Col id="NORMAL_AMORTIZATION"/>
+            <Col id="ACCUMULATED_AMORTIZATION"/>
+            <Col id="BOOK_VALUE_END"/>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="accountName" propid="value" datasetid="ds_asset" columnid="ACCOUNT_NAME"/>
+      <BindItem id="item1" compid="assetCode" propid="value" datasetid="ds_asset" columnid="ASSET_CODE"/>
+      <BindItem id="item2" compid="accountCode" propid="value" datasetid="ds_asset" columnid="ACCOUNT_CODE"/>
+      <BindItem id="item3" compid="assetName" propid="value" datasetid="ds_asset" columnid="ASSET_NAME"/>
+      <BindItem id="item4" compid="progress" propid="value" datasetid="ds_asset" columnid="PROGRESS"/>
+      <BindItem id="item5" compid="finalizeStatus" propid="value" datasetid="ds_asset" columnid="FINALIZE_STATUS"/>
+      <BindItem id="item7" compid="acquisitionCost" propid="value" datasetid="ds_assetDetail" columnid="ACQUISITION_COST"/>
+      <BindItem id="item8" compid="amortizationWay" propid="value" datasetid="ds_assetDetail" columnid="AMORTIZATION_WAY"/>
+      <BindItem id="item9" compid="department" propid="value" datasetid="ds_assetDetail" columnid="DEPARTMENT"/>
+      <BindItem id="item10" compid="previousCost" propid="value" datasetid="ds_assetDetail" columnid="DEPRECIATION"/>
+      <BindItem id="item11" compid="previousBalance" propid="value" datasetid="ds_assetDetail" columnid="BOOK_VALUE"/>
+      <BindItem id="item12" compid="usefulLife" propid="value" datasetid="ds_assetDetail" columnid="USEFUL_LIFE"/>
+      <BindItem id="item13" compid="amortizationFinalYear" propid="value" datasetid="ds_assetDetail" columnid="AMORTIZATION_FINAL_YEAR"/>
+      <BindItem id="item14" compid="acquisitionQuantity" propid="value" datasetid="ds_assetDetail" columnid="ACQUISITION_QUANTITY"/>
+      <BindItem id="item15" compid="changeQuantity" propid="value" datasetid="ds_assetDetail" columnid="CHANGE_QUANTITY"/>
+      <BindItem id="item16" compid="remainQuantity" propid="value" datasetid="ds_assetDetail" columnid="REMAIN_QUANTITY"/>
+      <BindItem id="item17" compid="amortizationRate" propid="value" datasetid="ds_assetDetail" columnid="AMORTIZATION_RATE"/>
+      <BindItem id="item18" compid="month" propid="value" datasetid="ds_assetDetail" columnid="MONTH"/>
+      <BindItem id="item19" compid="normalAmortization" propid="value" datasetid="ds_assetDetail" columnid="NORMAL_AMORTIZATION"/>
+      <BindItem id="item20" compid="nowCost" propid="value" datasetid="ds_assetDetail" columnid="ACCUMULATED_AMORTIZATION"/>
+      <BindItem id="item21" compid="nowBalance" propid="value" datasetid="ds_assetDetail" columnid="BOOK_VALUE_END"/>
+      <BindItem id="item6" compid="assetDetailCode" propid="value" datasetid="ds_assetDetail" columnid="ASSET_CODE"/>
+    </Bind>
+  </Form>
+</FDL>

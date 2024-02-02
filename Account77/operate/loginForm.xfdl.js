@@ -89,7 +89,8 @@
         this.btn_login_onclick = function(obj,e)
         {
         	trace("@@@@btn_login_onclick@@@@");
-        	var empCode = 'emp7';
+        	var empCode = this.ed_id.value;
+        	//var empCode = "emp7";
         	var userPw = this.ed_pw.value;
         	var today = this.gfn_today(); // 2021-01-01
 
@@ -116,42 +117,42 @@
 
         //로그인한 후에 gds_menu를 가지고 온다.
         this.afterLoginSetting = function(){
-        		var code = application.gds_emp.getColumn(0, "EMP_CODE");
-        		var name = application.gds_emp.getColumn(0, "EMP_NAME");
-        		var position = application.gds_emp.getColumn(0, "POSITION_NAME");
-        		var deptCode = application.gds_emp.getColumn(0, "DEPT_CODE");
-        		// 현재 기수번호 구함
-        		var index = application.gds_period.getRowCount()-1;
-        		var current_periodNo = application.gds_period.getColumn(index, "ACCOUNT_PERIOD_NO");
+        	var code = application.gds_emp.getColumn(0, "EMP_CODE");
+        	var name = application.gds_emp.getColumn(0, "EMP_NAME");
+        	var position = application.gds_emp.getColumn(0, "POSITION_NAME");
+        	var deptCode = application.gds_emp.getColumn(0, "DEPT_CODE");
+        	// 현재 기수번호 구함
+        	var index = application.gds_period.getRowCount()-1;
+        	var current_periodNo = application.gds_period.getColumn(index, "ACCOUNT_PERIOD_NO");
 
-        		// 글로벌변수 세팅
-        		application.gv_empCode = code;
-        		application.gv_empName = name;
-        		application.gv_deptCode = deptCode;
-        		application.gv_currentPeriod = current_periodNo;
+        	// 글로벌변수 세팅
+        	application.gv_empCode = code;
+        	application.gv_empName = name;
+        	application.gv_deptCode = deptCode;
+        	application.gv_currentPeriod = current_periodNo;
 
-        		this.alert(name + " " + position + "님 접속을 환영합니다!");
+        	this.alert(name + " " + position + "님 접속을 환영합니다!");
 
-        		// 모든 메뉴를 가져온다.
-        		var id = "getMenuList";
-        		var url = "svcBase::findMenuList";
-        		var resData = "";
-        		var reqData = "gds_menu=gds_menu";
-        		var args = "";
-        		var callback = "menu_callback";
+        	// 모든 메뉴를 가져온다.
+        	var id = "getMenuList";
+        	var url = "svcBase::findMenuList";
+        	var resData = "";
+        	var reqData = "gds_menu=gds_menu";
+        	var args = "";
+        	var callback = "menu_callback";
 
-        		application.transaction(id,  url, resData, reqData, args, callback, false);
+        	application.transaction(id,  url, resData, reqData, args, callback, false);
 
-        		// 메뉴 권한 목록 가져온다
-        		this.gfn_loginAuthority(code);
-        		application.gv_authorityCode = application.gds_loginAuthority.getColumn(0, "AUTHORITY_LEVEL");
+        	// 메뉴 권한 목록 가져온다
+        	this.gfn_loginAuthority(code);
+        	application.gv_authorityCode = application.gds_loginAuthority.getColumn(0, "AUTHORITY_LEVEL");
 
-        		// 로그인한 user정보 세팅
-        		var index = application.gds_open.addRow();
-        		application.gds_open.setColumn(index, "CODE", position); // 직책
-        		application.gds_open.setColumn(index, "NAME", name);
-        		this.gfn_open("Base::MainPage.xfdl", "MainPage", "mainForm");
-        		//application.mainframe.set_visible(true);				                  //*******************************
+        	// 로그인한 user정보 세팅
+        	var index = application.gds_open.addRow();
+        	application.gds_open.setColumn(index, "CODE", position); // 직책
+        	application.gds_open.setColumn(index, "NAME", name);
+        	this.gfn_open("Base::MainPage.xfdl", "MainPage", "mainForm");
+        	//application.mainframe.set_visible(true);				                  //*******************************
 
 
 
@@ -200,10 +201,10 @@
         //---> 트랜잭션이 데이터를 가지고 오고 나서
         //     실행하기 위함
         this.auth_datacallbackFunc=function(){
-        trace('');
-        trace('');
-        trace('');
-        trace('---------------------------logic for user verification started---------------------------')
+        	trace('');
+        	trace('');
+        	trace('');
+        	trace('---------------------------logic for user verification started---------------------------')
 
         	//현재 로그인한 사용자의 정보를 받아서
         	var user = application.gds_emp.getColumn(0, "EMP_CODE");
@@ -252,94 +253,111 @@
 
 
         	//사용하지 않는 페이지를 gds_menu에서 삭제하기 위한 로직
-        				trace('');
-        				trace('');
-        				trace('');
-        				var arr=application.gds_menu.extractRows("DESCRIPTION=='10'");
-         				application.gds_menu.deleteMultiRows(arr);
-         				cnt=application.gds_menu.getRowCount();
-         				trace('------------- after delete description 10 cnt : '+cnt+'------------------');
-        				trace('');
-        				trace('');
-        				trace('');
+        	trace('');
+        	trace('');
+        	trace('');
+        	var arr=application.gds_menu.extractRows("DESCRIPTION=='10'");
+        	application.gds_menu.deleteMultiRows(arr);
+        	cnt=application.gds_menu.getRowCount();
+        	trace('------------- after delete description 10 cnt : '+cnt+'------------------');
+        	trace('');
+        	trace('');
+        	trace('');
 
 
         	// 로그인한 사용자의 권한을 확인하기 위한 로직
         	// DB의 menu 테이블 description 칼럼에 입력된
         	// 숫자를 기준으로 합니다.
 
-        			if(this.Emp_Auth_List.findRow(3,'AU01')==-1){
-        				var arr=application.gds_menu.extractRows("DESCRIPTION=='1'");
-         				application.gds_menu.deleteMultiRows(arr);
-         				cnt=application.gds_menu.getRowCount();
-         				trace('1>>>>>> after delete rows : '+cnt);
+        	if(this.Emp_Auth_List.findRow(3,'AU01')==-1){
+        		var arr=application.gds_menu.extractRows("DESCRIPTION=='1'");
+        		application.gds_menu.deleteMultiRows(arr);
+        		cnt=application.gds_menu.getRowCount();
+        		trace('1>>>>>> after delete rows : '+cnt);
 
 
-        			}
+        	}
 
-        			if(this.Emp_Auth_List.findRow(3,'AU02')==-1){
-        				var arr=application.gds_menu.extractRows("DESCRIPTION=='2'");
-        				application.gds_menu.deleteMultiRows(arr);
-         				cnt=application.gds_menu.getRowCount();
-        				trace('2>>>>>> after delete rows : '+cnt);
-
-
-        			}
-
-        			if(this.Emp_Auth_List.findRow(3,'AU03')==-1){
-        				var arr=application.gds_menu.extractRows("DESCRIPTION=='3'");
-        				application.gds_menu.deleteMultiRows(arr);
-         				cnt=application.gds_menu.getRowCount();
-        				trace('3>>>>>> after delete rows : '+cnt);
+        	if(this.Emp_Auth_List.findRow(3,'AU02')==-1){
+        		var arr=application.gds_menu.extractRows("DESCRIPTION=='2'");
+        		application.gds_menu.deleteMultiRows(arr);
+        		cnt=application.gds_menu.getRowCount();
+        		trace('2>>>>>> after delete rows : '+cnt);
 
 
-        			}
+        	}
 
-        			if(this.Emp_Auth_List.findRow(3,'AU04')==-1){
+        	if(this.Emp_Auth_List.findRow(3,'AU03')==-1){
+        		var arr=application.gds_menu.extractRows("DESCRIPTION=='3'");
+        		application.gds_menu.deleteMultiRows(arr);
+        		cnt=application.gds_menu.getRowCount();
+        		trace('3>>>>>> after delete rows : '+cnt);
 
-        			var arr=application.gds_menu.extractRows("DESCRIPTION=='4'");
-        				application.gds_menu.deleteMultiRows(arr);
-         				cnt=application.gds_menu.getRowCount();
-        				trace('4>>>>>> after delete rows : '+cnt);
 
-        			}
+        	}
 
-        			if(this.Emp_Auth_List.findRow(3,'AU05')==-1){
+        	if(this.Emp_Auth_List.findRow(3,'AU04')==-1){
 
-        				var arr=application.gds_menu.extractRows("DESCRIPTION=='5'");
-        				application.gds_menu.deleteMultiRows(arr);
-         				cnt=application.gds_menu.getRowCount();
-        				trace('5>>>>>> after delete rows : '+cnt);
+        		var arr=application.gds_menu.extractRows("DESCRIPTION=='4'");
+        		application.gds_menu.deleteMultiRows(arr);
+        		cnt=application.gds_menu.getRowCount();
+        		trace('4>>>>>> after delete rows : '+cnt);
 
-        			}
+        	}
 
-        			if(this.Emp_Auth_List.findRow(3,'AU06')==-1){
+        	if(this.Emp_Auth_List.findRow(3,'AU05')==-1){
 
-        				var arr=application.gds_menu.extractRows("DESCRIPTION=='6'");
-        				application.gds_menu.deleteMultiRows(arr);
-         				cnt=application.gds_menu.getRowCount();
-        				trace('6>>>>>> after delete rows : '+cnt);
+        		var arr=application.gds_menu.extractRows("DESCRIPTION=='5'");
+        		application.gds_menu.deleteMultiRows(arr);
+        		cnt=application.gds_menu.getRowCount();
+        		trace('5>>>>>> after delete rows : '+cnt);
 
-        			}
+        	}
 
-        			if(this.Emp_Auth_List.findRow(3,'AU07')==-1){
+        	if(this.Emp_Auth_List.findRow(3,'AU06')==-1){
 
-        				var arr=application.gds_menu.extractRows("DESCRIPTION=='7'");
-        				application.gds_menu.deleteMultiRows(arr);
-         				cnt=application.gds_menu.getRowCount();
-        				trace('7>>>>>> after delete rows : '+cnt);
+        		var arr=application.gds_menu.extractRows("DESCRIPTION=='6'");
+        		application.gds_menu.deleteMultiRows(arr);
+        		cnt=application.gds_menu.getRowCount();
+        		trace('6>>>>>> after delete rows : '+cnt);
 
-        			}
+        	}
 
-        			if(this.Emp_Auth_List.findRow(3,'AU09')==-1){
+        	if(this.Emp_Auth_List.findRow(3,'AU07')==-1){
 
-        				var arr=application.gds_menu.extractRows("DESCRIPTION=='8'");
-        				application.gds_menu.deleteMultiRows(arr);
-         				cnt=application.gds_menu.getRowCount();
-        				trace('8>>>>>> after delete rows : '+cnt);
+        		var arr=application.gds_menu.extractRows("DESCRIPTION=='7'");
+        		application.gds_menu.deleteMultiRows(arr);
+        		cnt=application.gds_menu.getRowCount();
+        		trace('7>>>>>> after delete rows : '+cnt);
 
-        				}
+        	}
 
+        	if(this.Emp_Auth_List.findRow(3,'AU08')==-1){
+
+        		var arr=application.gds_menu.extractRows("DESCRIPTION=='8'");
+        		application.gds_menu.deleteMultiRows(arr);
+        		cnt=application.gds_menu.getRowCount();
+        		trace('8>>>>>> after delete rows : '+cnt);
+
+        	}
+
+        	if(this.Emp_Auth_List.findRow(3,'AU09')==-1){
+
+        		var arr=application.gds_menu.extractRows("DESCRIPTION=='9'");
+        		application.gds_menu.deleteMultiRows(arr);
+        		cnt=application.gds_menu.getRowCount();
+        		trace('8>>>>>> after delete rows : '+cnt);
+
+        	}
+
+        	if(this.Emp_Auth_List.findRow(3,'AU10')==-1){
+
+        		var arr=application.gds_menu.extractRows("DESCRIPTION=='0'");
+        		application.gds_menu.deleteMultiRows(arr);
+        		cnt=application.gds_menu.getRowCount();
+        		trace('8>>>>>> after delete rows : '+cnt);
+
+        	}
 
 
 
@@ -357,8 +375,8 @@
         	application.mainframe.set_visible(true);
 
 
-         //권한에 따라서 데이터를 삭제하고 해당 폼을 종료
-         this.close();
+        	//권한에 따라서 데이터를 삭제하고 해당 폼을 종료
+        	this.close();
         }
 
 
@@ -369,15 +387,15 @@
 
         // 권한 메뉴 목록 함수
         this.gfn_loginAuthority = function(empCode){
-        		trace("@@@@gfn_loginAuthority@@@@");
-        		var id = "findLoginAuthorityList";
-        		var url = "svcOperate::loginAuthority";
-        		var resData = "";
-        		var reqData = "gds_loginAuthority=gds_loginAuthority";
-        		var args = "empCode='"+empCode+"'";
-        		var callback = "callback";
+        	trace("@@@@gfn_loginAuthority@@@@");
+        	var id = "findLoginAuthorityList";
+        	var url = "svcOperate::loginAuthority";
+        	var resData = "";
+        	var reqData = "gds_loginAuthority=gds_loginAuthority";
+        	var args = "empCode='"+empCode+"'";
+        	var callback = "callback";
 
-        		application.transaction(id, url, resData, reqData, args, callback, false);
+        	application.transaction(id, url, resData, reqData, args, callback, false);
 
 
         }
@@ -424,6 +442,7 @@
         		this.btn_login.click();
         	}
         };
+
 
         });
         

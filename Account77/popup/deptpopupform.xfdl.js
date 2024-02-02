@@ -17,7 +17,7 @@
             
             // Object(Dataset, ExcelExportObject) Initialize
             obj = new Dataset("ds_code", this);
-            obj._setContents("<ColumnInfo><Column id=\"DEPT_CODE\" type=\"STRING\" size=\"256\"/><Column id=\"DEPT_NAME\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            obj._setContents("<ColumnInfo><Column id=\"DEPT_CODE\" type=\"STRING\" size=\"256\"/><Column id=\"DEPT_NAME\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row/></Rows>");
             this.addChild(obj.name, obj);
             
             // UI Components Initialize
@@ -62,8 +62,9 @@
         		var url = "svcOperate::selectdeptCode";
         		var resData = "";
         		var reqData = "gds_department=gds_department";
-        		var args = "code='"+code+"'";
+        		var args = "";
         		var callback = "callback";
+
         		this.transaction(id, url, resData, reqData, args, callback);
         };
 
@@ -78,12 +79,21 @@
         	this.close();
         };
 
+        // esc로 창 닫기
+        this.deptpopupform_onkeydown = function(obj,e)
+        {
+        	const a=e.keycode;
+        	if(a==27){
+        		this.close('esc');
+        	}
+        };
         });
         
         // Regist UI Components Event
         this.on_initEvent = function()
         {
             this.addEventHandler("onload",this.deptpopupform_onload,this);
+            this.addEventHandler("onkeydown",this.deptpopupform_onkeydown,this);
             this.Grid00.addEventHandler("oncelldblclick",this.Grid00_oncelldblclick,this);
         };
         this.loadIncludeScript("deptpopupform.xfdl");

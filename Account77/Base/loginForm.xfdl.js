@@ -47,8 +47,8 @@
             obj.set_taborder("3");
             obj.set_displaynulltext("아이디를 입력해주세요");
             obj.set_textAlign("center");
-            obj.set_value("emp1");
-            obj.set_text("emp1");
+            obj.set_value("emp7");
+            obj.set_text("emp7");
             this.addChild(obj.name, obj);
 
             obj = new Edit("ed_pw","77","240","236","43",null,null,null,null,null,null,this);

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <FDL version="2.1">
-  <Form id="deptpopupform" width="390" height="430" onload="deptpopupform_onload">
+  <Form id="deptpopupform" width="390" height="430" onload="deptpopupform_onload" onkeydown="deptpopupform_onkeydown">
     <Layouts>
       <Layout height="430" width="390">
         <Static id="Static00" taborder="0" text="부서코드" left="108" top="13" width="167" height="35" textAlign="center" font="20px/normal &quot;휴먼엑스포&quot;"/>
@@ -34,6 +34,9 @@
           <Column id="DEPT_CODE" type="STRING" size="256"/>
           <Column id="DEPT_NAME" type="STRING" size="256"/>
         </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
       </Dataset>
     </Objects>
     <InitValue/>
@@ -46,8 +49,9 @@ this.deptpopupform_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
 		var url = "svcOperate::selectdeptCode";
 		var resData = "";
 		var reqData = "gds_department=gds_department";
-		var args = "code='"+code+"'";
+		var args = "";
 		var callback = "callback";		
+		
 		this.transaction(id, url, resData, reqData, args, callback);
 };
 
@@ -61,6 +65,14 @@ this.Grid00_oncelldblclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventI
 	
 	this.close();
 };
-]]></Script>
+
+// esc로 창 닫기
+this.deptpopupform_onkeydown = function(obj:nexacro.Form,e:nexacro.KeyEventInfo)
+{
+	const a=e.keycode;
+	if(a==27){
+		this.close('esc');
+	}
+};]]></Script>
   </Form>
 </FDL>

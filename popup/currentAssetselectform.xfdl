@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="currentAssetselectform" width="350" height="350" titletext="New Form" onload="currentAssetselectform_onload" onkeydown="currentAssetselectform_onkeydown">
+    <Layouts>
+      <Layout height="350" width="350">
+        <Static id="Static00" taborder="0" text="차량" left="87.00" top="13" width="167" height="35" textAlign="center" font="20px/normal &quot;휴먼엑스포&quot;"/>
+        <Grid id="Grid00" taborder="1" left="20.00" top="58" width="310" height="262" binddataset="ds_asset" autofittype="col" oncelldblclick="Grid00_oncelldblclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="155"/>
+                <Column size="155"/>
+              </Columns>
+              <Rows>
+                <Row band="head" size="24"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="자산코드"/>
+                <Cell col="1" text="자산명"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:ASSET_CODE" textAlign="center"/>
+                <Cell col="1" text="bind:ASSET_NAME" textAlign="center"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_asset">
+        <ColumnInfo>
+          <Column id="ASSET_CODE" type="STRING" size="256"/>
+          <Column id="ASSET_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/*************************************************************/
+/* 프 로 그 램 : C:\Users\owner\Desktop\77th_2nd_Nexa ACC\Nexacro_Front\popup\currentAssetselectform.xfdl
+/* 작 성 일 자 : 2024/01/26
+/* 작 성 자 명 : S.U
+/* 설       명 : 차량선택 폼
+/*************************************************************/
+
+application = nexacro.getApplication();
+
+this.currentAssetselectform_onload = function (obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	var id = "findCarAsset";
+	var url = "svcOperate::findCarAsset";
+	var reqData = "";
+	var resData = "ds_asset=ds_asset";
+	var args = "";
+	var callback = "callback";
+	
+	this.transaction(id, url, reqData, resData, args, callback);
+};
+
+// 그리드 더블클릭 
+this.Grid00_oncelldblclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{	
+	var assetCode = this.Grid00.getCellText(this.Grid00.currentrow, 0);
+	var assetName = this.Grid00.getCellText(this.Grid00.currentrow, 1);
+	
+	application.gv_assetCode = assetCode;
+	application.gv_assetName = assetName;
+	
+	trace(application.gv_assetCode);
+	trace(application.gv_assetName);
+	
+	this.close();
+};
+
+// esc로 창 닫기
+this.currentAssetselectform_onkeydown = function(obj:nexacro.Form,e:nexacro.KeyEventInfo)
+{
+	const a=e.keycode;
+	if(a==27){
+		this.close('esc');
+	}
+};]]></Script>
+  </Form>
+</FDL>

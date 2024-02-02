@@ -1,0 +1,475 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="vehicledetailform" width="850" height="500" titletext="차량 상세정보 폼" onload="vehicledetailform_onload" onkeydown="vehicledetailform_onkeydown">
+    <Layouts>
+      <Layout width="850" height="500">
+        <Grid id="vehicleGrid" taborder="0" left="66.00" top="45" width="723" height="10.2%" binddataset="ds_vehicle" enable="false">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="90"/>
+                <Column size="90"/>
+                <Column size="90"/>
+                <Column size="90"/>
+                <Column size="90"/>
+                <Column size="90"/>
+                <Column size="90"/>
+                <Column size="91"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="차량코드"/>
+                <Cell col="1" text="차량번호"/>
+                <Cell col="2" text="차종"/>
+                <Cell col="3" text="부서코드"/>
+                <Cell col="4" text="부서명"/>
+                <Cell col="5" text="사원코드"/>
+                <Cell col="6" text="사원명"/>
+                <Cell col="7" text="사용여부"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:VEHICLE_CODE" textAlign="center"/>
+                <Cell col="1" text="bind:VEHICLE_NUMBER" textAlign="center"/>
+                <Cell col="2" text="bind:VEHICLE_TYPE" textAlign="center"/>
+                <Cell col="3" text="bind:DEPT_CODE" textAlign="center"/>
+                <Cell col="4" text="bind:DEPT_NAME" textAlign="center"/>
+                <Cell col="5" text="bind:EMP_CODE" edittype="text" textAlign="center"/>
+                <Cell col="6" text="bind:EMP_NAME" edittype="text" textAlign="center"/>
+                <Cell col="7" text="bind:AVAILABILITY" edittype="combo" combodataset="ds_available" combodatacol="AVAILABLE" textAlign="center"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="accountname" taborder="1" text="계정과목" left="8.24%" top="24.80%" width="8.71%" height="6.20%" textAlign="center" borderRadius="5px" color="white" background="#87c4f1"/>
+        <Static id="currentasset" taborder="2" text="고정자산" left="8.12%" top="33.80%" width="8.71%" height="6.20%" textAlign="center" borderRadius="5px" color="white" background="#87c4f1"/>
+        <Edit id="accountCode" taborder="3" left="167.00" top="124" width="60" height="6.20%" value="0208" text="0208" readonly="true"/>
+        <Edit id="accountName" taborder="4" left="237.00" top="124" width="80" height="6.20%" value="차량운반구" text="차량운반구" readonly="true"/>
+        <Edit id="assetCode" taborder="5" left="167.00" top="169" width="110" height="6.20%" text="" readonly="true"/>
+        <Edit id="assetName" taborder="6" left="287.00" top="169" width="100" height="6.20%" text="" tooltiptext="If personal vehicles, Blanks" readonly="true" oneditclick="assetName_oneditclick"/>
+        <Static id="accountName00" taborder="7" text="취득일자" left="58.94%" top="24.80%" width="8.71%" height="6.20%" textAlign="center" borderRadius="5px" color="white" background="#87c4f1"/>
+        <Calendar id="acquisitionDate" taborder="8" left="587.00" top="124" width="132" height="6.20%" readonly="true" dateformat="yyyy-MM-dd"/>
+        <Static id="accountName00_00" taborder="9" text="처분일자" left="58.94%" top="33.40%" width="8.71%" height="6.20%" textAlign="center" borderRadius="5px" color="white" background="#87c4f1"/>
+        <Calendar id="disposalDate" taborder="10" left="587.00" top="169" width="132" height="6.20%" readonly="true" dateformat="yyyy-MM-dd"/>
+        <Static id="currentasset00" taborder="11" text="경비구분" left="8.24%" top="42.80%" width="8.71%" height="6.20%" textAlign="center" borderRadius="5px" color="white" background="#87c4f1"/>
+        <Combo id="expenseCategory" taborder="12" left="167.00" top="214" width="144" height="6.20%" value="" index="-1" innerdataset="ds_category" datacolumn="EXPENSE_CATEGORY" readonly="true"/>
+        <Static id="currentasset00_00" taborder="13" text="보험여부" left="8.00%" top="51.80%" width="8.71%" height="6.20%" textAlign="center" borderRadius="5px" color="white" background="#87c4f1"/>
+        <CheckBox id="insuranceStatusCheckBox" taborder="14" text="가입" left="173.00" top="259" width="69" height="31" onclick="insuranceStatusCheckBox_onclick" value="false" readonly="true"/>
+        <Static id="currentasset00_00_00" taborder="15" text="보험회사" left="31.88%" top="51.80%" width="8.71%" height="6.20%" textAlign="center" borderRadius="5px" color="white" background="#87c4f1"/>
+        <Edit id="customerCode" taborder="16" left="357.00" top="259" width="63" height="6.20%" text="" readonly="true"/>
+        <Edit id="insuranceCompany" taborder="17" left="432.00" top="259" width="118" height="6.20%" text="" readonly="true" oneditclick="insuranceCompany_oneditclick"/>
+        <Static id="accountName00_01" taborder="18" text="보험기간" left="8.00%" top="60.80%" width="8.71%" height="6.20%" textAlign="center" borderRadius="5px" color="white" background="#87c4f1"/>
+        <Calendar id="insuranceStartPeriod" taborder="19" left="167.00" top="304" width="144" height="6.20%" readonly="true" dateformat="yyyy-MM-dd"/>
+        <Static id="Static00_00" taborder="20" text="-" left="317.00" top="307" width="27" height="24" textAlign="center" font="bold 20px/normal &quot;Gulim&quot;"/>
+        <Calendar id="insuranceEndPeriod" taborder="21" left="349.00" top="304" width="144" height="6.20%" readonly="true" dateformat="yyyy-MM-dd"/>
+        <Static id="accountName00_01_00" taborder="22" text="임차구분" left="8.00%" top="69.80%" width="8.71%" height="6.20%" textAlign="center" borderRadius="5px" color="white" background="#87c4f1"/>
+        <Combo id="leaseType" taborder="23" left="167.00" top="349" width="166" height="6.20%" value="" index="-1" innerdataset="ds_type" datacolumn="LEASE_TYPE" onitemchanged="leaseType_onitemchanged" readonly="true"/>
+        <Static id="accountName00_01_01" taborder="24" text="임차기간" left="8.00%" top="78.80%" width="8.71%" height="6.20%" textAlign="center" borderRadius="5px" color="white" background="#87c4f1"/>
+        <Calendar id="leaseStartPeriod" taborder="25" left="167.00" top="396" width="144" height="6.2%" readonly="true" dateformat="yyyy-MM-dd"/>
+        <Static id="Static00_00_00" taborder="26" text="-" left="317.00" top="399" width="27" height="24" textAlign="center" font="bold 20px/normal &quot;Gulim&quot;"/>
+        <Calendar id="leaseEndPeriod" taborder="27" left="349.00" top="396" width="144" height="6.20%" readonly="true" dateformat="yyyy-MM-dd"/>
+        <Static id="accountName00_01_01_00" taborder="28" text="사용구분" left="8.00%" top="87.80%" width="8.71%" height="6.20%" textAlign="center" borderRadius="5px" color="white" background="#87c4f1"/>
+        <CheckBox id="usageWork" taborder="29" text="일반업무용" left="167.00" top="439" width="83" height="6.20%" onclick="usageWork_onclick" readonly="true"/>
+        <CheckBox id="usageCommute" taborder="30" text="출·퇴근용" left="257.00" top="439" width="83" height="6.20%" onclick="usageCommute_onclick" readonly="true"/>
+        <Button id="updateBtn" taborder="31" text="수정" left="595" top="458" width="62" height="26" onclick="updateBtn_onclick"/>
+        <Button id="returnBtn" taborder="32" text="목록" left="678.00" top="458" width="62" height="26" onclick="returnBtn_onclick"/>
+        <Button id="deleteBtn" taborder="33" text="삭제" left="759.00" top="458" width="62" height="26" onclick="deleteBtn_onclick"/>
+        <Edit id="insuranceStatus" taborder="34" left="725" top="257" width="81" height="34" visible="false" readonly="true"/>
+        <Edit id="usageType" taborder="35" left="725.00" top="304" width="81" height="34" visible="false" readonly="true"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[/*************************************************************/
+/* 프 로 그 램 : C:\Users\owner\Desktop\77th_2nd_Nexa ACC\Nexacro_Front\popup\vehicledetailform.xfdl
+/* 작 성 일 자 : 2024/01/26
+/* 작 성 자 명 : S.U
+/* 설       명 : 업무용차량 상세 폼
+/*************************************************************/
+
+var vehicleCode = this.parent.vehicleCode;
+application = nexacro.getApplication();
+
+// 선택 업무용차량 조회
+this.vehicledetailform_onload = function (obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	var id = "findVehicle";
+	var url = "svcOperate::findVehicle";
+	var reqData ="";
+	var resData ="ds_vehicle=ds_vehicle";
+	var args = "vehicleCode="+vehicleCode;
+	var callback = "findVehicle_callbackFunc";
+	
+	this.transaction(id, url, reqData, resData, args, callback);   
+};
+
+// 선택 업무용차량상세 조회
+this.findVehicle_callbackFunc = function ()
+{
+	var id = "findVehicleDetail";
+	var url = "svcOperate::findVehicleDetail";
+	var reqData ="";
+	var resData ="ds_vehicleDetail=ds_vehicleDetail";
+	var args = "vehicleCode="+vehicleCode;
+	var callback = "onload_callbackFunc";
+	
+	this.transaction(id, url, reqData, resData, args, callback);
+	
+};
+
+// 조회후 콜백 처리
+this.onload_callbackFunc = function ()
+{
+	// 보험여부 체크박스 처리
+	if (this.insuranceStatus.value == "여") {
+		this.insuranceStatusCheckBox.value = true;	
+	} else {
+		this.insuranceStatusCheckBox.value = false;
+	}
+	
+	// 사용구분 체크박스 처리
+	if (this.usageType.value == "일반업무용") {
+		this.usageWork.value = true;
+		this.usageCommute.value = false;
+	} else {
+		this.usageWork.value = false;
+		this.usageCommute.value = true;
+	}
+};
+
+// 고정자산 선택 팝업창 호출
+this.assetName_oneditclick = function(obj:nexacro.Edit,e:nexacro.ChangeEventInfo)
+{	 
+	if (this.assetName.readonly == false) {
+		var sID="currentAssetselectform";
+		var sURL="popup::currentAssetselectform.xfdl";
+		var param="";
+		var callbackFunc="currentAssetselectform_callbackFunc";  
+		// 해당 프레임을 생성												 //            --파라미터 순서-- 
+		var oChildFrame = new ChildFrame(sID, 0, 0, 0, 0, null, null, sURL);  // 프레임명, 부모프레임의 왼쪽과의 거리,
+		// 부모프레임의 상단과의 거리, 해당 프레임의 넓이,
+		// 해당 프레임의 높이, 부로 프레임의 오른쪽과의 거리,
+		// 부모 프레임과의 하단과의 거리, 참조할 프레임의 주소
+		// 해당 프레임 화면에 출력												 // 참고 : 해당 프레임의 크기는 변경할수는 없는거 같다. 
+		oChildFrame.set_openalign("center middle");  // ---> 띄워지는 위치를 지정 
+		oChildFrame.showModal(sID, this.getOwnerFrame(), param, this, callbackFunc);
+	}
+};
+
+// 선택 고정자산 세팅
+this.currentAssetselectform_callbackFunc = function ()
+{
+	this.assetCode.set_value(application.gv_assetCode);
+	this.assetName.set_value(application.gv_assetName);
+};
+
+// 거래처 팝업창 호출
+this.insuranceCompany_oneditclick = function(obj:nexacro.Edit,e:nexacro.ChangeEventInfo)
+{	 
+	if (this.insuranceCompany.readonly == false) {
+		var sID="customercodeform";
+		var sURL="popup::customercodeform.xfdl";
+		var param={vehicle : "vehicle"};
+		var callbackFunc="customercodeform_callbackFunc";  
+		// 해당 프레임을 생성												 //            --파라미터 순서-- 
+		var oChildFrame = new ChildFrame(sID, 0, 0, 0, 0, null, null, sURL);  // 프레임명, 부모프레임의 왼쪽과의 거리,
+		// 부모프레임의 상단과의 거리, 해당 프레임의 넓이,
+		// 해당 프레임의 높이, 부로 프레임의 오른쪽과의 거리,
+		// 부모 프레임과의 하단과의 거리, 참조할 프레임의 주소
+		// 해당 프레임 화면에 출력												 // 참고 : 해당 프레임의 크기는 변경할수는 없는거 같다. 
+		oChildFrame.set_openalign("center middle");  // ---> 띄워지는 위치를 지정 
+		oChildFrame.showModal(sID, this.getOwnerFrame(), param, this, callbackFunc);
+	}
+};
+
+// 선택 거래처 세팅
+this.customercodeform_callbackFunc = function() 
+{
+	this.customerCode.set_value(application.gv_customerCode);
+	this.insuranceCompany.set_value(application.gv_customerName);
+}
+
+// 보험가입 여부처리
+this.insuranceStatusCheckBox_onclick = function(obj:nexacro.CheckBox,e:nexacro.ClickEventInfo)
+{
+	if (this.insuranceStatusCheckBox.value == true) {
+		this.insuranceStatus.value = '여';
+		this.insuranceCompany.set_readonly(false);
+		this.insuranceStartPeriod.set_readonly(false);
+		this.insuranceEndPeriod.set_readonly(false);
+	} else {
+		this.insuranceStatus.value = '부';
+		this.customerCode.value = '';
+		this.insuranceCompany.value = '';
+		this.insuranceStartPeriod.value = '';
+		this.insuranceEndPeriod.value = '';
+		this.insuranceCompany.set_readonly(true);
+		this.insuranceStartPeriod.set_readonly(true);
+		this.insuranceEndPeriod.set_readonly(true);
+	}
+};
+
+// 임차구분에 따른 임차기간처리
+this.leaseType_onitemchanged = function(obj:nexacro.Combo,e:nexacro.ItemChangeEventInfo)
+{
+	if (this.leaseType.value == "자차") {
+		this.leaseStartPeriod.value = '';
+		this.leaseEndPeriod.value = '';
+		this.leaseStartPeriod.set_readonly(true);
+		this.leaseEndPeriod.set_readonly(true);
+	} else {
+		this.leaseStartPeriod.set_readonly(false);
+		this.leaseEndPeriod.set_readonly(false);
+	}
+};
+
+// 사용구분 toggle처리
+this.usageWork_onclick = function(obj:nexacro.CheckBox,e:nexacro.ClickEventInfo)
+{
+	if (this.usageWork.value == true) {
+		this.usageCommute.value = false;
+		this.usageType.value = "일반업무용";
+	} else if (!this.usageWork.value && !this.usageCommute.value) {
+		this.usageType.value = "";
+	}
+};
+// 사용구분 toggle처리
+this.usageCommute_onclick = function(obj:nexacro.CheckBox,e:nexacro.ClickEventInfo)
+{
+	if (this.usageCommute.value == true) {
+		this.usageWork.value = false;
+		this.usageType.value = "출·퇴근용";
+	} else if (!this.usageWork.value && !this.usageCommute.value) {
+		this.usageType.value = "";
+	}
+};
+
+// 수정
+this.updateBtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	if(this.updateBtn.text == "수정") {
+		this.updateBtn.set_text("저장");
+		this.vehicleGrid.enable = true;
+		this.assetName.set_readonly(false);
+		this.acquisitionDate.set_readonly(false);
+		this.disposalDate.set_readonly(false);
+		this.expenseCategory.set_readonly(false);
+		this.insuranceStatusCheckBox.set_readonly(false);
+		this.insuranceCompany.set_readonly(false);
+		this.insuranceStartPeriod.set_readonly(false);
+		this.insuranceEndPeriod.set_readonly(false);
+		this.leaseType.set_readonly(false);
+		this.leaseStartPeriod.set_readonly(false);
+		this.leaseEndPeriod.set_readonly(false);
+		this.usageWork.set_readonly(false);
+		this.usageCommute.set_readonly(false);
+		
+		this.insuranceStatusCheckBox_onclick();
+		this.leaseType_onitemchanged();
+	} else {
+		
+		if (this.ds_vehicle.getColumn(0, 5) == null) {
+			alert("사원코드를 입력해주세요");
+		} else if (this.ds_vehicle.getColumn(0, 6) == null) {
+			alert("사원명을 입력해주세요");
+		} else {
+			this.ds_vehicleDetail.setColumn(0, "ACQUISITION_DATE", this.acquisitionDate.text);
+
+			if (this.disposalDate.text == "    -  -  ")
+				this.ds_vehicleDetail.setColumn(0, "DISPOSAL_DATE", this.disposalDate.value);
+			else
+				this.ds_vehicleDetail.setColumn(0, "DISPOSAL_DATE", this.disposalDate.text);
+				
+			if (this.insuranceStartPeriod.text == "    -  -  ")
+				this.ds_vehicleDetail.setColumn(0, "INSURANCE_START_PERIOD", this.insuranceStartPeriod.value);
+			else
+				this.ds_vehicleDetail.setColumn(0, "INSURANCE_START_PERIOD", this.insuranceStartPeriod.text);
+				
+			if (this.insuranceEndPeriod.text == "    -  -  ")
+				this.ds_vehicleDetail.setColumn(0, "INSURANCE_END_PERIOD", this.insuranceEndPeriod.value);
+			else
+				this.ds_vehicleDetail.setColumn(0, "INSURANCE_END_PERIOD", this.insuranceEndPeriod.text);
+				
+			if (this.leaseStartPeriod.text == "    -  -  ")
+				this.ds_vehicleDetail.setColumn(0, "LEASE_START_PERIOD", this.leaseStartPeriod.value);
+			else
+				this.ds_vehicleDetail.setColumn(0, "LEASE_START_PERIOD", this.leaseStartPeriod.text);
+				
+			if (this.leaseEndPeriod.text == "    -  -  ")
+				this.ds_vehicleDetail.setColumn(0, "LEASE_END_PERIOD", this.leaseEndPeriod.value);
+			else
+				this.ds_vehicleDetail.setColumn(0, "LEASE_END_PERIOD", this.leaseEndPeriod.text);
+		
+			const bool = confirm("저장하시겠습니까?");
+			
+			if (bool) {
+				var id = "updateVehicle";
+				var url = "svcOperate::updateVehicle";
+				var reqData = "ds_vehicle=ds_vehicle ds_vehicleDetail=ds_vehicleDetail";
+				var resData = "";
+				var args = "";
+				var callback = "callbackFunc";
+				
+				this.transaction(id, url, reqData, resData, args, callback);
+				
+				alert("저장되었습니다");
+				this.close();
+			}
+		}
+	}
+}
+
+// 목록
+this.returnBtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.close('list_btn');
+};
+
+// 삭제
+this.deleteBtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var vehicleCode = this.vehicleGrid.getCellText(0,0);
+	
+	const bool = confirm("삭제하시겠습니까?\n(해당 차량의 모든 정보가 삭제됩니다)");
+	
+	if (bool) {
+		var id = "deleteVehicle";
+		var url = "svcOperate::deleteVehicle";
+		var reqData = "";
+		var resData = "";
+		var args = "vehicleCode="+vehicleCode;
+		var callback = "callbackFunc";
+		
+		this.transaction(id, url, reqData, resData, args, callback);
+		
+		alert("삭제되었습니다");
+		this.close();
+	}
+};
+
+// esc로 창 닫기
+this.vehicledetailform_onkeydown = function(obj:nexacro.Form,e:nexacro.KeyEventInfo)
+{
+	const a=e.keycode;
+	if(a==27){
+		this.close('esc');
+	}
+};
+
+
+]]></Script>
+    <Objects>
+      <Dataset id="ds_vehicle">
+        <ColumnInfo>
+          <Column id="VEHICLE_CODE" type="STRING" size="256"/>
+          <Column id="VEHICLE_NUMBER" type="STRING" size="256"/>
+          <Column id="VEHICLE_TYPE" type="STRING" size="256"/>
+          <Column id="DEPT_CODE" type="STRING" size="256"/>
+          <Column id="DEPT_NAME" type="STRING" size="256"/>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+          <Column id="AVAILABILITY" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_vehicleDetail">
+        <ColumnInfo>
+          <Column id="VEHICLE_CODE" type="STRING" size="256"/>
+          <Column id="ACCOUNT_CODE" type="STRING" size="256"/>
+          <Column id="ACCOUNT_NAME" type="STRING" size="256"/>
+          <Column id="ASSET_CODE" type="STRING" size="256"/>
+          <Column id="ASSET_NAME" type="STRING" size="256"/>
+          <Column id="ACQUISITION_DATE" type="STRING" size="256"/>
+          <Column id="DISPOSAL_DATE" type="STRING" size="256"/>
+          <Column id="EXPENSE_CATEGORY" type="STRING" size="256"/>
+          <Column id="INSURANCE_STATUS" type="STRING" size="256"/>
+          <Column id="CUSTOMER_CODE" type="STRING" size="256"/>
+          <Column id="INSURANCE_COMPANY" type="STRING" size="256"/>
+          <Column id="INSURANCE_START_PERIOD" type="STRING" size="256"/>
+          <Column id="INSURANCE_END_PERIOD" type="STRING" size="256"/>
+          <Column id="LEASE_TYPE" type="STRING" size="256"/>
+          <Column id="LEASE_START_PERIOD" type="STRING" size="256"/>
+          <Column id="LEASE_END_PERIOD" type="STRING" size="256"/>
+          <Column id="USAGE_TYPE" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_category">
+        <ColumnInfo>
+          <Column id="EXPENSE_CATEGORY" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="EXPENSE_CATEGORY">800번대</Col>
+          </Row>
+          <Row>
+            <Col id="EXPENSE_CATEGORY">500번대</Col>
+          </Row>
+          <Row>
+            <Col id="EXPENSE_CATEGORY">600번대</Col>
+          </Row>
+          <Row>
+            <Col id="EXPENSE_CATEGORY">700번대</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_type">
+        <ColumnInfo>
+          <Column id="LEASE_TYPE" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="LEASE_TYPE">자차</Col>
+          </Row>
+          <Row>
+            <Col id="LEASE_TYPE">렌트</Col>
+          </Row>
+          <Row>
+            <Col id="LEASE_TYPE">리스</Col>
+          </Row>
+          <Row>
+            <Col id="LEASE_TYPE">직원명의</Col>
+          </Row>
+          <Row>
+            <Col id="LEASE_TYPE">직원소유타인명의</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_available">
+        <ColumnInfo>
+          <Column id="AVAILABLE" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="AVAILABLE">사용</Col>
+          </Row>
+          <Row>
+            <Col id="AVAILABLE">미사용</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="accountCode" propid="value" datasetid="ds_vehicleDetail" columnid="ACCOUNT_CODE"/>
+      <BindItem id="item1" compid="accountName" propid="value" datasetid="ds_vehicleDetail" columnid="ACCOUNT_NAME"/>
+      <BindItem id="item2" compid="assetCode" propid="value" datasetid="ds_vehicleDetail" columnid="ASSET_CODE"/>
+      <BindItem id="item3" compid="assetName" propid="value" datasetid="ds_vehicleDetail" columnid="ASSET_NAME"/>
+      <BindItem id="item4" compid="acquisitionDate" propid="value" datasetid="ds_vehicleDetail" columnid="ACQUISITION_DATE"/>
+      <BindItem id="item5" compid="disposalDate" propid="value" datasetid="ds_vehicleDetail" columnid="DISPOSAL_DATE"/>
+      <BindItem id="item6" compid="expenseCategory" propid="value" datasetid="ds_vehicleDetail" columnid="EXPENSE_CATEGORY"/>
+      <BindItem id="item7" compid="insuranceStatus" propid="value" datasetid="ds_vehicleDetail" columnid="INSURANCE_STATUS"/>
+      <BindItem id="item8" compid="customerCode" propid="value" datasetid="ds_vehicleDetail" columnid="CUSTOMER_CODE"/>
+      <BindItem id="item9" compid="insuranceCompany" propid="value" datasetid="ds_vehicleDetail" columnid="INSURANCE_COMPANY"/>
+      <BindItem id="item10" compid="insuranceStartPeriod" propid="value" datasetid="ds_vehicleDetail" columnid="INSURANCE_START_PERIOD"/>
+      <BindItem id="item11" compid="insuranceEndPeriod" propid="value" datasetid="ds_vehicleDetail" columnid="INSURANCE_END_PERIOD"/>
+      <BindItem id="item12" compid="leaseType" propid="value" datasetid="ds_vehicleDetail" columnid="LEASE_TYPE"/>
+      <BindItem id="item13" compid="leaseStartPeriod" propid="value" datasetid="ds_vehicleDetail" columnid="LEASE_START_PERIOD"/>
+      <BindItem id="item14" compid="leaseEndPeriod" propid="value" datasetid="ds_vehicleDetail" columnid="LEASE_END_PERIOD"/>
+      <BindItem id="item15" compid="usageType" propid="value" datasetid="ds_vehicleDetail" columnid="USAGE_TYPE"/>
+    </Bind>
+  </Form>
+</FDL>

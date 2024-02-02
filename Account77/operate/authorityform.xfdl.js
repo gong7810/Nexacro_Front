@@ -86,252 +86,165 @@
         // User Script
         this.registerScript("authorityform.xfdl", function() {
 
-
-
         var bool=true;
-
-
 
         this.authorityform_onload = function(obj,e)
         {
-        				this.set_visible(false);
+        	this.set_visible(false);
+
+        	//현재 로그인되어 있는 id를 가져옴
+        	var	name = application.gds_emp.getColumn(0, "EMP_CODE");
 
 
-        				//현재 로그인되어 있는 id를 가져옴
-        				var	name = application.gds_emp.getColumn(0, "EMP_CODE");
+        	if(name!='emp7'){
+        		this.emp_list_grid.set_visible(false);
+        		this.static_emp_list.set_visible(false);
+        		this.refresh_btn.set_visible(false);
+        		this.register_auth_btn.set_visible(false);
+        	}
+
+        	if(bool==true){
 
 
-        			if(name!='emp1'){
-        				this.emp_list_grid.set_visible(false);
-        				this.static_emp_list.set_visible(false);
-        				this.refresh_btn.set_visible(false);
-        				this.register_auth_btn.set_visible(false);
-        			}
-
-
-
-
-
-
-
-
-
-        			if(bool==true){
-
-
-        				//띄울 poppdiv의 정보를 작성하고
-        			var sID="authorityauthform";
-        			var sURL="popup::authorityauthform.xfdl";
-        			var param={}; // 열리는 폼에 데이터를 넘겨준다.
-        			var callbackFunc="callbackFunc";
-        			// 해당 프레임을 생성												 //            --파라미터 순서--
-        	var oChildFrame = new ChildFrame(sID,600, 200, 100, 500, null, null, sURL);  // 프레임명, 부모프레임의 왼쪽과의 거리,
-        							                                                     // 부모프레임의 상단과의 거리, 해당 프레임의 넓이,
-        																				 // 해당 프레임의 높이, 부로 프레임의 오른쪽과의 거리,
-        																				 // 부모 프레임과의 하단과의 거리, 참조할 프레임의 주소 ㄴ
-        	// 해당 프레임을 화면에 출력												 // 참고 : 해당 프레임의 크기는 변경할수는 없는거 같다.
+        		//띄울 poppdiv의 정보를 작성하고
+        		var sID="authorityauthform";
+        		var sURL="popup::authorityauthform.xfdl";
+        		var param={}; // 열리는 폼에 데이터를 넘겨준다.
+        		var callbackFunc="callbackFunc";
+        		// 해당 프레임을 생성												 //            --파라미터 순서--
+        		var oChildFrame = new ChildFrame(sID,600, 200, 100, 500, null, null, sURL);  // 프레임명, 부모프레임의 왼쪽과의 거리,
+        		// 부모프레임의 상단과의 거리, 해당 프레임의 넓이,
+        		// 해당 프레임의 높이, 부로 프레임의 오른쪽과의 거리,
+        		// 부모 프레임과의 하단과의 거리, 참조할 프레임의 주소 ㄴ
+        		// 해당 프레임을 화면에 출력												 // 참고 : 해당 프레임의 크기는 변경할수는 없는거 같다.
         		oChildFrame.set_openalign("center middle");
         		oChildFrame.showModal(sID, this.getOwnerFrame(), param, this, callbackFunc);
-
 
         	}
         	trace('<<<<<onload event has been occured at : authorityform');
 
-
-
-
-
         };
 
-
-
-
-
-
-
-
-
-
-
-
-
-        this.callbackFunc=function(obj,val){
-
-
+        this.callbackFunc=function(obj,val)
+        {
         	var	code = application.gds_emp.getColumn(0, "EMP_CODE");
         	//alert('<<< code is :'+code)
 
 
-        	if(code=='emp1'){
+        	if(code=='emp7'){
 
-        	//로그인한 사용자가 admin이면 모든 사원의 권한 데이터를 가져옴
+        		//로그인한 사용자가 admin이면 모든 사원의 권한 데이터를 가져옴
 
-        	var id = "selectEmpAuthList";
-        	var url = "svcOperate::authorityEmpList";
-        	var resData = "";  // update하거나 insert할때는 res데이터로 :U옵션을 주고 전송
-        	var reqData ="Emp_Auth_List=gds_authority_emp"; // 데이터 요청
-        	var args = "";
-        	var callback = "";
+        		var id = "selectEmpAuthList";
+        		var url = "svcOperate::authorityEmpList";
+        		var resData = "";  // update하거나 insert할때는 res데이터로 :U옵션을 주고 전송
+        		var reqData ="Emp_Auth_List=gds_authority_emp"; // 데이터 요청
+        		var args = "";
+        		var callback = "";
 
+        		this.transaction(id, url, resData, reqData, args, callback);
 
-        	this.transaction(id, url, resData, reqData, args, callback);
+        		trace('<<< tracnsaction for admin has been sent');
 
+        		var id2 = "selecEmpList";
+        		var url2 = "svcOperate::findEmpList";
+        		var resData2 = "";  // update하거나 insert할때는 res데이터로 :U옵션을 주고 전송
+        		var reqData2 ="emp_list=gds_emp"; // 데이터 요청
+        		var args2 = "";
+        		var callback2 = "callback";
 
+        		this.transaction(id2, url2, resData2, reqData2, args2, callback2);
 
-        	trace('<<< tracnsaction for admin has been sent');
+        		trace('<<< tracnsaction for emp_list has been sent');
 
+        	}else if(code!='emp7'){
 
-        	var id2 = "selecEmpList";
-        	var url2 = "svcOperate::findEmpList";
-        	var resData2 = "";  // update하거나 insert할때는 res데이터로 :U옵션을 주고 전송
-        	var reqData2 ="emp_list=gds_emp"; // 데이터 요청
-        	var args2 = "";
-        	var callback2 = "callback";
+        		//로그인한 사용자가 admin이 아니면 로그인한 사용자의 권한 데이터만 가져온다.
+        		var id = "selectEmpAuthDetailList";
+        		var url = "svcOperate::authorityEmpDetailList";
+        		var resData = "";  // update하거나 insert할때는 res데이터로 :U옵션을 주고 전송
+        		var reqData ="Emp_Auth_List=gds_authority_emp"; // 데이터 요청
+        		var args = "empCode="+code;
+        		var callback = "callback";
 
+        		this.transaction(id, url, resData, reqData, args, callback);
 
-        	this.transaction(id2, url2, resData2, reqData2, args2, callback2);
-
-
-
-        	trace('<<< tracnsaction for emp_list has been sent');
-
-
-
-
-
-
-
-
-        	}else if(code!='emp1'){
-
-          //로그인한 사용자가 admin이 아니면 로그인한 사용자의 권한 데이터만 가져온다.
-        	var id = "selectEmpAuthDetailList";
-        	var url = "svcOperate::authorityEmpDetailList";
-        	var resData = "";  // update하거나 insert할때는 res데이터로 :U옵션을 주고 전송
-        	var reqData ="Emp_Auth_List=gds_authority_emp"; // 데이터 요청
-        	var args = "empCode="+code;
-        	var callback = "callback";
-
-
-        	this.transaction(id, url, resData, reqData, args, callback);
-
-
-
-        	trace('<<< transaction for other has been sent');
-
-
+        		trace('<<< transaction for other has been sent');
         	}
 
-
-        this.set_visible('true');
-
-
+        	this.set_visible('true');
         }
 
 
         this.callback=function(){
 
-        var empCnt=this.emp_list.getRowCount();
-        trace('empCnt is : '+empCnt);
+        	var empCnt=this.emp_list.getRowCount();
+        	trace('empCnt is : '+empCnt);
 
-        var cnt=this.Emp_Auth_List.getRowCount();
-        trace('emp authority cnt is :'+cnt);
+        	var cnt=this.Emp_Auth_List.getRowCount();
+        	trace('emp authority cnt is :'+cnt);
 
-        	}
-
-
-
-
-
+        }
 
         this.emp_auth_detail_grid_oncelldblclick = function(obj,e)
         {
         	alert('<<<<< celldbl event has been occured at : '+obj);
         };
 
-
-
         // 이거는 화면이 완성 되고 나면은 수정이 필요 ---> 해당 권한의 삭제할 form을 띄울 예정
         this.emp_auth_list_oncelldblclick = function(obj,e)
         {
+        	//클릭한 row의 정보를 변수에 할당
+        	var empId=this.Emp_Auth_List.getColumn(e.row,0);
+        	var empCode=this.Emp_Auth_List.getColumn(e.row,1);
+        	var empName=this.Emp_Auth_List.getColumn(e.row,2);
+        	var authCode=this.Emp_Auth_List.getColumn(e.row,3);
+        	var authName=this.Emp_Auth_List.getColumn(e.row,4);
+
+        	trace('selected data is : '+empCode+' // '+empName+' // '+authCode +' // '+authName);
 
 
-        //클릭한 row의 정보를 변수에 할당
-        var empId=this.Emp_Auth_List.getColumn(e.row,0);
-        var empCode=this.Emp_Auth_List.getColumn(e.row,1);
-        var empName=this.Emp_Auth_List.getColumn(e.row,2);
-        var authCode=this.Emp_Auth_List.getColumn(e.row,3);
-        var authName=this.Emp_Auth_List.getColumn(e.row,4);
+        	//로그인한 유저의 정보를 변수에 할당
+        	var	code = application.gds_emp.getColumn(0, "EMP_CODE");
 
-        trace('selected data is : '+empCode+' // '+empName+' // '+authCode +' // '+authName);
-
-
-        //로그인한 유저의 정보를 변수에 할당
-        var	code = application.gds_emp.getColumn(0, "EMP_CODE");
-
-        	if(code!='emp1'){
+        	if(code!='emp7'){
 
         		alert('access denied.');
 
-        	}else if(code=='emp1'){
+        	}else if(code=='emp7'){
 
-
-
-
-        			var sID="authoritdetailform";
-        			var sURL="popup::authoritydetailform.xfdl";
-        			var param={empId:empId,
-        					   empCode:empCode,
-        					   empName:empName,
-        					   authCode:authCode,
-        					   authName:authName}; // 열리는 폼에 파라미터를 넘겨준다.
-        			var callbackFunc="callbackFunc";
-        			// 해당 프레임을 생성												 //            --파라미터 순서--
-        			var oChildFrame = new ChildFrame(sID, 0, 0, 0, 0, null, null, sURL);  // 프레임명, 부모프레임의 왼쪽과의 거리,
-        							                                                     // 부모프레임의 상단과의 거리, 해당 프레임의 넓이,
-        																				 // 해당 프레임의 높이, 부로 프레임의 오른쪽과의 거리,
-        																				 // 부모 프레임과의 하단과의 거리, 참조할 프레임의 주소 ㄴ
-        	// 해당 프레임을 화면에 출력												 // 참고 : 해당 프레임의 크기는 변경할수는 없는거 같다.
+        		var sID="authoritdetailform";
+        		var sURL="popup::authoritydetailform.xfdl";
+        		var param={empId:empId,
+        			empCode:empCode,
+        			empName:empName,
+        			authCode:authCode,
+        			authName:authName}; // 열리는 폼에 파라미터를 넘겨준다.
+        		var callbackFunc="callbackFunc";
+        		// 해당 프레임을 생성												 //            --파라미터 순서--
+        		var oChildFrame = new ChildFrame(sID, 0, 0, 0, 0, null, null, sURL);  // 프레임명, 부모프레임의 왼쪽과의 거리,
+        		// 부모프레임의 상단과의 거리, 해당 프레임의 넓이,
+        		// 해당 프레임의 높이, 부로 프레임의 오른쪽과의 거리,
+        		// 부모 프레임과의 하단과의 거리, 참조할 프레임의 주소 ㄴ
+        		// 해당 프레임을 화면에 출력												 // 참고 : 해당 프레임의 크기는 변경할수는 없는거 같다.
         		oChildFrame.set_openalign("center middle");
         		oChildFrame.showModal(sID, this.getOwnerFrame(), param, this, callbackFunc);
-
-
-
-
-
-
-
-
-
         	}
-
-
         };
-
-
-
-
-
 
         this.emp_list_grid_oncellclick = function(obj,e)
         {
         	var empcode=this.emp_list_grid.getCellText(e.row,0);
         	trace('<<<<< empcode is : '+empcode);
 
-
-        		var id = "selectEmpAuthDetailList";
+        	var id = "selectEmpAuthDetailList";
         	var url = "svcOperate::authorityEmpDetailList";
         	var resData = "";  // update하거나 insert할때는 res데이터로 :U옵션을 주고 전송
         	var reqData ="Emp_Auth_List=gds_authority_emp"; // 데이터 요청
         	var args = "empCode="+empcode;
         	var callback = "callback";
 
-
         	this.transaction(id, url, resData, reqData, args, callback);
-
-
-
-
 
         };
 
@@ -341,47 +254,27 @@
         	this.reload();
         };
 
-
-
-
-
-
         this.register_auth_btn_onclick = function(obj,e)
         {
-
-
-        			//띄울 poppdiv의 정보를 작성하고
-        			var sID="authorityempaddform";
-        			var sURL="popup::authorityempaddform.xfdl";
-        			var param={}; // 열리는 폼에 파라미터를 넘겨준다.
-        			var callbackFunc="auth_addhcallbackFunc";
-        			// 해당 프레임을 생성												 //            --파라미터 순서--
+        	//띄울 poppdiv의 정보를 작성하고
+        	var sID="authorityempaddform";
+        	var sURL="popup::authorityempaddform.xfdl";
+        	var param={}; // 열리는 폼에 파라미터를 넘겨준다.
+        	var callbackFunc="auth_addhcallbackFunc";
+        	// 해당 프레임을 생성												 //            --파라미터 순서--
         	var oChildFrame = new ChildFrame(sID,0, 0, 0, 0, null, null, sURL);  // 프레임명, 부모프레임의 왼쪽과의 거리,
-        							                                                     // 부모프레임의 상단과의 거리, 해당 프레임의 넓이,
-        																				 // 해당 프레임의 높이, 부로 프레임의 오른쪽과의 거리,
-        																				 // 부모 프레임과의 하단과의 거리, 참조할 프레임의 주소 ㄴ
+        	// 부모프레임의 상단과의 거리, 해당 프레임의 넓이,
+        	// 해당 프레임의 높이, 부로 프레임의 오른쪽과의 거리,
+        	// 부모 프레임과의 하단과의 거리, 참조할 프레임의 주소 ㄴ
         	// 해당 프레임의 띄어지는 위치및 해당 프레임을 화면에 출력												 // 참고 : 해당 프레임의 크기는 변경할수는 없는거 같다.
-        		oChildFrame.set_openalign("center middle");
-        		oChildFrame.showModal(sID, this.getOwnerFrame(), param, this, callbackFunc);
-
-
-
-
+        	oChildFrame.set_openalign("center middle");
+        	oChildFrame.showModal(sID, this.getOwnerFrame(), param, this, callbackFunc);
         };
 
-
-        this.auth_addcallbackFunc=function(){
-
-        trace('<<<<<<<<< addform has been closed');
-
+        this.auth_addcallbackFunc=function()
+        {
+        	trace('<<<<<<<<< addform has been closed');
         }
-
-
-
-
-
-
-
         });
         
         // Regist UI Components Event

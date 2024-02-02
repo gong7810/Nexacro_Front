@@ -126,8 +126,6 @@
 
         			trace("<<<<<<<<<<<<<< this is bno for parameter  :"+this.parent.bno); //객체의 키로 값을 받는다.
 
-
-
         			var id = "findBoardDetail";
         			var url = "svcOperate::findBoardDetail";
         			var resData = "";
@@ -138,13 +136,6 @@
         			this.transaction(id, url, resData, reqData, args, callback);
 
         };
-
-
-
-
-
-
-
 
         this.delete_btn_onclick = function(obj,e)
         {
@@ -170,27 +161,15 @@
         	}
         };
 
-
-
-
-
-
-
         //목록으로 돌아가는 버튼
         this.list_btn_detail_onclick = function(obj,e)
         {
         	this.close('list_btn');
-
-
         };
 
 
         this.modify_btn_onclick = function(obj,e)
         {
-
-
-
-
         	var modBtn=this.modify_btn.text;
 
         	if(modBtn=='수정'){
@@ -198,16 +177,9 @@
         	//modify_btn의 text를 "저장"으로 업데이트하고
         	this.modify_btn.set_text('저장');
 
-
-
         	//제목과 내용의 readonly를 false로 변경
         	this.e_name.set_readonly(false);
         	this.e_contents.set_readonly(false);
-
-
-
-
-
 
         	}else if(modBtn=='저장'){ //  유효성 검증 및 transaction을 위한 if문 시작
 
@@ -243,10 +215,7 @@
 
         					}
 
-
         				}
-
-
 
         		//컴포넌트들의 상태들을 다시 원복해 놓는다.
         		this.modify_btn.set_text('수정');
@@ -254,16 +223,8 @@
         		trace("modifiydetailform will be shut down");
         		this.close('mod_btn');
 
-
         		}//  유효성 검증 및 transaction을 위한 if문의 끝
-
-
         };
-
-
-
-
-
 
         this.boarddetailform_onkeydown = function(obj,e)
         {
@@ -272,7 +233,6 @@
           this.close('esc');
           }
         };
-
         });
         
         // Regist UI Components Event

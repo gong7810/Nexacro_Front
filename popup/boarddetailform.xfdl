@@ -43,8 +43,6 @@ this.boarddetailform_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
 			this.e_contents.set_readonly(true);
 	
 			trace("<<<<<<<<<<<<<< this is bno for parameter  :"+this.parent.bno); //객체의 키로 값을 받는다. 
-	
-	
 				
 			var id = "findBoardDetail";
 			var url = "svcOperate::findBoardDetail";
@@ -56,13 +54,6 @@ this.boarddetailform_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
 			this.transaction(id, url, resData, reqData, args, callback);
 			
 };
-
-
-
-
-
-
-
 
 this.delete_btn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {		
@@ -88,27 +79,15 @@ this.delete_btn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 	}
 };
 
-	
-
-
-
-
-
 //목록으로 돌아가는 버튼 
 this.list_btn_detail_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
 	this.close('list_btn');
-	
-	
 };
 
 
 this.modify_btn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
-
-
-	
-
 	var modBtn=this.modify_btn.text;
 	
 	if(modBtn=='수정'){
@@ -116,16 +95,9 @@ this.modify_btn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 	//modify_btn의 text를 "저장"으로 업데이트하고 
 	this.modify_btn.set_text('저장');
 
-
-	
 	//제목과 내용의 readonly를 false로 변경 
 	this.e_name.set_readonly(false);
 	this.e_contents.set_readonly(false);
-
-
-
-
-		
 	
 	}else if(modBtn=='저장'){ //  유효성 검증 및 transaction을 위한 if문 시작 
 			
@@ -160,28 +132,17 @@ this.modify_btn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 							return; // 취소하면 다시 화면으로 돌아감
 				
 					} 
-			
 				
 				}
-			
-			
-			
+
 		//컴포넌트들의 상태들을 다시 원복해 놓는다. 	
 		this.modify_btn.set_text('수정');
 		this.delete_btn.set_visible(true);
 		trace("modifiydetailform will be shut down");
 		this.close('mod_btn');
-
 		
 		}//  유효성 검증 및 transaction을 위한 if문의 끝 
-
-
 };
-
-
-
-
-
 
 this.boarddetailform_onkeydown = function(obj:nexacro.Form,e:nexacro.KeyEventInfo)
 {
@@ -189,8 +150,7 @@ this.boarddetailform_onkeydown = function(obj:nexacro.Form,e:nexacro.KeyEventInf
   if(a==27){
   this.close('esc');
   }
-};
-]]></Script>
+};]]></Script>
     <Bind>
       <BindItem id="item0" compid="e_contents" propid="value" datasetid="ds_board" columnid="CONTENTS"/>
       <BindItem id="item1" compid="e_name" propid="value" datasetid="ds_board" columnid="TITLE"/>

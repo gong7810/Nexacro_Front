@@ -368,11 +368,6 @@
 
         };
 
-
-
-
-
-
         this.onload_callbackFunc=function(){
 
           if(this.edit_emp_code.value==undefined){

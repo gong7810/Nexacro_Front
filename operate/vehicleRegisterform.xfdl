@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="vehicleRegisterform" width="1280" height="720" titletext="New Form" onload="vehicleRegisterform_onload">
+    <Layouts>
+      <Layout height="720" width="1280">
+        <Static id="Static00" taborder="0" text="업무용 차량관리" left="375.00" top="10" width="251" height="75" textAlign="center" font="normal 18pt/normal &quot;Arial&quot;"/>
+        <Grid id="vehicleGrid" taborder="1" left="139" top="125" width="723" height="330" binddataset="ds_vehicle" oncelldblclick="vehicleGrid_oncelldblclick" nodatatext="조회된 회사차량이 없습니다.">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="90"/>
+                <Column size="90"/>
+                <Column size="90"/>
+                <Column size="90"/>
+                <Column size="90"/>
+                <Column size="90"/>
+                <Column size="90"/>
+                <Column size="93"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="차량코드"/>
+                <Cell col="1" text="차량번호"/>
+                <Cell col="2" text="차종"/>
+                <Cell col="3" text="부서코드"/>
+                <Cell col="4" text="부서명"/>
+                <Cell col="5" text="사원코드"/>
+                <Cell col="6" text="사원명"/>
+                <Cell col="7" text="사용여부"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:VEHICLE_CODE"/>
+                <Cell col="1" text="bind:VEHICLE_NUMBER"/>
+                <Cell col="2" text="bind:VEHICLE_TYPE"/>
+                <Cell col="3" text="bind:DEPT_CODE"/>
+                <Cell col="4" text="bind:DEPT_NAME"/>
+                <Cell col="5" text="bind:EMP_CODE"/>
+                <Cell col="6" text="bind:EMP_NAME"/>
+                <Cell col="7" text="bind:AVAILABILITY"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="insertBtn" taborder="2" text="추가" left="795" top="90" width="67" height="25" onclick="insertBtn_onclick"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_vehicle">
+        <ColumnInfo>
+          <Column id="VEHICLE_CODE" type="STRING" size="256"/>
+          <Column id="VEHICLE_NUMBER" type="STRING" size="256"/>
+          <Column id="VEHICLE_TYPE" type="STRING" size="256"/>
+          <Column id="DEPT_CODE" type="STRING" size="256"/>
+          <Column id="DEPT_NAME" type="STRING" size="256"/>
+          <Column id="EMP_CODE" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+          <Column id="AVAILABILITY" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/*************************************************************/
+/* 프 로 그 램 : C:\Users\owner\Desktop\77th_2nd_Nexa ACC\Nexacro_Front\operate\vehicleRegisterform.xfdl
+/* 작 성 일 자 : 2024/01/25
+/* 작 성 자 명 : S.U
+/* 설       명 : 업무용차량관리 폼
+/*************************************************************/
+
+this.vehicleRegisterform_onload = function (obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	var id = "findVehicleList";
+	var url = "svcOperate::findVehicleList";
+	var reqData = "";
+	var resData = "ds_vehicle=ds_vehicle";
+	var args = "";
+	var callback = "onload_callbackFunc";
+	
+	this.transaction(id, url, reqData, resData, args, callback);   
+};
+
+// 업무용차량 상세정보
+this.vehicleGrid_oncelldblclick = function (obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	var vehicleCode = this.vehicleGrid.getCellText(this.vehicleGrid.currentrow, 0); // 차량코드를 열리는 폼에 넘김
+	trace(vehicleCode);
+	
+	//띄울 poppdiv의 정보를 작성하고 
+	var sID="vehicledetailform";
+	var sURL="popup::vehicledetailform.xfdl";
+	var param={vehicleCode : vehicleCode}; // 생성되는 폼에 파라미터를 넘겨준다. 
+	var callbackFunc="vehicledetailform_callbackFunc";  
+	// 해당 프레임을 생성												 //            --파라미터 순서-- 
+	var oChildFrame = new ChildFrame(sID, 0, 0, 0, 0, null, null, sURL);  // 프레임명, 부모 프레임의 왼쪽과의 거리,
+	// 부모 프레임의 상단과의 거리, 해당 프레임의 넓이,
+	// 해당 프레임의 높이, 부모 프레임의 오른쪽과의 거리,
+	// 부모 프레임과의 하단과의 거리, 참조할 프레임의 주소
+	// 해당 프레임 화면에 출력												 // 참고 : 해당 프레임의 크기는 변경할수는 없는거 같다. 
+	oChildFrame.set_openalign("center middle");  // ---> 띄워지는 위치를 지정 
+	oChildFrame.showModal(sID, this.getOwnerFrame(), param, this, callbackFunc);
+};
+
+this.vehicledetailform_callbackFunc = function ()
+{
+	this.reload();
+};
+
+// 추가
+this.insertBtn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	//띄울 poppdiv의 정보를 작성하고 
+	var sID="vehicleRegistform";
+	var sURL="popup::vehicleRegistform.xfdl";
+	var param={}; // 생성되는 폼에 파라미터를 넘겨준다. 
+	var callbackFunc="vehicledetailform_callbackFunc";  
+	// 해당 프레임을 생성												 //            --파라미터 순서-- 
+	var oChildFrame = new ChildFrame(sID, 0, 0, 0, 0, null, null, sURL);  // 프레임명, 부모 프레임의 왼쪽과의 거리,
+	// 부모 프레임의 상단과의 거리, 해당 프레임의 넓이,
+	// 해당 프레임의 높이, 부모 프레임의 오른쪽과의 거리,
+	// 부모 프레임과의 하단과의 거리, 참조할 프레임의 주소
+	// 해당 프레임 화면에 출력												 // 참고 : 해당 프레임의 크기는 변경할수는 없는거 같다. 
+	oChildFrame.set_openalign("center middle");  // ---> 띄워지는 위치를 지정 
+	oChildFrame.showModal(sID, this.getOwnerFrame(), param, this, callbackFunc);
+};
+
+this.vehicledetailform_callbackFunc = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	trace("<<<<<<< callback function has been called");
+	
+	if(e=='esc' || e=='list_btn'){
+		trace('<<<<<<<<<<<<<<<< this is esc or list_btn >>>>>>>>>>>>>>>>>>>');
+	}else {
+		this.reload();
+		trace(">>>>>>> vehicleRegistform has been reloaded!!");
+		
+	}
+}
+]]></Script>
+  </Form>
+</FDL>

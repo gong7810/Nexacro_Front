@@ -91,7 +91,7 @@
 
 
             obj = new Dataset("gds_journal_detail", this);
-            obj._setContents("<ColumnInfo><Column id=\"JOURNAL_NO\" type=\"STRING\" size=\"256\"/><Column id=\"JOURNAL_DETAIL_NO\" type=\"STRING\" size=\"256\"/><Column id=\"DESCRIPTION\" type=\"STRING\" size=\"256\"/><Column id=\"ACCOUNT_CONTROL_NAME\" type=\"STRING\" size=\"256\"/><Column id=\"ACCOUNT_CONTROL_TYPE\" type=\"STRING\" size=\"256\"/><Column id=\"ACCOUNT_CONTROL_DESCRIPTION\" type=\"STRING\" size=\"256\"/><Column id=\"ACCOUNT_CONTROL_CODE\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            obj._setContents("<ColumnInfo><Column id=\"JOURNAL_NO\" type=\"STRING\" size=\"256\"/><Column id=\"JOURNAL_DETAIL_NO\" type=\"STRING\" size=\"256\"/><Column id=\"JOURNAL_DESCRIPTION\" type=\"STRING\" size=\"256\"/><Column id=\"ACCOUNT_CONTROL_NAME\" type=\"STRING\" size=\"256\"/><Column id=\"ACCOUNT_CONTROL_TYPE\" type=\"STRING\" size=\"256\"/><Column id=\"ACCOUNT_CONTROL_DESCRIPTION\" type=\"STRING\" size=\"256\"/><Column id=\"ACCOUNT_CONTROL_CODE\" type=\"STRING\" size=\"256\"/><Column id=\"ACCOUNT_NAME\" type=\"STRING\" size=\"256\"/><Column id=\"ACCOUNT_INNER_CODE\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
             this._addDataset(obj.name, obj);
 
 
@@ -138,6 +138,16 @@
             obj = new Dataset("gds_journal0", this);
             obj._setContents("<ColumnInfo><Column id=\"BALANCE_DIVISION\" type=\"STRING\" size=\"256\" sumtext=\"대차구분\"/><Column id=\"LEFT_DEBTOR_PRICE\" type=\"STRING\" size=\"256\" sumtext=\"차변금액\"/><Column id=\"RIGHT_CREDITS_PRICE\" type=\"STRING\" size=\"256\" sumtext=\"대변금액\"/><Column id=\"CUSTOMER_CODE\" type=\"STRING\" size=\"256\" sumtext=\"거래처코드\"/><Column id=\"ACCOUNT_INNER_CODE\" type=\"STRING\" size=\"256\" sumtext=\"계정내부코드\"/><Column id=\"JOURNAL_NO\" type=\"STRING\" size=\"256\" sumtext=\"분개일련번호\"/><Column id=\"SLIP_NO\" type=\"STRING\" size=\"256\" sumtext=\"수주일련번호\"/><Column id=\"ACCOUNT_NAME\" type=\"STRING\" size=\"256\" sumtext=\"계정과목\"/><Column id=\"STATUS\" type=\"STRING\" size=\"256\"/><Column id=\"APPROVAL_DATE\" type=\"STRING\" size=\"256\"/><Column id=\"CUSTOMER_NAME\" type=\"STRING\" size=\"256\" sumtext=\"거래처이름\"/></ColumnInfo>");
             this._addDataset(obj.name, obj);
+
+
+            obj = new Dataset("gds_plan", this);
+            obj._setContents("<ColumnInfo><Column id=\"PLAN_NO\" type=\"STRING\" size=\"256\"/><Column id=\"PLAN_DATE\" type=\"STRING\" size=\"256\"/><Column id=\"FUND_CODE\" type=\"STRING\" size=\"256\"/><Column id=\"FUND_NAME\" type=\"STRING\" size=\"256\"/><Column id=\"CUSTOMER_CODE\" type=\"STRING\" size=\"256\"/><Column id=\"CUSTOMER_NAME\" type=\"STRING\" size=\"256\"/><Column id=\"EXPENSE_REPORT\" type=\"STRING\" size=\"256\"/><Column id=\"PRICE\" type=\"STRING\" size=\"256\"/><Column id=\"BALANCE_DIVISION\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row/></Rows>");
+            this._addDataset(obj.name, obj);
+
+
+            obj = new Dataset("gds_vehicleCode", this);
+            obj._setContents("<ColumnInfo><Column id=\"VEHICLE_CODE\" type=\"STRING\" size=\"256\"/><Column id=\"VEHICLE_NUMBER\" type=\"STRING\" size=\"256\"/><Column id=\"VEHICLE_TYPE\" type=\"STRING\" size=\"256\"/><Column id=\"DEPT_CODE\" type=\"STRING\" size=\"256\"/><Column id=\"DEPT_NAME\" type=\"STRING\" size=\"256\"/><Column id=\"EMP_CODE\" type=\"STRING\" size=\"256\"/><Column id=\"EMP_NAME\" type=\"STRING\" size=\"256\"/><Column id=\"AVAILABILITY\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            this._addDataset(obj.name, obj);
             
             // global variable
             this._addVariable("gv_accountControlName","");
@@ -147,6 +157,11 @@
             this._addVariable("gv_currentPeriod","");
             this._addVariable("gv_journalNo","");
             this._addVariable("gv_customerCode","");
+            this._addVariable("gv_accountCode","");
+            this._addVariable("gv_accountName","");
+            this._addVariable("gv_customerName","");
+            this._addVariable("gv_assetCode","");
+            this._addVariable("gv_assetName","");
             
             obj = null;
         };

@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="fundPlanCalendarform" width="1000" height="720" titletext="New Form" onload="fundPlanCalendarform_onload">
+    <Layouts>
+      <Layout height="720" width="1000">
+        <Static id="Static00" taborder="0" text="자금계획카렌다" left="365.00" top="10" width="251" height="75" textAlign="center" font="normal 18pt/normal &quot;Arial&quot;"/>
+        <Calendar id="Calendar" taborder="1" left="70.00" top="110" width="383" height="215" dateformat="yyyy-MM-dd" type="monthonly" onchanged="Calendar_onchanged"/>
+        <Grid id="inExpectedPlan" taborder="2" left="502.00" top="128" width="440" height="197" binddataset="ds_inplanList" oncellclick="inExpectedPlan_oncellclick" nodatatext="조회된 수입계획이 없습니다">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="135"/>
+                <Column size="75"/>
+                <Column size="135"/>
+                <Column size="98"/>
+              </Columns>
+              <Rows>
+                <Row band="head" size="24"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="계획번호"/>
+                <Cell col="1" text="계획일자"/>
+                <Cell col="2" text="적요"/>
+                <Cell col="3" text="금액"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:PLAN_NO"/>
+                <Cell col="1" text="bind:PLAN_DATE"/>
+                <Cell col="2" text="bind:EXPENSE_REPORT"/>
+                <Cell col="3" text="bind:PRICE"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="Static00_01" taborder="3" left="500.00" top="327" width="120" height="20" text="지출예정" font="normal 13pt/normal &quot;Gulim&quot;"/>
+        <Grid id="outExpectedPlan" taborder="4" left="501.00" top="350" width="440" height="197" binddataset="ds_outplanList" oncellclick="outExpectedPlan_oncellclick" nodatatext="조회된 지출계획이 없습니다">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="135"/>
+                <Column size="75"/>
+                <Column size="135"/>
+                <Column size="98"/>
+              </Columns>
+              <Rows>
+                <Row band="head" size="24"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="계획번호"/>
+                <Cell col="1" text="계획일자"/>
+                <Cell col="2" text="적요"/>
+                <Cell col="3" text="금액"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:PLAN_NO"/>
+                <Cell col="1" text="bind:PLAN_DATE"/>
+                <Cell col="2" text="bind:EXPENSE_REPORT"/>
+                <Cell col="3" text="bind:PRICE"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="Static00_00" taborder="5" left="501.00" top="105" width="120" height="20" text="수입예정" font="normal 13pt/normal &quot;Gulim&quot;"/>
+        <Static id="Static01" taborder="6" text="수입" left="110.00" top="366" width="60" height="32" background="#87c4f1" borderRadius="5px" color="white" textAlign="center"/>
+        <Static id="Static01_00" taborder="7" text="지출" left="110.00" top="418" width="60" height="32" background="#87c4f1" borderRadius="5px" color="white" textAlign="center"/>
+        <MaskEdit id="intotal" taborder="8" left="200.00" top="366" width="200" height="32" format="#,0.###" readonly="true"/>
+        <MaskEdit id="outtotal" taborder="9" left="200.00" top="418" width="200" height="32" format="#,0.###" readonly="true"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[/*************************************************************/
+/* 프 로 그 램 : C:\Users\owner\Desktop\77th_2nd_Nexa ACC\Nexacro_Front\operate\fundPlanCalendarform.xfdl
+/* 작 성 일 자 : 2024/01/25
+/* 작 성 자 명 : S.U
+/* 설       명 : 자금계획카렌다 폼
+/*************************************************************/
+
+var selectDate = "";
+
+this.Calendar_onchanged = function(obj:nexacro.Calendar,e:nexacro.ChangeEventInfo)
+{
+	selectDate = this.Calendar.text;
+	
+	var id = "findPlan";
+	var url = "svcOperate::findPlan";
+	var reqData = "";
+	var resData = "ds_inplanList=ds_plan ds_outplanList=ds_plan";
+	var args = "startDate='"+selectDate+"' endDate='"+selectDate+"'";
+	var callback = "findPlan_callback";	
+	
+	this.transaction(id, url, reqData, resData, args, callback);
+};
+
+this.findPlan_callback = function ()
+{
+	var increase = "수입";
+	var decrease = "지출";
+	this.ds_inplanList.filter("BALANCE_DIVISION=='"+increase+"'");
+	this.ds_outplanList.filter("BALANCE_DIVISION=='"+decrease+"'");
+	
+	var inSum = 0
+	var outSum = 0
+	var str = "";
+	
+	for (var i = 0; i < this.ds_inplanList.getRowCount(); i++) {
+		str = this.inExpectedPlan.getCellText(i, 3);
+		inSum += nexacro.toNumber(str.replace(/,/gi, ''));
+	}
+	for (var i = 0; i < this.ds_outplanList.getRowCount(); i++) {
+		str = this.outExpectedPlan.getCellText(i, 3);
+		outSum += nexacro.toNumber(str.replace(/,/gi, ''));
+	}
+	
+	this.intotal.set_value(inSum);
+	this.outtotal.set_value(outSum);
+};]]></Script>
+    <Objects>
+      <Dataset id="ds_inplanList">
+        <ColumnInfo>
+          <Column id="PLAN_NO" type="STRING" size="256"/>
+          <Column id="PLAN_DATE" type="STRING" size="256"/>
+          <Column id="EXPENSE_REPORT" type="STRING" size="256"/>
+          <Column id="PRICE" type="STRING" size="256"/>
+          <Column id="BALANCE_DIVISION" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_outplanList">
+        <ColumnInfo>
+          <Column id="PLAN_NO" type="STRING" size="256"/>
+          <Column id="PLAN_DATE" type="STRING" size="256"/>
+          <Column id="EXPENSE_REPORT" type="STRING" size="256"/>
+          <Column id="PRICE" type="STRING" size="256"/>
+          <Column id="BALANCE_DIVISION" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="intotal" propid="value" datasetid="ds_plan" columnid="PRICE"/>
+      <BindItem id="item1" compid="outtotal" propid="value" datasetid="ds_plan" columnid="PRICE"/>
+    </Bind>
+  </Form>
+</FDL>

@@ -21,19 +21,17 @@ if (nexacro.Environment)
         nexacro._addService("font", "file", "./_resource_/_font_/", "session", null, "", "0", "0");
         nexacro._addService("Base", "form", "./Base/", "session", null, "", "0", "0");
         nexacro._addService("frame", "form", "./frame/", "session", null, "", "0", "0");
-        nexacro._addService("scripts", "form", "./scripts/", "session", null, "", "0", "0");
-        nexacro._addService("svcBase", "form", "http://localhost:8484/base/", "none", null, "", "0", "0");
-        nexacro._addService("posting", "form", "./posting/", "session", null, "", "0", "0");
         nexacro._addService("popup", "form", "./popup/", "session", null, "", "0", "0");
-        nexacro._addService("svcOperate", "form", "http://localhost:8484/operate/", "none", null, "", "0", "0");
-        nexacro._addService("svcPosting", "form", "http://localhost:8484/posting/", "none", null, "", "0", "0");
-        nexacro._addService("operate", "form", "./operate/", "session", null, "", "0", "0");
+        nexacro._addService("scripts", "js", "./scripts/", "session", null, "", "0", "0");
+        nexacro._addService("svcBase", "JSP", "http://localhost:8484/acc/base/", "none", null, "", "0", "0");
+        nexacro._addService("svcPosting", "JSP", "http://localhost:8484/acc/posting/", "none", null, "", "0", "0");
+        nexacro._addService("svcStatement", "JSP", "http://localhost:8484/acc/statement/", "none", null, "", "0", "0");
+        nexacro._addService("svcBudget", "JSP", "http://localhost:8484/acc/budget/", "none", null, "", "0", "0");
+        nexacro._addService("svcOperate", "JSP", "http://localhost:8484/acc/operate/", "none", null, "", "0", "0");
+        nexacro._addService("posting", "form", "./posting/", "session", null, "", "0", "0");
         nexacro._addService("statement", "form", "./statement/", "session", null, "", "0", "0");
-        nexacro._addService("svcStatement", "form", "http://localhost:8484/acc/statement/", "none", null, "", "0", "0");
-        nexacro._addService("svcBudget", "form", "http://localhost:8484/acc/budget/", "none", null, "", "0", "0");
         nexacro._addService("budget", "form", "./budget/", "session", null, "", "0", "0");
-        nexacro._addService("board", "form", "./board/", "session", null, "", "0", "0");
-        nexacro._addService("svcBoard", "form", "http://localhost:8484/acc/operate/", "session", null, "", "0", "0");
+        nexacro._addService("operate", "form", "./operate/", "session", null, "", "0", "0");
     	nexacro._component_uri = (nexacro._arg_compurl ? nexacro._arg_compurl : "./nexacrolib/component/");
     	nexacro._theme_uri = "./_resource_/_theme_/";
     	// load components
@@ -61,7 +59,9 @@ if (nexacro.Environment)
         		{"id":"Plugin", "classname":"nexacro.Plugin", "type":"JavaScript"},
         		{"id":"Dataset", "classname":"nexacro.NormalDataset", "type":"JavaScript"},
         		{"id":"FileDialog", "classname":"nexacro.FileDialog", "type":"JavaScript"},
-        		{"id":"VirtualFile", "classname":"nexacro.VirtualFile", "type":"JavaScript"}
+        		{"id":"VirtualFile", "classname":"nexacro.VirtualFile", "type":"JavaScript"},
+        		{"id":"Panel", "classname":"nexacro.Panel", "type":"JavaScript"},
+        		{"id":"MultiCombo", "classname":"nexacro.MultiCombo", "type":"JavaScript"}
         ];
     	nexacro._addClasses(registerclass);
     };

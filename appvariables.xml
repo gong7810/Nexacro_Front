@@ -343,11 +343,13 @@
       <ColumnInfo>
         <Column id="JOURNAL_NO" type="STRING" size="256"/>
         <Column id="JOURNAL_DETAIL_NO" type="STRING" size="256"/>
-        <Column id="DESCRIPTION" type="STRING" size="256"/>
+        <Column id="JOURNAL_DESCRIPTION" type="STRING" size="256"/>
         <Column id="ACCOUNT_CONTROL_NAME" type="STRING" size="256"/>
         <Column id="ACCOUNT_CONTROL_TYPE" type="STRING" size="256"/>
         <Column id="ACCOUNT_CONTROL_DESCRIPTION" type="STRING" size="256"/>
         <Column id="ACCOUNT_CONTROL_CODE" type="STRING" size="256"/>
+        <Column id="ACCOUNT_NAME" type="STRING" size="256"/>
+        <Column id="ACCOUNT_INNER_CODE" type="STRING" size="256"/>
       </ColumnInfo>
     </Dataset>
     <Dataset id="gds_account_control_temp">
@@ -434,6 +436,34 @@
         <Column id="CUSTOMER_NAME" type="STRING" size="256" sumtext="거래처이름"/>
       </ColumnInfo>
     </Dataset>
+    <Dataset id="gds_plan">
+      <ColumnInfo>
+        <Column id="PLAN_NO" type="STRING" size="256"/>
+        <Column id="PLAN_DATE" type="STRING" size="256"/>
+        <Column id="FUND_CODE" type="STRING" size="256"/>
+        <Column id="FUND_NAME" type="STRING" size="256"/>
+        <Column id="CUSTOMER_CODE" type="STRING" size="256"/>
+        <Column id="CUSTOMER_NAME" type="STRING" size="256"/>
+        <Column id="EXPENSE_REPORT" type="STRING" size="256"/>
+        <Column id="PRICE" type="STRING" size="256"/>
+        <Column id="BALANCE_DIVISION" type="STRING" size="256"/>
+      </ColumnInfo>
+      <Rows>
+        <Row/>
+      </Rows>
+    </Dataset>
+    <Dataset id="gds_vehicleCode">
+      <ColumnInfo>
+        <Column id="VEHICLE_CODE" type="STRING" size="256"/>
+        <Column id="VEHICLE_NUMBER" type="STRING" size="256"/>
+        <Column id="VEHICLE_TYPE" type="STRING" size="256"/>
+        <Column id="DEPT_CODE" type="STRING" size="256"/>
+        <Column id="DEPT_NAME" type="STRING" size="256"/>
+        <Column id="EMP_CODE" type="STRING" size="256"/>
+        <Column id="EMP_NAME" type="STRING" size="256"/>
+        <Column id="AVAILABILITY" type="STRING" size="256"/>
+      </ColumnInfo>
+    </Dataset>
   </Datasets>
   <Variables>
     <Variable id="gv_accountControlName"/>
@@ -443,6 +473,11 @@
     <Variable id="gv_currentPeriod"/>
     <Variable id="gv_journalNo"/>
     <Variable id="gv_customerCode"/>
+    <Variable id="gv_accountCode"/>
+    <Variable id="gv_accountName"/>
+    <Variable id="gv_customerName"/>
+    <Variable id="gv_assetCode"/>
+    <Variable id="gv_assetName"/>
   </Variables>
   <DataObjects/>
 </AppVariables>

@@ -43,7 +43,7 @@
             </Format>
           </Formats>
         </Grid>
-        <Grid id="grid_journal" taborder="1" left="1.85%" top="41.93%" width="96.30%" height="25.44%" autofittype="col" binddataset="gds_journal" oncellclick="grid_journal_oncellclick" autosizingtype="row" oncelldblclick="grid_journal_oncelldblclick" nodatatext="조회된 분개가 없습니다">
+        <Grid id="grid_journal" taborder="1" left="1.76%" top="42.63%" width="96.30%" height="24.74%" autofittype="col" binddataset="gds_journal" oncellclick="grid_journal_oncellclick" autosizingtype="row" oncelldblclick="grid_journal_oncelldblclick" nodatatext="조회된 분개가 없습니다">
           <Formats>
             <Format id="default">
               <Columns>
@@ -86,7 +86,7 @@
             </Format>
           </Formats>
         </Grid>
-        <Grid id="grid_journal_detail" taborder="2" left="1.85%" top="73.68%" width="96.30%" height="24.56%" autofittype="col" binddataset="gds_journal_detail" oncelldblclick="grid_journal_detail_oncelldblclick" oncellclick="grid_journal_detail_oncellclick" nodatatext="조회된 분개상세가 없습니다">
+        <Grid id="grid_journal_detail" taborder="2" left="1.76%" top="71.23%" width="96.30%" height="24.39%" autofittype="col" binddataset="gds_journal_detail" oncelldblclick="grid_journal_detail_oncelldblclick" oncellclick="grid_journal_detail_oncellclick" nodatatext="조회된 분개상세가 없습니다">
           <Formats>
             <Format id="default">
               <Columns>
@@ -117,23 +117,23 @@
             </Format>
           </Formats>
         </Grid>
-        <Calendar id="calendar_start" taborder="3" left="19" top="14" width="131" height="30" onchanged="calendar_start_onchanged"/>
-        <Calendar id="calendar_end" taborder="4" left="186" top="14" width="131" height="30"/>
-        <Button id="bt_appSlip" taborder="5" text="전표승인" left="85.19%" top="2.98%" height="4.74%" width="5.46%" onclick="bt_appSlip_onclick"/>
-        <Button id="bt_cancleApp" taborder="6" text="전표반려" left="91.30%" top="2.98%" height="4.74%" width="5.46%" onclick="bt_cancleApp_onclick"/>
-        <Button id="bt_searchSlip" taborder="7" text="조회" left="441" top="20" height="26" width="79" onclick="bt_searchSlip_onclick"/>
-        <Static id="Static00" taborder="8" text="-" left="156" top="17" width="27" height="24" textAlign="center" font="bold 20px/normal &quot;Gulim&quot;"/>
-        <Combo id="combo_status" taborder="9" text="전체검색" left="330" top="22" width="98" height="24" innerdataset="ds_slipStatus" datacolumn="STATUS" codecolumn="STATUS" index="0" value="전체검색" onitemchanged="combo_status_onitemchanged"/>
+        <Calendar id="calendar_start" taborder="3" left="1.76%" top="2.81%" width="12.13%" height="5.09%" onchanged="calendar_start_onchanged"/>
+        <Calendar id="calendar_end" taborder="4" left="16.76%" top="2.81%" width="12.13%" height="5.09%"/>
+        <Button id="bt_appSlip" taborder="5" text="전표승인" left="86.30%" top="2.81%" height="4.74%" width="5.28%" onclick="bt_appSlip_onclick"/>
+        <Button id="bt_cancleApp" taborder="6" text="전표반려" left="92.69%" top="2.81%" height="4.74%" width="5.28%" onclick="bt_cancleApp_onclick"/>
+        <Button id="bt_searchSlip" taborder="7" text="조회" left="39.26%" top="3.51%" height="4.39%" width="7.22%" onclick="bt_searchSlip_onclick"/>
+        <Static id="Static00" taborder="8" text="-" left="14.17%" top="2.81%" width="2.5%" height="4.21%" textAlign="center" font="bold 20px/normal &quot;Gulim&quot;"/>
+        <Combo id="combo_status" taborder="9" text="전체검색" left="29.63%" top="3.86%" width="8.98%" height="4.04%" innerdataset="ds_slipStatus" datacolumn="STATUS" codecolumn="STATUS" index="0" value="전체검색" onitemchanged="combo_status_onitemchanged"/>
       </Layout>
     </Layouts>
     <Script type="xscript5.1"><![CDATA[include "scripts::commonDate.xjs"
 application = nexacro.getApplication();
 
-this.slipApprovalForm_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
-{
+this.slipApprovalForm_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo){
 	application.gds_slip.clear();
 	application.gds_journal.clear();
 	application.gds_journal_detail.clear();
+	
 	today = this.gfn_today().toString();
 	firstday = this.gfn_todayFirst().toString();
 	
@@ -141,24 +141,13 @@ this.slipApprovalForm_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo
 	this.calendar_end.set_value(today);
 };
 
-
-
-
-
-
 //조회
 
-
-this.bt_searchSlip_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
-{	
-
-	
-		application.gds_slip.clear();
+this.bt_searchSlip_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo){	
+	application.gds_slip.clear();
 	application.gds_journal.clear();
 	application.gds_journal_detail.clear();
-
-
-
+	
 	var slipStatus = this.combo_status.value;
 	var startDate = this.calendar_start.value;
 	var endDate = this.calendar_end.value;
@@ -173,50 +162,20 @@ this.bt_searchSlip_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInf
 	var eDay = endDate.toString().substring(6,8);	
 	var eDate = eYear+"-"+eMonth+"-"+eDay;
 	
-	trace("sDate : "+sDate+"	eDate : "+eDate);
-	
 	application.gds_slip.filter("");
 	application.gds_journal.filter("SLIP_NO=='X'");
 	application.gds_journal_detail.filter("JOURNAL_NO=='X'");
-
-
-
-
-// 
-// 	var startDate = this.calendar_start.value;
-// 	var sYear = startDate.toString().substring(0,4);
-// 	var sMonth = startDate.toString().substring(4,6);
-// 	var sDay = startDate.toString().substring(6,8);
-// 	var sDate = sYear+"-"+sMonth+"-"+sDay;
-// 	
-// 	var endDate = this.calendar_end.value;
-// 	var eYear = endDate.toString().substring(0,4);
-// 	var eMonth = endDate.toString().substring(4,6);
-// 	var eDay = endDate.toString().substring(6,8);	
-// 	var eDate = eYear+"-"+eMonth+"-"+eDay;
 	
-// 	if(startDate && endDate ){
-// 		var id = "findRangedSlipList";
-// 		var url = "svcPosting::findRangedSlipList";
-// 		var resData = "gds_slip=gds_slip";
-// 		var reqData = "";                                                                                                                                
-// 		var args = "startDate='"+sDate+"' endDate='"+eDate+"' slipStatus='승인완료'";
-// 		var callback = "callback";
-		
-			if(startDate && endDate && slipStatus){
-		// 전표 다가지고옴
+	// 전표조회
+	if(startDate && endDate && slipStatus){
 		var id = "findRangedSlipList";
 		var url = "svcPosting::findRangedSlipList";
 		var resData = "gds_slip=gds_slip";
 		var reqData = "";
-		var args = "startDate='"+sDate+"' endDate='"+eDate+"' slipStatus='"+slipStatus+"'"; // 넘어갈때 parameter (스프링 부트로넘어갈때)
+		var args = "startDate='"+sDate+"' endDate='"+eDate+"' slipStatus='"+slipStatus+"'";
 		var callback = "callback";
 		
-		/*this.transaction(id, url, reqData, resData, args, callback, false);*/
-		
 		this.transaction(id, url, reqData, resData, args, callback, false);	
-		
-		
 		
 	}else{
 		alert("날짜를 확인해주세요.");
@@ -225,9 +184,8 @@ this.bt_searchSlip_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInf
 	
 	application.gds_slip.addColumn("SLIP_DESCRIPTION", "string" , 1); // 칼럼명, 칼럼타입, 데이터 길이 
 	for(index=0 ; index<rowcount ; index++){
-		application.gds_slip.setColumn(index,"SLIP_DESCRIPTION",0); // 선택해제 세팅  
+		application.gds_slip.setColumn(index,"SLIP_DESCRIPTION",0); // 선택해제 세팅   
 	}
-	
 };
 
 
@@ -237,7 +195,7 @@ this.bt_searchSlip_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInf
 this.grid_slip_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
 {
 	var check = application.gds_slip.getColumn(e.row, "SLIP_DESCRIPTION");
-		trace("check 2 :"+check);
+	trace("check 2 :"+check);
 	var slipNo = application.gds_slip.getColumn(application.gds_slip.rowposition, "SLIP_NO");
 	
 	var id = "findJournalListForSlip";
@@ -246,14 +204,13 @@ this.grid_slip_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventI
 	var reqData = "gds_journal=gds_journal";
 	var args = "slipNo='"+slipNo+"'";
 	var callback = "callback";
-
+	
 	this.transaction(id, url, resData, reqData, args, callback);
 	application.gds_journal.filter("SLIP_NO=='"+slipNo+"'");
 };
 
 //분개상세조회
-this.grid_journal_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
-{
+this.grid_journal_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo){
 	var selJournalNo = application.gds_journal.getColumn(application.gds_journal.rowposition, "JOURNAL_NO");
 	
 	var id = "findJournalDetailInfo";
@@ -272,78 +229,35 @@ this.grid_journal_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEve
 var executionType; // 실행유형
 
 //전표승인
-this.bt_appSlip_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
-{
-
+this.bt_appSlip_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo){
+	
 	executionType = "승인완료";
 	var today = this.gfn_today().toString();
-	
-// 	var empCode = application.gds_emp.getColumn(0, "EMP_CODE"); // 오류 발생
-// 				trace(empCode); // 확인 안됨
-				
 	var count = 0;
 	var check = "";
 	var rowcount = this.grid_slip.rowcount;
-	/*var slipstatus = this.CheckBox.getDisplayText("SLIP_STATUS")*/
-
 	
-	for(index=0 ; index<rowcount ; index++){
+	for(index=0; index<rowcount; index++){
 		
-		check = application.gds_slip.getColumn(index, "SLIP_DESCRIPTION");
-		trace(check);
-		if(check==1){	//체크되었을때 1, 안되었을때 0
-		var reportingEmpCode=application.gds_slip.getColumn(index,"REPORTING_EMP_CODE");
-			application.gds_slip.setColumn(index,"SLIP_STATUS","승인완료");
-			application.gds_slip.setColumn(index,"APPROVAL_DATE",today);
-			application.gds_slip.setColumn(index,"APPROVAL_EMP_CODE",reportingEmpCode);						
-			application.gds_slip.setColumn(index,"SLIP_DESCRIPTION", null);
-			count++;
-			//var selSlipNo=application.gds_slip.getColumn(index,"SLIP_NO");	
+		check = nexacro.getApplication().gds_slip.getColumn(index, "SLIP_DESCRIPTION");
+		
+		if(check==1){	// 체크 1
+			var reportingEmpCode = application.gds_slip.getColumn(index,"REPORTING_EMP_CODE");
 			
-			//application.gds_journal.filter("SLIP_NO=='"+selSlipNo+"'");
-							
-			//var appDate = nexacro.getApplication().gds_slip.getColumn(index,"APPROVAL_DATE");
-			//this.Grid_slip.setCellProperty("Body",3,"text",appDate);
-			// 그리드에 승인날짜보이게
+			application.gds_slip.setColumn(index, "APPROVAL_DATE",today);
+			application.gds_slip.setColumn(index, "APPROVAL_EMP_CODE",application.gv_empCode);	
+			application.gds_slip.setColumn(index, "SLIP_STATUS","승인완료");
+			application.gds_slip.setColumn(index, "SLIP_DESCRIPTION", null);
+			count++;
 		}
 	}
 	
-	if(count==0){
+	if(count==0){	// 체크x 0
 		alert("선택된 항목이 없습니다. 전표를 체크 해 주세요.");
 	}else{
 		this.approvalSlip(executionType); // 전표 승인 실행 함수
 	}
 };
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-//전표승인실행
-this.approvalSlip = function(executionType){
-
-	var id = "approveSlip";	
-	if(executionType == "작성중(반려)"){
-		id = "cancleSlip";
-	}	
-	
-	if(confirm("선택한 전표를 " + executionType + "하시겠습니까?")){
-	
-		
-		var url = "svcPosting::approveSlip";
-		var reqData = "gds_slip=gds_slip"; //:u -> 변경된 내용 서버로 되돌려 보낼때 사용 
-		var resData = "";
-		var args= "";
-		/*var args = "APPROVAL_DATE='"+APPROVAL_DATE+"' SLIP_STATUS='"+"승인요청"+"'";*/
-		//var args = "empCode='"+application.gv_empCode+"'";
-		var callback = "callback";
-		
-		this.transaction(id, url, reqData, resData, args, callback, false);
-		//this.transaction(id, url, resData, reqData, args, callback, false);
-	
-	}else{
-		this.bt_searchSlip_onclick(); // 다시 조회버튼
-	}
-}
-
 
 
 
@@ -351,27 +265,21 @@ this.approvalSlip = function(executionType){
 this.bt_cancleApp_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
 {
 	executionType = "작성중(반려)";
-	var today = this.gfn_today().toString();
-	var empCode = application.gds_emp.getColumn(0, "EMP_CODE");
+	
 	var count=0;
 	var check = "";
 	var rowcount = this.grid_slip.rowcount;
-
+	
 	for(index=0 ; index < rowcount ; index++){
-		check = nexacro.getApplication().gds_slip.getColumn(index,"SLIP_DESCRIPTION")
+		check = nexacro.getApplication().gds_slip.getColumn(index, "SLIP_DESCRIPTION");
 		if(check==1){	
-
-			application.gds_slip.setColumn(index,"SLIP_STATUS","작성중(반려)");	
-			application.gds_slip.setColumn(index,"APPROVAL_EMP_CODE","");
-			application.gds_slip.setColumn(index,"APPROVAL_DATE","");
-			application.gds_slip.setColumn(index,"SLIP_DESCRIPTION", null);			
-			//nexacro.getApplication().gds_slip.setColumn(index,"SLIP_DESCRIPTION", null);
-					
-			//var selSlipNo=nexacro.getApplication().gds_slip.getColumn(index,"SLIP_NO");	
-			//var reDate=nexacro.getApplication().gds_slip.getColumn(index,"REPORTING_DATE");
-			//this.Grid_slip.setCellProperty("Body",3,"text",reDate);
-			count++
-					
+			
+			application.gds_slip.setColumn(index, "APPROVAL_DATE",' ');
+			application.gds_slip.setColumn(index, "APPROVAL_EMP_CODE",' ');
+			application.gds_slip.setColumn(index, "SLIP_STATUS","작성중(반려)");	
+			application.gds_slip.setColumn(index, "SLIP_DESCRIPTION", null);	
+			
+			count++;
 		}
 	}
 	if(count==0){ 
@@ -380,6 +288,30 @@ this.bt_cancleApp_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo
 		this.approvalSlip(executionType);
 	}
 };
+
+
+
+///////////////////////////////////////////////////////////////////
+
+// 전표승인실행
+this.approvalSlip = function(executionType){
+	var id = "approveSlip";	
+	if(executionType == "작성중(반려)"){
+		id = "cancleSlip";
+	}
+	
+	if(confirm("선택한 전표를 " + executionType + " 하시겠습니까?")){
+		var url = "svcPosting::approveSlip";
+		var reqData = "gds_slip=gds_slip:u";  
+		var resData = "";
+		var args = "empCode='"+application.gv_empCode+"'";
+		var callback = "callback";
+		
+		this.transaction(id, url, reqData, resData, args, callback, false);
+	}else{
+		this.bt_searchSlip_onclick();
+	}
+}
 
 
 
